@@ -39,7 +39,7 @@ export function Footer() {
         </div>
 
         <div className="mt-12 flex flex-wrap items-center justify-between gap-3 border-t border-rule2 pt-6">
-          <span className="type-label">© 2026 Live Era</span>
+          <span className="type-label">© 2026 Live Era2</span>
           <a href="mailto:hello@liveera.ru" className="type-label rounded-[6px] hover:text-ink2">
             hello@liveera.ru
           </a>

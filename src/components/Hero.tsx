@@ -83,7 +83,7 @@ export function Hero() {
     <section className="lg:h-[calc(100svh-72px)] lg:overflow-hidden">
       <div className="mx-auto grid h-full max-w-[1440px] lg:grid-cols-[42%_58%]">
         {/* Left */}
-        <div className="flex h-full min-h-0 flex-col justify-center overflow-hidden border-rule px-8 py-10 lg:border-r lg:px-16">
+        <div className="flex h-full min-h-0 flex-col justify-center overflow-hidden border-rule px-8 py-10 [@media(max-height:860px)]:py-6 lg:border-r lg:px-16">
           <SectionLabel>Снимок → Видео</SectionLabel>
 
           <h1 className="mt-4 font-light leading-[1.05] tracking-[-0.05em] text-[clamp(32px,3.4vw,52px)]">

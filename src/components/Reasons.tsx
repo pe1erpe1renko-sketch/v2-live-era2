@@ -5,49 +5,47 @@ const ITEMS = [
   {
     icon: "solar:album-linear",
     title: "Семейный архив",
-    text: "Прабабушка с карточки 1958 года моргает и поворачивает голову. Дети видят предков живыми, а не строгими лицами с выцветшей бумаги.",
+    text: "Портреты бабушек и дедушек снова в движении",
   },
   {
     icon: "solar:gift-linear",
     title: "Подарок",
-    text: "Юбилей, свадьба, годовщина: ролик из снимка, который человек не доставал десятилетиями. Действует сильнее любой открытки.",
+    text: "Ролик к юбилею из снимка, забытого на десятилетия",
   },
   {
     icon: "solar:smartphone-linear",
     title: "Лента и сторис",
-    text: "Вертикальное видео из фотографии, которая уже лежит в галерее. Без съёмки, без монтажа, без водяного знака.",
+    text: "Вертикальное видео из того, что уже лежит в галерее",
   },
   {
     icon: "solar:buildings-linear",
     title: "Музеи и краеведение",
-    text: "Архивные снимки для выставок, публикаций и школьных проектов. Права на результат остаются у вас.",
+    text: "Архивные кадры для выставок и публикаций",
   },
 ];
 
 export function Reasons() {
   return (
-    <section className="border-b border-rule">
+    <section className="border-b border-rule" data-reveal>
       <div className="mx-auto max-w-[1440px] px-8 py-8 md:py-16 lg:px-16">
         <SectionLabel>Зачем это нужно</SectionLabel>
 
         <h2 className="mt-4 text-[clamp(28px,3vw,44px)] font-light leading-[1.1] tracking-[-0.04em] text-ink">
-          Четыре повода оживить снимок
+          Четыре повода
         </h2>
 
-        <p className="type-body mt-4 max-w-[560px]">
-          Сценарии разные, а снимок нужен всего один.
-        </p>
-
-        <div className="mt-12 grid gap-6 md:grid-cols-2">
+        <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {ITEMS.map((it) => (
             <article
               key={it.title}
               tabIndex={0}
-              className="rounded-[16px] border border-rule bg-surface p-8 shadow-card transition-colors duration-300 hover:border-gold2"
+              className="flex flex-col rounded-[16px] border border-rule bg-surface p-6 shadow-card transition-colors duration-300 hover:border-gold2"
             >
-              <Icon icon={it.icon} width={28} height={28} className="text-gold2" />
-              <h3 className="mt-4 text-[18px] font-normal text-ink">{it.title}</h3>
-              <p className="mt-2 text-[14px] leading-[1.6] text-ink2">{it.text}</p>
+              <div className="flex h-12 w-12 items-center justify-center rounded-[6px] bg-gold3">
+                <Icon icon={it.icon} width={24} height={24} className="text-gold" />
+              </div>
+              <h3 className="mt-4 text-[16px] font-normal text-ink">{it.title}</h3>
+              <p className="mt-2 text-[13px] leading-[1.5] text-ink2">{it.text}</p>
             </article>
           ))}
         </div>

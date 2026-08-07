@@ -3,6 +3,8 @@ import { useEffect, useRef } from "react";
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
 import { StatsBar } from "@/components/StatsBar";
+import { Steps } from "@/components/Steps";
+import { Scenarios } from "@/components/Scenarios";
 import { Footer } from "@/components/Footer";
 
 export const Route = createFileRoute("/")({
@@ -70,6 +72,12 @@ function Index() {
       <main>
         <Hero />
         <StatsBar />
+        <div data-reveal>
+          <Steps />
+        </div>
+        <div data-reveal>
+          <Scenarios />
+        </div>
       </main>
       <div data-reveal>
         <Footer />

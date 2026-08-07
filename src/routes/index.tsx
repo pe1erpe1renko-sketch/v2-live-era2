@@ -8,6 +8,8 @@ import { Scenarios } from "@/components/Scenarios";
 import { Reasons } from "@/components/Reasons";
 import { Models } from "@/components/Models";
 import { Specs } from "@/components/Specs";
+import { Tips } from "@/components/Tips";
+import { Reviews } from "@/components/Reviews";
 import { Footer } from "@/components/Footer";
 
 export const Route = createFileRoute("/")({

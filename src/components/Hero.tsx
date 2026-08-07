@@ -36,8 +36,8 @@ function UploadZone() {
         aria-label="Загрузить снимок"
         onChange={(e) => setFileName(e.target.files?.[0]?.name ?? null)}
       />
-      <Icon icon="solar:gallery-add-linear" className="mx-auto h-8 w-8 text-gold2" />
-      <p className="mt-3 text-[14px] text-ink">
+      <Icon icon="solar:gallery-add-linear" className="mx-auto h-7 w-7 text-gold2" />
+      <p className="mt-2 text-[14px] text-ink">
         {fileName ?? "Перетащите снимок или выберите файл"}
       </p>
       <p className="mt-1 text-[12px] text-ink3">JPG или PNG</p>
@@ -108,7 +108,7 @@ export function Hero() {
                     key={t.id}
                     type="button"
                     onClick={() => setTab(t.id)}
-                    className={`-mb-px rounded-[6px] px-3 py-3 text-[14px] transition-colors ${
+                    className={`-mb-px rounded-[6px] px-3 py-2.5 text-[14px] transition-colors ${
                       tab === t.id
                         ? "border-b-2 border-gold2 bg-gold3 text-gold"
                         : "border-b-2 border-transparent text-ink3 hover:text-ink2"
@@ -124,12 +124,12 @@ export function Hero() {
               <input
                 type="text"
                 placeholder="Опишите движение — или оставьте пустым"
-                className="mt-3 w-full rounded-[6px] border border-rule bg-surface px-4 py-3 text-[14px] text-ink placeholder:text-ink3"
+                className="mt-3 w-full rounded-[6px] border border-rule bg-surface px-4 py-2.5 text-[14px] text-ink placeholder:text-ink3"
               />
 
               <button
                 type="button"
-                className="mt-3 w-full rounded-[6px] bg-gold p-4 text-[15px] text-surface transition-colors hover:bg-gold-dark"
+                className="mt-3 w-full rounded-[6px] bg-gold px-4 py-3 text-[15px] text-surface transition-colors hover:bg-gold-dark"
               >
                 Оживить снимок — первый ролик бесплатно
               </button>

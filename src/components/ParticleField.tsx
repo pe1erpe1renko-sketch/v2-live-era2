@@ -31,10 +31,12 @@ export function ParticleField() {
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
       // Center the dense dot cluster on the photo cards in Hero.
-      const cards = wrap.parentElement?.querySelector('.flex.w-\\[60\\%\\]') as HTMLElement | null;
+      const cards = wrap.parentElement?.querySelector('.photo-cards-target') as HTMLElement | null;
       const cardsRect = cards?.getBoundingClientRect();
 
-      const cx = w / 2;
+      const cx = cardsRect
+        ? cardsRect.left + cardsRect.width / 2 - rect.left
+        : w / 2;
       const cy = cardsRect
         ? cardsRect.top + cardsRect.height / 2 - rect.top
         : h / 2;

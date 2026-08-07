@@ -57,14 +57,14 @@ function PhotoCard({
   className?: string;
 }) {
   return (
-    <figure className={`w-[150px] shrink-0 sm:w-[200px] ${className ?? ""}`}>
+    <figure className={`w-[160px] shrink-0 sm:w-[210px] ${className ?? ""}`}>
       <div className="rounded-[6px] border border-rule bg-surface p-3 shadow-card">
         <img
           src={src}
           alt={caption}
           width={640}
           height={800}
-          className="h-[180px] w-full object-cover sm:h-[240px]"
+          className="aspect-[4/5] w-full object-cover"
         />
       </div>
       <figcaption className="mt-3 flex items-center justify-center gap-3">
@@ -74,6 +74,7 @@ function PhotoCard({
     </figure>
   );
 }
+
 
 export function Hero() {
   const [tab, setTab] = useState<"photo" | "text">("photo");
@@ -169,18 +170,15 @@ export function Hero() {
           <div className="pointer-events-none absolute right-8 top-8 h-8 w-8 border-r border-t border-rule" />
 
           <div className="relative flex h-full items-center justify-center px-8">
-            <PhotoCard
-              src={portraitOld}
-              caption="Исходник"
-              className="translate-y-8 -rotate-2"
-            />
+            <PhotoCard src={portraitOld} caption="Исходник" className="translate-y-2 -rotate-2" />
             <PhotoCard
               src={portraitRestored}
               caption="В движении"
               dot
-              className="-ml-8 -translate-y-8 rotate-2"
+              className="-ml-3 -translate-y-2 rotate-2"
             />
           </div>
+
 
           <p className="type-label absolute bottom-8 left-8">Один кадр · 5 секунд видео</p>
         </div>

@@ -15,9 +15,9 @@ export function ParticleField() {
     let raf = 0;
     let w = 0;
     let h = 0;
-    let points: { x: number; y: number; ox: number; oy: number; d: number }[] = [];
+    let points: { x: number; y: number; ox: number; oy: number; d: number; s: number }[] = [];
     const mouse = { x: -9999, y: -9999 };
-    const STEP = 22;
+    const STEP = 14;
 
     const build = () => {
       const rect = wrap.getBoundingClientRect();
@@ -32,15 +32,21 @@ export function ParticleField() {
 
       const cx = w / 2;
       const cy = h / 2;
+      // radius of the dense circular core
+      const core = Math.min(w, h) * 0.42;
       const maxD = Math.hypot(cx, cy);
       points = [];
       for (let y = STEP / 2; y < h; y += STEP) {
         for (let x = STEP / 2; x < w; x += STEP) {
-          const jx = x + (Math.random() - 0.5) * 6;
-          const jy = y + (Math.random() - 0.5) * 6;
-          const d = Math.hypot(jx - cx, jy - cy) / maxD;
-          if (Math.random() > 1 - d * 0.85) continue;
-          points.push({ x: jx, y: jy, ox: jx, oy: jy, d });
+          const jx = x + (Math.random() - 0.5) * 5;
+          const jy = y + (Math.random() - 0.5) * 5;
+          const r = Math.hypot(jx - cx, jy - cy);
+          // 1 in the core, fading to 0 at the edges
+          const t = Math.max(0, Math.min(1, 1 - (r - core) / (maxD - core)));
+          const density = t * t;
+          // keep every point in the core, thin out towards the edges
+          if (r > core && Math.random() > density * 0.85) continue;
+          points.push({ x: jx, y: jy, ox: jx, oy: jy, d: r / maxD, s: density });
         }
       }
     };
@@ -53,14 +59,10 @@ export function ParticleField() {
 
     const draw = (time: number) => {
       ctx.clearRect(0, 0, w, h);
-      const cx = w / 2;
-      const cy = h / 2;
-      const maxD = Math.hypot(cx, cy);
       const phase = (time % 2000) / 2000;
 
       for (const p of points) {
-        const dist = Math.hypot(p.ox - cx, p.oy - cy) / maxD;
-        let wave = (phase - dist * 0.5) % 1;
+        let wave = (phase - p.d * 0.5) % 1;
         if (wave < 0) wave += 1;
         const pulse = ease(wave < 0.5 ? wave * 2 : (1 - wave) * 2);
 
@@ -69,18 +71,17 @@ export function ParticleField() {
         const md = Math.hypot(mdx, mdy);
         let tx = p.ox;
         let ty = p.oy;
-        if (md < 140 && md > 0.001) {
-          const push = (1 - md / 140) * 6;
+        if (md < 160 && md > 0.001) {
+          const push = (1 - md / 160) * 10;
           tx = p.ox - (mdx / md) * push;
           ty = p.oy - (mdy / md) * push;
         }
         p.x += (tx - p.x) * 0.06;
         p.y += (ty - p.y) * 0.06;
 
-        const falloff = Math.max(0, 1 - dist * 1.15);
-        const alpha = falloff * (0.25 + pulse * 0.55);
-        if (alpha <= 0.01) continue;
-        const r = 1 + pulse * 0.5;
+        const alpha = (0.2 + p.s * 0.75) * (0.55 + pulse * 0.45);
+        if (alpha <= 0.015) continue;
+        const r = 0.9 + p.s * 0.9 + pulse * 0.35;
 
         ctx.beginPath();
         ctx.fillStyle = `rgba(176, 141, 87, ${alpha.toFixed(3)})`;
@@ -89,6 +90,7 @@ export function ParticleField() {
       }
       raf = requestAnimationFrame(draw);
     };
+
 
     const onMove = (e: PointerEvent) => {
       const rect = wrap.getBoundingClientRect();

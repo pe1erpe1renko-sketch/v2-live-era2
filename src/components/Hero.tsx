@@ -57,14 +57,14 @@ function PhotoCard({
   className?: string;
 }) {
   return (
-    <figure className={`w-[150px] shrink-0 sm:w-[200px] ${className ?? ""}`}>
+    <figure className={`w-[160px] shrink-0 sm:w-[210px] ${className ?? ""}`}>
       <div className="rounded-[6px] border border-rule bg-surface p-3 shadow-card">
         <img
           src={src}
           alt={caption}
           width={640}
           height={800}
-          className="h-[180px] w-full object-cover sm:h-[240px]"
+          className="aspect-[4/5] w-full object-cover"
         />
       </div>
       <figcaption className="mt-3 flex items-center justify-center gap-3">
@@ -74,6 +74,7 @@ function PhotoCard({
     </figure>
   );
 }
+
 
 export function Hero() {
   const [tab, setTab] = useState<"photo" | "text">("photo");

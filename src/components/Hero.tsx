@@ -57,14 +57,14 @@ function PhotoCard({
   className?: string;
 }) {
   return (
-    <figure className={className}>
+    <figure className={`w-[150px] shrink-0 sm:w-[200px] ${className ?? ""}`}>
       <div className="rounded-[6px] border border-rule bg-surface p-3 shadow-card">
         <img
           src={src}
           alt={caption}
           width={640}
           height={800}
-          className="h-[180px] w-[140px] object-cover sm:h-[240px] sm:w-[190px]"
+          className="h-[180px] w-full object-cover sm:h-[240px]"
         />
       </div>
       <figcaption className="mt-3 flex items-center justify-center gap-3">
@@ -168,17 +168,17 @@ export function Hero() {
 
           <div className="pointer-events-none absolute right-8 top-8 h-8 w-8 border-r border-t border-rule" />
 
-          <div className="relative flex h-full items-center justify-center gap-3 px-8">
+          <div className="relative flex h-full items-center justify-center px-8">
             <PhotoCard
               src={portraitOld}
               caption="Исходник"
-              className="translate-y-6 -rotate-2"
+              className="translate-y-8 -rotate-2"
             />
             <PhotoCard
               src={portraitRestored}
               caption="В движении"
               dot
-              className="-translate-y-6 rotate-2"
+              className="-ml-8 -translate-y-8 rotate-2"
             />
           </div>
 

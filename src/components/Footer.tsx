@@ -11,12 +11,7 @@ export function Footer() {
       <div className="mx-auto max-w-[1440px] px-8 py-16">
         <div className="grid gap-12 lg:grid-cols-[1fr_2fr]">
           <div>
-            <div className="flex items-center gap-3">
-              <span className="flex h-[28px] w-[28px] items-center justify-center rounded-full border border-gold2">
-                <span className="block h-[6px] w-[6px] bg-gold2" />
-              </span>
-              <span className="text-[18px] font-light text-ink">Live Era</span>
-            </div>
+            <span className="text-[18px] font-light text-ink">Live Era2</span>
             <p className="type-body mt-6 max-w-[320px]">
               Нейросеть для оживления фотографий — онлайн, на русском, без VPN.
             </p>
@@ -44,7 +39,7 @@ export function Footer() {
         </div>
 
         <div className="mt-12 flex flex-wrap items-center justify-between gap-3 border-t border-rule2 pt-6">
-          <span className="type-label">© 2026 Live Era</span>
+          <span className="type-label">© 2026 Live Era2</span>
           <a href="mailto:hello@liveera.ru" className="type-label rounded-[6px] hover:text-ink2">
             hello@liveera.ru
           </a>

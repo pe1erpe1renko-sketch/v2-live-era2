@@ -11,11 +11,8 @@ const NAV = [
 
 function Logo() {
   return (
-    <a href="/" className="flex items-center gap-3 rounded-[6px]">
-      <span className="flex h-[28px] w-[28px] items-center justify-center rounded-full border border-gold2">
-        <span className="block h-[6px] w-[6px] bg-gold2" />
-      </span>
-      <span className="text-[18px] font-light text-ink">Live Era</span>
+    <a href="/" className="rounded-[6px] text-[18px] font-light text-ink">
+      Live Era2
     </a>
   );
 }

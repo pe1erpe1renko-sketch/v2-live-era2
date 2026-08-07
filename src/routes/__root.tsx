@@ -77,13 +77,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Live Era — оживить фото нейросетью" },
+      { title: "Live Era2 — оживить фото нейросетью" },
       {
         name: "description",
         content: "Нейросеть оживляет фотографии: загрузите снимок и получите короткое видео.",
       },
-      { name: "author", content: "Live Era" },
-      { property: "og:title", content: "Live Era — оживить фото нейросетью" },
+      { name: "author", content: "Live Era2" },
+      { property: "og:title", content: "Live Era2 — оживить фото нейросетью" },
       {
         property: "og:description",
         content: "Загрузите снимок и получите короткое видео. Без VPN, на русском.",

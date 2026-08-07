@@ -89,8 +89,20 @@ const SIMPLE_LINKS = ["Примеры", "Цены", "Блог"];
 
 function Logo() {
   return (
-    <a href="/" className="rounded-[6px] text-[18px] font-light text-ink">
-      Live Era2
+    <a
+      href="/"
+      className="group relative inline-flex rounded-[6px] text-[18px] font-light text-ink"
+    >
+      <span>Live Era</span>
+      <span
+        className="inline-block transform transition-[transform,color] duration-[2000ms] ease-slow group-hover:-translate-y-1 group-hover:text-gold motion-reduce:transition-none motion-reduce:group-hover:translate-y-0"
+      >
+        2
+      </span>
+      <span
+        className="absolute bottom-0 left-0 h-px w-full origin-left transform scale-x-0 bg-gold2 transition-transform duration-[2000ms] ease-slow group-hover:scale-x-100 motion-reduce:hidden"
+        aria-hidden="true"
+      />
     </a>
   );
 }

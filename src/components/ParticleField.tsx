@@ -30,11 +30,22 @@ export function ParticleField() {
       canvas.style.height = `${h}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
+      // Center the dense dot cluster on the photo cards in Hero.
+      const cards = wrap.parentElement?.querySelector('.flex.w-\\[60\\%\\]') as HTMLElement | null;
+      const cardsRect = cards?.getBoundingClientRect();
+
       const cx = w / 2;
-      const cy = h / 2;
+      const cy = cardsRect
+        ? cardsRect.top + cardsRect.height / 2 - rect.top
+        : h / 2;
       // radius of the dense circular core
       const core = Math.min(w, h) * 0.42;
-      const maxD = Math.hypot(cx, cy);
+      const maxD = Math.max(
+        Math.hypot(cx, cy),
+        Math.hypot(w - cx, cy),
+        Math.hypot(cx, h - cy),
+        Math.hypot(w - cx, h - cy)
+      );
       points = [];
       for (let y = STEP / 2; y < h; y += STEP) {
         for (let x = STEP / 2; x < w; x += STEP) {

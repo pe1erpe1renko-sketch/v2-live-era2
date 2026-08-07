@@ -24,7 +24,7 @@ function UploadZone() {
         const f = e.dataTransfer.files?.[0];
         if (f) setFileName(f.name);
       }}
-      className={`cursor-pointer rounded-[6px] border border-dashed p-8 text-center transition-colors duration-200 hover:border-gold2 hover:bg-gold3 ${
+      className={`cursor-pointer rounded-[6px] border border-dashed p-5 text-center transition-colors duration-200 hover:border-gold2 hover:bg-gold3 ${
         over ? "border-gold2 bg-gold3" : "border-rule"
       }`}
     >
@@ -36,8 +36,8 @@ function UploadZone() {
         aria-label="Загрузить снимок"
         onChange={(e) => setFileName(e.target.files?.[0]?.name ?? null)}
       />
-      <Icon icon="solar:gallery-add-linear" className="mx-auto h-8 w-8 text-gold2" />
-      <p className="mt-3 text-[14px] text-ink">
+      <Icon icon="solar:gallery-add-linear" className="mx-auto h-7 w-7 text-gold2" />
+      <p className="mt-2 text-[14px] text-ink">
         {fileName ?? "Перетащите снимок или выберите файл"}
       </p>
       <p className="mt-1 text-[12px] text-ink3">JPG или PNG</p>
@@ -80,25 +80,25 @@ export function Hero() {
   const [tab, setTab] = useState<"photo" | "text">("photo");
 
   return (
-    <section className="border-b border-rule">
-      <div className="mx-auto grid max-w-[1440px] lg:grid-cols-[42%_58%]">
+    <section className="lg:h-[calc(100svh-72px)] lg:overflow-hidden">
+      <div className="mx-auto grid h-full max-w-[1440px] lg:grid-cols-[42%_58%]">
         {/* Left */}
-        <div className="border-rule p-8 lg:border-r lg:p-16">
+        <div className="flex h-full min-h-0 flex-col justify-center overflow-hidden border-rule px-8 py-10 lg:border-r lg:px-16">
           <SectionLabel>Снимок → Видео</SectionLabel>
 
-          <h1 className="type-display mt-6">
+          <h1 className="mt-4 font-light leading-[1.05] tracking-[-0.05em] text-[clamp(32px,3.4vw,52px)]">
             <span className="block text-ink">Оживить фото бесплатно</span>
             <span className="block text-ink3">снимок станет живым видео</span>
           </h1>
 
-          <p className="type-body mt-6 max-w-[460px]">
+          <p className="type-body mt-4 max-w-[460px]">
             Kling 3, Sora, Veo и Seedance — в одном окне. Загружаете снимок, через пару минут
             забираете MP4 без водяных знаков. Русский интерфейс, оплата картой РФ, VPN не нужен.
           </p>
 
           {/* Form card */}
-          <div id="form" className="hairline-frame mt-8 shadow-card">
-            <div className="rounded-[16px] bg-surface p-8">
+          <div id="form" className="hairline-frame mt-6 shadow-card">
+            <div className="rounded-[16px] bg-surface p-6">
               <div className="flex gap-6 border-b border-rule2">
                 {[
                   { id: "photo" as const, label: "Фото в видео" },
@@ -108,7 +108,7 @@ export function Hero() {
                     key={t.id}
                     type="button"
                     onClick={() => setTab(t.id)}
-                    className={`-mb-px rounded-[6px] px-3 py-3 text-[14px] transition-colors ${
+                    className={`-mb-px rounded-[6px] px-3 py-2.5 text-[14px] transition-colors ${
                       tab === t.id
                         ? "border-b-2 border-gold2 bg-gold3 text-gold"
                         : "border-b-2 border-transparent text-ink3 hover:text-ink2"
@@ -119,58 +119,34 @@ export function Hero() {
                 ))}
               </div>
 
-              <div className="mt-6">{tab === "photo" ? <UploadZone /> : null}</div>
+              <div className="mt-3">{tab === "photo" ? <UploadZone /> : null}</div>
 
               <input
                 type="text"
                 placeholder="Опишите движение — или оставьте пустым"
-                className="mt-4 w-full rounded-[6px] border border-rule bg-surface px-4 py-3 text-[14px] text-ink placeholder:text-ink3"
+                className="mt-3 w-full rounded-[6px] border border-rule bg-surface px-4 py-2.5 text-[14px] text-ink placeholder:text-ink3"
               />
 
               <button
                 type="button"
-                className="mt-4 w-full rounded-[6px] bg-gold p-4 text-[15px] text-surface transition-colors hover:bg-gold-dark"
+                className="mt-3 w-full rounded-[6px] bg-gold px-4 py-3 text-[15px] text-surface transition-colors hover:bg-gold-dark"
               >
                 Оживить снимок — первый ролик бесплатно
               </button>
 
-              <p className="type-label mt-4 text-center">Без VPN · Русский интерфейс · Карта РФ</p>
-            </div>
-          </div>
-
-          {/* Summary panel */}
-          <div className="mt-8 border-t border-rule py-6">
-            <div className="grid grid-cols-2 gap-6">
-              <div>
-                <p className="type-label">Моделей в доступе</p>
-                <p className="mt-3 text-[36px] font-light leading-none text-ink">10</p>
-              </div>
-              <div>
-                <p className="type-label">Статус</p>
-                <div className="mt-3 flex items-center gap-3">
-                  <span className="block h-[6px] w-[6px] rounded-full bg-gold2" />
-                  <span className="type-label text-ink">Первая генерация бесплатна</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-rule2 pt-6">
-              <span className="rounded-full bg-gold3 px-3 py-1.5 text-[12px] text-gold">
-                Реставрация включена
-              </span>
-              <span className="type-label">MP4 · Без водяных знаков</span>
+              <p className="type-label mt-3 text-center">Без VPN · Русский интерфейс · Карта РФ</p>
             </div>
           </div>
         </div>
 
         {/* Right */}
-        <div className="relative h-[60vh] overflow-hidden bg-bg lg:h-auto lg:min-h-[720px]">
+        <div className="relative h-[60vh] overflow-hidden bg-bg lg:h-full">
           <ParticleField />
 
           <div className="pointer-events-none absolute right-8 top-8 h-8 w-8 border-r border-t border-rule" />
 
-          <div className="relative flex h-full items-start justify-center px-8 pt-8 lg:pt-[106px]">
-            <div className="flex w-[80%] items-start lg:w-[60%]">
+          <div className="relative flex h-full min-h-0 items-start justify-center px-8 pb-16 pt-8 lg:pt-[88px]">
+            <div className="flex max-h-full w-[80%] items-start lg:w-[60%]">
               <PhotoCard src={portraitOld} caption="Исходник" className="translate-y-2 -rotate-2" />
               <PhotoCard
                 src={portraitRestored}

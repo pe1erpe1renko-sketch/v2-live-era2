@@ -92,6 +92,12 @@ function Index() {
         <div data-reveal>
           <Specs />
         </div>
+        <div data-reveal>
+          <Tips />
+        </div>
+        <div data-reveal>
+          <Reviews />
+        </div>
       </main>
       <div data-reveal>
         <Footer />

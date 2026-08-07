@@ -10,6 +10,9 @@ import { Models } from "@/components/Models";
 import { Specs } from "@/components/Specs";
 import { Tips } from "@/components/Tips";
 import { Reviews } from "@/components/Reviews";
+import { Pricing } from "@/components/Pricing";
+import { Faq } from "@/components/Faq";
+import { AboutText } from "@/components/AboutText";
 import { Footer } from "@/components/Footer";
 
 export const Route = createFileRoute("/")({
@@ -97,6 +100,15 @@ function Index() {
         </div>
         <div data-reveal>
           <Reviews />
+        </div>
+        <div data-reveal>
+          <Pricing />
+        </div>
+        <div data-reveal>
+          <Faq />
+        </div>
+        <div data-reveal>
+          <AboutText />
         </div>
       </main>
       <div data-reveal>

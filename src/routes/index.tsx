@@ -5,6 +5,9 @@ import { Hero } from "@/components/Hero";
 import { StatsBar } from "@/components/StatsBar";
 import { Steps } from "@/components/Steps";
 import { Scenarios } from "@/components/Scenarios";
+import { Reasons } from "@/components/Reasons";
+import { Models } from "@/components/Models";
+import { Specs } from "@/components/Specs";
 import { Footer } from "@/components/Footer";
 
 export const Route = createFileRoute("/")({

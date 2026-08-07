@@ -63,12 +63,70 @@ const LD_JSON = JSON.stringify({
   })),
 });
 
+function FaqItem({
+  item,
+  index,
+  isOpen,
+  onToggle,
+  uid,
+}: {
+  item: (typeof FAQ)[number];
+  index: number;
+  isOpen: boolean;
+  onToggle: () => void;
+  uid: string;
+}) {
+  const number = String(index + 1).padStart(2, "0");
+
+  return (
+    <div className="border-t border-rule">
+      <h3>
+        <button
+          type="button"
+          id={`${uid}-btn-${index}`}
+          aria-expanded={isOpen}
+          aria-controls={`${uid}-panel-${index}`}
+          onClick={onToggle}
+          className="group flex w-full items-center gap-4 py-4 text-left"
+        >
+          <span className="type-label w-8 shrink-0 text-gold2">{number}</span>
+          <span className="flex-1 text-[15px] font-normal leading-[1.4] text-ink">
+            {item.q}
+          </span>
+          <Icon
+            icon="solar:alt-arrow-down-linear"
+            width={16}
+            height={16}
+            className={`shrink-0 transition-transform duration-300 ${
+              isOpen
+                ? "rotate-180 text-gold2"
+                : "text-ink3 group-hover:text-gold2"
+            }`}
+          />
+        </button>
+      </h3>
+      <div
+        id={`${uid}-panel-${index}`}
+        role="region"
+        aria-labelledby={`${uid}-btn-${index}`}
+        hidden={!isOpen}
+        className="pb-4 pl-8"
+      >
+        <p className="pt-1 text-[13px] leading-[1.6] text-ink2">{item.a}</p>
+      </div>
+    </div>
+  );
+}
+
 export function Faq() {
-  const [open, setOpen] = useState<number[]>([0]);
+  const [open, setOpen] = useState<number[]>([]);
   const uid = useId();
 
   const toggle = (i: number) =>
     setOpen((prev) => (prev.includes(i) ? prev.filter((x) => x !== i) : [...prev, i]));
+
+  const left = FAQ.slice(0, 6);
+  const right = FAQ.slice(6, 12);
 
   return (
     <section className="border-b border-rule">
@@ -80,43 +138,31 @@ export function Faq() {
           Частые вопросы
         </h2>
 
-        <div className="mt-8 overflow-hidden rounded-[16px] border border-rule bg-surface">
-          {FAQ.map((f, i) => {
-            const isOpen = open.includes(i);
-            return (
-              <div key={f.q} className={i > 0 ? "border-t border-rule" : ""}>
-                <h3>
-                  <button
-                    type="button"
-                    id={`${uid}-btn-${i}`}
-                    aria-expanded={isOpen}
-                    aria-controls={`${uid}-panel-${i}`}
-                    onClick={() => toggle(i)}
-                    className="flex w-full items-center justify-between gap-4 px-6 py-5 text-left text-[15px] font-normal text-ink transition-colors duration-300 hover:bg-gold3"
-                  >
-                    <span>{f.q}</span>
-                    <Icon
-                      icon="solar:alt-arrow-down-linear"
-                      width={18}
-                      height={18}
-                      className={`shrink-0 text-gold2 transition-transform duration-500 ${
-                        isOpen ? "rotate-180" : ""
-                      }`}
-                    />
-                  </button>
-                </h3>
-                <div
-                  id={`${uid}-panel-${i}`}
-                  role="region"
-                  aria-labelledby={`${uid}-btn-${i}`}
-                  hidden={!isOpen}
-                  className="px-6 pb-5"
-                >
-                  <p className="max-w-[720px] text-[14px] leading-[1.6] text-ink2">{f.a}</p>
-                </div>
-              </div>
-            );
-          })}
+        <div className="mt-6 grid grid-cols-1 gap-8 md:grid-cols-2">
+          <div>
+            {left.map((item, i) => (
+              <FaqItem
+                key={item.q}
+                item={item}
+                index={i}
+                isOpen={open.includes(i)}
+                onToggle={() => toggle(i)}
+                uid={uid}
+              />
+            ))}
+          </div>
+          <div>
+            {right.map((item, i) => (
+              <FaqItem
+                key={item.q}
+                item={item}
+                index={i + 6}
+                isOpen={open.includes(i + 6)}
+                onToggle={() => toggle(i + 6)}
+                uid={uid}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

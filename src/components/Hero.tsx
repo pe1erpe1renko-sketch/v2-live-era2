@@ -58,7 +58,7 @@ function PhotoCard({
 }) {
   return (
     <figure className={`w-full min-w-0 flex-1 ${className ?? ""}`}>
-      <div className="rounded-[6px] border border-rule bg-surface p-3 shadow-card">
+      <div className="rounded-[6px] border border-rule bg-surface p-3 pb-10 shadow-card">
         <img
           src={src}
           alt={caption}
@@ -66,11 +66,11 @@ function PhotoCard({
           height={800}
           className="aspect-[4/5] w-full object-cover"
         />
+        <figcaption className="mt-4 flex items-center justify-center gap-3">
+          {dot ? <span className="block h-[6px] w-[6px] rounded-full bg-gold2" /> : null}
+          <span className="type-label">{caption}</span>
+        </figcaption>
       </div>
-      <figcaption className="mt-3 flex items-center justify-center gap-3">
-        {dot ? <span className="block h-[6px] w-[6px] rounded-full bg-gold2" /> : null}
-        <span className="type-label">{caption}</span>
-      </figcaption>
     </figure>
   );
 }
@@ -145,8 +145,8 @@ export function Hero() {
 
           <div className="pointer-events-none absolute right-8 top-8 h-8 w-8 border-r border-t border-rule" />
 
-          <div className="relative flex h-full min-h-0 items-start justify-center px-8 pb-16 pt-8 lg:pt-[88px]">
-            <div className="flex max-h-full w-[80%] items-start lg:w-[60%]">
+          <div className="relative flex h-full min-h-0 items-center justify-center px-8">
+            <div className="photo-cards-target flex max-h-full w-[80%] items-center lg:w-[60%]">
               <PhotoCard src={portraitOld} caption="Исходник" className="translate-y-2 -rotate-2" />
               <PhotoCard
                 src={portraitRestored}

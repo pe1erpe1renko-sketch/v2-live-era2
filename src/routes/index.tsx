@@ -81,6 +81,15 @@ function Index() {
         <div data-reveal>
           <Scenarios />
         </div>
+        <div data-reveal>
+          <Reasons />
+        </div>
+        <div data-reveal>
+          <Models />
+        </div>
+        <div data-reveal>
+          <Specs />
+        </div>
       </main>
       <div data-reveal>
         <Footer />

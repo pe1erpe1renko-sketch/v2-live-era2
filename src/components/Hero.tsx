@@ -169,19 +169,16 @@ export function Hero() {
 
           <div className="pointer-events-none absolute right-8 top-8 h-8 w-8 border-r border-t border-rule" />
 
-          <div className="relative flex h-full items-center justify-center px-8">
-            <PhotoCard
-              src={portraitOld}
-              caption="Исходник"
-              className="translate-y-8 -rotate-2"
-            />
+          <div className="relative flex h-full items-center justify-center px-8 pb-16">
+            <PhotoCard src={portraitOld} caption="Исходник" className="translate-y-3 -rotate-2" />
             <PhotoCard
               src={portraitRestored}
               caption="В движении"
               dot
-              className="-ml-8 -translate-y-8 rotate-2"
+              className="-ml-6 -translate-y-3 rotate-2"
             />
           </div>
+
 
           <p className="type-label absolute bottom-8 left-8">Один кадр · 5 секунд видео</p>
         </div>

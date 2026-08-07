@@ -40,8 +40,11 @@ export function ParticleField() {
       const cy = cardsRect
         ? cardsRect.top + cardsRect.height / 2 - rect.top
         : h / 2;
-      // radius of the dense circular core
-      const core = Math.min(w, h) * 0.42;
+      // radius of the dense circular core; scales with the photo cards
+      // so the cluster extends roughly one-third of a card width beyond the edges.
+      const core = cardsRect
+        ? (cardsRect.width / 2) * 1.25
+        : Math.min(w, h) * 0.62;
       const maxD = Math.max(
         Math.hypot(cx, cy),
         Math.hypot(w - cx, cy),

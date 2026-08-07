@@ -146,7 +146,7 @@ export function Hero() {
           <div className="pointer-events-none absolute right-8 top-8 h-8 w-8 border-r border-t border-rule" />
 
           <div className="relative flex h-full min-h-0 items-center justify-center px-8">
-            <div className="photo-cards-target flex max-h-full w-[80%] items-center lg:w-[60%]">
+            <div className="photo-cards-target flex max-h-full w-[80%] items-center lg:w-[88%]">
               <PhotoCard src={portraitOld} caption="Исходник" className="translate-y-2 -rotate-2" />
               <PhotoCard
                 src={portraitRestored}

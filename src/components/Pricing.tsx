@@ -86,7 +86,7 @@ function Feature({
   size = 13,
 }: {
   text: string;
-  sub?: string;
+  sub?: string | undefined;
   dark?: boolean;
   size?: number;
 }) {

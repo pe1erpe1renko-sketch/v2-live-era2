@@ -114,7 +114,7 @@ export function Scenarios() {
     tabRefs.current[next]?.focus();
   };
 
-  const cards = TABS[active].cards;
+  const cards = TABS[active]?.cards ?? [];
 
   return (
     <section className="border-b border-rule">

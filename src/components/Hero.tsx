@@ -168,17 +168,17 @@ export function Hero() {
 
           <div className="pointer-events-none absolute right-8 top-8 h-8 w-8 border-r border-t border-rule" />
 
-          <div className="relative flex h-full items-center justify-center gap-3 px-8">
+          <div className="relative flex h-full items-center justify-center px-8">
             <PhotoCard
               src={portraitOld}
               caption="Исходник"
-              className="translate-y-6 -rotate-2"
+              className="translate-y-8 -rotate-2"
             />
             <PhotoCard
               src={portraitRestored}
               caption="В движении"
               dot
-              className="-translate-y-6 rotate-2"
+              className="-ml-8 -translate-y-8 rotate-2"
             />
           </div>
 

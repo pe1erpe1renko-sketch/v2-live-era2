@@ -67,9 +67,7 @@ function Index() {
     <div ref={rootRef} className="min-h-screen bg-bg">
       <Header />
       <main>
-        <div data-reveal>
-          <Hero />
-        </div>
+        <Hero />
       </main>
       <div data-reveal>
         <Footer />

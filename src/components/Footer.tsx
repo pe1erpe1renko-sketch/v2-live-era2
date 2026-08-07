@@ -34,9 +34,7 @@ export function Footer() {
               <p>Индивидуальный предприниматель [ФИО]</p>
               <p className="mt-0.5">ИНН [номер] · ОГРНИП [номер]</p>
               <p className="mt-0.5">
-                <a href="mailto:[адрес электронной почты]" className="hover:text-ink">
-                  [адрес электронной почты]
-                </a>
+                <FooterLink href="mailto:[адрес электронной почты]">[адрес электронной почты]</FooterLink>
               </p>
             </div>
           </div>
@@ -67,12 +65,7 @@ export function Footer() {
               <FooterLink>Оферта</FooterLink>
               <FooterLink>Политика конфиденциальности</FooterLink>
             </div>
-            <a
-              href="mailto:hello@liveera.ru"
-              className="text-[12px] text-ink3 transition-colors duration-[2000ms] ease-slow hover:text-ink"
-            >
-              hello@liveera.ru
-            </a>
+            <FooterLink href="mailto:hello@liveera.ru">hello@liveera.ru</FooterLink>
           </div>
         </div>
       </div>

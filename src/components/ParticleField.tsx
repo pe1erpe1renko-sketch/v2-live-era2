@@ -116,7 +116,7 @@ export function ParticleField() {
   }, []);
 
   return (
-    <div ref={wrapRef} className="dot-grid-static absolute inset-0 motion-safe:bg-none">
+    <div ref={wrapRef} className="absolute inset-0 motion-reduce:dot-grid-static">
       <canvas ref={canvasRef} className="h-full w-full" aria-hidden="true" />
     </div>
   );

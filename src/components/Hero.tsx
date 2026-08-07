@@ -57,7 +57,7 @@ function PhotoCard({
   className?: string;
 }) {
   return (
-    <figure className={`w-[160px] shrink-0 sm:w-[210px] ${className ?? ""}`}>
+    <figure className={`w-full min-w-0 flex-1 ${className ?? ""}`}>
       <div className="rounded-[6px] border border-rule bg-surface p-3 shadow-card">
         <img
           src={src}
@@ -169,14 +169,16 @@ export function Hero() {
 
           <div className="pointer-events-none absolute right-8 top-8 h-8 w-8 border-r border-t border-rule" />
 
-          <div className="relative flex h-full items-center justify-center px-8">
-            <PhotoCard src={portraitOld} caption="Исходник" className="translate-y-2 -rotate-2" />
-            <PhotoCard
-              src={portraitRestored}
-              caption="В движении"
-              dot
-              className="-ml-3 -translate-y-2 rotate-2"
-            />
+          <div className="relative flex h-full items-start justify-center px-8 pt-8 lg:pt-[106px]">
+            <div className="flex w-[80%] items-start lg:w-[60%]">
+              <PhotoCard src={portraitOld} caption="Исходник" className="translate-y-2 -rotate-2" />
+              <PhotoCard
+                src={portraitRestored}
+                caption="В движении"
+                dot
+                className="-ml-3 -translate-y-2 rotate-2"
+              />
+            </div>
           </div>
 
 

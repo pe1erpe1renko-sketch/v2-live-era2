@@ -123,7 +123,7 @@ export function Faq() {
   const uid = useId();
 
   const toggle = (i: number) =>
-    setOpen((prev) => (prev.includes(i) ? prev.filter((x) => x !== i) : [...prev, i]));
+    setOpen((prev) => (prev.includes(i) ? [] : [i]));
 
   const left = FAQ.slice(0, 6);
   const right = FAQ.slice(6, 12);

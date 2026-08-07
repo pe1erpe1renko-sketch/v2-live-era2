@@ -23,24 +23,9 @@ function IconDuration({ className }: IconProps) {
 function IconFrame({ className }: IconProps) {
   return (
     <svg viewBox="0 0 40 40" className={className} fill="none" stroke="currentColor" strokeWidth="1">
-      <rect x="4.5" y="12.5" width="8" height="15" />
-      <rect x="15.5" y="12.5" width="15" height="15" />
-      <rect x="20.5" y="12.5" width="0" height="0" />
-      <rect x="33.5" y="12.5" width="0" height="0" />
-      <rect x="15.5" y="12.5" width="15" height="15" />
-      <rect x="4.5" y="12.5" width="8" height="15" />
-      <rect x="15.5" y="12.5" width="15" height="15" />
-      <rect x="4.5" y="12.5" width="8" height="15" />
-      <rect x="33.5" y="12.5" width="0" height="0" />
-      <rect x="15.5" y="12.5" width="15" height="15" />
-      <rect x="15.5" y="12.5" width="15" height="15" />
-      <rect x="4.5" y="12.5" width="8" height="15" />
-      <rect x="33.5" y="12.5" width="0" height="0" />
-      <rect x="20.5" y="12.5" width="0" height="0" />
-      <rect x="15.5" y="12.5" width="15" height="15" />
-      <rect x="4.5" y="12.5" width="8" height="15" />
-      <rect x="33.5" y="12.5" width="0" height="0" />
-      <rect x="15.5" y="12.5" width="15" height="15" />
+      <rect x="2.5" y="15" width="5.6" height="10" />
+      <rect x="10.6" y="15" width="10" height="10" />
+      <rect x="23.1" y="15" width="17.8" height="10" transform="translate(-2 0)" />
     </svg>
   );
 }

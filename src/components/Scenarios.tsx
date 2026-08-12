@@ -131,31 +131,35 @@ export function Scenarios() {
         </p>
 
         <div
-          role="tablist"
-          aria-label="Сценарии"
-          onKeyDown={onKeyDown}
-          className="mt-12 flex flex-wrap gap-6 border-b border-rule"
+          className="sticky top-[72px] z-40 border-b border-rule bg-bg px-4 py-3 md:relative md:top-auto md:z-auto md:border-0 md:bg-transparent md:px-0 md:py-0 md:mt-12"
         >
-          {TABS.map((t, i) => (
-            <button
-              key={t.id}
-              ref={(el) => {
-                tabRefs.current[i] = el;
-              }}
-              role="tab"
-              type="button"
-              aria-selected={active === i}
-              tabIndex={active === i ? 0 : -1}
-              onClick={() => setActive(i)}
-              className={`type-label -mb-px border-b-2 px-1 py-3 transition-colors ${
-                active === i
-                  ? "border-gold2 text-ink"
-                  : "border-transparent text-ink3 hover:text-ink2"
-              }`}
-            >
-              {t.label}
-            </button>
-          ))}
+          <div
+            role="tablist"
+            aria-label="Сценарии"
+            onKeyDown={onKeyDown}
+            className="flex gap-4 overflow-x-auto whitespace-nowrap pb-px [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:flex-wrap md:gap-6 md:overflow-visible md:whitespace-normal md:pb-0 md:border-b md:border-rule"
+          >
+            {TABS.map((t, i) => (
+              <button
+                key={t.id}
+                ref={(el) => {
+                  tabRefs.current[i] = el;
+                }}
+                role="tab"
+                type="button"
+                aria-selected={active === i}
+                tabIndex={active === i ? 0 : -1}
+                onClick={() => setActive(i)}
+                className={`-mb-px shrink-0 border-b-2 text-[11px] px-2 py-2 transition-colors md:type-label md:px-1 md:py-3 md:text-[inherit] ${
+                  active === i
+                    ? "border-gold2 text-ink"
+                    : "border-transparent text-ink3 hover:text-ink2"
+                }`}
+              >
+                {t.label}
+              </button>
+            ))}
+          </div>
         </div>
 
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

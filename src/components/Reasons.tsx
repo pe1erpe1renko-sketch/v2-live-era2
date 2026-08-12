@@ -1,4 +1,3 @@
-import { Icon } from "@iconify/react";
 import { SectionLabel } from "@/components/SectionLabel";
 import archiveImg from "@/assets/reason-archive.jpg";
 import giftImg from "@/assets/reason-gift.jpg";

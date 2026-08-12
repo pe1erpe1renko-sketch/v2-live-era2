@@ -17,7 +17,7 @@ export function ParticleField() {
     let h = 0;
     let points: { x: number; y: number; ox: number; oy: number; d: number; s: number }[] = [];
     const mouse = { x: -9999, y: -9999 };
-    const STEP = 14;
+    const STEP = 32;
 
     const build = () => {
       const rect = wrap.getBoundingClientRect();
@@ -59,9 +59,9 @@ export function ParticleField() {
           const r = Math.hypot(jx - cx, jy - cy);
           // 1 in the core, fading to 0 at the edges
           const t = Math.max(0, Math.min(1, 1 - (r - core) / (maxD - core)));
-          const density = t * t;
-          // keep every point in the core, thin out towards the edges
-          if (r > core && Math.random() > density * 0.85) continue;
+          // sharper falloff outside the core
+          const density = t * t * t * t;
+          if (r > core && Math.random() > density * 0.6) continue;
           points.push({ x: jx, y: jy, ox: jx, oy: jy, d: r / maxD, s: density });
         }
       }
@@ -95,9 +95,9 @@ export function ParticleField() {
         p.x += (tx - p.x) * 0.06;
         p.y += (ty - p.y) * 0.06;
 
-        const alpha = (0.2 + p.s * 0.75) * (0.55 + pulse * 0.45);
-        if (alpha <= 0.015) continue;
-        const r = 0.9 + p.s * 0.9 + pulse * 0.35;
+        const alpha = (0.1 + p.s * 0.37) * (0.78 + pulse * 0.22);
+        if (alpha <= 0.01) continue;
+        const r = 1;
 
         ctx.beginPath();
         ctx.fillStyle = `rgba(176, 141, 87, ${alpha.toFixed(3)})`;

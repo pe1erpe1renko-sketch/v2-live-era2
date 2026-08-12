@@ -60,12 +60,16 @@ export function Reasons() {
                 loading="lazy"
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-200 ease-[cubic-bezier(0.4,0,0.6,1)] group-hover:scale-[1.04]"
               />
-              <div className="absolute inset-x-3 bottom-3 rounded-[6px] p-4 backdrop-blur-[12px] [background:rgba(0,0,0,0.55)]">
-                <div className="flex h-8 w-8 items-center justify-center rounded-[6px] [background:rgba(255,255,255,0.15)]">
-                  <Icon icon={it.icon} width={18} height={18} className="text-white" />
-                </div>
-                <h3 className="mt-3 text-[16px] font-normal text-white">{it.title}</h3>
-                <p className="mt-1 text-[12px] leading-[1.4] [color:rgba(255,255,255,0.8)]">
+              <div
+                className="absolute bottom-[10px] left-[10px] right-[10px] max-h-[33%] overflow-hidden rounded-[6px] p-3 backdrop-blur-[12px] [background:rgba(0,0,0,0.55)]"
+              >
+                <h3
+                  className="text-white font-normal leading-tight"
+                  style={{ fontSize: it.titleSize ?? 15 }}
+                >
+                  {it.title}
+                </h3>
+                <p className="mt-[4px] line-clamp-2 text-[12px] leading-[1.35] [color:rgba(255,255,255,0.8)]">
                   {it.text}
                 </p>
               </div>

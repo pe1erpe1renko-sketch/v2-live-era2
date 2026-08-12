@@ -1,3 +1,4 @@
+import type { ReactElement } from "react";
 import { SectionLabel } from "@/components/SectionLabel";
 
 type IconProps = { className?: string };
@@ -53,7 +54,7 @@ const CELLS: {
   value: string;
   note: string;
   small?: boolean;
-  Icon?: (p: IconProps) => React.ReactElement;
+  Icon?: (p: IconProps) => ReactElement;
 }[] = [
   {
     label: "Водяной знак",

@@ -1,7 +1,6 @@
 import { useRef, useState } from "react";
 import { Icon } from "@iconify/react";
 import { SectionLabel } from "./SectionLabel";
-import { ParticleField } from "./ParticleField";
 import portraitOld from "@/assets/portrait-old.jpg";
 import portraitRestored from "@/assets/portrait-restored.jpg";
 

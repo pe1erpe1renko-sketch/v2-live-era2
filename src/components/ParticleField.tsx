@@ -95,7 +95,8 @@ export function ParticleField() {
         p.x += (tx - p.x) * 0.06;
         p.y += (ty - p.y) * 0.06;
 
-        const alpha = (0.1 + p.s * 0.37) * (0.78 + pulse * 0.22);
+        const alpha =
+          (0.1 + p.s * 0.37) * (0.78 + pulse * 0.22) * (window.innerWidth < 768 ? 0.5 : 1);
         if (alpha <= 0.01) continue;
         const r = 1;
 

@@ -1,3 +1,4 @@
+import { useEffect, useRef, useState } from "react";
 import { Icon } from "@iconify/react";
 import { SectionLabel } from "@/components/SectionLabel";
 

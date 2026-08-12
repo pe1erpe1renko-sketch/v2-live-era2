@@ -2,28 +2,30 @@ export function StatsBar() {
   return (
     <section className="border-y border-rule bg-surface">
       <div className="mx-auto grid max-w-[1440px] divide-y divide-rule px-8 lg:grid-cols-3 lg:divide-x lg:divide-y-0 lg:px-16">
-        {/* Left */}
-        <div className="py-6 lg:pr-8">
+        {/* ЧАСТЬ 1 */}
+        <div className="py-8 lg:pr-8">
           <p className="type-label text-ink3">В доступе</p>
-          <p className="mt-1 flex items-baseline text-ink">
-            <span className="text-[44px] font-light leading-none">10</span>
-            <span className="ml-3 text-[24px] font-light leading-none">моделей</span>
+          <p className="mt-2 flex items-baseline text-ink">
+            <span className="text-[32px] font-light leading-none lg:text-[40px]">10</span>
+            <span className="ml-2.5 text-[32px] font-light leading-none text-ink3 lg:ml-2.5 lg:text-[40px]">моделей</span>
           </p>
         </div>
 
-        {/* Middle */}
-        <div className="py-6 lg:px-8">
-          <div className="flex items-center">
-            <span className="block h-[6px] w-[6px] shrink-0 rounded-full bg-gold2" />
-            <span className="ml-2.5 text-[15px] text-ink">Первая генерация бесплатна</span>
-          </div>
-          <p className="mt-1 text-[12px] text-ink3">карта не нужна</p>
+        {/* ЧАСТЬ 2 */}
+        <div className="py-8 lg:px-8">
+          <p className="type-label text-ink3">Первый ролик</p>
+          <p className="mt-2 flex items-center text-ink">
+            <span className="block h-2 w-2 shrink-0 rounded-full bg-gold2" />
+            <span className="ml-3 text-[22px] font-light leading-none lg:text-[28px]">Бесплатно, без карты</span>
+          </p>
         </div>
 
-        {/* Right */}
-        <div className="py-6 lg:pl-8">
-          <p className="text-[13px] text-ink2">Реставрация входит в сценарий</p>
-          <p className="text-[13px] text-ink2">MP4 без водяных знаков</p>
+        {/* ЧАСТЬ 3 */}
+        <div className="py-8 lg:pl-8">
+          <p className="type-label text-ink3">На выходе</p>
+          <p className="mt-2 text-[22px] font-light leading-none text-ink lg:text-[28px]">
+            MP4 без водяных знаков
+          </p>
         </div>
       </div>
     </section>

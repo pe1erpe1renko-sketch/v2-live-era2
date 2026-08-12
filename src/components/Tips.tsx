@@ -81,7 +81,7 @@ export function Tips() {
 
             <button
               type="button"
-              className="mt-6 w-full rounded-[6px] bg-gold p-4 text-[15px] text-white transition-colors duration-300 hover:bg-gold-dark"
+              className="mt-6 w-full rounded-[6px] bg-gold p-4 text-[15px] text-white transition-colors duration-200 hover:bg-gold-dark"
             >
               Оживить старое фото →
             </button>

@@ -1,3 +1,5 @@
+import { Icon } from "@iconify/react";
+
 const COLUMNS = [
   { title: "Сценарии", links: ["Старое фото", "Видео из фото", "Фото питомца", "Оживить рисунок"] },
   { title: "Нейросети", links: ["Kling 3.0", "Sora 2", "Veo 3.1", "Seedance 2.0"] },
@@ -9,11 +11,11 @@ function FooterLink({ href = "#", children }: { href?: string; children: React.R
   return (
     <a
       href={href}
-      className="group relative inline-block text-[14px] text-ink2 transition-colors duration-[2000ms] ease-slow hover:text-ink"
+      className="group relative inline-block text-[14px] text-ink2 transition-colors duration-200 ease-slow hover:text-ink"
     >
       <span>{children}</span>
       <span
-        className="absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-gold2 transition-transform duration-[2000ms] ease-slow group-hover:scale-x-100 motion-reduce:hidden"
+        className="absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-gold2 transition-transform duration-200 ease-slow group-hover:scale-x-100 motion-reduce:hidden"
         aria-hidden="true"
       />
     </a>
@@ -36,6 +38,23 @@ export function Footer() {
               <p className="mt-0.5">
                 <FooterLink href="mailto:[адрес электронной почты]">[адрес электронной почты]</FooterLink>
               </p>
+            </div>
+
+            <div className="mt-5 flex items-center gap-4">
+              {[
+                { icon: "solar:plain-linear", label: "Telegram" },
+                { icon: "solar:chat-square-linear", label: "VK" },
+                { icon: "solar:videocamera-linear", label: "YouTube" },
+              ].map((s) => (
+                <a
+                  key={s.label}
+                  href="#"
+                  aria-label={s.label}
+                  className="rounded-[6px] text-ink3 transition-colors duration-200 ease-slow hover:text-gold"
+                >
+                  <Icon icon={s.icon} width={20} height={20} />
+                </a>
+              ))}
             </div>
           </div>
 

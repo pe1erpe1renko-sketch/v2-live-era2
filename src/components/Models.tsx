@@ -46,14 +46,14 @@ function Marquee({ items, reverse }: { items: string[]; reverse?: boolean }) {
 export function Models() {
   return (
     <section className="border-b border-rule">
-      <div className="mx-auto max-w-[1440px] px-8 py-8 md:py-16 lg:px-16">
+      <div className="mx-auto max-w-[1440px] px-8 py-12 lg:px-16">
         <SectionLabel>Десять моделей</SectionLabel>
 
         <h2 className="mt-4 text-[clamp(28px,3vw,44px)] font-light leading-[1.1] tracking-[-0.04em] text-ink">
           Не одна нейросеть, а весь набор сразу
         </h2>
 
-        <p className="type-body mt-4 max-w-[560px]">
+        <p className="type-body mt-4 max-w-[720px]">
           Kling держит мимику, Seedance считает быстрее и дешевле, Veo добавляет звук и 4K. В
           сценариях модель подбирается под задачу сама, в прямом доступе выбираете вручную. Движки
           обновляем в день релиза.

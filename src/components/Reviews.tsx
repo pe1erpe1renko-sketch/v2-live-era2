@@ -40,10 +40,10 @@ export function Reviews() {
 
         <div className="mt-8 grid items-stretch gap-6 md:grid-cols-2">
           {REVIEWS.map((r) => (
-            <article
+            <a
               key={r.name}
-              tabIndex={0}
-              className="flex h-full flex-col rounded-[16px] border border-rule bg-surface p-6 shadow-card transition-colors duration-300 hover:border-gold2"
+              href="#"
+              className="flex h-full cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold2 flex-col rounded-[16px] border border-rule bg-surface p-6 shadow-card transition-colors duration-200 hover:border-gold2"
             >
               <div className="flex items-start gap-3">
                 <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[6px] bg-gold3 text-[15px] font-normal text-gold">
@@ -67,7 +67,7 @@ export function Reviews() {
               </div>
 
               <p className="mt-4 text-[14px] leading-[1.6] text-ink2">{r.text}</p>
-            </article>
+            </a>
           ))}
         </div>
       </div>

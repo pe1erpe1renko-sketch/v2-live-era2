@@ -114,19 +114,71 @@ function Feature({
 
 export function Pricing() {
   const carouselRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const [activeIdx, setActiveIdx] = useState(1);
+
+  const scrollToCard = (i: number, smooth: boolean) => {
+    const el = carouselRef.current;
+    if (!el) return;
+    const card = el.children[i] as HTMLElement | undefined;
+    if (!card) return;
+    const left = card.offsetLeft - (el.clientWidth - card.offsetWidth) / 2;
+    el.scrollTo({ left, behavior: smooth ? "smooth" : "auto" });
+    setActiveIdx(i);
+  };
 
   useEffect(() => {
     const el = carouselRef.current;
     if (!el) return;
     if (window.matchMedia("(max-width: 767px)").matches) {
-      const card = el.children[1] as HTMLElement | undefined;
-      if (card) {
-        const left = card.offsetLeft - (el.clientWidth - card.offsetWidth) / 2;
-        el.scrollLeft = left;
-        setActiveIdx(1);
-      }
+      scrollToCard(1, false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // First-show nudge: shift right 24px and back, once per session.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (!window.matchMedia("(max-width: 767px)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (sessionStorage.getItem("pricingNudgeShown")) return;
+
+    const section = sectionRef.current;
+    if (!section) return;
+
+    let done = false;
+    const run = () => {
+      if (done) return;
+      done = true;
+      sessionStorage.setItem("pricingNudgeShown", "1");
+      const el = carouselRef.current;
+      if (!el) return;
+      const start = el.scrollLeft;
+      const peak = start + 24;
+      const t0 = performance.now();
+      const dur = 400;
+      const tick = (now: number) => {
+        const t = Math.min(1, (now - t0) / dur);
+        // out then back: 0 -> 24 -> 0
+        const v = t < 0.5 ? t * 2 : (1 - t) * 2;
+        el.scrollLeft = start + (peak - start) * v;
+        if (t < 1) requestAnimationFrame(tick);
+        else el.scrollLeft = start;
+      };
+      requestAnimationFrame(tick);
+    };
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          run();
+          io.disconnect();
+        }
+      },
+      { threshold: 0.4 },
+    );
+    io.observe(section);
+    return () => io.disconnect();
   }, []);
 
   const onScroll = () => {
@@ -148,7 +200,7 @@ export function Pricing() {
   };
 
   return (
-    <section className="border-b border-rule">
+    <section ref={sectionRef} className="border-b border-rule">
       <div className="mx-auto max-w-[1440px] px-8 py-8 md:py-16 lg:px-16">
         <SectionLabel>Подписка</SectionLabel>
 
@@ -166,15 +218,15 @@ export function Pricing() {
           onScroll={onScroll}
           className="mt-12 -mx-8 flex items-stretch gap-3 overflow-x-auto px-4 pb-2 pt-4 [-webkit-overflow-scrolling:touch] [scroll-snap-type:x_mandatory] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:grid md:grid-cols-3 md:items-start md:gap-6 md:overflow-visible md:px-0 md:pb-0 md:pt-0"
         >
-          {PLANS.map((p) => {
+          {PLANS.map((p, idx) => {
             const dark = !!p.featured;
             return (
               <article
                 key={p.name}
                 tabIndex={0}
-                className={`relative flex h-full w-[84vw] shrink-0 snap-center flex-col rounded-[16px] p-7 shadow-card focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 md:w-auto md:shrink ${
+                className={`relative flex h-full w-[76vw] shrink-0 snap-center flex-col rounded-[16px] p-7 shadow-card transition-[opacity,transform] duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 md:w-auto md:shrink md:opacity-100 md:scale-100 ${
                   dark ? "bg-ink md:-my-6" : "border border-rule bg-surface"
-                }`}
+                } ${activeIdx === idx ? "scale-100 opacity-100" : "scale-[0.94] opacity-50"}`}
               >
                 {dark && (
                   <span className="type-label absolute -top-3 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-full bg-gold px-3 py-1 text-[10px] text-white">
@@ -252,12 +304,20 @@ export function Pricing() {
           })}
         </div>
 
-        <div className="mt-4 flex justify-center gap-2 md:hidden">
-          {PLANS.map((_, i) => (
-            <span
-              key={i}
-              className={`h-1.5 w-1.5 rounded-full ${activeIdx === i ? "bg-gold2" : "bg-rule"}`}
-            />
+        <div className="mt-5 flex justify-center gap-2 md:hidden">
+          {PLANS.map((p, i) => (
+            <button
+              key={p.name}
+              type="button"
+              onClick={() => scrollToCard(i, true)}
+              className={`min-h-[44px] rounded-full px-5 py-2.5 text-[13px] transition-colors duration-200 ${
+                activeIdx === i
+                  ? "bg-gold text-white"
+                  : "border border-rule text-ink2"
+              }`}
+            >
+              {p.name}
+            </button>
           ))}
         </div>
 

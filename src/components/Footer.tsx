@@ -22,7 +22,7 @@ function FooterLink({ href = "#", children }: { href?: string; children: React.R
 
 export function Footer() {
   return (
-    <footer className="border-t border-rule bg-bg">
+    <footer className="bg-bg">
       <div className="mx-auto max-w-[1440px] px-8 py-16">
         <div className="grid gap-12 lg:grid-cols-[1fr_2fr]">
           <div>

@@ -24,7 +24,7 @@ function UploadZone() {
         const f = e.dataTransfer.files?.[0];
         if (f) setFileName(f.name);
       }}
-      className={`cursor-pointer rounded-[6px] border border-dashed p-5 text-center transition-colors duration-200 hover:border-gold2 hover:bg-gold3 ${
+      className={`cursor-pointer rounded-[6px] border border-dashed p-5 text-center transition-colors duration-200 hover:border-gold2 hover:bg-gold3 lg:p-[clamp(12px,2.2vh,20px)] ${
         over ? "border-gold2 bg-gold3" : "border-rule"
       }`}
     >
@@ -87,22 +87,22 @@ export function Hero() {
     <section id="hero" className="lg:min-h-[calc(100svh-72px)]">
       <div className="mx-auto grid h-full max-w-[1440px] lg:grid-cols-[42%_58%]">
         {/* Left */}
-        <div className="flex flex-col justify-center border-rule px-8 pb-0 pt-10 lg:border-r lg:px-16 lg:py-10">
+        <div className="flex flex-col justify-center border-rule px-8 pb-0 pt-10 lg:border-r lg:px-16 lg:py-[clamp(20px,4vh,40px)]">
           <SectionLabel>Снимок → Видео</SectionLabel>
 
-          <h1 className="mt-4 font-light leading-[1.05] tracking-[-0.05em] text-[clamp(32px,3.4vw,52px)]">
+          <h1 className="mt-4 font-light leading-[1.05] tracking-[-0.05em] text-[clamp(32px,3.4vw,52px)] lg:mt-[clamp(10px,2vh,24px)] lg:text-[clamp(28px,4.6vh,52px)]">
             <span className="block text-ink">Оживить фото бесплатно</span>
             <span className="block text-ink3">снимок станет живым видео</span>
           </h1>
 
-          <p className="type-body mt-4 max-w-[460px]">
+          <p className="type-body mt-4 max-w-[460px] lg:mt-[clamp(10px,2vh,24px)] lg:text-[clamp(13px,1.8vh,16px)]">
             Kling 3, Sora, Veo и Seedance — в одном окне. Загружаете снимок, через пару минут
             забираете MP4 без водяных знаков. Русский интерфейс, оплата картой РФ, VPN не нужен.
           </p>
 
           {/* Form card */}
-          <div id="form" className="hairline-frame mt-6 shadow-card">
-            <div className="rounded-[16px] bg-surface p-6">
+          <div id="form" className="hairline-frame mt-6 shadow-card lg:mt-[clamp(10px,2vh,24px)]">
+            <div className="rounded-[16px] bg-surface p-6 lg:p-[clamp(16px,2.4vh,24px)]">
               <div className="flex gap-6 border-b border-rule2">
                 {[
                   { id: "photo" as const, label: "Фото в видео" },
@@ -123,17 +123,19 @@ export function Hero() {
                 ))}
               </div>
 
-              <div className="mt-3">{tab === "photo" ? <UploadZone /> : null}</div>
+              <div className="mt-3 lg:mt-[clamp(8px,1.4vh,12px)]">
+                {tab === "photo" ? <UploadZone /> : null}
+              </div>
 
               <input
                 type="text"
                 placeholder="Опишите движение — или оставьте пустым"
-                className="mt-3 w-full rounded-[6px] border border-rule bg-surface px-4 py-2.5 text-[14px] text-ink placeholder:text-ink3"
+                className="mt-3 w-full rounded-[6px] border border-rule bg-surface px-4 py-2.5 text-[14px] text-ink placeholder:text-ink3 lg:mt-[clamp(8px,1.4vh,12px)]"
               />
 
               <button
                 type="button"
-                className="mt-3 w-full rounded-[6px] bg-gold px-4 py-3 text-[15px] text-surface transition-colors hover:bg-gold-dark"
+                className="mt-3 w-full rounded-[6px] bg-gold px-4 py-3 text-[15px] text-surface transition-colors hover:bg-gold-dark lg:mt-[clamp(8px,1.4vh,12px)] lg:px-[clamp(12px,1.8vh,16px)] lg:py-[clamp(12px,1.8vh,16px)]"
               >
                 Оживить снимок — первый ролик бесплатно
               </button>

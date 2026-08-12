@@ -57,7 +57,7 @@ export function Restoration() {
 
 function Shot({ src, label, alt }: { src: string; label: string; alt: string }) {
   return (
-    <div className="relative min-w-0 flex-1 overflow-hidden rounded-[6px]">
+    <div className="relative w-full overflow-hidden rounded-[6px]">
       <img src={src} alt={alt} loading="lazy" className="aspect-[3/4] w-full object-cover" />
       <span className="type-label absolute bottom-3 left-3 inline-block w-auto whitespace-nowrap rounded-[6px] bg-black/60 px-2 py-1 text-[10px] text-bg">
         {label}

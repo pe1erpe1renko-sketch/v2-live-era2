@@ -13,8 +13,7 @@ export function StatsBar() {
         {/* ЧАСТЬ 2 */}
         <div className="py-8 lg:px-8">
           <p className="type-label text-ink3">Первый ролик</p>
-          <p className="mt-2 flex items-center gap-3 text-[28px] font-light leading-none text-ink">
-            <span className="block h-2 w-2 shrink-0 rounded-full bg-gold2" />
+          <p className="mt-2 flex items-baseline text-[28px] font-light leading-none text-ink">
             Бесплатно, без карты
           </p>
         </div>

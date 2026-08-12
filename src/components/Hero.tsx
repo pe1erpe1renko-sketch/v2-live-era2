@@ -133,8 +133,6 @@ export function Hero() {
               >
                 Оживить снимок — первый ролик бесплатно
               </button>
-
-              <p className="type-label mt-3 text-center">Без VPN · Русский интерфейс · Карта РФ</p>
             </div>
           </div>
         </div>

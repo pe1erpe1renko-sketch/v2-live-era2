@@ -339,7 +339,6 @@ export function Header() {
             <span className="hidden lg:inline">Создать видео</span>
             <span className="lg:hidden">Создать</span>
           </a>
-          <span className="type-label hidden xl:block">RU · Без VPN</span>
           <button
             type="button"
             aria-label="Меню"

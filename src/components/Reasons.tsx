@@ -63,13 +63,12 @@ export function Reasons() {
                 loading="lazy"
                 className="absolute inset-0 h-full w-full object-cover transition-transform duration-200 ease-[cubic-bezier(0.4,0,0.6,1)] group-hover:scale-[1.04]"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.75)] to-[rgba(0,0,0,0.15)] transition-opacity duration-200 ease-[cubic-bezier(0.4,0,0.6,1)] group-hover:from-[rgba(0,0,0,0.82)]" />
-              <div className="relative flex h-full flex-col justify-end p-6">
-                <div className="flex h-10 w-10 items-center justify-center rounded-[6px] bg-[rgba(255,255,255,0.15)]">
-                  <Icon icon={it.icon} width={20} height={20} className="text-white" />
+              <div className="absolute inset-x-3 bottom-3 rounded-[6px] p-4 backdrop-blur-[12px] [background:rgba(0,0,0,0.55)]">
+                <div className="flex h-8 w-8 items-center justify-center rounded-[6px] [background:rgba(255,255,255,0.15)]">
+                  <Icon icon={it.icon} width={18} height={18} className="text-white" />
                 </div>
-                <h3 className="mt-4 text-[17px] font-normal text-white">{it.title}</h3>
-                <p className="mt-1.5 text-[13px] leading-[1.5] text-[rgba(255,255,255,0.75)]">
+                <h3 className="mt-3 text-[16px] font-normal text-white">{it.title}</h3>
+                <p className="mt-1 text-[12px] leading-[1.4] [color:rgba(255,255,255,0.8)]">
                   {it.text}
                 </p>
               </div>

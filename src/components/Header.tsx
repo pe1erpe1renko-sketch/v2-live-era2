@@ -148,32 +148,40 @@ function Panel({ children }: { children: React.ReactNode }) {
   );
 }
 
+function ScenarioCard({ it }: { it: Item }) {
+  return (
+    <a href="#form" className="group block overflow-hidden rounded-[6px]">
+      <div className="relative aspect-[3/2] overflow-hidden rounded-[6px]">
+        <img
+          src={it.img}
+          alt={it.title}
+          loading="lazy"
+          className="h-full w-full object-cover transition-transform duration-200 ease-slow group-hover:scale-[1.04] motion-reduce:transition-none"
+        />
+        {it.badge ? (
+          <span className="absolute left-2 top-2">
+            <Badge>{it.badge}</Badge>
+          </span>
+        ) : null}
+      </div>
+      <p className="mt-2 text-[13px] font-normal leading-[1.3] text-ink line-clamp-2">
+        {it.title}
+      </p>
+    </a>
+  );
+}
+
 function ScenariosMenu() {
   return (
     <Panel>
       <div className="flex gap-8">
-        <div className="grid w-[72%] grid-cols-4 gap-6">
+        <div className="grid w-[72%] grid-cols-4 gap-5">
           {SCENARIO_COLS.map((col) => (
             <div key={col.label}>
               <span className="type-label">{col.label}</span>
-              <div className="mt-3 flex flex-col gap-3">
+              <div className="mt-3 flex flex-col gap-4">
                 {col.items.map((it) => (
-                  <a
-                    key={it.title}
-                    href="#form"
-                    className="group flex items-center gap-3 rounded-[6px] p-[6px] transition-colors hover:bg-gold3"
-                  >
-                    <img
-                      src={it.img}
-                      alt={it.title}
-                      loading="lazy"
-                      className="h-10 w-14 shrink-0 rounded-[6px] border border-rule object-cover transition-colors group-hover:border-gold2"
-                    />
-                    <span className="flex flex-wrap items-center gap-2 text-[14px] text-ink">
-                      {it.title}
-                      {it.badge ? <Badge>{it.badge}</Badge> : null}
-                    </span>
-                  </a>
+                  <ScenarioCard key={it.title} it={it} />
                 ))}
               </div>
             </div>
@@ -182,7 +190,7 @@ function ScenariosMenu() {
 
         <div className="w-[28%] border-l border-rule pl-8">
           <SectionLabel>Главный сценарий</SectionLabel>
-          <div className="mt-3 rounded-[16px] border border-gold2 bg-surface p-3">
+          <div className="mt-3 rounded-[16px] border border-rule bg-surface p-3">
             <div className="relative aspect-[16/10] overflow-hidden rounded-[6px]">
               <img
                 src={portraitRestored}
@@ -192,9 +200,6 @@ function ScenariosMenu() {
               />
               <span className="absolute right-2 top-2 flex h-8 w-8 items-center justify-center rounded-full border border-rule bg-surface">
                 <Icon icon="solar:play-linear" className="h-4 w-4 text-gold" />
-              </span>
-              <span className="type-label absolute bottom-2 left-2 rounded-[6px] bg-surface px-2 py-1 text-[10px]">
-                Луп · Портрет дышит
               </span>
             </div>
             <p className="mt-3 text-[15px] text-ink">Оживление фото</p>

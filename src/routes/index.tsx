@@ -81,10 +81,10 @@ function Index() {
         <Hero />
         <StatsBar />
         <div data-reveal>
-          <Steps />
+          <Scenarios />
         </div>
         <div data-reveal>
-          <Scenarios />
+          <Steps />
         </div>
         <div data-reveal>
           <Reasons />
@@ -96,13 +96,13 @@ function Index() {
           <Specs />
         </div>
         <div data-reveal>
-          <Tips />
+          <Pricing />
         </div>
         <div data-reveal>
           <Reviews />
         </div>
         <div data-reveal>
-          <Pricing />
+          <Tips />
         </div>
         <div data-reveal>
           <Faq />

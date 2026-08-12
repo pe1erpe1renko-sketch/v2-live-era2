@@ -60,7 +60,7 @@ function PhotoCard({
 }) {
   return (
     <figure className={`w-full min-w-0 flex-1 ${className ?? ""}`}>
-      <div className="rounded-[6px] border border-rule bg-surface p-3 pb-10 shadow-card">
+      <div className="rounded-[6px] border border-rule bg-surface p-2 pb-7 shadow-card sm:p-3 sm:pb-10">
         <img
           src={src}
           alt={caption}
@@ -68,9 +68,11 @@ function PhotoCard({
           height={800}
           className="aspect-[4/5] w-full object-cover"
         />
-        <figcaption className="mt-4 flex items-center justify-center gap-3">
-          {dot ? <span className="block h-[6px] w-[6px] rounded-full bg-gold2" /> : null}
-          <span className="type-label">{caption}</span>
+        <figcaption className="mt-3 flex items-center justify-center gap-2 sm:mt-4 sm:gap-3">
+          {dot ? <span className="block h-[6px] w-[6px] shrink-0 rounded-full bg-gold2" /> : null}
+          <span className="type-label whitespace-nowrap text-[10px] tracking-[0.1em] sm:text-[12px] sm:tracking-[0.14em]">
+            {caption}
+          </span>
         </figcaption>
       </div>
     </figure>

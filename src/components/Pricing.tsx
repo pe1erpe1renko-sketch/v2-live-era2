@@ -113,6 +113,40 @@ function Feature({
 }
 
 export function Pricing() {
+  const carouselRef = useRef<HTMLDivElement>(null);
+  const [activeIdx, setActiveIdx] = useState(1);
+
+  useEffect(() => {
+    const el = carouselRef.current;
+    if (!el) return;
+    if (window.matchMedia("(max-width: 767px)").matches) {
+      const card = el.children[1] as HTMLElement | undefined;
+      if (card) {
+        const left = card.offsetLeft - (el.clientWidth - card.offsetWidth) / 2;
+        el.scrollLeft = left;
+        setActiveIdx(1);
+      }
+    }
+  }, []);
+
+  const onScroll = () => {
+    const el = carouselRef.current;
+    if (!el) return;
+    const center = el.scrollLeft + el.clientWidth / 2;
+    let nearest = 0;
+    let dist = Infinity;
+    Array.from(el.children).forEach((c, i) => {
+      const child = c as HTMLElement;
+      const cCenter = child.offsetLeft + child.offsetWidth / 2;
+      const d = Math.abs(cCenter - center);
+      if (d < dist) {
+        dist = d;
+        nearest = i;
+      }
+    });
+    setActiveIdx(nearest);
+  };
+
   return (
     <section className="border-b border-rule">
       <div className="mx-auto max-w-[1440px] px-8 py-8 md:py-16 lg:px-16">
@@ -127,14 +161,18 @@ export function Pricing() {
           можно в личном кабинете, без звонков и писем.
         </p>
 
-        <div className="mt-12 grid items-start gap-6 md:grid-cols-3">
+        <div
+          ref={carouselRef}
+          onScroll={onScroll}
+          className="mt-12 flex items-stretch gap-3 overflow-x-auto px-4 pb-2 pt-4 [-webkit-overflow-scrolling:touch] [scroll-snap-type:x_mandatory] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:items-start md:gap-6 md:overflow-visible md:px-0 md:pb-0 md:pt-0"
+        >
           {PLANS.map((p) => {
             const dark = !!p.featured;
             return (
               <article
                 key={p.name}
                 tabIndex={0}
-                className={`relative flex h-full flex-col rounded-[16px] p-7 shadow-card focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
+                className={`relative flex h-full w-[84%] shrink-0 snap-center flex-col rounded-[16px] p-7 shadow-card focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 md:w-auto md:shrink ${
                   dark ? "bg-ink md:-my-6" : "border border-rule bg-surface"
                 }`}
               >
@@ -212,6 +250,15 @@ export function Pricing() {
               </article>
             );
           })}
+        </div>
+
+        <div className="mt-4 flex justify-center gap-2 md:hidden">
+          {PLANS.map((_, i) => (
+            <span
+              key={i}
+              className={`h-1.5 w-1.5 rounded-full ${activeIdx === i ? "bg-gold2" : "bg-rule"}`}
+            />
+          ))}
         </div>
 
         <div className="mt-6 rounded-[16px] border border-rule bg-surface p-5">

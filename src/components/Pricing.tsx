@@ -96,7 +96,7 @@ function Feature({
         icon="solar:check-circle-linear"
         width={15}
         height={15}
-        className="mt-[3px] shrink-0 text-gold2"
+        className={`mt-[3px] shrink-0 ${dark ? "text-[#71717A]" : "text-ink3"}`}
       />
       <span className="ml-[10px]">
         <span

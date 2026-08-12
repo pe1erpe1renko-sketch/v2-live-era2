@@ -1,27 +1,31 @@
 import { Icon } from "@iconify/react";
 import { SectionLabel } from "@/components/SectionLabel";
+import avatarMarina from "@/assets/avatar-marina.jpg";
+import avatarDmitry from "@/assets/avatar-dmitry.jpg";
+import avatarAnna from "@/assets/avatar-anna.jpg";
+import avatarSergey from "@/assets/avatar-sergey.jpg";
 
 const REVIEWS = [
   {
-    letter: "М",
+    avatar: avatarMarina,
     name: "Марина, Нижний Новгород",
     category: "Семейный архив",
     text: "Отсканировала единственную карточку бабушки, 1958 год, с заломом через всё лицо. Ждала, что черты поплывут, но получилось дыхание и моргание, а лицо осталось её. Царапины сервис убрал сам, отдельно я об этом не просила.",
   },
   {
-    letter: "Д",
+    avatar: avatarDmitry,
     name: "Дмитрий, Екатеринбург",
     category: "Подарок",
     text: "Делал ролик отцу на семидесятилетие из студенческого снимка. С первого раза он только моргал, поменял сценарий на поворот головы — и вышло то, что нужно. За неудачную попытку токены вернулись автоматически.",
   },
   {
-    letter: "А",
+    avatar: avatarAnna,
     name: "Анна, Казань",
     category: "Лента",
     text: "Беру для сторис: кадры из отпуска оживают за пару минут, вертикальный формат сразу нужный, водяного знака нет. На групповых снимках лица на заднем плане иногда плывут, поэтому выбираю те, где я крупно.",
   },
   {
-    letter: "С",
+    avatar: avatarSergey,
     name: "Сергей, Псков",
     category: "Рисунки",
     text: "Оживил дракона, которого сын рисовал неделю. Боялся, что нейросеть перерисует по-своему и получится мультик из интернета, но кривые пропорции и линии остались его. Ребёнок пересматривал раз двадцать.",
@@ -46,9 +50,14 @@ export function Reviews() {
               className="flex h-full cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold2 flex-col rounded-[16px] border border-rule bg-surface p-6 shadow-card transition-colors duration-200 hover:border-gold2"
             >
               <div className="flex items-start gap-3">
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[6px] bg-gold3 text-[15px] font-normal text-gold">
-                  {r.letter}
-                </div>
+                <img
+                  src={r.avatar}
+                  alt=""
+                  loading="lazy"
+                  width={48}
+                  height={48}
+                  className="h-12 w-12 shrink-0 rounded-full border border-rule object-cover"
+                />
                 <div className="min-w-0 flex-1">
                   <div className="text-[14px] font-normal text-ink">{r.name}</div>
                   <div className="type-label mt-0.5 text-[10px]">{r.category}</div>

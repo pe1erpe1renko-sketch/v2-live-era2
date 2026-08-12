@@ -24,7 +24,7 @@ function UploadZone() {
         const f = e.dataTransfer.files?.[0];
         if (f) setFileName(f.name);
       }}
-      className={`cursor-pointer rounded-[6px] border border-dashed p-5 text-center transition-colors duration-200 hover:border-gold2 hover:bg-gold3 ${
+      className={`cursor-pointer rounded-[6px] border border-dashed p-5 text-center transition-colors duration-200 hover:border-gold2 hover:bg-gold3 lg:p-[clamp(12px,2.2vh,20px)] ${
         over ? "border-gold2 bg-gold3" : "border-rule"
       }`}
     >

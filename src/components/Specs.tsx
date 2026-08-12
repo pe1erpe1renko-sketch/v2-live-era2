@@ -118,8 +118,8 @@ export function Specs() {
                 {c.Icon ? <c.Icon className="absolute right-4 top-4 h-8 w-8 text-gold2" /> : null}
                 <div className="type-label text-ink3">{c.label}</div>
                 <div
-                  className={`mt-3 whitespace-nowrap font-light leading-[1.1] text-ink ${
-                    c.small ? "text-[24px]" : "text-[30px]"
+                  className={`mt-3 whitespace-nowrap font-light leading-[1.1] tracking-[-0.02em] text-ink ${
+                    c.small ? "text-[26px]" : "text-[30px]"
                   }`}
                 >
                   {c.value}

@@ -304,12 +304,20 @@ export function Pricing() {
           })}
         </div>
 
-        <div className="mt-4 flex justify-center gap-2 md:hidden">
-          {PLANS.map((_, i) => (
-            <span
-              key={i}
-              className={`h-1.5 w-1.5 rounded-full ${activeIdx === i ? "bg-gold2" : "bg-rule"}`}
-            />
+        <div className="mt-5 flex justify-center gap-2 md:hidden">
+          {PLANS.map((p, i) => (
+            <button
+              key={p.name}
+              type="button"
+              onClick={() => scrollToCard(i, true)}
+              className={`min-h-[44px] rounded-full px-5 py-2.5 text-[13px] transition-colors duration-200 ${
+                activeIdx === i
+                  ? "bg-gold text-white"
+                  : "border border-rule text-ink2"
+              }`}
+            >
+              {p.name}
+            </button>
           ))}
         </div>
 

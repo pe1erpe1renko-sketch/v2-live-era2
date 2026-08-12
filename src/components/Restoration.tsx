@@ -7,7 +7,7 @@ export function Restoration() {
     <section className="border-b border-rule">
       <div className="mx-auto max-w-[1440px] px-8 py-8 md:py-16 lg:px-16">
         <div className="overflow-hidden rounded-[16px] bg-ink p-6 md:p-10">
-          <div className="grid items-center gap-8 lg:grid-cols-[45%_55%] lg:gap-12">
+          <div className="grid items-center gap-8 lg:grid-cols-[45fr_55fr] lg:gap-12">
             <div className="min-w-0">
               <div className="flex items-center gap-3">
                 <span className="block h-[6px] w-[6px] rounded-full bg-gold2" />
@@ -35,14 +35,18 @@ export function Restoration() {
             </div>
 
             <div className="flex w-full box-border min-w-0 flex-col items-stretch gap-4 sm:flex-row sm:items-center sm:gap-4">
-              <Shot src={portraitOld} label="До" alt="Старое фото с царапинами и заломами" />
+              <div className="flex min-w-0 flex-1 basis-0 overflow-hidden rounded-[6px]">
+                <Shot src={portraitOld} label="До" alt="Старое фото с царапинами и заломами" />
+              </div>
               <Icon
                 icon="solar:arrow-right-linear"
                 width={24}
                 height={24}
-                className="mx-auto shrink-0 rotate-90 px-1 text-gold2 sm:mx-0 sm:rotate-0"
+                className="mx-auto shrink-0 grow-0 basis-auto rotate-90 px-1 text-gold2 sm:mx-0 sm:rotate-0"
               />
-              <Shot src={portraitRestored} label="После" alt="То же фото после реставрации" />
+              <div className="flex min-w-0 flex-1 basis-0 overflow-hidden rounded-[6px]">
+                <Shot src={portraitRestored} label="После" alt="То же фото после реставрации" />
+              </div>
             </div>
           </div>
         </div>
@@ -53,7 +57,7 @@ export function Restoration() {
 
 function Shot({ src, label, alt }: { src: string; label: string; alt: string }) {
   return (
-    <div className="relative min-w-0 flex-1 overflow-hidden rounded-[6px]">
+    <div className="relative w-full overflow-hidden rounded-[6px]">
       <img src={src} alt={alt} loading="lazy" className="aspect-[3/4] w-full object-cover" />
       <span className="type-label absolute bottom-3 left-3 inline-block w-auto whitespace-nowrap rounded-[6px] bg-black/60 px-2 py-1 text-[10px] text-bg">
         {label}

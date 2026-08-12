@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Icon } from "@iconify/react";
 import { SectionLabel } from "./SectionLabel";
 import portraitOld from "@/assets/portrait-old.jpg";
@@ -78,6 +78,88 @@ function PhotoCard({
   );
 }
 
+function PhotoStage() {
+  const wrapRef = useRef<HTMLDivElement | null>(null);
+  const leftRef = useRef<HTMLDivElement | null>(null);
+  const rightRef = useRef<HTMLDivElement | null>(null);
+  const enabledRef = useRef(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia(
+      "(min-width: 1024px) and (prefers-reduced-motion: no-preference)"
+    );
+    const update = () => {
+      enabledRef.current = mq.matches;
+    };
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!enabledRef.current || !wrapRef.current) return;
+    const r = wrapRef.current.getBoundingClientRect();
+    const cx = r.left + r.width / 2;
+    const cy = r.top + r.height / 2;
+    const nx = Math.max(-1, Math.min(1, (e.clientX - cx) / (r.width / 2)));
+    const ny = Math.max(-1, Math.min(1, (e.clientY - cy) / (r.height / 2)));
+    const max = 12;
+    const lx = nx * max;
+    const ly = ny * max;
+    const rx = nx * max * 0.6;
+    const ry = ny * max * 0.6;
+    const rotY = nx * 2;
+    const rotX = -ny * 2;
+    const set = (
+      el: HTMLDivElement | null,
+      tx: number,
+      ty: number,
+      rxg: number,
+      ryg: number
+    ) => {
+      if (!el) return;
+      el.style.transition = "transform 400ms cubic-bezier(0.4,0,0.6,1)";
+      el.style.transform = `translate(${tx}px, ${ty}px) rotateX(${rxg}deg) rotateY(${ryg}deg)`;
+    };
+    set(leftRef.current, lx, ly, rotX, rotY);
+    set(rightRef.current, rx, ry, rotX * 0.6, rotY * 0.6);
+  };
+
+  const onLeave = () => {
+    const reset = (el: HTMLDivElement | null) => {
+      if (!el) return;
+      el.style.transition = "transform 600ms cubic-bezier(0.4,0,0.6,1)";
+      el.style.transform = "";
+    };
+    reset(leftRef.current);
+    reset(rightRef.current);
+  };
+
+  return (
+    <div
+      ref={wrapRef}
+      onMouseMove={onMove}
+      onMouseLeave={onLeave}
+      className="relative flex h-full min-h-0 items-center justify-center px-4 lg:px-8"
+    >
+      <div
+        className="photo-cards-target flex max-h-full w-[92%] items-center lg:w-[88%]"
+        style={{ perspective: "1000px" }}
+      >
+        <div ref={leftRef} className="min-w-0 flex-1" style={{ willChange: "transform" }}>
+          <PhotoCard src={portraitOld} caption="Исходник" className="translate-y-2 -rotate-2" />
+        </div>
+        <div
+          ref={rightRef}
+          className="-ml-1 min-w-0 flex-1 lg:-ml-3"
+          style={{ willChange: "transform" }}
+        >
+          <PhotoCard src={portraitRestored} caption="В движении" dot className="-translate-y-2 rotate-2" />
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export function Hero() {
   const [tab, setTab] = useState<"photo" | "text">("photo");
@@ -146,18 +228,7 @@ export function Hero() {
         <div className="relative overflow-hidden pb-8 pt-8 lg:h-auto lg:min-h-[calc(100svh-72px)] lg:py-0" style={{ backgroundColor: "#EFEFED" }}>
           <div className="pointer-events-none absolute right-8 top-8 hidden h-8 w-8 border-r border-t border-rule lg:block" />
 
-          <div className="relative flex h-full min-h-0 items-center justify-center px-4 lg:px-8">
-            <div className="photo-cards-target flex max-h-full w-[92%] items-center lg:w-[88%]">
-              <PhotoCard src={portraitOld} caption="Исходник" className="translate-y-2 -rotate-2" />
-              <PhotoCard
-                src={portraitRestored}
-                caption="В движении"
-                dot
-                className="-ml-1 -translate-y-2 rotate-2 lg:-ml-3"
-              />
-            </div>
-          </div>
-
+          <PhotoStage />
 
           <p className="type-label mx-auto mt-6 w-fit rounded-full border border-rule bg-bg px-4 py-1.5 text-center text-ink2 lg:absolute lg:bottom-8 lg:left-8 lg:mx-0 lg:mt-0">
             Один кадр · 5 секунд видео

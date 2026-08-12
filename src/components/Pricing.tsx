@@ -172,7 +172,7 @@ export function Pricing() {
               <article
                 key={p.name}
                 tabIndex={0}
-                className={`relative flex h-full w-[84%] shrink-0 snap-center flex-col rounded-[16px] p-7 shadow-card focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 md:w-auto md:shrink ${
+                className={`relative flex h-full w-[84vw] shrink-0 snap-center flex-col rounded-[16px] p-7 shadow-card focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 md:w-auto md:shrink ${
                   dark ? "bg-ink md:-my-6" : "border border-rule bg-surface"
                 }`}
               >

@@ -87,22 +87,22 @@ export function Hero() {
     <section id="hero" className="lg:min-h-[calc(100svh-72px)]">
       <div className="mx-auto grid h-full max-w-[1440px] lg:grid-cols-[42%_58%]">
         {/* Left */}
-        <div className="flex flex-col justify-center border-rule px-8 pb-0 pt-10 lg:border-r lg:px-16 lg:py-10">
+        <div className="flex flex-col justify-center border-rule px-8 pb-0 pt-10 lg:border-r lg:px-16 lg:py-[clamp(20px,4vh,40px)]">
           <SectionLabel>Снимок → Видео</SectionLabel>
 
-          <h1 className="mt-4 font-light leading-[1.05] tracking-[-0.05em] text-[clamp(32px,3.4vw,52px)]">
+          <h1 className="mt-4 font-light leading-[1.05] tracking-[-0.05em] text-[clamp(32px,3.4vw,52px)] lg:mt-[clamp(10px,2vh,24px)] lg:text-[clamp(28px,4.6vh,52px)]">
             <span className="block text-ink">Оживить фото бесплатно</span>
             <span className="block text-ink3">снимок станет живым видео</span>
           </h1>
 
-          <p className="type-body mt-4 max-w-[460px]">
+          <p className="type-body mt-4 max-w-[460px] lg:mt-[clamp(10px,2vh,24px)] lg:text-[clamp(13px,1.8vh,16px)]">
             Kling 3, Sora, Veo и Seedance — в одном окне. Загружаете снимок, через пару минут
             забираете MP4 без водяных знаков. Русский интерфейс, оплата картой РФ, VPN не нужен.
           </p>
 
           {/* Form card */}
-          <div id="form" className="hairline-frame mt-6 shadow-card">
-            <div className="rounded-[16px] bg-surface p-6">
+          <div id="form" className="hairline-frame mt-6 shadow-card lg:mt-[clamp(10px,2vh,24px)]">
+            <div className="rounded-[16px] bg-surface p-6 lg:p-[clamp(16px,2.4vh,24px)]">
               <div className="flex gap-6 border-b border-rule2">
                 {[
                   { id: "photo" as const, label: "Фото в видео" },

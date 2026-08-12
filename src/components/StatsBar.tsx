@@ -1,25 +1,29 @@
 export function StatsBar() {
   return (
     <section className="border-y border-rule bg-surface">
-      <div className="mx-auto flex max-w-[1440px] flex-wrap items-center gap-8 px-8 py-6 lg:px-16">
-        <div className="min-w-[180px]">
-          <p className="type-label">Моделей в доступе</p>
-          <p className="mt-3 text-[36px] font-light leading-none text-ink">10</p>
+      <div className="mx-auto grid max-w-[1440px] divide-y divide-rule px-8 lg:grid-cols-3 lg:divide-x lg:divide-y-0 lg:px-16">
+        {/* Left */}
+        <div className="py-6 lg:pr-8">
+          <p className="type-label text-ink3">В доступе</p>
+          <p className="mt-1 flex items-baseline text-ink">
+            <span className="text-[44px] font-light leading-none">10</span>
+            <span className="ml-3 text-[24px] font-light leading-none">моделей</span>
+          </p>
         </div>
 
-        <div className="min-w-[220px] border-rule2 lg:border-l lg:pl-8">
-          <p className="type-label">Статус</p>
-          <div className="mt-3 flex items-center gap-3">
-            <span className="block h-[6px] w-[6px] rounded-full bg-gold2" />
-            <span className="type-label text-ink">Первая генерация бесплатна</span>
+        {/* Middle */}
+        <div className="py-6 lg:px-8">
+          <div className="flex items-center">
+            <span className="block h-[6px] w-[6px] shrink-0 rounded-full bg-gold2" />
+            <span className="ml-2.5 text-[15px] text-ink">Первая генерация бесплатна</span>
           </div>
+          <p className="mt-1 text-[12px] text-ink3">карта не нужна</p>
         </div>
 
-        <div className="ml-auto flex flex-wrap items-center gap-6">
-          <span className="rounded-full bg-gold3 px-3 py-1.5 text-[12px] text-gold">
-            Реставрация включена
-          </span>
-          <span className="type-label">MP4 · Без водяных знаков</span>
+        {/* Right */}
+        <div className="py-6 lg:pl-8">
+          <p className="text-[13px] text-ink2">Реставрация входит в сценарий</p>
+          <p className="text-[13px] text-ink2">MP4 без водяных знаков</p>
         </div>
       </div>
     </section>

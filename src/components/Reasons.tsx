@@ -13,7 +13,6 @@ const MUSEUM_IMG = museumImg;
 const ITEMS = [
   {
     image: ARCHIVE_IMG,
-    icon: "solar:album-linear",
     title: "Семейный архив",
     text: "Портреты бабушек и дедушек снова в движении",
   },

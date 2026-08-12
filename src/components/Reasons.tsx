@@ -23,15 +23,13 @@ const ITEMS = [
   },
   {
     image: FEED_IMG,
-    icon: "solar:smartphone-linear",
     title: "Лента и сторис",
-    text: "Вертикальное видео из того, что уже лежит в галерее",
+    text: "Вертикальное видео из того, что уже в галерее",
   },
   {
     image: MUSEUM_IMG,
-    icon: "solar:gallery-wide-linear",
     title: "Музеи и краеведение",
-    text: "Архивные кадры для выставок и публикаций",
+    text: "Архивные кадры для выставок",
   },
 ];
 

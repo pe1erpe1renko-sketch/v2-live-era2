@@ -85,7 +85,7 @@ export function Hero() {
     <section id="hero" className="lg:min-h-[calc(100svh-72px)]">
       <div className="mx-auto grid h-full max-w-[1440px] lg:grid-cols-[42%_58%]">
         {/* Left */}
-        <div className="flex h-full min-h-0 flex-col justify-center border-rule px-8 py-10 lg:border-r lg:px-16">
+        <div className="flex flex-col justify-center border-rule px-8 py-10 lg:border-r lg:px-16">
           <SectionLabel>Снимок → Видео</SectionLabel>
 
           <h1 className="mt-4 font-light leading-[1.05] tracking-[-0.05em] text-[clamp(32px,3.4vw,52px)]">
@@ -158,7 +158,7 @@ export function Hero() {
           </div>
 
 
-          <p className="type-label absolute bottom-8 left-8">Один кадр · 5 секунд видео</p>
+          <p className="type-label absolute bottom-8 left-8 rounded-full border border-rule bg-bg px-4 py-1.5 text-ink2">Один кадр · 5 секунд видео</p>
         </div>
       </div>
     </section>

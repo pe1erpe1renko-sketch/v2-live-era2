@@ -93,7 +93,7 @@ export function Steps() {
           Первый ролик — без оплаты и без карты. Ниже весь путь от файла до готового MP4.
         </p>
 
-        <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-[52%_48%] lg:items-start lg:gap-[48px]">
+        <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-[44%_56%] lg:items-stretch lg:gap-[48px]">
           {/* Left — example card */}
           <div className="rounded-2xl border border-rule bg-surface p-4 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_8px_24px_rgba(0,0,0,0.06)]">
             <span className="type-label text-ink3">Пример генерации</span>

@@ -61,7 +61,7 @@ export function Models() {
 
         <div className="mt-12">
           <Marquee items={ROW_TOP} />
-          <div className="mt-4">
+          <div className="mt-6">
             <Marquee items={ROW_BOTTOM} reverse />
           </div>
         </div>

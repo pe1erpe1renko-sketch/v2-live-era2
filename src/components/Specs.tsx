@@ -44,7 +44,7 @@ function IconWait({ className }: IconProps) {
   return (
     <svg viewBox="0 0 40 40" className={className} fill="none" stroke="currentColor" strokeWidth="1">
       <circle cx="20" cy="20" r="12" />
-      <path d="M20 8a12 12 0 0 1 10.39 6" strokeWidth="2.5" />
+      <path d="M20 8a12 12 0 0 1 10.39 6" />
     </svg>
   );
 }
@@ -103,20 +103,24 @@ export function Specs() {
           <div className="grid grid-cols-1 gap-px sm:grid-cols-2 lg:grid-cols-4">
             {/* Главная ячейка — ожидание */}
             <div className="relative bg-gold3 p-6 sm:col-span-2">
-              <IconWait className="absolute right-4 top-4 h-10 w-10 text-gold2" />
-              <div className="type-label">Ожидание</div>
-              <div className="mt-3 text-[56px] font-light leading-[1] text-gold">1–3 мин</div>
-              <p className="mt-2 text-[12px] leading-[1.4] text-ink2">
-                зависит от модели и длины ролика
+              <IconWait className="absolute right-4 top-4 h-8 w-8 text-gold2" />
+              <div className="type-label text-ink3">Минимальное ожидание</div>
+              <div className="mt-3 whitespace-nowrap text-[40px] font-light leading-[1] text-gold">
+                За 3 минуты
+              </div>
+              <p className="mt-2 text-[12px] leading-[1.4] text-ink3">
+                от загрузки снимка до готового MP4, зависит от модели и длины ролика
               </p>
             </div>
 
             {CELLS.map((c) => (
               <div key={c.label} className="relative bg-surface p-6">
-                {c.Icon ? <c.Icon className="absolute right-4 top-4 h-10 w-10 text-gold2" /> : null}
-                <div className="type-label">{c.label}</div>
+                {c.Icon ? <c.Icon className="absolute right-4 top-4 h-8 w-8 text-gold2" /> : null}
+                <div className="type-label text-ink3">{c.label}</div>
                 <div
-                  className={`mt-3 pr-12 font-light leading-[1.1] text-ink ${c.small ? "text-[24px]" : "text-[32px]"}`}
+                  className={`mt-3 whitespace-nowrap font-light leading-[1.1] text-ink ${
+                    c.small ? "text-[24px]" : "text-[30px]"
+                  }`}
                 >
                   {c.value}
                 </div>

@@ -200,7 +200,7 @@ export function Pricing() {
   };
 
   return (
-    <section className="border-b border-rule">
+    <section ref={sectionRef} className="border-b border-rule">
       <div className="mx-auto max-w-[1440px] px-8 py-8 md:py-16 lg:px-16">
         <SectionLabel>Подписка</SectionLabel>
 

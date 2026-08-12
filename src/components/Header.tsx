@@ -332,13 +332,18 @@ export function Header() {
           <a href="#" className="hidden rounded-[6px] text-[14px] text-ink2 hover:text-ink lg:block">
             Войти
           </a>
-          <a
-            href="#form"
-            className="rounded-[6px] bg-gold px-6 py-3 text-[14px] text-surface transition-colors hover:bg-gold-dark"
+          <button
+            type="button"
+            onClick={() => {
+              window.scrollTo({ top: 0, behavior: "smooth" });
+              const el = document.getElementById("hero-upload") as HTMLElement | null;
+              el?.focus({ preventScroll: true });
+            }}
+            className="rounded-[6px] bg-gold px-6 py-3 text-[14px] text-surface transition-colors duration-200 ease-slow hover:bg-gold-dark"
           >
             <span className="hidden lg:inline">Создать видео</span>
             <span className="lg:hidden">Создать</span>
-          </a>
+          </button>
           <button
             type="button"
             aria-label="Меню"

@@ -1,3 +1,5 @@
+import { Icon } from "@iconify/react";
+
 const COLUMNS = [
   { title: "Сценарии", links: ["Старое фото", "Видео из фото", "Фото питомца", "Оживить рисунок"] },
   { title: "Нейросети", links: ["Kling 3.0", "Sora 2", "Veo 3.1", "Seedance 2.0"] },
@@ -36,6 +38,23 @@ export function Footer() {
               <p className="mt-0.5">
                 <FooterLink href="mailto:[адрес электронной почты]">[адрес электронной почты]</FooterLink>
               </p>
+            </div>
+
+            <div className="mt-5 flex items-center gap-4">
+              {[
+                { icon: "solar:plain-linear", label: "Telegram" },
+                { icon: "solar:chat-square-linear", label: "VK" },
+                { icon: "solar:videocamera-linear", label: "YouTube" },
+              ].map((s) => (
+                <a
+                  key={s.label}
+                  href="#"
+                  aria-label={s.label}
+                  className="rounded-[6px] text-ink3 transition-colors duration-200 ease-slow hover:text-gold"
+                >
+                  <Icon icon={s.icon} width={20} height={20} />
+                </a>
+              ))}
             </div>
           </div>
 

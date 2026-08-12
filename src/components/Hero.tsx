@@ -30,9 +30,11 @@ function UploadZone() {
     >
       <input
         ref={inputRef}
+        id="hero-upload"
         type="file"
         accept="image/jpeg,image/png"
         className="sr-only"
+        tabIndex={0}
         aria-label="Загрузить снимок"
         onChange={(e) => setFileName(e.target.files?.[0]?.name ?? null)}
       />
@@ -80,10 +82,10 @@ export function Hero() {
   const [tab, setTab] = useState<"photo" | "text">("photo");
 
   return (
-    <section className="lg:h-[calc(100svh-72px)] lg:overflow-hidden">
+    <section id="hero" className="lg:min-h-[calc(100svh-72px)]">
       <div className="mx-auto grid h-full max-w-[1440px] lg:grid-cols-[42%_58%]">
         {/* Left */}
-        <div className="flex h-full min-h-0 flex-col justify-center overflow-hidden border-rule px-8 py-10 lg:border-r lg:px-16">
+        <div className="flex h-full min-h-0 flex-col justify-center border-rule px-8 py-10 lg:border-r lg:px-16">
           <SectionLabel>Снимок → Видео</SectionLabel>
 
           <h1 className="mt-4 font-light leading-[1.05] tracking-[-0.05em] text-[clamp(32px,3.4vw,52px)]">
@@ -138,7 +140,7 @@ export function Hero() {
         </div>
 
         {/* Right */}
-        <div className="relative h-[60vh] overflow-hidden bg-bg lg:h-full">
+        <div className="relative h-[60vh] overflow-hidden bg-bg lg:h-auto lg:min-h-[calc(100svh-72px)]">
           <ParticleField />
 
           <div className="pointer-events-none absolute right-8 top-8 h-8 w-8 border-r border-t border-rule" />

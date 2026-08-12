@@ -54,7 +54,6 @@ const SCENARIO_COLS: { label: string; items: Item[] }[] = [
 
 const MODELS: {
   letter: string;
-  icon?: string;
   name: string;
   badge?: string;
   text: string;
@@ -67,7 +66,6 @@ const MODELS: {
   },
   {
     letter: "V",
-    icon: "simple-icons:google",
     name: "Veo 3.1",
     text: "Google: звук в комплекте, есть 4K",
   },
@@ -79,13 +77,11 @@ const MODELS: {
   },
   {
     letter: "S",
-    icon: "simple-icons:openai",
     name: "Sora 2",
     text: "OpenAI: звук и синхронные губы сразу",
   },
   {
     letter: "W",
-    icon: "simple-icons:alibabacloud",
     name: "Wan 2.7",
     text: "Alibaba: плавные переходы между сценами",
   },
@@ -103,13 +99,11 @@ const MODELS: {
   },
   {
     letter: "G",
-    icon: "simple-icons:x",
     name: "Grok Imagine",
     text: "xAI: свободные соотношения сторон",
   },
   {
     letter: "H",
-    icon: "simple-icons:alibabacloud",
     name: "Happy Horse",
     text: "Alibaba: 1080p со звуком",
   },

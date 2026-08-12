@@ -142,25 +142,27 @@ export function Hero() {
         </div>
 
         {/* Right */}
-        <div className="relative h-[60vh] overflow-hidden bg-bg lg:h-auto lg:min-h-[calc(100svh-72px)]">
+        <div className="relative overflow-hidden bg-bg pb-8 pt-8 lg:h-auto lg:min-h-[calc(100svh-72px)] lg:py-0">
           <ParticleField />
 
-          <div className="pointer-events-none absolute right-8 top-8 h-8 w-8 border-r border-t border-rule" />
+          <div className="pointer-events-none absolute right-8 top-8 hidden h-8 w-8 border-r border-t border-rule lg:block" />
 
-          <div className="relative flex h-full min-h-0 items-center justify-center px-8">
-            <div className="photo-cards-target flex max-h-full w-[80%] items-center lg:w-[88%]">
+          <div className="relative flex h-full min-h-0 items-center justify-center px-4 lg:px-8">
+            <div className="photo-cards-target flex max-h-full w-[92%] items-center lg:w-[88%]">
               <PhotoCard src={portraitOld} caption="Исходник" className="translate-y-2 -rotate-2" />
               <PhotoCard
                 src={portraitRestored}
                 caption="В движении"
                 dot
-                className="-ml-3 -translate-y-2 rotate-2"
+                className="-ml-1 -translate-y-2 rotate-2 lg:-ml-3"
               />
             </div>
           </div>
 
 
-          <p className="type-label absolute bottom-8 left-8 rounded-full border border-rule bg-bg px-4 py-1.5 text-ink2">Один кадр · 5 секунд видео</p>
+          <p className="type-label mx-auto mt-6 w-fit rounded-full border border-rule bg-bg px-4 py-1.5 text-center text-ink2 lg:absolute lg:bottom-8 lg:left-8 lg:mx-0 lg:mt-0">
+            Один кадр · 5 секунд видео
+          </p>
         </div>
       </div>
     </section>

@@ -19,9 +19,8 @@ const ITEMS = [
   },
   {
     image: GIFT_IMG,
-    icon: "solar:gift-linear",
     title: "Подарок",
-    text: "Ролик к юбилею из снимка, забытого на десятилетия",
+    text: "Ролик к юбилею из забытого снимка",
   },
   {
     image: FEED_IMG,

@@ -228,18 +228,7 @@ export function Hero() {
         <div className="relative overflow-hidden pb-8 pt-8 lg:h-auto lg:min-h-[calc(100svh-72px)] lg:py-0" style={{ backgroundColor: "#EFEFED" }}>
           <div className="pointer-events-none absolute right-8 top-8 hidden h-8 w-8 border-r border-t border-rule lg:block" />
 
-          <div className="relative flex h-full min-h-0 items-center justify-center px-4 lg:px-8">
-            <div className="photo-cards-target flex max-h-full w-[92%] items-center lg:w-[88%]">
-              <PhotoCard src={portraitOld} caption="Исходник" className="translate-y-2 -rotate-2" />
-              <PhotoCard
-                src={portraitRestored}
-                caption="В движении"
-                dot
-                className="-ml-1 -translate-y-2 rotate-2 lg:-ml-3"
-              />
-            </div>
-          </div>
-
+          <PhotoStage />
 
           <p className="type-label mx-auto mt-6 w-fit rounded-full border border-rule bg-bg px-4 py-1.5 text-center text-ink2 lg:absolute lg:bottom-8 lg:left-8 lg:mx-0 lg:mt-0">
             Один кадр · 5 секунд видео

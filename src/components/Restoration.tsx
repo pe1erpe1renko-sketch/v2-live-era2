@@ -6,7 +6,7 @@ export function Restoration() {
   return (
     <section className="border-b border-rule">
       <div className="mx-auto max-w-[1440px] px-8 py-8 md:py-16 lg:px-16">
-        <div className="rounded-[16px] bg-ink p-6 md:p-10">
+        <div className="overflow-hidden rounded-[16px] bg-ink p-6 md:p-10">
           <div className="grid items-center gap-8 lg:grid-cols-[45%_55%] lg:gap-12">
             <div className="min-w-0">
               <div className="flex items-center gap-3">

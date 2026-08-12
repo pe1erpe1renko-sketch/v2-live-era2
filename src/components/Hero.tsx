@@ -143,9 +143,7 @@ export function Hero() {
         </div>
 
         {/* Right */}
-        <div className="relative overflow-hidden bg-bg pb-8 pt-8 lg:h-auto lg:min-h-[calc(100svh-72px)] lg:py-0">
-          <ParticleField />
-
+        <div className="relative overflow-hidden bg-gold3 pb-8 pt-8 lg:h-auto lg:min-h-[calc(100svh-72px)] lg:py-0">
           <div className="pointer-events-none absolute right-8 top-8 hidden h-8 w-8 border-r border-t border-rule lg:block" />
 
           <div className="relative flex h-full min-h-0 items-center justify-center px-4 lg:px-8">

@@ -83,6 +83,10 @@ function PhotoStage() {
   const leftRef = useRef<HTMLDivElement | null>(null);
   const rightRef = useRef<HTMLDivElement | null>(null);
   const enabledRef = useRef(false);
+  const targetRef = useRef({ x: 0, y: 0 });
+  const curRef = useRef({ x: 0, y: 0 });
+  const easeRef = useRef(0.15);
+  const rafRef = useRef<number | null>(null);
 
   useEffect(() => {
     const mq = window.matchMedia(
@@ -93,46 +97,60 @@ function PhotoStage() {
     };
     update();
     mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
+    return () => {
+      mq.removeEventListener("change", update);
+      if (rafRef.current !== null) cancelAnimationFrame(rafRef.current);
+    };
   }, []);
+
+  const tick = () => {
+    const t = targetRef.current;
+    const c = curRef.current;
+    const k = easeRef.current;
+    c.x += (t.x - c.x) * k;
+    c.y += (t.y - c.y) * k;
+
+    const max = 12;
+    const lx = c.x * max;
+    const ly = c.y * max;
+    const rotY = c.x * 2;
+    const rotX = -c.y * 2;
+
+    if (leftRef.current) {
+      leftRef.current.style.transform = `translate3d(${lx}px, ${ly}px, 0) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+    }
+    if (rightRef.current) {
+      rightRef.current.style.transform = `translate3d(${lx * 0.6}px, ${ly * 0.6}px, 0) rotateX(${rotX * 0.6}deg) rotateY(${rotY * 0.6}deg)`;
+    }
+
+    const done = Math.abs(t.x - c.x) < 0.001 && Math.abs(t.y - c.y) < 0.001;
+    if (done) {
+      c.x = t.x;
+      c.y = t.y;
+      rafRef.current = null;
+      return;
+    }
+    rafRef.current = requestAnimationFrame(tick);
+  };
+
+  const start = () => {
+    if (rafRef.current === null) rafRef.current = requestAnimationFrame(tick);
+  };
 
   const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!enabledRef.current || !wrapRef.current) return;
     const r = wrapRef.current.getBoundingClientRect();
-    const cx = r.left + r.width / 2;
-    const cy = r.top + r.height / 2;
-    const nx = Math.max(-1, Math.min(1, (e.clientX - cx) / (r.width / 2)));
-    const ny = Math.max(-1, Math.min(1, (e.clientY - cy) / (r.height / 2)));
-    const max = 12;
-    const lx = nx * max;
-    const ly = ny * max;
-    const rx = nx * max * 0.6;
-    const ry = ny * max * 0.6;
-    const rotY = nx * 2;
-    const rotX = -ny * 2;
-    const set = (
-      el: HTMLDivElement | null,
-      tx: number,
-      ty: number,
-      rxg: number,
-      ryg: number
-    ) => {
-      if (!el) return;
-      el.style.transition = "transform 400ms cubic-bezier(0.4,0,0.6,1)";
-      el.style.transform = `translate(${tx}px, ${ty}px) rotateX(${rxg}deg) rotateY(${ryg}deg)`;
-    };
-    set(leftRef.current, lx, ly, rotX, rotY);
-    set(rightRef.current, rx, ry, rotX * 0.6, rotY * 0.6);
+    const nx = Math.max(-1, Math.min(1, (e.clientX - (r.left + r.width / 2)) / (r.width / 2)));
+    const ny = Math.max(-1, Math.min(1, (e.clientY - (r.top + r.height / 2)) / (r.height / 2)));
+    targetRef.current = { x: nx, y: ny };
+    easeRef.current = 0.15;
+    start();
   };
 
   const onLeave = () => {
-    const reset = (el: HTMLDivElement | null) => {
-      if (!el) return;
-      el.style.transition = "transform 600ms cubic-bezier(0.4,0,0.6,1)";
-      el.style.transform = "";
-    };
-    reset(leftRef.current);
-    reset(rightRef.current);
+    targetRef.current = { x: 0, y: 0 };
+    easeRef.current = 0.08;
+    start();
   };
 
   return (

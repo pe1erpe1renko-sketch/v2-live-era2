@@ -224,9 +224,9 @@ export function Pricing() {
               <article
                 key={p.name}
                 tabIndex={0}
-                className={`relative flex h-full w-[84vw] shrink-0 snap-center flex-col rounded-[16px] p-7 shadow-card focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 md:w-auto md:shrink ${
+                className={`relative flex h-full w-[76vw] shrink-0 snap-center flex-col rounded-[16px] p-7 shadow-card transition-[opacity,transform] duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 md:w-auto md:shrink md:opacity-100 md:scale-100 ${
                   dark ? "bg-ink md:-my-6" : "border border-rule bg-surface"
-                }`}
+                } ${activeIdx === idx ? "scale-100 opacity-100" : "scale-[0.94] opacity-50"}`}
               >
                 {dark && (
                   <span className="type-label absolute -top-3 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-full bg-gold px-3 py-1 text-[10px] text-white">

@@ -41,7 +41,7 @@ const ITEMS = [
 export function Reasons() {
   return (
     <section className="border-b border-rule" data-reveal>
-      <div className="mx-auto max-w-[1440px] px-8 py-8 md:py-16 lg:px-16">
+      <div className="mx-auto max-w-[1440px] px-8 py-12 lg:px-16">
         <SectionLabel>Зачем это нужно</SectionLabel>
 
         <h2 className="mt-4 text-[clamp(28px,3vw,44px)] font-light leading-[1.1] tracking-[-0.04em] text-ink">
@@ -50,10 +50,10 @@ export function Reasons() {
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {ITEMS.map((it) => (
-            <article
+            <a
               key={it.title}
-              tabIndex={0}
-              className="group relative aspect-[3/4] overflow-hidden rounded-[16px]"
+              href="#"
+              className="group relative block aspect-[3/4] cursor-pointer overflow-hidden rounded-[16px] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold2"
             >
               <img
                 src={it.image}
@@ -73,7 +73,7 @@ export function Reasons() {
                   {it.text}
                 </p>
               </div>
-            </article>
+            </a>
           ))}
         </div>
       </div>

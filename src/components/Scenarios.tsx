@@ -160,10 +160,10 @@ export function Scenarios() {
 
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {cards.map((c) => (
-            <article
+            <a
               key={c.title}
-              tabIndex={0}
-              className="group h-full overflow-hidden rounded-[16px] border border-rule bg-surface shadow-card transition-colors duration-200 hover:border-gold2"
+              href="#"
+              className="group block h-full cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold2 overflow-hidden rounded-[16px] border border-rule bg-surface shadow-card transition-colors duration-200 hover:border-gold2"
             >
               <div className="aspect-[16/10] overflow-hidden">
                 <img
@@ -179,7 +179,7 @@ export function Scenarios() {
                 <h3 className="text-[16px] font-normal text-ink">{c.title}</h3>
                 <p className="mt-3 text-[13px] leading-[1.5] text-ink2">{c.text}</p>
               </div>
-            </article>
+            </a>
           ))}
         </div>
 

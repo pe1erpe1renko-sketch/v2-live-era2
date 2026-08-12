@@ -18,11 +18,11 @@ import { Footer } from "@/components/Footer";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Live Era2 — оживить фото нейросетью онлайн, без VPN" },
+      { title: "Live Era2 — оживить фото онлайн бесплатно, нейросеть сделает видео из снимка" },
       {
         name: "description",
         content:
-          "Загрузите снимок и получите короткое видео. Kling 3, Sora, Veo и Seedance в одном окне, MP4 без водяных знаков, оплата картой РФ.",
+          "Загрузите фотографию и получите короткое видео: Kling 3, Sora, Veo и Seedance в одном окне. Первый ролик бесплатно, без VPN, оплата картой РФ.",
       },
       { property: "og:title", content: "Live Era2 — оживить фото нейросетью онлайн" },
       {
@@ -59,7 +59,7 @@ function Index() {
             {
               opacity: 1,
               y: 0,
-              duration: 2,
+              duration: 0.4,
               ease: "power1.inOut",
               scrollTrigger: { trigger: el, start: "top 88%" },
             },

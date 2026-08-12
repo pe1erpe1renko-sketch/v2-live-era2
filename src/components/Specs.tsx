@@ -92,13 +92,13 @@ export function Specs() {
             {CELLS.map((c, i) => (
               <div
                 key={c.label}
-                className={`group relative bg-surface p-6 transition-colors duration-200 ease-slow hover:bg-gold3 sm:border-rule ${
+                className={`relative bg-surface p-6 sm:border-rule ${
                   i % 2 === 0 ? "sm:border-l-0" : "sm:border-l"
                 } ${i < 3 ? "sm:border-b" : ""} lg:border-l lg:border-rule ${
                   i < 2 ? "lg:border-b" : "lg:border-b-0"
                 } ${i === 2 ? "lg:border-l-0" : ""}`}
               >
-                <c.Icon className="absolute right-4 top-4 h-10 w-10 text-gold2 transition-colors duration-200 ease-slow group-hover:text-gold" />
+                <c.Icon className="absolute right-4 top-4 h-10 w-10 text-gold2" />
                 <div className="type-label">{c.label}</div>
                 <div
                   className={`mt-3 pr-12 font-light leading-[1.1] text-ink ${c.small ? "text-[24px]" : "text-[32px]"}`}

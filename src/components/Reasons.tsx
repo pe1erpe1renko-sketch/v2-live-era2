@@ -14,27 +14,24 @@ const MUSEUM_IMG = museumImg;
 const ITEMS = [
   {
     image: ARCHIVE_IMG,
-    icon: "solar:album-linear",
     title: "Семейный архив",
     text: "Портреты бабушек и дедушек снова в движении",
   },
   {
     image: GIFT_IMG,
-    icon: "solar:gift-linear",
     title: "Подарок",
-    text: "Ролик к юбилею из снимка, забытого на десятилетия",
+    text: "Ролик к юбилею из забытого снимка",
   },
   {
     image: FEED_IMG,
-    icon: "solar:smartphone-linear",
     title: "Лента и сторис",
-    text: "Вертикальное видео из того, что уже лежит в галерее",
+    text: "Вертикальное видео из того, что уже в галерее",
   },
   {
     image: MUSEUM_IMG,
-    icon: "solar:buildings-linear",
     title: "Музеи и краеведение",
-    text: "Архивные кадры для выставок и публикаций",
+    titleSize: 14,
+    text: "Архивные кадры для выставок",
   },
 ];
 

@@ -9,6 +9,7 @@ import { Reasons } from "@/components/Reasons";
 import { Models } from "@/components/Models";
 import { Specs } from "@/components/Specs";
 import { Tips } from "@/components/Tips";
+import { Restoration } from "@/components/Restoration";
 import { Reviews } from "@/components/Reviews";
 import { Pricing } from "@/components/Pricing";
 import { Faq } from "@/components/Faq";
@@ -103,6 +104,7 @@ function Index() {
         </div>
         <div data-reveal>
           <Tips />
+          <Restoration />
         </div>
         <div data-reveal>
           <Faq />

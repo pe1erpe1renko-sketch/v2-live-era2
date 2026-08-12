@@ -42,9 +42,9 @@ export function Footer() {
 
             <div className="mt-5 flex items-center gap-4">
               {[
-                { icon: "solar:plain-linear", label: "Telegram" },
-                { icon: "solar:chat-square-linear", label: "VK" },
-                { icon: "solar:videocamera-linear", label: "YouTube" },
+                { icon: "simple-icons:telegram", label: "Telegram" },
+                { icon: "simple-icons:vk", label: "ВКонтакте" },
+                { icon: "simple-icons:youtube", label: "YouTube" },
               ].map((s) => (
                 <a
                   key={s.label}

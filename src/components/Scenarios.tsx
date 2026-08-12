@@ -150,7 +150,7 @@ export function Scenarios() {
                 aria-selected={active === i}
                 tabIndex={active === i ? 0 : -1}
                 onClick={() => setActive(i)}
-                className={`-mb-px shrink-0 border-b-2 text-[11px] px-2 py-2 transition-colors md:type-label md:px-1 md:py-3 md:text-[inherit] ${
+                className={`-mb-px shrink-0 border-b-2 text-[11px] px-3 py-2 transition-colors md:type-label md:px-1 md:py-3 md:text-[inherit] ${
                   active === i
                     ? "border-gold2 text-ink"
                     : "border-transparent text-ink3 hover:text-ink2"

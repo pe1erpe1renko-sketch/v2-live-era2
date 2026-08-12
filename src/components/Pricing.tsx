@@ -114,19 +114,71 @@ function Feature({
 
 export function Pricing() {
   const carouselRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const [activeIdx, setActiveIdx] = useState(1);
+
+  const scrollToCard = (i: number, smooth: boolean) => {
+    const el = carouselRef.current;
+    if (!el) return;
+    const card = el.children[i] as HTMLElement | undefined;
+    if (!card) return;
+    const left = card.offsetLeft - (el.clientWidth - card.offsetWidth) / 2;
+    el.scrollTo({ left, behavior: smooth ? "smooth" : "auto" });
+    setActiveIdx(i);
+  };
 
   useEffect(() => {
     const el = carouselRef.current;
     if (!el) return;
     if (window.matchMedia("(max-width: 767px)").matches) {
-      const card = el.children[1] as HTMLElement | undefined;
-      if (card) {
-        const left = card.offsetLeft - (el.clientWidth - card.offsetWidth) / 2;
-        el.scrollLeft = left;
-        setActiveIdx(1);
-      }
+      scrollToCard(1, false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // First-show nudge: shift right 24px and back, once per session.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (!window.matchMedia("(max-width: 767px)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (sessionStorage.getItem("pricingNudgeShown")) return;
+
+    const section = sectionRef.current;
+    if (!section) return;
+
+    let done = false;
+    const run = () => {
+      if (done) return;
+      done = true;
+      sessionStorage.setItem("pricingNudgeShown", "1");
+      const el = carouselRef.current;
+      if (!el) return;
+      const start = el.scrollLeft;
+      const peak = start + 24;
+      const t0 = performance.now();
+      const dur = 400;
+      const tick = (now: number) => {
+        const t = Math.min(1, (now - t0) / dur);
+        // out then back: 0 -> 24 -> 0
+        const v = t < 0.5 ? t * 2 : (1 - t) * 2;
+        el.scrollLeft = start + (peak - start) * v;
+        if (t < 1) requestAnimationFrame(tick);
+        else el.scrollLeft = start;
+      };
+      requestAnimationFrame(tick);
+    };
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((e) => e.isIntersecting)) {
+          run();
+          io.disconnect();
+        }
+      },
+      { threshold: 0.4 },
+    );
+    io.observe(section);
+    return () => io.disconnect();
   }, []);
 
   const onScroll = () => {

@@ -12,7 +12,7 @@ const ROW_BOTTOM = [
 function Item({ label }: { label: string }) {
   return (
     <span className="flex shrink-0 items-center">
-      <span className="text-[24px] font-light leading-none text-ink2">{label}</span>
+      <span className="text-[24px] font-light leading-[1.35] text-ink2">{label}</span>
       <span className="mx-6 block h-[4px] w-[4px] shrink-0 rounded-full bg-gold2" />
     </span>
   );

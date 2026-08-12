@@ -1,5 +1,6 @@
 import { Icon } from "@iconify/react";
 import { SectionLabel } from "@/components/SectionLabel";
+import portraitRestored from "@/assets/portrait-restored.jpg";
 
 const PILLS = ["улыбка", "взгляд в камеру", "поворот головы", "объятие"];
 
@@ -27,7 +28,7 @@ const STEPS = [
 function StepMockup({ number }: { number: string }) {
   if (number === "01") {
     return (
-      <div className="pointer-events-none mt-8 rounded-[6px] border border-dashed border-rule p-4">
+      <div className="pointer-events-none mt-3 rounded-[6px] border border-dashed border-rule p-4">
         <div className="flex items-center justify-between gap-3">
           <div className="flex min-w-0 items-center gap-3">
             <Icon
@@ -47,7 +48,7 @@ function StepMockup({ number }: { number: string }) {
 
   if (number === "02") {
     return (
-      <div className="pointer-events-none mt-8 flex flex-wrap gap-2">
+      <div className="pointer-events-none mt-3 flex flex-wrap gap-2">
         {PILLS.map((pill, i) => (
           <span
             key={pill}
@@ -65,7 +66,7 @@ function StepMockup({ number }: { number: string }) {
   }
 
   return (
-    <div className="pointer-events-none mt-8 flex items-center justify-between gap-3 rounded-[6px] border border-rule px-4 py-3">
+    <div className="pointer-events-none mt-3 flex items-center justify-between gap-3 rounded-[6px] border border-rule px-4 py-3">
       <div className="flex min-w-0 items-center gap-3">
         <Icon
           icon="solar:download-minimalistic-linear"
@@ -92,35 +93,64 @@ export function Steps() {
           Первый ролик — без оплаты и без карты. Ниже весь путь от файла до готового MP4.
         </p>
 
-        <div className="mt-12 grid grid-cols-1 lg:grid-cols-3">
-          {STEPS.map((s, i) => (
-            <div
-              key={s.number}
-              className={
-                i === 0
-                  ? "lg:pr-12"
-                  : "lg:border-l lg:border-rule lg:px-12"
-              }
-            >
-              <span className="text-[48px] font-light leading-none text-gold2">
-                {s.number}
-              </span>
-              <h3 className="mt-6 text-[18px] font-normal leading-[1.3] text-ink">
-                {s.title}
-              </h3>
-              <p className="type-body mt-3">{s.description}</p>
-
-              <StepMockup number={s.number} />
+        <div className="mt-12 grid grid-cols-1 gap-12 lg:grid-cols-[52%_48%] lg:items-start lg:gap-[48px]">
+          {/* Left — example card */}
+          <div className="rounded-2xl border border-rule bg-surface p-4 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_8px_24px_rgba(0,0,0,0.06)]">
+            <span className="type-label text-ink3">Пример генерации</span>
+            <div className="relative mt-3 aspect-[4/5] w-full overflow-hidden rounded-[6px]">
+              <img
+                src={portraitRestored}
+                alt="Оживлённый портрет — пример генерации"
+                className="h-full w-full object-cover"
+              />
+              <button
+                type="button"
+                aria-label="Воспроизвести"
+                className="pointer-events-none absolute right-3 top-3 flex h-11 w-11 items-center justify-center rounded-full border border-rule bg-surface"
+              >
+                <Icon
+                  icon="solar:play-linear"
+                  className="h-5 w-5 text-gold"
+                />
+              </button>
             </div>
-          ))}
-        </div>
+            <div className="mt-3 flex items-center justify-between gap-3">
+              <span className="text-[13px] text-ink2">бабушка_1958.jpg</span>
+              <span className="type-label text-ink3 whitespace-nowrap">
+                KLING 3.0 · 5 СЕК
+              </span>
+            </div>
+          </div>
 
-        <button
-          type="button"
-          className="mt-12 self-start rounded-[6px] bg-gold px-8 py-4 text-[15px] text-surface transition-colors hover:bg-gold-dark"
-        >
-          Оживить снимок бесплатно
-        </button>
+          {/* Right — steps */}
+          <div className="flex flex-col">
+            <div className="flex flex-col gap-8">
+              {STEPS.map((s) => (
+                <div key={s.number} className="flex gap-4">
+                  <span className="w-14 shrink-0 text-[36px] font-light leading-none text-gold2">
+                    {s.number}
+                  </span>
+                  <div className="min-w-0">
+                    <h3 className="text-[17px] font-normal leading-[1.3] text-ink">
+                      {s.title}
+                    </h3>
+                    <p className="mt-1.5 text-[14px] leading-[1.6] text-ink2">
+                      {s.description}
+                    </p>
+                    <StepMockup number={s.number} />
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <button
+              type="button"
+              className="mt-8 self-start rounded-[6px] bg-gold px-8 py-4 text-[15px] text-surface transition-colors hover:bg-gold-dark"
+            >
+              Оживить снимок бесплатно
+            </button>
+          </div>
+        </div>
       </div>
     </section>
   );

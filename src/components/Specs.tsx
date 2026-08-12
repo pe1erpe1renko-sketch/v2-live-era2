@@ -1,3 +1,4 @@
+import type { ReactElement } from "react";
 import { SectionLabel } from "@/components/SectionLabel";
 
 type IconProps = { className?: string };
@@ -23,9 +24,9 @@ function IconDuration({ className }: IconProps) {
 function IconFrame({ className }: IconProps) {
   return (
     <svg viewBox="0 0 40 40" className={className} fill="none" stroke="currentColor" strokeWidth="1">
-      <rect x="2.5" y="15" width="5.6" height="10" />
-      <rect x="10.6" y="15" width="10" height="10" />
-      <rect x="23.1" y="15" width="17.8" height="10" transform="translate(-2 0)" />
+      <rect x="6" y="10" width="13.5" height="24" />
+      <rect x="6" y="16" width="18" height="18" />
+      <rect x="6" y="18.25" width="28" height="15.75" />
     </svg>
   );
 }
@@ -48,12 +49,44 @@ function IconWait({ className }: IconProps) {
   );
 }
 
-const CELLS = [
-  { label: "Формат", value: "MP4", note: "открывается везде, конвертировать не нужно", Icon: IconFormat },
-  { label: "Длительность", value: "5–10 сек", note: "до 15 в прямом доступе", Icon: IconDuration },
-  { label: "Кадр", value: "9:16 · 1:1 · 16:9", note: "под ленту, пост или экран", small: true, Icon: IconFrame },
-  { label: "Разрешение", value: "720p", note: "до 4K на отдельных моделях", Icon: IconResolution },
-  { label: "Ожидание", value: "1–3 мин", note: "зависит от модели и длины ролика", Icon: IconWait },
+const CELLS: {
+  label: string;
+  value: string;
+  note: string;
+  small?: boolean;
+  Icon?: (p: IconProps) => ReactElement;
+}[] = [
+  {
+    label: "Водяной знак",
+    value: "Без водяного знака",
+    note: "ни на одном тарифе, включая разовые пакеты",
+    small: true,
+  },
+  {
+    label: "Формат",
+    value: "MP4",
+    note: "открывается везде, конвертировать не нужно",
+    Icon: IconFormat,
+  },
+  {
+    label: "Длительность",
+    value: "5–10 сек",
+    note: "до 15 в прямом доступе",
+    Icon: IconDuration,
+  },
+  {
+    label: "Кадр",
+    value: "9:16 · 1:1 · 16:9",
+    note: "под ленту, пост или экран",
+    small: true,
+    Icon: IconFrame,
+  },
+  {
+    label: "Разрешение",
+    value: "720p",
+    note: "до 4K на отдельных моделях",
+    Icon: IconResolution,
+  },
 ];
 
 export function Specs() {
@@ -66,39 +99,21 @@ export function Specs() {
           Что вы получаете после генерации
         </h2>
 
-        <div className="mt-12 overflow-hidden rounded-[16px] border border-rule bg-surface">
-          <div className="grid grid-cols-1 divide-y divide-rule sm:grid-cols-2 sm:divide-y-0 lg:grid-cols-4">
-            {/* Главная ячейка */}
-            <div className="relative overflow-hidden bg-gold3 p-6 sm:col-span-2 sm:border-b sm:border-rule lg:border-b">
-              <div
-                className="pointer-events-none absolute inset-y-0 right-0 w-2/3"
-                style={{
-                  backgroundImage:
-                    "radial-gradient(rgba(176,141,87,0.25) 1px, transparent 1px)",
-                  backgroundSize: "12px 12px",
-                  maskImage: "linear-gradient(to right, transparent, #000 70%)",
-                  WebkitMaskImage: "linear-gradient(to right, transparent, #000 70%)",
-                }}
-              />
-              <div className="relative">
-                <div className="type-label">Водяной знак</div>
-                <div className="mt-3 text-[56px] font-light leading-[1] text-gold">Нет</div>
-                <p className="mt-2 text-[12px] leading-[1.4] text-ink2">
-                  ни на одном тарифе, включая разовые пакеты
-                </p>
-              </div>
+        <div className="mt-12 overflow-hidden rounded-[16px] border border-rule bg-rule">
+          <div className="grid grid-cols-1 gap-px sm:grid-cols-2 lg:grid-cols-4">
+            {/* Главная ячейка — ожидание */}
+            <div className="relative bg-gold3 p-6 sm:col-span-2">
+              <IconWait className="absolute right-4 top-4 h-10 w-10 text-gold2" />
+              <div className="type-label">Ожидание</div>
+              <div className="mt-3 text-[56px] font-light leading-[1] text-gold">1–3 мин</div>
+              <p className="mt-2 text-[12px] leading-[1.4] text-ink2">
+                зависит от модели и длины ролика
+              </p>
             </div>
 
-            {CELLS.map((c, i) => (
-              <div
-                key={c.label}
-                className={`relative bg-surface p-6 sm:border-rule ${
-                  i % 2 === 0 ? "sm:border-l-0" : "sm:border-l"
-                } ${i < 3 ? "sm:border-b" : ""} lg:border-l lg:border-rule ${
-                  i < 2 ? "lg:border-b" : "lg:border-b-0"
-                } ${i === 2 ? "lg:border-l-0" : ""}`}
-              >
-                <c.Icon className="absolute right-4 top-4 h-10 w-10 text-gold2" />
+            {CELLS.map((c) => (
+              <div key={c.label} className="relative bg-surface p-6">
+                {c.Icon ? <c.Icon className="absolute right-4 top-4 h-10 w-10 text-gold2" /> : null}
                 <div className="type-label">{c.label}</div>
                 <div
                   className={`mt-3 pr-12 font-light leading-[1.1] text-ink ${c.small ? "text-[24px]" : "text-[32px]"}`}
@@ -112,7 +127,7 @@ export function Specs() {
             {/* Ссылка */}
             <a
               href="#hero"
-              className="flex items-center justify-center bg-surface p-6 text-[14px] text-gold transition-colors duration-200 ease-slow hover:bg-gold3 sm:border-l sm:border-rule lg:border-l"
+              className="flex items-center justify-center bg-surface p-6 text-[14px] text-gold transition-colors duration-200 ease-slow hover:bg-gold3"
             >
               Первая генерация бесплатно →
             </a>

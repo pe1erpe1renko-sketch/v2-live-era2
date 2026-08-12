@@ -248,12 +248,8 @@ function ModelsMenu() {
             href="#form"
             className="rounded-[16px] border border-rule bg-surface p-4 transition-colors hover:border-gold2"
           >
-            <span className="flex h-9 w-9 items-center justify-center rounded-[6px] bg-gold3 text-[16px] text-gold">
-              {m.icon ? (
-                <Icon icon={m.icon} className="h-5 w-5 text-ink" />
-              ) : (
-                m.letter
-              )}
+            <span className="flex h-9 w-9 items-center justify-center rounded-[6px] bg-gold3 font-normal text-[16px] text-gold">
+              {m.letter}
             </span>
             <span className="mt-3 flex flex-wrap items-center gap-2">
               <span className="text-[14px] text-ink">{m.name}</span>

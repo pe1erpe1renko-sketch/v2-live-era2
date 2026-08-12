@@ -53,7 +53,7 @@ const CELLS: {
   value: string;
   note: string;
   small?: boolean;
-  Icon?: (p: IconProps) => JSX.Element;
+  Icon?: (p: IconProps) => React.ReactElement;
 }[] = [
   {
     label: "Водяной знак",

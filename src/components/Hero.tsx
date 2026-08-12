@@ -123,17 +123,19 @@ export function Hero() {
                 ))}
               </div>
 
-              <div className="mt-3">{tab === "photo" ? <UploadZone /> : null}</div>
+              <div className="mt-3 lg:mt-[clamp(8px,1.4vh,12px)]">
+                {tab === "photo" ? <UploadZone /> : null}
+              </div>
 
               <input
                 type="text"
                 placeholder="Опишите движение — или оставьте пустым"
-                className="mt-3 w-full rounded-[6px] border border-rule bg-surface px-4 py-2.5 text-[14px] text-ink placeholder:text-ink3"
+                className="mt-3 w-full rounded-[6px] border border-rule bg-surface px-4 py-2.5 text-[14px] text-ink placeholder:text-ink3 lg:mt-[clamp(8px,1.4vh,12px)]"
               />
 
               <button
                 type="button"
-                className="mt-3 w-full rounded-[6px] bg-gold px-4 py-3 text-[15px] text-surface transition-colors hover:bg-gold-dark"
+                className="mt-3 w-full rounded-[6px] bg-gold px-4 py-3 text-[15px] text-surface transition-colors hover:bg-gold-dark lg:mt-[clamp(8px,1.4vh,12px)] lg:px-[clamp(12px,1.8vh,16px)] lg:py-[clamp(12px,1.8vh,16px)]"
               >
                 Оживить снимок — первый ролик бесплатно
               </button>

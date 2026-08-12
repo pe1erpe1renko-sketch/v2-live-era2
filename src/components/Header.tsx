@@ -52,22 +52,43 @@ const SCENARIO_COLS: { label: string; items: Item[] }[] = [
   },
 ];
 
-const MODELS: { letter: string; name: string; badge?: string; text: string }[] = [
+const MODELS: {
+  letter: string;
+  icon?: string;
+  name: string;
+  badge?: string;
+  text: string;
+}[] = [
   {
     letter: "K",
     name: "Kling 3.0",
     badge: "Чаще всего",
     text: "универсальная модель, держит мимику и мелкие детали",
   },
-  { letter: "V", name: "Veo 3.1", text: "Google: звук в комплекте, есть 4K" },
+  {
+    letter: "V",
+    icon: "simple-icons:google",
+    name: "Veo 3.1",
+    text: "Google: звук в комплекте, есть 4K",
+  },
   {
     letter: "S",
     name: "Seedance 2.0",
     badge: "Быстро",
     text: "ByteDance: считает быстрее и стоит дешевле",
   },
-  { letter: "S", name: "Sora 2", text: "OpenAI: звук и синхронные губы сразу" },
-  { letter: "W", name: "Wan 2.7", text: "Alibaba: плавные переходы между сценами" },
+  {
+    letter: "S",
+    icon: "simple-icons:openai",
+    name: "Sora 2",
+    text: "OpenAI: звук и синхронные губы сразу",
+  },
+  {
+    letter: "W",
+    icon: "simple-icons:alibabacloud",
+    name: "Wan 2.7",
+    text: "Alibaba: плавные переходы между сценами",
+  },
   {
     letter: "K",
     name: "Kling Motion Control",
@@ -80,8 +101,18 @@ const MODELS: { letter: string; name: string; badge?: string; text: string }[] =
     badge: "Эконом",
     text: "MiniMax: самый бережный расход токенов",
   },
-  { letter: "G", name: "Grok Imagine", text: "xAI: свободные соотношения сторон" },
-  { letter: "H", name: "Happy Horse", text: "Alibaba: 1080p со звуком" },
+  {
+    letter: "G",
+    icon: "simple-icons:x",
+    name: "Grok Imagine",
+    text: "xAI: свободные соотношения сторон",
+  },
+  {
+    letter: "H",
+    icon: "simple-icons:alibabacloud",
+    name: "Happy Horse",
+    text: "Alibaba: 1080p со звуком",
+  },
   { letter: "N", name: "Nano Banana 2", text: "до 14 референсов в одной сцене" },
 ];
 
@@ -224,7 +255,11 @@ function ModelsMenu() {
             className="rounded-[16px] border border-rule bg-surface p-4 transition-colors hover:border-gold2"
           >
             <span className="flex h-9 w-9 items-center justify-center rounded-[6px] bg-gold3 text-[16px] text-gold">
-              {m.letter}
+              {m.icon ? (
+                <Icon icon={m.icon} className="h-5 w-5 text-ink" />
+              ) : (
+                m.letter
+              )}
             </span>
             <span className="mt-3 flex flex-wrap items-center gap-2">
               <span className="text-[14px] text-ink">{m.name}</span>
@@ -234,6 +269,11 @@ function ModelsMenu() {
           </a>
         ))}
       </div>
+
+      <p className="mt-4 text-[11px] leading-[1.5] text-ink3">
+        Названия и логотипы моделей принадлежат их правообладателям и указаны для обозначения
+        совместимости.
+      </p>
 
       <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-rule pt-4">
         <p className="text-[13px] text-ink2">

@@ -251,7 +251,7 @@ function ModelsMenu() {
           <a
             key={m.name}
             href="#form"
-            className="rounded-[16px] border border-rule bg-surface p-4 transition-colors hover:border-gold2"
+            className="rounded-[6px] border border-rule bg-surface p-4 transition-colors hover:border-gold2"
           >
             <span className="flex h-9 w-9 items-center justify-center rounded-[6px] bg-gold3 font-normal text-[16px] text-gold">
               {m.letter}

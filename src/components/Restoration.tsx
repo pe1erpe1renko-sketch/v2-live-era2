@@ -35,14 +35,18 @@ export function Restoration() {
             </div>
 
             <div className="flex w-full box-border min-w-0 flex-col items-stretch gap-4 sm:flex-row sm:items-center sm:gap-4">
-              <Shot src={portraitOld} label="До" alt="Старое фото с царапинами и заломами" />
+              <div className="flex min-w-0 flex-1 basis-0 overflow-hidden rounded-[6px]">
+                <Shot src={portraitOld} label="До" alt="Старое фото с царапинами и заломами" />
+              </div>
               <Icon
                 icon="solar:arrow-right-linear"
                 width={24}
                 height={24}
-                className="mx-auto shrink-0 rotate-90 px-1 text-gold2 sm:mx-0 sm:rotate-0"
+                className="mx-auto shrink-0 grow-0 basis-auto rotate-90 px-1 text-gold2 sm:mx-0 sm:rotate-0"
               />
-              <Shot src={portraitRestored} label="После" alt="То же фото после реставрации" />
+              <div className="flex min-w-0 flex-1 basis-0 overflow-hidden rounded-[6px]">
+                <Shot src={portraitRestored} label="После" alt="То же фото после реставрации" />
+              </div>
             </div>
           </div>
         </div>

@@ -97,7 +97,7 @@ function FaqItem({
             icon="solar:alt-arrow-down-linear"
             width={16}
             height={16}
-            className={`shrink-0 transition-transform duration-300 ${
+            className={`shrink-0 transition-transform duration-200 ${
               isOpen
                 ? "rotate-180 text-gold2"
                 : "text-ink3 group-hover:text-gold2"

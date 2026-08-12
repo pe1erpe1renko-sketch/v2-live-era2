@@ -43,7 +43,7 @@ export function Reviews() {
             <article
               key={r.name}
               tabIndex={0}
-              className="flex h-full flex-col rounded-[16px] border border-rule bg-surface p-6 shadow-card transition-colors duration-300 hover:border-gold2"
+              className="flex h-full flex-col rounded-[16px] border border-rule bg-surface p-6 shadow-card transition-colors duration-200 hover:border-gold2"
             >
               <div className="flex items-start gap-3">
                 <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-[6px] bg-gold3 text-[15px] font-normal text-gold">

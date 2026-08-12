@@ -125,7 +125,7 @@ export function Scenarios() {
           Сценарии: под каждую задачу свои настройки
         </h2>
 
-        <p className="type-body mt-4 max-w-[560px]">
+        <p className="type-body mt-4 max-w-[720px]">
           Внутри сценария нейросеть и промпт подбираются сами. Хотите управлять вручную — все модели
           и параметры открыты в прямом доступе.
         </p>
@@ -163,7 +163,7 @@ export function Scenarios() {
             <article
               key={c.title}
               tabIndex={0}
-              className="group h-full overflow-hidden rounded-[16px] border border-rule bg-surface shadow-card transition-colors duration-300 hover:border-gold2"
+              className="group h-full overflow-hidden rounded-[16px] border border-rule bg-surface shadow-card transition-colors duration-200 hover:border-gold2"
             >
               <div className="aspect-[16/10] overflow-hidden">
                 <img
@@ -172,7 +172,7 @@ export function Scenarios() {
                   loading="lazy"
                   width={820}
                   height={512}
-                  className="h-full w-full object-cover transition-transform duration-[2000ms] ease-[cubic-bezier(0.4,0,0.6,1)] group-hover:scale-[1.03]"
+                  className="h-full w-full object-cover transition-transform duration-200 ease-[cubic-bezier(0.4,0,0.6,1)] group-hover:scale-[1.03]"
                 />
               </div>
               <div className="p-5">

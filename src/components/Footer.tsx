@@ -9,11 +9,11 @@ function FooterLink({ href = "#", children }: { href?: string; children: React.R
   return (
     <a
       href={href}
-      className="group relative inline-block text-[14px] text-ink2 transition-colors duration-[2000ms] ease-slow hover:text-ink"
+      className="group relative inline-block text-[14px] text-ink2 transition-colors duration-200 ease-slow hover:text-ink"
     >
       <span>{children}</span>
       <span
-        className="absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-gold2 transition-transform duration-[2000ms] ease-slow group-hover:scale-x-100 motion-reduce:hidden"
+        className="absolute bottom-0 left-0 h-px w-full origin-left scale-x-0 bg-gold2 transition-transform duration-200 ease-slow group-hover:scale-x-100 motion-reduce:hidden"
         aria-hidden="true"
       />
     </a>

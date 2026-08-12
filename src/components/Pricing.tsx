@@ -121,7 +121,7 @@ export function Pricing() {
           Сколько роликов нужно вам в месяц
         </h2>
 
-        <p className="type-body mt-4 max-w-[560px]">
+        <p className="type-body mt-4 max-w-[720px]">
           На тарифах «Про» и «Ультра» неиспользованные токены переходят на следующий месяц. Отменить
           можно в личном кабинете, без звонков и писем.
         </p>
@@ -200,7 +200,7 @@ export function Pricing() {
 
                 <button
                   type="button"
-                  className={`mt-6 w-full rounded-[6px] p-3 text-[15px] transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
+                  className={`mt-6 w-full rounded-[6px] p-3 text-[15px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
                     dark
                       ? "bg-gold text-white hover:bg-gold-dark"
                       : "border border-rule text-ink hover:border-gold2 hover:text-gold"

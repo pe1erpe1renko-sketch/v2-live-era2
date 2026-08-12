@@ -34,7 +34,7 @@ export function Steps() {
           Как снимок превращается в видео
         </h2>
 
-        <p className="type-body mt-4 max-w-[560px]">
+        <p className="type-body mt-4 max-w-[720px]">
           Первый ролик — без оплаты и без карты. Ниже весь путь от файла до готового MP4.
         </p>
 

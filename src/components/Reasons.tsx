@@ -61,9 +61,9 @@ export function Reasons() {
                 width={768}
                 height={1024}
                 loading="lazy"
-                className="absolute inset-0 h-full w-full object-cover transition-transform duration-[2000ms] ease-[cubic-bezier(0.4,0,0.6,1)] group-hover:scale-[1.04]"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-200 ease-[cubic-bezier(0.4,0,0.6,1)] group-hover:scale-[1.04]"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.75)] to-[rgba(0,0,0,0.15)] transition-opacity duration-[2000ms] ease-[cubic-bezier(0.4,0,0.6,1)] group-hover:from-[rgba(0,0,0,0.82)]" />
+              <div className="absolute inset-0 bg-gradient-to-t from-[rgba(0,0,0,0.75)] to-[rgba(0,0,0,0.15)] transition-opacity duration-200 ease-[cubic-bezier(0.4,0,0.6,1)] group-hover:from-[rgba(0,0,0,0.82)]" />
               <div className="relative flex h-full flex-col justify-end p-6">
                 <div className="flex h-10 w-10 items-center justify-center rounded-[6px] bg-[rgba(255,255,255,0.15)]">
                   <Icon icon={it.icon} width={20} height={20} className="text-white" />

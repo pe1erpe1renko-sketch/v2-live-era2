@@ -4,7 +4,7 @@ import { AccountShell } from "@/components/account/AccountShell";
 
 export const Route = createFileRoute("/account")({
   validateSearch: (search: Record<string, unknown>) => ({
-    tab: typeof search.tab === "string" ? search.tab : undefined,
+    tab: typeof search["tab"] === "string" ? (search["tab"] as string) : undefined,
   }),
   head: () => ({
     meta: [

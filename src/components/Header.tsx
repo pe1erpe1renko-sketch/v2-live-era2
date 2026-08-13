@@ -339,7 +339,7 @@ export function Header() {
 
   return (
     <header ref={wrapRef} className="sticky top-0 z-50 border-b border-rule bg-bg">
-      <div className="mx-auto flex h-[72px] max-w-[1440px] items-center justify-between px-6 lg:px-8">
+      <div className="mx-auto flex h-[72px] max-w-[1440px] items-center justify-between gap-3 px-4 lg:px-8">
         <Logo />
 
         <nav className="hidden items-center gap-8 lg:flex">

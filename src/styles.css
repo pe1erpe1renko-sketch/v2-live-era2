@@ -210,3 +210,7 @@
 .zone-dark .hover\:bg-gold3:hover {
   background-color: var(--dark-rule);
 }
+
+.zone-dark .auth-field {
+  background-color: var(--dark-bg);
+}

@@ -14,6 +14,8 @@ import { reportLovableError } from "../lib/lovable-error-reporting";
 import { LightLayout } from "@/components/layouts/LightLayout";
 import { AuthProvider } from "@/context/AuthContext";
 import { AuthDevToggle } from "@/components/AuthDevToggle";
+import { AuthModalProvider } from "@/context/AuthModalContext";
+import { AuthModal } from "@/components/AuthModal";
 
 function NotFoundComponent() {
   return (
@@ -134,10 +136,13 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
+        <AuthModalProvider>
         {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
         <Outlet />
         {/* ВРЕМЕННО: переключатель авторизации, удалить после реальной авторизации */}
         <AuthDevToggle />
+        <AuthModal />
+        </AuthModalProvider>
       </AuthProvider>
     </QueryClientProvider>
   );

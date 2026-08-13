@@ -168,7 +168,7 @@ function HistoryPanel() {
 
 function RestoreWorkspace() {
   const { isLoggedIn } = useAuth();
-  const { open } = useAuthModal();
+  const { openAuth } = useAuthModal();
   const [file, setFile] = useState<File | null>(null);
   const [tab, setTab] = useState<"universal" | "custom">("universal");
   const [universal, setUniversal] = useState(RESTORE_DEFAULT_PROMPT);
@@ -318,7 +318,7 @@ function RestoreWorkspace() {
           disabled={isLoggedIn && !file}
           // TODO: заглушка — запуск реставрации появится вместе с бэкендом
           onClick={() => {
-            if (!isLoggedIn) open("login");
+            if (!isLoggedIn) openAuth("login");
           }}
           className={`h-[56px] w-full rounded-[6px] text-[16px] transition-opacity duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
             isLoggedIn && !file

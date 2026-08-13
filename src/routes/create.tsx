@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { DarkLayout } from "@/components/layouts/DarkLayout";
-import { Placeholder } from "@/components/Placeholder";
+import { CreateShell } from "@/components/create/CreateShell";
 
 export const Route = createFileRoute("/create")({
   head: () => ({

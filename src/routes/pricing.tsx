@@ -64,6 +64,7 @@ function Page() {
             >
               Пакеты токенов
             </button>
+            </div>
           </div>
 
           {tab === "sub" ? <SubscriptionPlans /> : <TokenPacks />}

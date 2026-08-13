@@ -481,9 +481,35 @@ export function Header() {
               {l}
             </a>
           ))}
-          <a href="#" className="block rounded-[6px] py-3 text-[14px] text-ink2">
-            Войти
-          </a>
+          {isLoggedIn ? (
+            <div className="mt-2 border-t border-rule pt-2">
+              {ACCOUNT_LINKS.map((l) => (
+                <a
+                  key={l.label}
+                  href="#"
+                  className="flex items-center rounded-[6px] py-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2"
+                >
+                  <Icon icon={l.icon} className="h-[18px] w-[18px] shrink-0 text-ink3" />
+                  <span className="ml-3 text-[14px] text-ink">{l.label}</span>
+                </a>
+              ))}
+              <button
+                type="button"
+                onClick={() => setLoggedIn(false)}
+                className="flex w-full items-center rounded-[6px] py-3 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2"
+              >
+                <Icon
+                  icon="solar:logout-2-linear"
+                  className="h-[18px] w-[18px] shrink-0 text-ink3"
+                />
+                <span className="ml-3 text-[14px] text-ink2">Выйти</span>
+              </button>
+            </div>
+          ) : (
+            <a href="#" className="block rounded-[6px] py-3 text-[14px] text-ink2">
+              Войти
+            </a>
+          )}
           <span className="type-label mt-4 block">RU · Без VPN</span>
         </div>
       ) : null}

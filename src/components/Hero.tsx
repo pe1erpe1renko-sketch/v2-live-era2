@@ -196,7 +196,7 @@ export function Hero() {
           </h1>
 
           <p className="type-body mt-4 max-w-[460px] lg:mt-[clamp(10px,2vh,24px)] lg:text-[clamp(13px,1.8vh,16px)]">
-            Kling 3, Sora, Veo и Seedance — в одном окне. Загружаете снимок, через пару минут
+            Kling 3, Hedra, Veo и Seedance — в одном окне. Загружаете снимок, через пару минут
             забираете MP4 без водяных знаков. Русский интерфейс, оплата картой РФ, VPN не нужен.
           </p>
 

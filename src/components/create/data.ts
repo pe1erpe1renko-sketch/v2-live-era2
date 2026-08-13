@@ -109,29 +109,11 @@ export const SCENARIOS: Scenario[] = [
 ];
 
 export const MODELS: Model[] = [
-  { slug: "kling-3", name: "Kling 3.0", letter: "K", note: "универсальная, держит мимику и детали" },
-  {
-    slug: "seedance-2",
-    name: "Seedance 2.0",
-    letter: "S",
-    note: "ByteDance, считает быстрее и дешевле",
-  },
-  { slug: "veo-3-1", name: "Veo 3.1", letter: "V", note: "Google, звук в комплекте, есть 4K" },
-  { slug: "sora-2", name: "Sora 2", letter: "S", note: "OpenAI, звук и синхронные губы" },
-  { slug: "wan-2-7", name: "Wan 2.7", letter: "W", note: "Alibaba, плавные переходы между сценами" },
-  {
-    slug: "kling-motion",
-    name: "Kling Motion Control",
-    letter: "K",
-    note: "движение с вашего видео-образца",
-  },
-  { slug: "hailuo-02", name: "Hailuo 02", letter: "H", note: "MiniMax, бережный расход токенов" },
-  { slug: "grok-imagine", name: "Grok Imagine", letter: "G", note: "xAI, свободные соотношения сторон" },
-  { slug: "happy-horse", name: "Happy Horse", letter: "H", note: "Alibaba, 1080p со звуком" },
-  {
-    slug: "nano-banana-2",
-    name: "Nano Banana 2",
-    letter: "N",
-    note: "до 14 референсов в одной сцене",
-  },
+  { slug: "kling-3", name: "KLING 3.0", letter: "K", note: "универсальная, держит мимику и мелкие детали" },
+  { slug: "minimax-h3", name: "MiniMax H3", letter: "M", note: "Hailuo, оживление фото и работа с референсами" },
+  { slug: "hedra", name: "Hedra", letter: "H", note: "говорящий портрет: лицо произносит вашу реплику" },
+  { slug: "seedance-2", name: "Seedance 2.0", letter: "S", note: "ByteDance, максимальное качество движения" },
+  { slug: "veo-3-1", name: "Veo 3.1", letter: "V", note: "Google, звук в комплекте" },
+  { slug: "grok", name: "Grok", letter: "G", note: "xAI, быстрый и недорогой" },
+  { slug: "hailuo-2", name: "Hailuo 2", letter: "H", note: "MiniMax, самый бережный расход токенов" },
 ];

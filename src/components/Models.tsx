@@ -1,13 +1,7 @@
 import { SectionLabel } from "@/components/SectionLabel";
 
-const ROW_TOP = ["Kling 3.0", "Veo 3.1", "Seedance 2.0", "Sora 2", "Wan 2.7"];
-const ROW_BOTTOM = [
-  "Kling Motion Control",
-  "Hailuo 02",
-  "Grok Imagine",
-  "Happy Horse",
-  "Nano Banana 2",
-];
+const ROW_TOP = ["KLING 3.0", "MiniMax H3", "Hedra", "Seedance 2.0"];
+const ROW_BOTTOM = ["Veo 3.1", "Grok", "Hailuo 2"];
 
 function Item({ label }: { label: string }) {
   return (
@@ -47,16 +41,16 @@ export function Models() {
   return (
     <section className="border-b border-rule">
       <div className="mx-auto max-w-[1440px] px-8 py-12 lg:px-16">
-        <SectionLabel>Десять моделей</SectionLabel>
+        <SectionLabel>Семь моделей</SectionLabel>
 
         <h2 className="mt-4 text-[clamp(28px,3vw,44px)] font-light leading-[1.1] tracking-[-0.04em] text-ink">
           Не одна нейросеть, а весь набор сразу
         </h2>
 
         <p className="type-body mt-4 max-w-[820px]">
-          Kling держит мимику, Seedance считает быстрее и дешевле, Veo добавляет звук и 4K. В
-          сценариях модель подбирается под задачу сама, в прямом доступе выбираете вручную. Движки
-          обновляем в день релиза.
+          Kling держит мимику, Hedra заставляет портрет говорить, Seedance даёт максимальное
+          качество, Veo добавляет звук. В сценариях модель подбирается под задачу сама, в прямом
+          доступе выбираете вручную. Движки обновляем в день релиза.
         </p>
 
         <div className="mt-12">

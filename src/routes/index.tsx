@@ -23,7 +23,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Загрузите фотографию и получите короткое видео: Kling 3, Sora, Veo и Seedance в одном окне. Первый ролик бесплатно, без VPN, оплата картой РФ.",
+          "Загрузите фотографию и получите короткое видео: Kling 3, Hedra, Veo и Seedance в одном окне. Первый ролик бесплатно, без VPN, оплата картой РФ.",
       },
       { property: "og:title", content: "Live Era2 — оживить фото нейросетью онлайн" },
       {

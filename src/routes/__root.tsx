@@ -12,6 +12,8 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { LightLayout } from "@/components/layouts/LightLayout";
+import { AuthProvider } from "@/context/AuthContext";
+import { AuthDevToggle } from "@/components/AuthDevToggle";
 
 function NotFoundComponent() {
   return (
@@ -131,8 +133,12 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
-      <Outlet />
+      <AuthProvider>
+        {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
+        <Outlet />
+        {/* ВРЕМЕННО: переключатель авторизации, удалить после реальной авторизации */}
+        <AuthDevToggle />
+      </AuthProvider>
     </QueryClientProvider>
   );
 }

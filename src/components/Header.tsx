@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Icon } from "@iconify/react";
 import { SectionLabel } from "@/components/SectionLabel";
+import { useAuth } from "@/context/AuthContext";
+import { AccountMenu, TokenPill, ACCOUNT_LINKS } from "@/components/AccountMenu";
 import archive1 from "@/assets/sc-archive-1.jpg";
 import archive2 from "@/assets/sc-archive-2.jpg";
 import archive3 from "@/assets/sc-archive-3.jpg";
@@ -110,7 +112,8 @@ const MODELS: {
   { letter: "N", name: "Nano Banana 2", text: "до 14 референсов в одной сцене" },
 ];
 
-const SIMPLE_LINKS = ["Примеры", "Цены", "Блог"];
+const SIMPLE_LINKS_OUT = ["Примеры", "Цены"];
+const SIMPLE_LINKS_IN = ["Мои генерации", "Цены"];
 
 function Logo() {
   return (
@@ -281,6 +284,8 @@ function ModelsMenu() {
 }
 
 export function Header() {
+  const { isLoggedIn, setLoggedIn } = useAuth();
+  const SIMPLE_LINKS = isLoggedIn ? SIMPLE_LINKS_IN : SIMPLE_LINKS_OUT;
   const [open, setOpen] = useState<"scenarios" | "models" | null>(null);
   const [menu, setMenu] = useState(false);
   const [mobileOpen, setMobileOpen] = useState<string | null>(null);
@@ -364,9 +369,16 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-4 lg:gap-6">
-          <a href="#" className="hidden rounded-[6px] text-[14px] text-ink2 hover:text-ink lg:block">
-            Войти
-          </a>
+          {isLoggedIn ? (
+            <TokenPill />
+          ) : (
+            <a
+              href="#"
+              className="hidden rounded-[6px] text-[14px] text-ink2 hover:text-ink lg:block"
+            >
+              Войти
+            </a>
+          )}
           <button
             type="button"
             onClick={() => {
@@ -379,6 +391,11 @@ export function Header() {
             <span className="hidden lg:inline">Создать видео</span>
             <span className="lg:hidden">Создать</span>
           </button>
+          {isLoggedIn ? (
+            <div className="hidden lg:block">
+              <AccountMenu />
+            </div>
+          ) : null}
           <button
             type="button"
             aria-label="Меню"
@@ -404,6 +421,31 @@ export function Header() {
 
       {menu ? (
         <div className="border-t border-rule bg-surface px-6 py-6 lg:hidden">
+          {isLoggedIn ? (
+            <div className="mb-2 border-b border-rule pb-2">
+              <div className="flex items-center py-3">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold3 text-[15px] text-gold">
+                  П
+                </span>
+                <span className="ml-3 min-w-0">
+                  <span className="block truncate text-[14px] text-ink">Пользователь</span>
+                  <span className="block truncate text-[12px] text-ink3">user@example.com</span>
+                </span>
+              </div>
+              <div className="flex items-center justify-between border-t border-rule py-3">
+                <span className="flex items-center">
+                  <span className="h-[6px] w-[6px] rounded-full bg-gold2" aria-hidden="true" />
+                  <span className="ml-2 text-[14px] text-ink">0 токенов</span>
+                </span>
+                <button
+                  type="button"
+                  className="rounded-[6px] bg-gold px-[14px] py-[6px] text-[12px] text-white"
+                >
+                  Пополнить
+                </button>
+              </div>
+            </div>
+          ) : null}
           {[
             { label: "Сценарии", items: SCENARIO_COLS.flatMap((c) => c.items.map((i) => i.title)) },
             { label: "Нейросети", items: MODELS.map((m) => m.name) },
@@ -439,9 +481,35 @@ export function Header() {
               {l}
             </a>
           ))}
-          <a href="#" className="block rounded-[6px] py-3 text-[14px] text-ink2">
-            Войти
-          </a>
+          {isLoggedIn ? (
+            <div className="mt-2 border-t border-rule pt-2">
+              {ACCOUNT_LINKS.map((l) => (
+                <a
+                  key={l.label}
+                  href="#"
+                  className="flex items-center rounded-[6px] py-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2"
+                >
+                  <Icon icon={l.icon} className="h-[18px] w-[18px] shrink-0 text-ink3" />
+                  <span className="ml-3 text-[14px] text-ink">{l.label}</span>
+                </a>
+              ))}
+              <button
+                type="button"
+                onClick={() => setLoggedIn(false)}
+                className="flex w-full items-center rounded-[6px] py-3 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2"
+              >
+                <Icon
+                  icon="solar:logout-2-linear"
+                  className="h-[18px] w-[18px] shrink-0 text-ink3"
+                />
+                <span className="ml-3 text-[14px] text-ink2">Выйти</span>
+              </button>
+            </div>
+          ) : (
+            <a href="#" className="block rounded-[6px] py-3 text-[14px] text-ink2">
+              Войти
+            </a>
+          )}
           <span className="type-label mt-4 block">RU · Без VPN</span>
         </div>
       ) : null}

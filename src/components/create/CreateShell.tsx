@@ -3,6 +3,8 @@ import { Icon } from "@iconify/react";
 import { useAuth } from "@/context/AuthContext";
 import { AppLink } from "@/components/AppLink";
 import { SelectPanel } from "@/components/create/SelectPanel";
+import { CreateProvider } from "@/components/create/CreateContext";
+import { Workspace } from "@/components/create/Workspace";
 
 function HistoryPanel() {
   const { isLoggedIn } = useAuth();
@@ -41,6 +43,7 @@ export function CreateShell() {
   }, [drawer]);
 
   return (
+    <CreateProvider>
     <div className="flex w-full flex-col lg:h-[calc(100svh-72px)] lg:flex-row lg:overflow-hidden">
       {/* left */}
       <aside className="hidden w-[340px] shrink-0 flex-col overflow-hidden border-r border-rule lg:flex">
@@ -58,9 +61,7 @@ export function CreateShell() {
             Сценарии и модели
           </button>
         </div>
-        <div className="mx-auto w-full max-w-[860px] px-8 pb-8 pt-5">
-          <p className="type-label">РАБОЧАЯ ОБЛАСТЬ</p>
-        </div>
+        <Workspace />
       </section>
 
       {/* right */}
@@ -83,5 +84,6 @@ export function CreateShell() {
         </div>
       )}
     </div>
+    </CreateProvider>
   );
 }

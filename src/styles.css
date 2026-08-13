@@ -214,3 +214,30 @@
 .zone-dark .auth-field {
   background-color: var(--dark-bg);
 }
+
+.zone-dark {
+  --dark-input: #1a1a1c;
+}
+
+@utility thin-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #2e2e31 transparent;
+
+  &::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: #2e2e31;
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background-color: #3f3f46;
+  }
+}

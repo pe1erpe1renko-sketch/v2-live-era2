@@ -59,9 +59,8 @@ function ScenarioBar() {
 }
 
 function UploadZone() {
-  const { scenarioSlug } = useCreate();
+  const { scenarioSlug, file, setFile } = useCreate();
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const [file, setFile] = useState<File | null>(null);
   const [url, setUrl] = useState<string | null>(null);
   const [drag, setDrag] = useState(false);
 

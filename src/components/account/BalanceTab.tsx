@@ -5,11 +5,12 @@ import { AppLink } from "@/components/AppLink";
 const focusRing =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 focus-visible:outline-offset-2";
 
-const panel = "rounded-[16px] border border-rule bg-surface p-6";
-const solidBtn =
-  "rounded-[6px] bg-gold px-6 py-3 text-[14px] text-white transition-colors duration-200 hover:bg-gold-dark";
-const ghostBtn =
-  "rounded-[6px] border border-rule px-6 py-3 text-[14px] text-ink transition-colors duration-200 hover:bg-gold3";
+const panel = "flex h-full flex-col rounded-[16px] border border-rule bg-surface p-6";
+const btnBase =
+  "inline-flex h-[44px] items-center justify-center rounded-[6px] px-6 text-[14px] transition-colors duration-200";
+const solidBtn = `${btnBase} bg-gold text-white hover:bg-gold-dark`;
+const ghostBtn = `${btnBase} border border-rule text-ink hover:bg-gold3`;
+
 
 export type Operation = {
   id: string;
@@ -62,7 +63,7 @@ export function BalanceTab() {
     <div>
       <h1 className="text-[24px] font-normal text-ink">Баланс и платежи</h1>
 
-      <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+      <div className="mt-6 grid grid-cols-1 items-stretch gap-4 md:grid-cols-2">
         <div className={panel}>
           <p className="type-label text-ink3">Баланс</p>
           <div className="mt-3 flex items-baseline">
@@ -70,12 +71,9 @@ export function BalanceTab() {
             <span className="ml-[10px] text-[20px] font-light text-ink2">токенов</span>
           </div>
           <p className="mt-1.5 text-[12px] text-ink3">хватит примерно на 0 роликов</p>
-          <div className="mt-5 flex flex-wrap gap-[10px]">
+          <div className="mt-auto flex flex-wrap gap-[10px] pt-5">
             <AppLink href="/pricing" className={`${solidBtn} ${focusRing}`}>
               Пополнить
-            </AppLink>
-            <AppLink href="/pricing" className={`${ghostBtn} ${focusRing}`}>
-              Все тарифы
             </AppLink>
           </div>
         </div>
@@ -87,12 +85,13 @@ export function BalanceTab() {
             Вы платите разово за пакеты токенов. Токены не сгорают, автоматических списаний нет.
             Подписка выгоднее при регулярном использовании.
           </p>
-          <div className="mt-5">
+          <div className="mt-auto pt-5">
             <AppLink href="/pricing" className={`${ghostBtn} ${focusRing}`}>
               Посмотреть подписки
             </AppLink>
           </div>
         </div>
+
       </div>
 
       <div className={`mt-6 ${panel}`}>

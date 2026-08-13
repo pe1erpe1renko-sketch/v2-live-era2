@@ -10,6 +10,9 @@ type Ctx = {
   model: Model | null;
   file: File | null;
   setFile: (f: File | null) => void;
+  /** длительность загруженной звуковой дорожки, сек (Hedra) */
+  audioDuration: number | null;
+  setAudioDuration: (v: number | null) => void;
 };
 
 const CreateCtx = createContext<Ctx | null>(null);
@@ -18,6 +21,7 @@ export function CreateProvider({ children }: { children: ReactNode }) {
   const [scenarioSlug, setScenarioSlug] = useState<string | null>(null);
   const [modelSlug, setModelSlug] = useState<string>("kling-3");
   const [file, setFile] = useState<File | null>(null);
+  const [audioDuration, setAudioDuration] = useState<number | null>(null);
 
   const value = useMemo<Ctx>(
     () => ({
@@ -29,8 +33,10 @@ export function CreateProvider({ children }: { children: ReactNode }) {
       model: MODELS.find((m) => m.slug === modelSlug) ?? null,
       file,
       setFile,
+      audioDuration,
+      setAudioDuration,
     }),
-    [scenarioSlug, modelSlug, file],
+    [scenarioSlug, modelSlug, file, audioDuration],
   );
 
   return <CreateCtx.Provider value={value}>{children}</CreateCtx.Provider>;

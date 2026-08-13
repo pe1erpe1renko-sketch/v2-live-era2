@@ -1,5 +1,6 @@
 import type { ReactElement } from "react";
 import { SectionLabel } from "@/components/SectionLabel";
+import { AppLink } from "@/components/AppLink";
 
 type IconProps = { className?: string };
 

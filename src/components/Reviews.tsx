@@ -1,5 +1,6 @@
 import { Icon } from "@iconify/react";
 import { SectionLabel } from "@/components/SectionLabel";
+import { AppLink } from "@/components/AppLink";
 import avatarMarina from "@/assets/avatar-marina.jpg";
 import avatarDmitry from "@/assets/avatar-dmitry.jpg";
 import avatarAnna from "@/assets/avatar-anna.jpg";
@@ -76,7 +77,7 @@ export function Reviews() {
               </div>
 
               <p className="mt-4 text-[14px] leading-[1.6] text-ink2">{r.text}</p>
-            </a>
+            </AppLink>
           ))}
         </div>
       </div>

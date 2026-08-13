@@ -19,7 +19,7 @@ const ALL_DOCS = [
 /* ── Типографика документа ─────────────────────────────────────── */
 
 export function P({ children }: { children: ReactNode }) {
-  return <p className="mt-[14px] text-[15px] leading-[1.75] text-ink2 first:mt-0">{children}</p>;
+  return <p className="mt-[14px] text-[14px] leading-[1.7] text-ink2 sm:text-[15px] sm:leading-[1.75] first:mt-0">{children}</p>;
 }
 
 export function H3({ children }: { children: ReactNode }) {
@@ -28,7 +28,7 @@ export function H3({ children }: { children: ReactNode }) {
 
 export function OL({ items }: { items: ReactNode[] }) {
   return (
-    <ol className="mt-[14px] list-decimal space-y-[10px] pl-6 text-[15px] leading-[1.75] text-ink2 marker:text-ink3">
+    <ol className="mt-[14px] list-decimal space-y-[10px] pl-6 text-[14px] leading-[1.7] text-ink2 sm:text-[15px] sm:leading-[1.75] marker:text-ink3">
       {items.map((it, i) => (
         <li key={i}>{it}</li>
       ))}
@@ -38,7 +38,7 @@ export function OL({ items }: { items: ReactNode[] }) {
 
 export function UL({ items }: { items: ReactNode[] }) {
   return (
-    <ul className="mt-[14px] space-y-[10px] pl-6 text-[15px] leading-[1.75] text-ink2">
+    <ul className="mt-[14px] space-y-[10px] pl-6 text-[14px] leading-[1.7] text-ink2 sm:text-[15px] sm:leading-[1.75]">
       {items.map((it, i) => (
         <li key={i} className="relative">
           <span className="absolute -left-4 top-[11px] block h-[4px] w-[4px] rounded-full bg-gold2" />
@@ -108,7 +108,7 @@ export function LegalDoc({
             <button
               type="button"
               onClick={() => goTo(s.id)}
-              className={`block w-full border-l-2 pl-3 text-left text-[13px] leading-[1.4] transition-colors duration-200 ease-slow focus-visible:outline-2 focus-visible:outline-gold2 ${
+              className={`block w-full border-l-2 py-1.5 pl-3 text-left text-[13px] leading-[1.4] transition-colors duration-200 ease-slow focus-visible:outline-2 focus-visible:outline-gold2 ${
                 isActive
                   ? "border-gold text-ink"
                   : "border-rule text-ink2 hover:border-gold2 hover:text-ink"
@@ -123,8 +123,8 @@ export function LegalDoc({
   );
 
   return (
-    <div className="legal-page px-6 pb-24 sm:px-8">
-      <div className="mx-auto max-w-[1100px] pt-16">
+    <div className="legal-page px-4 pb-24 sm:px-8">
+      <div className="mx-auto max-w-[1100px] pt-10 sm:pt-16">
         <SectionLabel>Документ</SectionLabel>
         <h1 className="mt-4 text-[clamp(28px,3.4vw,42px)] font-light leading-[1.1] tracking-[-0.04em] text-ink">
           {title}
@@ -134,15 +134,15 @@ export function LegalDoc({
         <div className="mt-6 border-b border-rule" />
       </div>
 
-      <div className="mx-auto mt-8 grid max-w-[1100px] gap-12 lg:grid-cols-[240px_1fr]">
+      <div className="mx-auto mt-6 grid max-w-[1100px] gap-8 sm:mt-8 lg:grid-cols-[240px_1fr] lg:gap-12">
         {/* Содержание */}
         <aside className="legal-toc">
-          <div className="lg:hidden">
+          <div className="sticky top-[72px] z-20 -mx-4 bg-bg px-4 py-2 lg:hidden">
             <button
               type="button"
               onClick={() => setTocOpen((v) => !v)}
               aria-expanded={tocOpen}
-              className="flex w-full items-center justify-between rounded-[6px] border border-rule bg-surface px-4 py-3 text-[13px] text-ink focus-visible:outline-2 focus-visible:outline-gold2"
+              className="flex min-h-[44px] w-full items-center justify-between rounded-[6px] border border-rule bg-surface px-4 py-3 text-[13px] text-ink focus-visible:outline-2 focus-visible:outline-gold2"
             >
               Содержание
               <Icon
@@ -151,7 +151,13 @@ export function LegalDoc({
                 className={`transition-transform duration-200 ease-slow ${tocOpen ? "rotate-180" : ""}`}
               />
             </button>
-            {tocOpen && <div className="mt-4">{tocList}</div>}
+            <div
+              className={`grid transition-[grid-template-rows,opacity] duration-200 ease-slow ${
+                tocOpen ? "mt-3 grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+              }`}
+            >
+              <div className="overflow-hidden">{tocList}</div>
+            </div>
           </div>
 
           <div className="hidden lg:block lg:sticky lg:top-[96px]">
@@ -184,7 +190,7 @@ export function LegalDoc({
                 <p className="type-label mb-[6px] text-gold2">
                   Раздел {String(i + 1).padStart(2, "0")}
                 </p>
-                <h2 className="mb-[14px] text-[20px] font-normal leading-[1.3] text-ink">
+                <h2 className="mb-[14px] text-[18px] sm:text-[20px] font-normal leading-[1.3] text-ink">
                   {s.title}
                 </h2>
               </div>

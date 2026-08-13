@@ -26,7 +26,7 @@ function Segmented({
       role="radiogroup"
       aria-label={label}
       style={darkInput}
-      className="inline-flex gap-0 rounded-[6px] border border-rule p-[3px]"
+      className="flex w-full gap-0 rounded-[6px] border border-rule p-[3px] md:inline-flex md:w-auto"
     >
       {options.map((o) => {
         const on = o === value;
@@ -37,7 +37,7 @@ function Segmented({
             role="radio"
             aria-checked={on}
             onClick={() => onChange(o)}
-            className={`rounded-[4px] px-[14px] py-[6px] text-[13px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
+            className={`flex-1 rounded-[4px] px-[14px] py-[10px] text-[13px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 md:flex-none md:py-[6px] ${
               on ? "bg-gold text-white" : "text-ink2 hover:text-ink"
             }`}
           >
@@ -236,16 +236,24 @@ export function SettingsPanel() {
 
   return (
     <>
-      <div className="mt-4 rounded-[16px] border border-rule bg-surface p-5">
+      <div className="mt-4 rounded-[16px] border border-rule bg-surface p-4 md:p-5">
         {/* Ряд 1 */}
-        <div className="flex flex-col gap-5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-8">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-3">
+        <div className="flex flex-col gap-5 md:flex-row md:flex-wrap md:items-center md:gap-8">
+          <div className="flex flex-col gap-2 md:flex-row md:items-center md:gap-3">
             <span className="text-[13px] text-ink3">Формат</span>
             <Segmented value={format} options={caps.formats} onChange={setFormat} label="Формат" />
           </div>
 
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-3">
-            <span className="text-[13px] text-ink3">Длительность</span>
+          <div className="flex flex-col gap-2 md:flex-row md:items-center md:gap-3">
+            <div className="flex items-center justify-between gap-3">
+              <span className="text-[13px] text-ink3">Длительность</span>
+              <span className="shrink-0 whitespace-nowrap md:hidden">
+                <span className="text-[14px] font-normal text-ink">{duration}</span>{" "}
+                <span className="text-[12px] text-ink3">
+                  / {caps.durationMin}–{caps.durationMax} сек
+                </span>
+              </span>
+            </div>
             <div className="flex items-center gap-3">
               <Slider
                 label="Длительность"
@@ -254,9 +262,9 @@ export function SettingsPanel() {
                 max={caps.durationMax}
                 step={caps.durationStep}
                 onChange={setDuration}
-                className="w-full sm:w-[160px]"
+                className="w-full md:w-[160px]"
               />
-              <span className="shrink-0 whitespace-nowrap">
+              <span className="hidden shrink-0 whitespace-nowrap md:inline">
                 <span className="text-[14px] font-normal text-ink">{duration}</span>{" "}
                 <span className="text-[12px] text-ink3">
                   / {caps.durationMin}–{caps.durationMax} сек
@@ -269,8 +277,8 @@ export function SettingsPanel() {
         <div className="my-4 h-px w-full bg-rule" />
 
         {/* Ряд 2 */}
-        <div className="flex flex-col gap-5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-8">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-3">
+        <div className="flex flex-col gap-5 md:flex-row md:flex-wrap md:items-center md:gap-8">
+          <div className="flex flex-col gap-2 md:flex-row md:items-center md:gap-3">
             <span className="text-[13px] text-ink3">Качество</span>
             <Segmented
               value={quality}
@@ -291,7 +299,7 @@ export function SettingsPanel() {
           )}
 
           {caps.expert && (
-            <div className="flex items-center gap-3 sm:ml-auto">
+            <div className="flex items-center gap-3 md:ml-auto">
               <Toggle checked={expert} onChange={setExpert} label="Эксперт" />
               <span className="text-[13px] text-ink">Эксперт</span>
             </div>
@@ -368,12 +376,12 @@ export function SettingsPanel() {
       </div>
 
       {/* Кнопка генерации */}
-      <div className="mt-4">
+      <div className="sticky-cta mt-4">
         <button
           type="button"
           disabled={disabled}
           onClick={() => (isLoggedIn ? handleGenerate() : openAuth("login"))}
-          className={`h-[56px] w-full rounded-[6px] text-[16px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
+          className={`h-[52px] w-full rounded-[6px] text-[15px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 md:h-[56px] md:text-[16px] ${
             disabled
               ? "cursor-not-allowed bg-rule text-ink3"
               : "cursor-pointer bg-gold text-white hover:bg-gold-dark"
@@ -382,7 +390,7 @@ export function SettingsPanel() {
           {isLoggedIn ? `Сгенерировать · ${cost} токенов` : "Войти и создать видео"}
         </button>
 
-        <p className="mt-2.5 text-center text-[12px] text-ink3">
+        <p className="mt-2 text-center text-[12px] text-ink3 md:mt-2.5">
           {disabled ? (
             "Загрузите снимок, чтобы продолжить"
           ) : isLoggedIn ? (

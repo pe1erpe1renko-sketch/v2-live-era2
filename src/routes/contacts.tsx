@@ -111,7 +111,7 @@ function EmailCard() {
 function Page() {
   return (
     <LightLayout>
-      <section className="mx-auto max-w-[1440px] px-5 pb-16 pt-16 sm:px-8 lg:px-16">
+      <section className="mx-auto max-w-[1440px] px-4 pb-16 pt-10 sm:px-8 sm:pt-16 lg:px-16">
         <SectionLabel>Контакты</SectionLabel>
         <h1 className="mt-4 text-[clamp(32px,4vw,52px)] font-light leading-[1.1] tracking-[-0.04em] text-ink">
           Связаться с нами
@@ -121,7 +121,7 @@ function Page() {
           сразу пишите, разберёмся вручную.
         </p>
 
-        <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
+        <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
           <a href={CONTACTS.telegram.href} target="_blank" rel="noreferrer" className={cardClass}>
             <IconBox icon="simple-icons:telegram" color="#229ED9" />
             <p className="mt-4 text-[16px] text-ink">Telegram</p>

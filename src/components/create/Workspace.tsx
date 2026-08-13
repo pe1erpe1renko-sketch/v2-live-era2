@@ -31,19 +31,26 @@ function ScenarioBar() {
   const { scenario, model, setScenarioSlug } = useCreate();
   if (!scenario) return null;
   return (
-    <div className="flex flex-col gap-3 rounded-[16px] border border-rule bg-surface px-4 py-3 sm:flex-row sm:items-center">
-      <div className="flex min-w-0 flex-1 items-center gap-3">
+    <div className="flex flex-col gap-2 rounded-[16px] border border-rule bg-surface px-4 py-3 md:flex-row md:items-center md:gap-3">
+      <div className="flex min-w-0 flex-1 items-start gap-3 md:items-center">
         <img
           src={scenario.img}
           alt={scenario.title}
           className="h-9 w-12 shrink-0 rounded-[6px] object-cover"
         />
         <div className="min-w-0">
-          <div className="flex items-center gap-2">
-            <Icon icon={scenario.icon} width={16} height={16} className="shrink-0 text-gold2" />
-            <span className="truncate text-[15px] font-normal text-ink">{scenario.title}</span>
+          <div className="flex items-start gap-2">
+            <Icon
+              icon={scenario.icon}
+              width={16}
+              height={16}
+              className="mt-1 shrink-0 text-gold2"
+            />
+            <span className="text-[15px] font-normal leading-[1.3] text-ink md:truncate">
+              {scenario.title}
+            </span>
           </div>
-          <p className="mt-1 truncate text-[12px] text-ink3">
+          <p className="mt-1 text-[12px] leading-[1.4] text-ink3 md:truncate">
             {scenario.note}
             {model && (
               <>
@@ -57,7 +64,7 @@ function ScenarioBar() {
       <button
         type="button"
         onClick={() => setScenarioSlug(null)}
-        className="flex shrink-0 items-center gap-1 self-start text-[12px] text-ink3 transition-colors hover:text-ink sm:self-center"
+        className="flex shrink-0 items-center gap-1 self-end text-[12px] text-ink3 transition-colors hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 md:self-center"
       >
         сбросить
         <Icon icon="solar:close-circle-linear" width={14} height={14} />
@@ -130,15 +137,17 @@ function UploadZone() {
         if (f) setFile(f);
       }}
       style={drag ? { backgroundColor: "rgba(176,141,87,0.06)" } : undefined}
-      className={`mt-4 flex min-h-[160px] cursor-pointer flex-col items-center justify-center rounded-[16px] border border-dashed px-5 text-center transition-colors duration-200 hover:border-gold2 hover:bg-[rgba(176,141,87,0.06)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 sm:min-h-[220px] ${
+      className={`mt-4 flex min-h-[160px] cursor-pointer flex-col items-center justify-center rounded-[16px] border border-dashed px-4 text-center transition-colors duration-200 hover:border-gold2 hover:bg-[rgba(176,141,87,0.06)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 md:min-h-[220px] md:px-5 ${
         drag ? "border-gold2" : "border-rule"
       }`}
     >
-      <Icon icon="solar:camera-linear" width={28} height={28} className="text-gold2" />
-      <p className="mt-3 text-[15px] text-ink">
+      <Icon icon="solar:camera-linear" className="h-6 w-6 text-gold2 md:h-7 md:w-7" />
+      <p className="mt-3 text-[14px] text-ink md:text-[15px]">
         {isDraw ? "Загрузите рисунок" : "Загрузите фотографию"}
       </p>
-      <p className="mt-1.5 text-[13px] text-ink3">снимок с телефона или скан · JPG, PNG до 20 МБ</p>
+      <p className="mt-1.5 text-[12px] text-ink3 md:text-[13px]">
+        снимок с телефона или скан · JPG, PNG до 20 МБ
+      </p>
       <input
         ref={inputRef}
         type="file"
@@ -242,7 +251,7 @@ function PromptPanel() {
 export function Workspace() {
   const { scenarioSlug } = useCreate();
   return (
-    <div className="mx-auto w-full max-w-[860px] px-5 pb-8 pt-5">
+    <div className="mx-auto w-full max-w-[860px] px-4 pb-8 pt-5 sm:px-5">
       <div
         className={`grid transition-[grid-template-rows,opacity] duration-200 ease-slow ${
           scenarioSlug ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"

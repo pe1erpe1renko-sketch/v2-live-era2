@@ -32,8 +32,8 @@ export function AccountShell() {
   return (
     <div className="flex w-full flex-col lg:h-[calc(100svh-72px)] lg:flex-row">
       {/* tabs */}
-      <aside className="flex shrink-0 flex-col border-b border-rule lg:h-full lg:w-[260px] lg:border-b-0 lg:border-r">
-        <nav className="flex gap-1 overflow-x-auto thin-scroll px-4 py-3 lg:flex-1 lg:flex-col lg:overflow-visible lg:px-4 lg:py-5">
+      <aside className="sticky top-[72px] z-30 flex shrink-0 flex-col border-b border-rule bg-bg lg:static lg:h-full lg:w-[260px] lg:border-b-0 lg:border-r">
+        <nav className="flex gap-1 overflow-x-auto no-scrollbar px-4 py-2 lg:flex-1 lg:flex-col lg:overflow-visible lg:py-5">
           {TABS.map((t) => {
             const on = t.id === active;
             return (
@@ -42,7 +42,7 @@ export function AccountShell() {
                 type="button"
                 aria-current={on ? "page" : undefined}
                 onClick={() => go(t.id)}
-                className={`relative flex shrink-0 cursor-pointer items-center whitespace-nowrap rounded-[6px] px-[14px] py-3 transition-colors duration-200 ${focusRing} ${
+                className={`relative flex h-11 shrink-0 cursor-pointer items-center whitespace-nowrap rounded-[6px] px-[14px] transition-colors duration-200 lg:h-auto lg:py-3 ${focusRing} ${
                   on
                     ? "border border-rule bg-surface text-ink"
                     : "text-ink2 hover:bg-surface hover:text-ink"
@@ -52,16 +52,16 @@ export function AccountShell() {
                 {on ? (
                   <span
                     aria-hidden="true"
-                    className="absolute bottom-0 left-0 top-0 w-[3px] rounded-[2px] bg-gold"
+                    className="absolute bottom-0 left-0 top-0 hidden w-[3px] rounded-[2px] bg-gold lg:block"
                   />
                 ) : null}
                 <Icon
                   icon={t.icon}
                   width={18}
                   height={18}
-                  className={on ? "text-gold2" : "text-ink2"}
+                  className={`shrink-0 ${on ? "text-gold2" : "text-ink2"}`}
                 />
-                <span className="ml-3 text-[14px]">{t.label}</span>
+                <span className="ml-2.5 text-[14px] lg:ml-3">{t.label}</span>
               </button>
             );
           })}
@@ -84,11 +84,25 @@ export function AccountShell() {
 
       {/* content */}
       <section className="min-w-0 flex-1 overflow-y-auto thin-scroll">
-        <div className="mx-auto max-w-[1000px] p-8">
+        <div className="mx-auto max-w-[1000px] p-4 sm:p-6 lg:p-8">
           {active === "generations" ? <GenerationsTab /> : null}
           {active === "balance" ? <BalanceTab /> : null}
           {active === "profile" ? <ProfileTab /> : null}
           {active === "support" ? <SupportTab /> : null}
+
+          <div className="mt-10 border-t border-rule pt-4 lg:hidden">
+            <button
+              type="button"
+              onClick={() => {
+                setLoggedIn(false);
+                navigate({ to: "/" });
+              }}
+              className={`flex h-11 w-full cursor-pointer items-center rounded-[6px] text-left text-ink3 transition-colors duration-200 hover:text-ink ${focusRing}`}
+            >
+              <Icon icon="solar:logout-2-linear" width={18} height={18} />
+              <span className="ml-3 text-[14px]">Выйти</span>
+            </button>
+          </div>
         </div>
       </section>
     </div>

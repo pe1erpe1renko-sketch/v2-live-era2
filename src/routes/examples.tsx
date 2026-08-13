@@ -71,7 +71,7 @@ function Page() {
 
   return (
     <LightLayout>
-      <section className="mx-auto max-w-[1440px] px-5 pb-16 pt-16 sm:px-8 lg:px-16">
+      <section className="mx-auto max-w-[1440px] px-4 pb-16 pt-10 sm:px-8 sm:pt-16 lg:px-16">
         <SectionLabel>Примеры</SectionLabel>
         <h1 className="mt-4 text-[clamp(32px,4vw,52px)] font-light leading-[1.1] tracking-[-0.04em] text-ink">
           Что получается на обычных снимках
@@ -81,7 +81,7 @@ function Page() {
           чтобы посмотреть.
         </p>
 
-        <div className="mt-8 flex flex-wrap gap-2">
+        <div className="-mx-4 mt-8 flex gap-2 overflow-x-auto no-scrollbar px-4 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0">
           {EXAMPLE_FILTERS.map((f) => {
             const on = f === filter;
             return (
@@ -90,7 +90,7 @@ function Page() {
                 type="button"
                 aria-pressed={on}
                 onClick={() => setFilter(f)}
-                className={`cursor-pointer rounded-[6px] px-[18px] py-2 text-[13px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
+                className={`min-h-[40px] shrink-0 cursor-pointer whitespace-nowrap rounded-[6px] px-[18px] py-2 text-[13px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
                   on
                     ? "border border-gold bg-gold text-white"
                     : "border border-rule text-ink2 hover:border-gold2"
@@ -102,7 +102,7 @@ function Page() {
           })}
         </div>
 
-        <div className="mt-6 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
           {items.map((item) => (
             <ExampleCard key={item.id} item={item} />
           ))}

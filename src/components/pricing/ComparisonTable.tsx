@@ -59,7 +59,7 @@ export function ComparisonTable() {
           tabIndex={0}
           className="mt-8 overflow-x-auto rounded-[16px] border border-rule bg-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 md:rounded-[16px]"
         >
-          <table className="w-full min-w-[640px] border-collapse text-left md:min-w-[640px]">
+          <table className="w-full border-collapse text-left md:min-w-[640px]">
             <thead>
               <tr>
                 <th className="sticky left-0 z-10 w-[130px] bg-surface px-5 py-[14px] shadow-[4px_0_8px_rgba(0,0,0,0.06)] md:w-[40%] md:shadow-none md:py-[14px]" />

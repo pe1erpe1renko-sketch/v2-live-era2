@@ -39,7 +39,8 @@ function Page() {
             Цены
           </h1>
 
-          <div className="mt-6 inline-flex rounded-full border border-rule bg-surface p-1">
+          <div className="mt-6 flex justify-center">
+            <div className="inline-flex rounded-full border border-rule bg-surface p-1">
             <button
               type="button"
               onClick={() => setTab("sub")}

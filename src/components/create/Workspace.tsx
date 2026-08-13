@@ -11,7 +11,6 @@ import {
   type MotionPresetId,
 } from "@/components/create/motionPresets";
 
-
 const DRAW_SCENARIOS = new Set(["detskiy-risunok", "illyustratsiya", "kartina"]);
 const TEXT_ONLY = "video-iz-teksta";
 const FACE_SCENARIOS = new Set(["portret", "staroe-foto", "foto-9-maya"]);
@@ -229,7 +228,6 @@ function PromptPanel() {
             </button>
           );
         })}
-
 
         <button
           type="button"

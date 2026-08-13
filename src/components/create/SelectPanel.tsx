@@ -44,10 +44,7 @@ export function SelectPanel({ onSelect }: { onSelect?: () => void } = {}) {
   }, [mode]);
 
   const q = query.trim().toLowerCase();
-  const scenarios = useMemo(
-    () => SCENARIOS.filter((s) => s.title.toLowerCase().includes(q)),
-    [q],
-  );
+  const scenarios = useMemo(() => SCENARIOS.filter((s) => s.title.toLowerCase().includes(q)), [q]);
   const models = useMemo(() => MODELS.filter((m) => m.name.toLowerCase().includes(q)), [q]);
 
   const empty = mode === "scenario" ? scenarios.length === 0 : models.length === 0;
@@ -65,9 +62,7 @@ export function SelectPanel({ onSelect }: { onSelect?: () => void } = {}) {
                 setQuery("");
               }}
               className={`w-1/2 rounded-[6px] py-2 text-[13px] transition-colors ${
-                mode === m
-                  ? "bg-gold text-white"
-                  : "bg-transparent text-ink2 hover:text-ink"
+                mode === m ? "bg-gold text-white" : "bg-transparent text-ink2 hover:text-ink"
               }`}
             >
               {m === "scenario" ? "Сценарии" : "Нейросети"}
@@ -128,11 +123,21 @@ export function SelectPanel({ onSelect }: { onSelect?: () => void } = {}) {
                       className="h-full w-full object-cover transition-transform duration-200 group-hover:scale-[1.04]"
                     />
                     <span className="absolute right-1.5 top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-black/50 backdrop-blur-[8px]">
-                      <Icon icon="solar:play-linear" width={10} height={10} className="text-white" />
+                      <Icon
+                        icon="solar:play-linear"
+                        width={10}
+                        height={10}
+                        className="text-white"
+                      />
                     </span>
                     {on && (
                       <span className="absolute left-1.5 top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-gold">
-                        <Icon icon="solar:check-read-linear" width={12} height={12} className="text-white" />
+                        <Icon
+                          icon="solar:check-read-linear"
+                          width={12}
+                          height={12}
+                          className="text-white"
+                        />
                       </span>
                     )}
                   </div>
@@ -169,7 +174,10 @@ export function SelectPanel({ onSelect }: { onSelect?: () => void } = {}) {
                   }`}
                 >
                   {on && (
-                    <span className="absolute bottom-0 left-0 top-0 w-[3px] bg-gold" aria-hidden="true" />
+                    <span
+                      className="absolute bottom-0 left-0 top-0 w-[3px] bg-gold"
+                      aria-hidden="true"
+                    />
                   )}
                   <span
                     className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-[6px] text-[14px] font-normal ${
@@ -179,10 +187,15 @@ export function SelectPanel({ onSelect }: { onSelect?: () => void } = {}) {
                     {m.letter}
                   </span>
                   <span className="min-w-0 flex-1">
-                    <span className={`block text-[13px] ${on ? "font-medium text-ink" : "text-ink"}`}>
+                    <span
+                      className={`block text-[13px] ${on ? "font-medium text-ink" : "text-ink"}`}
+                    >
                       {m.name}
                     </span>
-                    <span style={clamp2} className="mt-0.5 block text-[11px] leading-[1.35] text-ink3">
+                    <span
+                      style={clamp2}
+                      className="mt-0.5 block text-[11px] leading-[1.35] text-ink3"
+                    >
                       {m.note}
                     </span>
                   </span>

@@ -44,7 +44,12 @@ function Player({
       />
 
       <div className="flex items-start gap-[10px]">
-        <Icon icon="solar:music-note-linear" width={18} height={18} className="mt-0.5 shrink-0 text-gold2" />
+        <Icon
+          icon="solar:music-note-linear"
+          width={18}
+          height={18}
+          className="mt-0.5 shrink-0 text-gold2"
+        />
         <div className="min-w-0 flex-1">
           <div className="truncate text-[13px] text-ink">{name}</div>
           <div className="mt-0.5 text-[11px] text-ink3">{fmt(duration)}</div>
@@ -76,7 +81,11 @@ function Player({
           }}
           className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-rule text-gold transition-colors hover:border-gold2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2"
         >
-          <Icon icon={playing ? "solar:pause-linear" : "solar:play-linear"} width={14} height={14} />
+          <Icon
+            icon={playing ? "solar:pause-linear" : "solar:play-linear"}
+            width={14}
+            height={14}
+          />
         </button>
         <div className="h-[3px] flex-1 overflow-hidden rounded-full bg-rule">
           <div className="h-full rounded-full bg-gold2" style={{ width: `${pct}%` }} />
@@ -249,7 +258,9 @@ export function AudioPanel({ maxSeconds = 15 }: { maxSeconds?: number }) {
             >
               <Icon icon="solar:music-note-linear" width={24} height={24} className="text-gold2" />
               <p className="mt-[10px] text-[14px] text-ink">Перетащите аудио или выберите файл</p>
-              <p className="mt-1 text-[12px] text-ink3">MP3, WAV или M4A · до {maxSeconds} секунд</p>
+              <p className="mt-1 text-[12px] text-ink3">
+                MP3, WAV или M4A · до {maxSeconds} секунд
+              </p>
               <input
                 ref={inputRef}
                 type="file"

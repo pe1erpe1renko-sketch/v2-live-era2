@@ -132,7 +132,11 @@ function LastFrameZone({ onChange }: { onChange: (has: boolean) => void }) {
   if (file && url) {
     return (
       <div className="rounded-[6px] border border-rule bg-surface p-3">
-        <img src={url} alt={file.name} className="mx-auto max-h-[140px] rounded-[6px] object-contain" />
+        <img
+          src={url}
+          alt={file.name}
+          className="mx-auto max-h-[140px] rounded-[6px] object-contain"
+        />
         <div className="mt-2 flex items-center justify-between gap-4">
           <span className="truncate text-[12px] text-ink2">{file.name}</span>
           <button
@@ -264,34 +268,34 @@ export function SettingsPanel() {
               Длительность ролика равна длине звуковой дорожки
             </p>
           ) : (
-          <div className="flex flex-col gap-2 md:flex-row md:items-center md:gap-3">
-            <div className="flex items-center justify-between gap-3">
-              <span className="text-[13px] text-ink3">Длительность</span>
-              <span className="shrink-0 whitespace-nowrap md:hidden">
-                <span className="text-[14px] font-normal text-ink">{duration}</span>{" "}
-                <span className="text-[12px] text-ink3">
-                  / {dMin}–{dMax} сек
+            <div className="flex flex-col gap-2 md:flex-row md:items-center md:gap-3">
+              <div className="flex items-center justify-between gap-3">
+                <span className="text-[13px] text-ink3">Длительность</span>
+                <span className="shrink-0 whitespace-nowrap md:hidden">
+                  <span className="text-[14px] font-normal text-ink">{duration}</span>{" "}
+                  <span className="text-[12px] text-ink3">
+                    / {dMin}–{dMax} сек
+                  </span>
                 </span>
-              </span>
-            </div>
-            <div className="flex items-center gap-3">
-              <Slider
-                label="Длительность"
-                value={duration}
-                min={dMin}
-                max={dMax}
-                step={dStep}
-                onChange={setDuration}
-                className="w-full md:w-[160px]"
-              />
-              <span className="hidden shrink-0 whitespace-nowrap md:inline">
-                <span className="text-[14px] font-normal text-ink">{duration}</span>{" "}
-                <span className="text-[12px] text-ink3">
-                  / {dMin}–{dMax} сек
+              </div>
+              <div className="flex items-center gap-3">
+                <Slider
+                  label="Длительность"
+                  value={duration}
+                  min={dMin}
+                  max={dMax}
+                  step={dStep}
+                  onChange={setDuration}
+                  className="w-full md:w-[160px]"
+                />
+                <span className="hidden shrink-0 whitespace-nowrap md:inline">
+                  <span className="text-[14px] font-normal text-ink">{duration}</span>{" "}
+                  <span className="text-[12px] text-ink3">
+                    / {dMin}–{dMax} сек
+                  </span>
                 </span>
-              </span>
+              </div>
             </div>
-          </div>
           )}
         </div>
 

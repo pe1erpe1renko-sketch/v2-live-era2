@@ -273,7 +273,7 @@ export function AuthModal() {
   const content = (
     <div className={isDark ? "zone-dark" : undefined}>
       <div
-        className="fixed inset-0 z-[200] flex items-center justify-center px-4"
+        className="fixed inset-0 z-[200] flex items-end justify-center sm:items-center sm:px-4"
         role="dialog"
         aria-modal="true"
       >
@@ -285,7 +285,7 @@ export function AuthModal() {
         />
         <div
           ref={panelRef}
-          className={`relative w-full max-w-[420px] rounded-[16px] bg-surface p-8 shadow-panel transition-opacity duration-[250ms] ${
+          className={`relative max-h-[92svh] w-full max-w-[420px] overflow-y-auto thin-scroll rounded-t-[16px] bg-surface p-6 pb-8 shadow-panel transition-opacity duration-[250ms] sm:max-h-[90svh] sm:rounded-[16px] sm:p-8 ${
             visible ? "opacity-100" : "opacity-0"
           }`}
         >
@@ -293,7 +293,7 @@ export function AuthModal() {
             type="button"
             aria-label="Закрыть"
             onClick={close}
-            className={`absolute right-4 top-4 rounded-[6px] text-ink3 ${FOCUS}`}
+            className={`absolute right-3 top-3 flex h-11 w-11 items-center justify-center rounded-[6px] text-ink3 sm:right-4 sm:top-4 sm:h-auto sm:w-auto ${FOCUS}`}
           >
             <Icon icon="solar:close-circle-linear" className="h-5 w-5" />
           </button>
@@ -468,7 +468,7 @@ export function AuthModal() {
                           e.preventDefault();
                           onCodeChange(0, e.clipboardData.getData("text"));
                         }}
-                        className="auth-field h-[56px] w-full max-w-[48px] flex-1 rounded-[6px] border border-rule bg-surface text-center text-[24px] font-light text-ink outline-none transition-colors focus:border-gold2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 max-[360px]:h-12"
+                        className="auth-field h-[52px] w-full max-w-[48px] flex-1 rounded-[6px] border border-rule bg-surface text-center text-[20px] font-light text-ink outline-none transition-colors focus:border-gold2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 sm:h-[56px] sm:text-[24px] max-[360px]:h-12"
                       />
                     ))}
                   </div>

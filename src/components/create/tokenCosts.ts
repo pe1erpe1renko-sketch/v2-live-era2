@@ -46,7 +46,18 @@ export const TOKEN_COSTS = {
     improvePrompt: 1,
     lastFrame: 2,
   },
+  // реставрация снимка (страница /restore)
+  restore: {
+    base: 6,
+    resolution: { "1x": 1, "2x": 1.4, "4x": 2.2 } as Record<string, number>,
+  },
 };
+
+export function computeRestoreCost(resolution: string) {
+  const r = TOKEN_COSTS.restore;
+  return Math.ceil(r.base * (r.resolution[resolution] ?? 1));
+}
+
 
 export function computeCost(input: {
   model: string;

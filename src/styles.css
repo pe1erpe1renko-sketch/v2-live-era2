@@ -341,3 +341,50 @@
     max-width: none !important;
   }
 }
+
+/* ── Мобильные утилиты внутренних страниц ────────────────────────── */
+@utility no-scrollbar {
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Липкая кнопка действия на узких экранах */
+@media (max-width: 767px) {
+  .sticky-cta {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 40;
+    margin-top: 0;
+    padding: 12px 16px;
+    border-top: 1px solid var(--dark-rule, #e4e4e7);
+    background: linear-gradient(
+      to bottom,
+      rgba(26, 26, 28, 0) 0%,
+      var(--dark-bg, #fafafa) 45%
+    );
+  }
+
+  .cta-offset {
+    padding-bottom: 90px;
+  }
+}
+
+/* Тёмная шапка на планшете и мобильном */
+@media (max-width: 1023px) {
+  .zone-dark .hdr-cta {
+    display: none;
+  }
+
+  .zone-dark .hdr-account {
+    display: block;
+  }
+
+  .zone-dark .hdr-login {
+    display: block;
+  }
+}

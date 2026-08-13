@@ -158,10 +158,15 @@ export function SelectPanel() {
                   type="button"
                   data-slug={s.slug}
                   onClick={() => setScenario(s.slug)}
-                  className="group cursor-pointer overflow-hidden rounded-[6px] text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2"
+                  style={on ? { boxShadow: "0 0 0 4px rgba(176,141,87,0.15)" } : undefined}
+                  className={`group cursor-pointer overflow-hidden rounded-[6px] text-left transition-[opacity,filter] duration-200 ease-slow focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
+                    on
+                      ? "opacity-100"
+                      : "opacity-55 [filter:grayscale(0.3)] hover:opacity-100 hover:[filter:grayscale(0)]"
+                  }`}
                 >
                   <div
-                    className={`relative aspect-[3/4] overflow-hidden rounded-[6px] ${
+                    className={`relative aspect-[4/3] overflow-hidden rounded-[6px] ${
                       on ? "border-2 border-gold2" : ""
                     }`}
                   >
@@ -171,13 +176,18 @@ export function SelectPanel() {
                       loading="lazy"
                       className="h-full w-full object-cover transition-transform duration-200 group-hover:scale-[1.04]"
                     />
-                    <span className="absolute right-1.5 top-1.5 flex h-6 w-6 items-center justify-center rounded-full bg-black/50 backdrop-blur-[8px]">
-                      <Icon icon="solar:play-linear" width={12} height={12} className="text-white" />
+                    <span className="absolute right-1.5 top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-black/50 backdrop-blur-[8px]">
+                      <Icon icon="solar:play-linear" width={10} height={10} className="text-white" />
                     </span>
+                    {on && (
+                      <span className="absolute left-1.5 top-1.5 flex h-5 w-5 items-center justify-center rounded-full bg-gold">
+                        <Icon icon="solar:check-read-linear" width={12} height={12} className="text-white" />
+                      </span>
+                    )}
                   </div>
                   <p
                     style={clamp2}
-                    className={`mt-1.5 text-[12px] leading-[1.3] ${on ? "text-ink" : "text-ink2"}`}
+                    className={`mt-[5px] text-[11px] leading-[1.3] ${on ? "text-ink font-medium" : "text-ink2"}`}
                   >
                     {s.title}
                   </p>
@@ -198,15 +208,26 @@ export function SelectPanel() {
                   data-slug={m.slug}
                   onClick={() => setModel(m.slug)}
                   style={on ? { backgroundColor: "#2A2620" } : undefined}
-                  className={`flex cursor-pointer items-start gap-3 rounded-[6px] border p-3 text-left transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
-                    on ? "border-gold2" : "border-rule bg-surface hover:border-[#3F3F46]"
+                  className={`relative flex cursor-pointer items-start gap-3 overflow-hidden rounded-[6px] border p-3 text-left transition duration-200 ease-slow focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
+                    on
+                      ? "border-gold2 opacity-100"
+                      : "border-rule bg-surface opacity-70 hover:border-[#3F3F46] hover:opacity-100"
                   }`}
                 >
-                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-[6px] bg-gold3 text-[14px] font-normal text-gold">
+                  {on && (
+                    <span className="absolute bottom-0 left-0 top-0 w-[3px] bg-gold" aria-hidden="true" />
+                  )}
+                  <span
+                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-[6px] text-[14px] font-normal ${
+                      on ? "bg-gold text-white" : "bg-gold3 text-gold"
+                    }`}
+                  >
                     {m.letter}
                   </span>
                   <span className="min-w-0 flex-1">
-                    <span className="block text-[13px] text-ink">{m.name}</span>
+                    <span className={`block text-[13px] ${on ? "font-medium text-ink" : "text-ink"}`}>
+                      {m.name}
+                    </span>
                     <span style={clamp2} className="mt-0.5 block text-[11px] leading-[1.35] text-ink3">
                       {m.note}
                     </span>

@@ -225,6 +225,75 @@
   max-width: none;
 }
 
+/* Ползунки настроек генерации */
+.gold-range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 16px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.gold-range::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 9999px;
+  background: linear-gradient(
+    to right,
+    var(--color-gold2) 0 var(--fill, 0%),
+    var(--dark-rule, #e4e4e7) var(--fill, 0%) 100%
+  );
+}
+
+.gold-range::-moz-range-track {
+  height: 4px;
+  border-radius: 9999px;
+  background: linear-gradient(
+    to right,
+    var(--color-gold2) 0 var(--fill, 0%),
+    var(--dark-rule, #e4e4e7) var(--fill, 0%) 100%
+  );
+}
+
+.gold-range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  margin-top: -6px;
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+  background: #fafafa;
+  border: 2px solid var(--color-gold);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  transition:
+    width 120ms,
+    height 120ms;
+}
+
+.gold-range::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 9999px;
+  background: #fafafa;
+  border: 2px solid var(--color-gold);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+.gold-range:active::-webkit-slider-thumb {
+  width: 18px;
+  height: 18px;
+  margin-top: -7px;
+}
+
+.gold-range:active::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+}
+
+.gold-range:focus-visible {
+  outline: 2px solid var(--color-gold2);
+  outline-offset: 2px;
+}
+
 @utility thin-scroll {
   scrollbar-width: thin;
   scrollbar-color: #2e2e31 transparent;

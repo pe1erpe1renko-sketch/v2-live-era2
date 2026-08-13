@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Icon } from "@iconify/react";
 import { useCreate } from "@/components/create/CreateContext";
+import { SettingsPanel } from "@/components/create/SettingsPanel";
 
 const DRAW_SCENARIOS = new Set(["detskiy-risunok", "illyustratsiya", "kartina"]);
 const TEXT_ONLY = "video-iz-teksta";
@@ -59,9 +60,8 @@ function ScenarioBar() {
 }
 
 function UploadZone() {
-  const { scenarioSlug } = useCreate();
+  const { scenarioSlug, file, setFile } = useCreate();
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const [file, setFile] = useState<File | null>(null);
   const [url, setUrl] = useState<string | null>(null);
   const [drag, setDrag] = useState(false);
 
@@ -233,6 +233,7 @@ export function Workspace() {
 
       {scenarioSlug !== TEXT_ONLY && <UploadZone />}
       <PromptPanel />
+      <SettingsPanel />
     </div>
   );
 }

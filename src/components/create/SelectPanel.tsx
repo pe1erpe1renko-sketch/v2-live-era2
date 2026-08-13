@@ -105,7 +105,7 @@ export function SelectPanel() {
   const empty = mode === "scenario" ? scenarios.length === 0 : models.length === 0;
 
   return (
-    <div className="flex min-h-full flex-col pt-5">
+    <div className="flex h-full min-h-0 flex-1 flex-col pt-5">
       <div className="px-4">
         <div className="flex rounded-full border border-rule bg-[var(--dark-input,#1a1a1c)] p-1">
           {(["scenario", "model"] as const).map((m) => (

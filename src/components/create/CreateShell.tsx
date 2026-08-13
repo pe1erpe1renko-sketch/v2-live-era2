@@ -3,6 +3,8 @@ import { Icon } from "@iconify/react";
 import { useAuth } from "@/context/AuthContext";
 import { AppLink } from "@/components/AppLink";
 import { SelectPanel } from "@/components/create/SelectPanel";
+import { CreateProvider } from "@/components/create/CreateContext";
+import { Workspace } from "@/components/create/Workspace";
 
 function HistoryPanel() {
   const { isLoggedIn } = useAuth();

@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { Icon } from "@iconify/react";
 import { LightLayout } from "@/components/layouts/LightLayout";
-import { SectionLabel } from "@/components/SectionLabel";
 import { SubscriptionPlans } from "@/components/pricing/SubscriptionPlans";
 import { TokenPacks } from "@/components/pricing/TokenPacks";
 import { ComparisonTable } from "@/components/pricing/ComparisonTable";

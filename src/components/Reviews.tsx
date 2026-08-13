@@ -44,9 +44,9 @@ export function Reviews() {
 
         <div className="mt-8 grid items-stretch gap-6 md:grid-cols-2">
           {REVIEWS.map((r) => (
-            <a
+            <AppLink
               key={r.name}
-              href="#"
+              href="/examples"
               className="flex h-full cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold2 flex-col rounded-[16px] border border-rule bg-surface p-6 shadow-card transition-colors duration-200 hover:border-gold2"
             >
               <div className="flex items-start gap-3">

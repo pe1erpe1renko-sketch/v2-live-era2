@@ -76,24 +76,26 @@ export function AccountMenu() {
               <span className="h-[6px] w-[6px] rounded-full bg-gold2" aria-hidden="true" />
               <span className="ml-2 text-[14px] text-ink">0 токенов</span>
             </span>
-            <button
-              type="button"
+            <AppLink
+              href="/account?tab=balance"
+              onClick={() => setOpen(false)}
               className={`rounded-[6px] bg-gold px-[14px] py-[6px] text-[12px] text-white transition-colors duration-200 hover:bg-gold-dark ${focusRing}`}
             >
               Пополнить
-            </button>
+            </AppLink>
           </div>
 
           <div className="border-t border-rule p-2">
             {ACCOUNT_LINKS.map((l) => (
-              <a
+              <AppLink
                 key={l.label}
-                href="#"
+                href={l.href}
+                onClick={() => setOpen(false)}
                 className={`flex items-center rounded-[6px] px-4 py-3 transition-colors duration-200 hover:bg-gold3 ${focusRing}`}
               >
                 <Icon icon={l.icon} className="h-[18px] w-[18px] shrink-0 text-ink3" />
                 <span className="ml-3 text-[14px] text-ink">{l.label}</span>
-              </a>
+              </AppLink>
             ))}
           </div>
 

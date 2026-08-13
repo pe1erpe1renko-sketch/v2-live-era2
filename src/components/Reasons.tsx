@@ -1,4 +1,6 @@
 import { SectionLabel } from "@/components/SectionLabel";
+import { AppLink } from "@/components/AppLink";
+import { scenarioHref } from "@/lib/links";
 import archiveImg from "@/assets/reason-archive.jpg";
 import giftImg from "@/assets/reason-gift.jpg";
 import feedImg from "@/assets/reason-feed.jpg";

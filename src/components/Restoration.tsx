@@ -1,6 +1,7 @@
 import { Icon } from "@iconify/react";
 import portraitOld from "@/assets/portrait-old.jpg";
 import portraitRestored from "@/assets/portrait-restored.jpg";
+import { AppLink } from "@/components/AppLink";
 
 export function Restoration() {
   return (
@@ -24,12 +25,12 @@ export function Restoration() {
                 движущаяся помятая карточка.
               </p>
 
-              <button
-                type="button"
-                className="mt-6 rounded-[6px] bg-gold px-10 py-[18px] text-[16px] text-white transition-colors duration-200 hover:bg-gold-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold2"
+              <AppLink
+                href="/restore"
+                className="mt-6 inline-block rounded-[6px] bg-gold px-10 py-[18px] text-[16px] text-white transition-colors duration-200 hover:bg-gold-dark focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold2"
               >
                 Оживить старое фото →
-              </button>
+              </AppLink>
 
               <div className="type-label mt-3 text-ink3">Входит в сценарий · Без доплаты</div>
             </div>

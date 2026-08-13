@@ -1,5 +1,6 @@
 import type { ReactElement } from "react";
 import { SectionLabel } from "@/components/SectionLabel";
+import { AppLink } from "@/components/AppLink";
 
 type IconProps = { className?: string };
 
@@ -129,12 +130,12 @@ export function Specs() {
             ))}
 
             {/* Ссылка */}
-            <a
-              href="#hero"
+            <AppLink
+              href="/create"
               className="flex items-center justify-center bg-surface p-6 text-[14px] text-gold transition-colors duration-200 ease-slow hover:bg-gold3"
             >
               Первая генерация бесплатно →
-            </a>
+            </AppLink>
           </div>
         </div>
       </div>

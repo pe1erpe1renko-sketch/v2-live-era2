@@ -1,5 +1,6 @@
 import { Icon } from "@iconify/react";
 import { SectionLabel } from "@/components/SectionLabel";
+import { AppLink } from "@/components/AppLink";
 import avatarMarina from "@/assets/avatar-marina.jpg";
 import avatarDmitry from "@/assets/avatar-dmitry.jpg";
 import avatarAnna from "@/assets/avatar-anna.jpg";
@@ -44,9 +45,9 @@ export function Reviews() {
 
         <div className="mt-8 grid items-stretch gap-6 md:grid-cols-2">
           {REVIEWS.map((r) => (
-            <a
+            <AppLink
               key={r.name}
-              href="#"
+              href="/examples"
               className="flex h-full cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold2 flex-col rounded-[16px] border border-rule bg-surface p-6 shadow-card transition-colors duration-200 hover:border-gold2"
             >
               <div className="flex items-start gap-3">
@@ -76,7 +77,7 @@ export function Reviews() {
               </div>
 
               <p className="mt-4 text-[14px] leading-[1.6] text-ink2">{r.text}</p>
-            </a>
+            </AppLink>
           ))}
         </div>
       </div>

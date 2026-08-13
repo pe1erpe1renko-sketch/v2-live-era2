@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Icon } from "@iconify/react";
 import { SectionLabel } from "@/components/SectionLabel";
+import { AppLink } from "@/components/AppLink";
 
 type Plan = {
   name: string;
@@ -289,16 +290,16 @@ export function Pricing() {
                   )}
                 </div>
 
-                <button
-                  type="button"
-                  className={`mt-6 w-full rounded-[6px] p-3 text-[15px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
+                <AppLink
+                  href="/pricing"
+                  className={`mt-6 block w-full rounded-[6px] p-3 text-center text-[15px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
                     dark
                       ? "bg-gold text-white hover:bg-gold-dark"
                       : "border border-rule text-ink hover:border-gold2 hover:text-gold"
                   }`}
                 >
                   {p.cta}
-                </button>
+                </AppLink>
               </article>
             );
           })}

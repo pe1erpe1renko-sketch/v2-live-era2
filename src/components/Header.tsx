@@ -3,6 +3,8 @@ import { Icon } from "@iconify/react";
 import { SectionLabel } from "@/components/SectionLabel";
 import { useAuth } from "@/context/AuthContext";
 import { AccountMenu, TokenPill, ACCOUNT_LINKS } from "@/components/AccountMenu";
+import { AppLink } from "@/components/AppLink";
+import { scenarioHref, modelHref } from "@/lib/links";
 import archive1 from "@/assets/sc-archive-1.jpg";
 import archive2 from "@/assets/sc-archive-2.jpg";
 import archive3 from "@/assets/sc-archive-3.jpg";
@@ -112,12 +114,18 @@ const MODELS: {
   { letter: "N", name: "Nano Banana 2", text: "до 14 референсов в одной сцене" },
 ];
 
-const SIMPLE_LINKS_OUT = ["Примеры", "Цены"];
-const SIMPLE_LINKS_IN = ["Мои генерации", "Цены"];
+const SIMPLE_LINKS_OUT = [
+  { label: "Примеры", href: "/examples" },
+  { label: "Цены", href: "/pricing" },
+];
+const SIMPLE_LINKS_IN = [
+  { label: "Мои генерации", href: "/account?tab=generations" },
+  { label: "Цены", href: "/pricing" },
+];
 
 function Logo() {
   return (
-    <a
+    <AppLink
       href="/"
       className="group relative inline-flex rounded-[6px] text-[18px] font-light text-ink"
     >
@@ -131,7 +139,7 @@ function Logo() {
         className="absolute bottom-0 left-0 h-px w-full origin-left transform scale-x-0 bg-gold2 transition-transform duration-200 ease-slow group-hover:scale-x-100 motion-reduce:hidden"
         aria-hidden="true"
       />
-    </a>
+    </AppLink>
   );
 }
 
@@ -153,7 +161,7 @@ function Panel({ children }: { children: React.ReactNode }) {
 
 function ScenarioCard({ it }: { it: Item }) {
   return (
-    <a href="#form" className="group block overflow-hidden rounded-[6px]">
+    <AppLink href={scenarioHref(it.title)} className="group block overflow-hidden rounded-[6px]">
       <div className="relative aspect-[3/2] overflow-hidden rounded-[6px]">
         <img
           src={it.img}
@@ -170,7 +178,7 @@ function ScenarioCard({ it }: { it: Item }) {
       <p className="mt-2 text-[13px] font-normal leading-[1.3] text-ink line-clamp-2">
         {it.title}
       </p>
-    </a>
+    </AppLink>
   );
 }
 
@@ -193,7 +201,10 @@ function ScenariosMenu() {
 
         <div className="w-[28%] border-l border-rule pl-8">
           <SectionLabel>Главный сценарий</SectionLabel>
-          <div className="mt-3 rounded-[16px] border border-rule bg-surface p-3">
+          <AppLink
+            href={scenarioHref("Портрет")}
+            className="mt-3 block rounded-[16px] border border-rule bg-surface p-3"
+          >
             <div className="relative aspect-[16/10] overflow-hidden rounded-[6px]">
               <img
                 src={portraitRestored}
@@ -206,10 +217,10 @@ function ScenariosMenu() {
               </span>
             </div>
             <p className="mt-3 text-[15px] text-ink">Оживление фото</p>
-          </div>
+          </AppLink>
 
-          <a
-            href="#form"
+          <AppLink
+            href="/create"
             className="mt-3 flex items-center gap-3 rounded-[16px] border border-rule p-4 transition-colors hover:border-gold2"
           >
             <Icon icon="solar:tuning-linear" className="h-5 w-5 shrink-0 text-gold2" />
@@ -218,7 +229,7 @@ function ScenariosMenu() {
               <span className="block text-[12px] text-ink2">своя модель и свои настройки</span>
             </span>
             <span className="text-[14px] text-ink3">→</span>
-          </a>
+          </AppLink>
         </div>
       </div>
 
@@ -226,9 +237,9 @@ function ScenariosMenu() {
         <p className="text-[13px] text-ink2">
           Не нашли нужное? Опишите сцену словами — нейросеть соберёт сценарий сама.
         </p>
-        <a href="#form" className="rounded-[6px] text-[13px] text-gold">
+        <AppLink href="/create" className="rounded-[6px] text-[13px] text-gold">
           Все сценарии →
-        </a>
+        </AppLink>
       </div>
     </Panel>
   );
@@ -244,16 +255,16 @@ function ModelsMenu() {
             нативные настройки каждой модели открыты полностью
           </span>
         </p>
-        <a href="#form" className="rounded-[6px] text-[13px] text-gold">
+        <AppLink href="/create" className="rounded-[6px] text-[13px] text-gold">
           Все модели →
-        </a>
+        </AppLink>
       </div>
 
       <div className="mt-5 grid grid-cols-3 gap-4 xl:grid-cols-5">
         {MODELS.map((m) => (
-          <a
+          <AppLink
             key={m.name}
-            href="#form"
+            href={modelHref(m.name)}
             className="rounded-[6px] border border-rule bg-surface p-4 transition-colors hover:border-gold2"
           >
             <span className="flex h-9 w-9 items-center justify-center rounded-[6px] bg-gold3 font-normal text-[16px] text-gold">
@@ -264,7 +275,7 @@ function ModelsMenu() {
               {m.badge ? <Badge>{m.badge}</Badge> : null}
             </span>
             <span className="mt-1 block text-[12px] leading-[1.4] text-ink2">{m.text}</span>
-          </a>
+          </AppLink>
         ))}
       </div>
 
@@ -358,13 +369,13 @@ export function Header() {
             </button>
           ))}
           {SIMPLE_LINKS.map((l) => (
-            <a
-              key={l}
-              href="#"
+            <AppLink
+              key={l.label}
+              href={l.href}
               className="rounded-[6px] text-[14px] text-ink2 transition-colors hover:text-ink"
             >
-              {l}
-            </a>
+              {l.label}
+            </AppLink>
           ))}
         </nav>
 
@@ -372,25 +383,20 @@ export function Header() {
           {isLoggedIn ? (
             <TokenPill />
           ) : (
-            <a
-              href="#"
+            <AppLink
+              href="/account"
               className="hidden rounded-[6px] text-[14px] text-ink2 hover:text-ink lg:block"
             >
               Войти
-            </a>
+            </AppLink>
           )}
-          <button
-            type="button"
-            onClick={() => {
-              window.scrollTo({ top: 0, behavior: "smooth" });
-              const el = document.getElementById("hero-upload") as HTMLElement | null;
-              el?.focus({ preventScroll: true });
-            }}
+          <AppLink
+            href="/create"
             className="rounded-[6px] bg-gold px-6 py-3 text-[14px] text-surface transition-colors duration-200 ease-slow hover:bg-gold-dark"
           >
             <span className="hidden lg:inline">Создать видео</span>
             <span className="lg:hidden">Создать</span>
-          </button>
+          </AppLink>
           {isLoggedIn ? (
             <div className="hidden lg:block">
               <AccountMenu />
@@ -437,18 +443,26 @@ export function Header() {
                   <span className="h-[6px] w-[6px] rounded-full bg-gold2" aria-hidden="true" />
                   <span className="ml-2 text-[14px] text-ink">0 токенов</span>
                 </span>
-                <button
-                  type="button"
+                <AppLink
+                  href="/account?tab=balance"
                   className="rounded-[6px] bg-gold px-[14px] py-[6px] text-[12px] text-white"
                 >
                   Пополнить
-                </button>
+                </AppLink>
               </div>
             </div>
           ) : null}
           {[
-            { label: "Сценарии", items: SCENARIO_COLS.flatMap((c) => c.items.map((i) => i.title)) },
-            { label: "Нейросети", items: MODELS.map((m) => m.name) },
+            {
+              label: "Сценарии",
+              items: SCENARIO_COLS.flatMap((c) =>
+                c.items.map((i) => ({ label: i.title, href: scenarioHref(i.title) })),
+              ),
+            },
+            {
+              label: "Нейросети",
+              items: MODELS.map((m) => ({ label: m.name, href: modelHref(m.name) })),
+            },
           ].map((group) => (
             <div key={group.label}>
               <button
@@ -468,30 +482,38 @@ export function Header() {
               {mobileOpen === group.label ? (
                 <div className="flex flex-col gap-1 pb-3 pl-3">
                   {group.items.map((t) => (
-                    <a key={t} href="#form" className="rounded-[6px] py-2 text-[14px] text-ink">
-                      {t}
-                    </a>
+                    <AppLink
+                      key={t.label}
+                      href={t.href}
+                      className="rounded-[6px] py-2 text-[14px] text-ink"
+                    >
+                      {t.label}
+                    </AppLink>
                   ))}
                 </div>
               ) : null}
             </div>
           ))}
           {SIMPLE_LINKS.map((l) => (
-            <a key={l} href="#" className="block rounded-[6px] py-3 text-[14px] text-ink2">
-              {l}
-            </a>
+            <AppLink
+              key={l.label}
+              href={l.href}
+              className="block rounded-[6px] py-3 text-[14px] text-ink2"
+            >
+              {l.label}
+            </AppLink>
           ))}
           {isLoggedIn ? (
             <div className="mt-2 border-t border-rule pt-2">
               {ACCOUNT_LINKS.map((l) => (
-                <a
+                <AppLink
                   key={l.label}
-                  href="#"
+                  href={l.href}
                   className="flex items-center rounded-[6px] py-3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2"
                 >
                   <Icon icon={l.icon} className="h-[18px] w-[18px] shrink-0 text-ink3" />
                   <span className="ml-3 text-[14px] text-ink">{l.label}</span>
-                </a>
+                </AppLink>
               ))}
               <button
                 type="button"
@@ -506,9 +528,9 @@ export function Header() {
               </button>
             </div>
           ) : (
-            <a href="#" className="block rounded-[6px] py-3 text-[14px] text-ink2">
+            <AppLink href="/account" className="block rounded-[6px] py-3 text-[14px] text-ink2">
               Войти
-            </a>
+            </AppLink>
           )}
           <span className="type-label mt-4 block">RU · Без VPN</span>
         </div>

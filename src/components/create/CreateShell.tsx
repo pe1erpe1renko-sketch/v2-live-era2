@@ -55,7 +55,7 @@ export function CreateShell() {
       </aside>
 
       {/* center */}
-      <main className="min-w-0 flex-1 overflow-y-auto thin-scroll">
+      <section className="min-w-0 flex-1 overflow-y-auto thin-scroll">
         <div className="p-4 lg:hidden">
           <button
             type="button"
@@ -68,7 +68,7 @@ export function CreateShell() {
         <div className="mx-auto w-full max-w-[860px] p-8">
           <p className="type-label">РАБОЧАЯ ОБЛАСТЬ</p>
         </div>
-      </main>
+      </section>
 
       {/* right */}
       <aside className="w-full shrink-0 border-t border-rule lg:w-[320px] lg:overflow-y-auto lg:border-l lg:border-t-0 thin-scroll">

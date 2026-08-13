@@ -405,14 +405,26 @@ export function Header() {
               <AccountMenu />
             </div>
           ) : null}
-          <button
-            type="button"
-            aria-label="Меню"
-            onClick={() => setMenu((v) => !v)}
-            className="-mr-2 flex h-11 w-11 items-center justify-center rounded-[6px] text-ink2 lg:hidden"
-          >
-            <Icon icon="solar:hamburger-menu-linear" className="h-6 w-6" />
-          </button>
+          <div className="flex items-center lg:hidden">
+            {isLoggedIn ? (
+              <AppLink
+                href="/account?tab=balance"
+                className="mr-3 inline-flex items-center rounded-full border border-rule px-3 py-[6px]"
+              >
+                <span className="h-[6px] w-[6px] rounded-full bg-gold2" aria-hidden="true" />
+                <span className="ml-2 text-[13px] text-ink">0 ток.</span>
+              </AppLink>
+            ) : null}
+            <button
+              type="button"
+              aria-label="Меню"
+              onClick={() => setMenu((v) => !v)}
+              className="-mr-2 flex h-11 w-11 items-center justify-center rounded-[6px] text-ink2"
+            >
+              <Icon icon="solar:hamburger-menu-linear" className="h-6 w-6" />
+            </button>
+          </div>
+
         </div>
       </div>
 
@@ -497,15 +509,17 @@ export function Header() {
               ) : null}
             </div>
           ))}
-          {SIMPLE_LINKS.map((l) => (
-            <AppLink
-              key={l.label}
-              href={l.href}
-              className="block rounded-[6px] py-3 text-[14px] text-ink2"
-            >
-              {l.label}
-            </AppLink>
-          ))}
+          <AppLink
+            href="/restore"
+            className="flex items-center rounded-[6px] py-3 text-[14px] text-ink2"
+          >
+            <Icon
+              icon="solar:magic-stick-3-linear"
+              className="h-[18px] w-[18px] shrink-0 text-ink3"
+            />
+            <span className="ml-3">Реставрация</span>
+          </AppLink>
+
           {isLoggedIn ? (
             <div className="mt-2 border-t border-rule pt-2">
               {ACCOUNT_LINKS.map((l) => (
@@ -518,30 +532,52 @@ export function Header() {
                   <span className="ml-3 text-[14px] text-ink">{l.label}</span>
                 </AppLink>
               ))}
-              <button
-                type="button"
-                onClick={() => setLoggedIn(false)}
-                className="flex w-full items-center rounded-[6px] py-3 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2"
-              >
-                <Icon
-                  icon="solar:logout-2-linear"
-                  className="h-[18px] w-[18px] shrink-0 text-ink3"
-                />
-                <span className="ml-3 text-[14px] text-ink2">Выйти</span>
-              </button>
+              <div className="mt-2 border-t border-rule pt-2">
+                <button
+                  type="button"
+                  onClick={() => setLoggedIn(false)}
+                  className="flex w-full items-center rounded-[6px] py-3 text-left focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2"
+                >
+                  <Icon
+                    icon="solar:logout-2-linear"
+                    className="h-[18px] w-[18px] shrink-0 text-ink3"
+                  />
+                  <span className="ml-3 text-[14px] text-ink2">Выйти</span>
+                </button>
+              </div>
             </div>
           ) : (
-            <button
-              type="button"
-              onClick={() => {
-                setMenu(false);
-                openAuth("login");
-              }}
-              className="block w-full rounded-[6px] py-3 text-left text-[14px] text-ink2"
-            >
-              Войти
-            </button>
+            <>
+              {SIMPLE_LINKS_OUT.map((l) => (
+                <AppLink
+                  key={l.label}
+                  href={l.href}
+                  className="block rounded-[6px] py-3 text-[14px] text-ink2"
+                >
+                  {l.label}
+                </AppLink>
+              ))}
+              <div className="mt-2 flex flex-col gap-3 border-t border-rule pt-4">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMenu(false);
+                    openAuth("login");
+                  }}
+                  className="w-full rounded-[6px] border border-rule py-3 text-center text-[14px] text-ink"
+                >
+                  Войти
+                </button>
+                <AppLink
+                  href="/create"
+                  className="block w-full rounded-[6px] bg-gold py-3 text-center text-[14px] text-white"
+                >
+                  Создать видео
+                </AppLink>
+              </div>
+            </>
           )}
+
           <span className="type-label mt-4 block">RU · Без VPN</span>
         </div>
       ) : null}

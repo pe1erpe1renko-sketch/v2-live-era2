@@ -282,6 +282,8 @@ function ModelsMenu() {
 }
 
 export function Header() {
+  const { isLoggedIn } = useAuth();
+  const SIMPLE_LINKS = isLoggedIn ? SIMPLE_LINKS_IN : SIMPLE_LINKS_OUT;
   const [open, setOpen] = useState<"scenarios" | "models" | null>(null);
   const [menu, setMenu] = useState(false);
   const [mobileOpen, setMobileOpen] = useState<string | null>(null);

@@ -43,7 +43,7 @@ export function CreateShell() {
   return (
     <div className="flex w-full flex-col lg:h-[calc(100svh-72px)] lg:flex-row lg:overflow-hidden">
       {/* left */}
-      <aside className="hidden w-[300px] shrink-0 flex-col overflow-hidden border-r border-rule lg:flex">
+      <aside className="hidden w-[340px] shrink-0 flex-col overflow-hidden border-r border-rule lg:flex">
         <SelectPanel />
       </aside>
 
@@ -77,7 +77,7 @@ export function CreateShell() {
             onClick={() => setDrawer(false)}
             className="absolute inset-0 bg-black/50"
           />
-          <div className="absolute inset-y-0 left-0 flex w-[300px] max-w-[85vw] flex-col overflow-hidden border-r border-rule bg-bg">
+          <div className="absolute inset-y-0 left-0 flex w-[340px] max-w-[85vw] flex-col overflow-hidden border-r border-rule bg-bg">
             <SelectPanel />
           </div>
         </div>

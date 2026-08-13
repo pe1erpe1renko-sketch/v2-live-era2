@@ -219,6 +219,12 @@
   --dark-input: #1a1a1c;
 }
 
+/* Dark header spans full width so the logo aligns with the full-width
+   workspace content instead of being centered at max-w-1440. */
+.zone-dark header > div:first-child {
+  max-width: none;
+}
+
 @utility thin-scroll {
   scrollbar-width: thin;
   scrollbar-color: #2e2e31 transparent;

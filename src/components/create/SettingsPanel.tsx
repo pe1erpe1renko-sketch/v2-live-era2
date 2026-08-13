@@ -26,7 +26,7 @@ function Segmented({
       role="radiogroup"
       aria-label={label}
       style={darkInput}
-      className="inline-flex gap-0 rounded-[6px] border border-rule p-[3px]"
+      className="flex w-full gap-0 rounded-[6px] border border-rule p-[3px] md:inline-flex md:w-auto"
     >
       {options.map((o) => {
         const on = o === value;
@@ -37,7 +37,7 @@ function Segmented({
             role="radio"
             aria-checked={on}
             onClick={() => onChange(o)}
-            className={`rounded-[4px] px-[14px] py-[6px] text-[13px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
+            className={`flex-1 rounded-[4px] px-[14px] py-[10px] text-[13px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 md:flex-none md:py-[6px] ${
               on ? "bg-gold text-white" : "text-ink2 hover:text-ink"
             }`}
           >

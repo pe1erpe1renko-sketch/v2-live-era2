@@ -55,7 +55,7 @@ export function SelectPanel() {
   return (
     <div className="flex h-full min-h-0 flex-1 flex-col pt-5">
       <div className="px-4">
-        <div className="flex rounded-full border border-rule bg-[var(--dark-input,#1a1a1c)] p-1">
+        <div className="flex rounded-[6px] border border-rule bg-[var(--dark-input,#1a1a1c)] p-1">
           {(["scenario", "model"] as const).map((m) => (
             <button
               key={m}
@@ -64,7 +64,7 @@ export function SelectPanel() {
                 setMode(m);
                 setQuery("");
               }}
-              className={`w-1/2 rounded-full py-2 text-[13px] transition-colors ${
+              className={`w-1/2 rounded-[6px] py-2 text-[13px] transition-colors ${
                 mode === m
                   ? "bg-gold text-white"
                   : "bg-transparent text-ink2 hover:text-ink"

@@ -1,5 +1,7 @@
 import { useRef, useState } from "react";
 import { SectionLabel } from "@/components/SectionLabel";
+import { AppLink } from "@/components/AppLink";
+import { scenarioHref } from "@/lib/links";
 import archive1 from "@/assets/sc-archive-1.jpg";
 import archive2 from "@/assets/sc-archive-2.jpg";
 import archive3 from "@/assets/sc-archive-3.jpg";
@@ -164,9 +166,9 @@ export function Scenarios() {
 
         <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {cards.map((c) => (
-            <a
+            <AppLink
               key={c.title}
-              href="#"
+              href={scenarioHref(c.title)}
               className="group block h-full cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold2 overflow-hidden rounded-[16px] border border-rule bg-surface shadow-card transition-colors duration-200 hover:border-gold2"
             >
               <div className="aspect-[16/10] overflow-hidden">
@@ -183,13 +185,13 @@ export function Scenarios() {
                 <h3 className="text-[16px] font-normal text-ink">{c.title}</h3>
                 <p className="mt-3 text-[13px] leading-[1.5] text-ink2">{c.text}</p>
               </div>
-            </a>
+            </AppLink>
           ))}
         </div>
 
-        <a href="#form" className="mt-8 inline-block text-[14px] text-gold">
+        <AppLink href="/create" className="mt-8 inline-block text-[14px] text-gold">
           Все сценарии →
-        </a>
+        </AppLink>
       </div>
     </section>
   );

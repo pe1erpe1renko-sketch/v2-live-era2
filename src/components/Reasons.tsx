@@ -15,21 +15,25 @@ const MUSEUM_IMG = museumImg;
 const ITEMS = [
   {
     image: ARCHIVE_IMG,
+    href: scenarioHref("Старое фото"),
     title: "Семейный архив",
     text: "Портреты бабушек и дедушек снова в движении",
   },
   {
     image: GIFT_IMG,
+    href: scenarioHref("Подарок к юбилею"),
     title: "Подарок",
     text: "Ролик к юбилею из забытого снимка",
   },
   {
     image: FEED_IMG,
+    href: scenarioHref("Видео из фото"),
     title: "Лента и сторис",
     text: "Вертикальное видео из того, что уже в галерее",
   },
   {
     image: MUSEUM_IMG,
+    href: scenarioHref("Старое фото"),
     title: "Музеи и краеведение",
     text: "Архивные кадры для выставок",
   },
@@ -47,9 +51,9 @@ export function Reasons() {
 
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {ITEMS.map((it) => (
-            <a
+            <AppLink
               key={it.title}
-              href="#"
+              href={it.href}
               className="group relative flex aspect-[3/4] cursor-pointer flex-col justify-end overflow-hidden rounded-[16px] border border-rule p-5 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold2"
             >
               <img
@@ -70,7 +74,7 @@ export function Reasons() {
                   {it.text}
                 </p>
               </div>
-            </a>
+            </AppLink>
           ))}
         </div>
       </div>

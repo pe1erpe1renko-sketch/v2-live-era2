@@ -105,7 +105,10 @@ export function SelectPanel({ onSelect }: { onSelect?: () => void } = {}) {
                   key={s.slug}
                   type="button"
                   data-slug={s.slug}
-                  onClick={() => setScenario(s.slug)}
+                  onClick={() => {
+                    setScenario(s.slug);
+                    onSelect?.();
+                  }}
                   style={on ? { boxShadow: "0 0 0 4px rgba(176,141,87,0.15)" } : undefined}
                   className={`group cursor-pointer overflow-hidden rounded-[6px] text-left transition-[opacity,filter] duration-200 ease-slow focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
                     on
@@ -154,7 +157,10 @@ export function SelectPanel({ onSelect }: { onSelect?: () => void } = {}) {
                   key={m.slug}
                   type="button"
                   data-slug={m.slug}
-                  onClick={() => setModel(m.slug)}
+                  onClick={() => {
+                    setModel(m.slug);
+                    onSelect?.();
+                  }}
                   style={on ? { backgroundColor: "#2A2620" } : undefined}
                   className={`relative flex cursor-pointer items-start gap-3 overflow-hidden rounded-[6px] border p-3 text-left transition duration-200 ease-slow focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
                     on

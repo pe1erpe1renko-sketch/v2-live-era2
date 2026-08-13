@@ -14,12 +14,12 @@ export const Route = createFileRoute("/pricing")({
       {
         name: "description",
         content:
-          "Подписки и разовые пакеты токенов Live Era2. Ролик от 12 ₽, первая генерация бесплатно.",
+          "Подписки и разовые пакеты токенов Live Era2. Ролик от 39 ₽, первая генерация бесплатно.",
       },
       { property: "og:title", content: "Цены — Live Era2" },
       {
         property: "og:description",
-        content: "Подписки и пакеты токенов Live Era2. Ролик от 12 ₽, первая генерация бесплатно.",
+        content: "Подписки и пакеты токенов Live Era2. Ролик от 39 ₽, первая генерация бесплатно.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

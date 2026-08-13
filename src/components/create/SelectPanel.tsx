@@ -11,7 +11,7 @@ const clamp2 = {
   overflow: "hidden",
 };
 
-export function SelectPanel() {
+export function SelectPanel({ onSelect }: { onSelect?: () => void } = {}) {
   const [mode, setMode] = useState<"scenario" | "model">("scenario");
   const [query, setQuery] = useState("");
   const {

@@ -180,13 +180,17 @@ function LastFrameZone({ onChange }: { onChange: (has: boolean) => void }) {
 }
 
 export function SettingsPanel() {
-  const { modelSlug, model, scenarioSlug, file } = useCreate();
+  const { modelSlug, model, scenarioSlug, file, audioDuration } = useCreate();
   const { isLoggedIn } = useAuth();
   const { openAuth } = useAuthModal();
   const caps = capabilitiesFor(modelSlug);
+  const dMin = caps.durationMin ?? 5;
+  const dMax = caps.durationMax ?? 10;
+  const dStep = caps.durationStep ?? 1;
+  const needsAudio = !!caps.needsAudio;
 
   const [format, setFormat] = useState("9:16");
-  const [duration, setDuration] = useState(caps.durationMin);
+  const [duration, setDuration] = useState(dMin);
   const [quality, setQuality] = useState("720p");
   const [sound, setSound] = useState(false);
   const [expert, setExpert] = useState(false);
@@ -210,26 +214,37 @@ export function SettingsPanel() {
           ? "720p"
           : (caps.qualities[0] ?? "720p"),
     );
-    setDuration((d) => Math.min(caps.durationMax, Math.max(caps.durationMin, d)));
+    setDuration((d) => Math.min(dMax, Math.max(dMin, d)));
     if (!caps.sound) setSound(false);
     if (!caps.expert) setExpert(false);
-  }, [caps]);
+  }, [caps, dMin, dMax]);
 
   const cost = useMemo(
     () =>
       computeCost({
         model: modelSlug,
-        duration,
+        duration: needsAudio ? Math.max(5, Math.ceil(audioDuration ?? 5)) : duration,
         quality,
         sound,
         format,
         lastFrame: caps.lastFrame && expert && hasLastFrame,
       }),
-    [modelSlug, duration, quality, sound, format, caps.lastFrame, expert, hasLastFrame],
+    [
+      modelSlug,
+      duration,
+      needsAudio,
+      audioDuration,
+      quality,
+      sound,
+      format,
+      caps.lastFrame,
+      expert,
+      hasLastFrame,
+    ],
   );
 
   const needsPhoto = scenarioSlug !== TEXT_ONLY;
-  const disabled = needsPhoto && !file;
+  const disabled = (needsPhoto && !file) || (needsAudio && !audioDuration);
 
   // TODO: заглушка — генерация появится вместе с бэкендом
   const handleGenerate = () => {};
@@ -244,13 +259,18 @@ export function SettingsPanel() {
             <Segmented value={format} options={caps.formats} onChange={setFormat} label="Формат" />
           </div>
 
+          {needsAudio ? (
+            <p className="text-[13px] text-ink2">
+              Длительность ролика равна длине звуковой дорожки
+            </p>
+          ) : (
           <div className="flex flex-col gap-2 md:flex-row md:items-center md:gap-3">
             <div className="flex items-center justify-between gap-3">
               <span className="text-[13px] text-ink3">Длительность</span>
               <span className="shrink-0 whitespace-nowrap md:hidden">
                 <span className="text-[14px] font-normal text-ink">{duration}</span>{" "}
                 <span className="text-[12px] text-ink3">
-                  / {caps.durationMin}–{caps.durationMax} сек
+                  / {dMin}–{dMax} сек
                 </span>
               </span>
             </div>
@@ -258,20 +278,21 @@ export function SettingsPanel() {
               <Slider
                 label="Длительность"
                 value={duration}
-                min={caps.durationMin}
-                max={caps.durationMax}
-                step={caps.durationStep}
+                min={dMin}
+                max={dMax}
+                step={dStep}
                 onChange={setDuration}
                 className="w-full md:w-[160px]"
               />
               <span className="hidden shrink-0 whitespace-nowrap md:inline">
                 <span className="text-[14px] font-normal text-ink">{duration}</span>{" "}
                 <span className="text-[12px] text-ink3">
-                  / {caps.durationMin}–{caps.durationMax} сек
+                  / {dMin}–{dMax} сек
                 </span>
               </span>
             </div>
           </div>
+          )}
         </div>
 
         <div className="my-4 h-px w-full bg-rule" />
@@ -392,7 +413,11 @@ export function SettingsPanel() {
 
         <p className="mt-2 text-center text-[12px] text-ink3 md:mt-2.5">
           {disabled ? (
-            "Загрузите снимок, чтобы продолжить"
+            needsAudio && !audioDuration ? (
+              "Загрузите звук, чтобы продолжить"
+            ) : (
+              "Загрузите снимок, чтобы продолжить"
+            )
           ) : isLoggedIn ? (
             <>
               Баланс: 0 токенов ·{" "}

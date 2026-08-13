@@ -3,6 +3,8 @@ import { useNavigate, useRouterState } from "@tanstack/react-router";
 import { useAuth } from "@/context/AuthContext";
 import { GenerationsTab } from "@/components/account/GenerationsTab";
 import { BalanceTab } from "@/components/account/BalanceTab";
+import { ProfileTab } from "@/components/account/ProfileTab";
+import { SupportTab } from "@/components/account/SupportTab";
 
 const focusRing =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 focus-visible:outline-offset-2";
@@ -85,12 +87,8 @@ export function AccountShell() {
         <div className="mx-auto max-w-[1000px] p-8">
           {active === "generations" ? <GenerationsTab /> : null}
           {active === "balance" ? <BalanceTab /> : null}
-          {active === "profile" ? (
-            <h1 className="text-[24px] font-normal text-ink">Настройки профиля</h1>
-          ) : null}
-          {active === "support" ? (
-            <h1 className="text-[24px] font-normal text-ink">Поддержка</h1>
-          ) : null}
+          {active === "profile" ? <ProfileTab /> : null}
+          {active === "support" ? <SupportTab /> : null}
         </div>
       </section>
     </div>

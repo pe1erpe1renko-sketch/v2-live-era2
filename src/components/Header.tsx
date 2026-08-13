@@ -110,7 +110,8 @@ const MODELS: {
   { letter: "N", name: "Nano Banana 2", text: "до 14 референсов в одной сцене" },
 ];
 
-const SIMPLE_LINKS = ["Примеры", "Цены", "Блог"];
+const SIMPLE_LINKS_OUT = ["Примеры", "Цены"];
+const SIMPLE_LINKS_IN = ["Мои генерации", "Цены"];
 
 function Logo() {
   return (

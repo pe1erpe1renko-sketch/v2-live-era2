@@ -391,6 +391,11 @@ export function Header() {
             <span className="hidden lg:inline">Создать видео</span>
             <span className="lg:hidden">Создать</span>
           </button>
+          {isLoggedIn ? (
+            <div className="hidden lg:block">
+              <AccountMenu />
+            </div>
+          ) : null}
           <button
             type="button"
             aria-label="Меню"

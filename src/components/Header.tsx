@@ -65,54 +65,43 @@ const MODELS: {
 }[] = [
   {
     letter: "K",
-    name: "Kling 3.0",
+    name: "KLING 3.0",
     badge: "Чаще всего",
     text: "универсальная модель, держит мимику и мелкие детали",
   },
   {
-    letter: "V",
-    name: "Veo 3.1",
-    text: "Google: звук в комплекте, есть 4K",
+    letter: "M",
+    name: "MiniMax H3",
+    text: "Hailuo: оживление фото и работа с референсами",
+  },
+  {
+    letter: "H",
+    name: "Hedra",
+    badge: "Речь",
+    text: "говорящий портрет: лицо произносит вашу реплику",
   },
   {
     letter: "S",
     name: "Seedance 2.0",
-    badge: "Быстро",
-    text: "ByteDance: считает быстрее и стоит дешевле",
+    badge: "Качество",
+    text: "ByteDance: максимальное качество движения",
   },
   {
-    letter: "S",
-    name: "Sora 2",
-    text: "OpenAI: звук и синхронные губы сразу",
-  },
-  {
-    letter: "W",
-    name: "Wan 2.7",
-    text: "Alibaba: плавные переходы между сценами",
-  },
-  {
-    letter: "K",
-    name: "Kling Motion Control",
-    badge: "Эталон",
-    text: "движение переносится с вашего видео-образца",
-  },
-  {
-    letter: "H",
-    name: "Hailuo 02",
-    badge: "Эконом",
-    text: "MiniMax: самый бережный расход токенов",
+    letter: "V",
+    name: "Veo 3.1",
+    text: "Google: звук в комплекте",
   },
   {
     letter: "G",
-    name: "Grok Imagine",
-    text: "xAI: свободные соотношения сторон",
+    name: "Grok",
+    text: "xAI: быстрый и недорогой",
   },
   {
     letter: "H",
-    name: "Happy Horse",
-    text: "Alibaba: 1080p со звуком",
+    name: "Hailuo 2",
+    badge: "Эконом",
+    text: "MiniMax: самый бережный расход токенов",
   },
-  { letter: "N", name: "Nano Banana 2", text: "до 14 референсов в одной сцене" },
 ];
 
 const SIMPLE_LINKS_OUT = [
@@ -261,7 +250,7 @@ function ModelsMenu() {
         </AppLink>
       </div>
 
-      <div className="mt-5 grid grid-cols-3 gap-4 xl:grid-cols-5">
+      <div className="mt-5 grid grid-cols-2 gap-4 md:grid-cols-4">
         {MODELS.map((m) => (
           <AppLink
             key={m.name}

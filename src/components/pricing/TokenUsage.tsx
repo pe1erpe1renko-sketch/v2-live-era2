@@ -1,16 +1,13 @@
 import { SectionLabel } from "@/components/SectionLabel";
 
 const MODELS: { name: string; cost: number; note: string }[] = [
-  { name: "Seedance 2.0", cost: 4, note: "самая экономная, хороша для простых движений" },
-  { name: "Hailuo 02", cost: 4, note: "бюджетная, подойдёт для проб" },
-  { name: "Wan 2.7", cost: 5, note: "плавные переходы между сценами" },
-  { name: "Grok Imagine", cost: 5, note: "свободные соотношения сторон" },
-  { name: "Happy Horse", cost: 6, note: "1080p со звуком" },
-  { name: "Nano Banana 2", cost: 8, note: "до 14 референсов в одной сцене" },
-  { name: "Sora 2", cost: 12, note: "звук и синхронные губы" },
-  { name: "Veo 3.1", cost: 14, note: "звук в комплекте, есть 4K" },
-  { name: "Kling 3.0", cost: 15, note: "держит мимику и мелкие детали" },
-  { name: "Kling Motion Control", cost: 18, note: "движение переносится с вашего образца" },
+  { name: "Seedance 2.0", cost: 4, note: "максимальное качество движения" },
+  { name: "Hailuo 2", cost: 4, note: "самый бережный расход токенов" },
+  { name: "Grok", cost: 5, note: "быстрый и недорогой" },
+  { name: "MiniMax H3", cost: 6, note: "оживление фото и работа с референсами" },
+  { name: "Hedra", cost: 8, note: "говорящий портрет по вашей реплике" },
+  { name: "Veo 3.1", cost: 14, note: "звук в комплекте" },
+  { name: "KLING 3.0", cost: 15, note: "держит мимику и мелкие детали" },
 ];
 
 export function TokenUsage() {

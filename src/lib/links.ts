@@ -15,16 +15,14 @@ export const SCENARIO_SLUGS: Record<string, string> = {
 };
 
 export const MODEL_SLUGS: Record<string, string> = {
+  "KLING 3.0": "kling-3",
   "Kling 3.0": "kling-3",
-  "Veo 3.1": "veo-3-1",
+  "MiniMax H3": "minimax-h3",
+  Hedra: "hedra",
   "Seedance 2.0": "seedance-2",
-  "Sora 2": "sora-2",
-  "Wan 2.7": "wan-2-7",
-  "Kling Motion Control": "kling-motion",
-  "Hailuo 02": "hailuo-02",
-  "Grok Imagine": "grok-imagine",
-  "Happy Horse": "happy-horse",
-  "Nano Banana 2": "nano-banana-2",
+  "Veo 3.1": "veo-3-1",
+  Grok: "grok",
+  "Hailuo 2": "hailuo-2",
 };
 
 export const CREATE = "/create";

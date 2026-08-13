@@ -9,15 +9,12 @@ export const TOKEN_COSTS = {
   // базовая стоимость ролика 5 секунд, 720p, без звука
   base: {
     "kling-3": 15,
-    "veo-3-1": 14,
+    "minimax-h3": 6,
+    hedra: 8,
     "seedance-2": 4,
-    "sora-2": 12,
-    "wan-2-7": 5,
-    "kling-motion": 18,
-    "hailuo-02": 4,
-    "grok-imagine": 5,
-    "happy-horse": 6,
-    "nano-banana-2": 8,
+    "veo-3-1": 14,
+    grok: 5,
+    "hailuo-2": 4,
   } as Record<string, number>,
   // множители настроек
   multipliers: {

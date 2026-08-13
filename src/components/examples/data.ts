@@ -100,7 +100,7 @@ export const EXAMPLES: Example[] = [
     scenario: "Картина",
     title: "Акварельный пейзаж",
     text: "Вода и облака пришли в движение, мазок остался читаемым.",
-    meta: "WAN 2.7 · 5 СЕК · 16:9",
+    meta: "MINIMAX H3 · 5 СЕК · 16:9",
     poster: draw2,
   },
   {
@@ -109,7 +109,7 @@ export const EXAMPLES: Example[] = [
     scenario: "Видео из фото",
     title: "Кадр из поездки",
     text: "Панорама с ходом камеры вглубь. Снято на телефон.",
-    meta: "SORA 2 · 10 СЕК · 9:16",
+    meta: "MINIMAX H3 · 10 СЕК · 9:16",
     poster: feed3,
   },
 ];

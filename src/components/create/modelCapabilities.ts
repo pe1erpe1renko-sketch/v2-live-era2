@@ -34,15 +34,12 @@ const FULL: ModelCapability = {
 
 export const MODEL_CAPABILITIES: Record<string, ModelCapability> = {
   "kling-3": { ...FULL },
-  "veo-3-1": { ...FULL },
+  "minimax-h3": { ...FULL },
+  hedra: { ...FULL },
   "seedance-2": { ...FULL },
-  "sora-2": { ...FULL },
-  "wan-2-7": { ...FULL },
-  "kling-motion": { ...FULL },
-  "hailuo-02": { ...FULL },
-  "grok-imagine": { ...FULL },
-  "happy-horse": { ...FULL },
-  "nano-banana-2": { ...FULL },
+  "veo-3-1": { ...FULL },
+  grok: { ...FULL },
+  "hailuo-2": { ...FULL },
 };
 
 export function capabilitiesFor(slug: string | null | undefined): ModelCapability {

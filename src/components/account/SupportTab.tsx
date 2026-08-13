@@ -15,14 +15,8 @@ export const SUPPORT_CONTACTS = {
   email: "hello@liveera.ru",
 };
 
-/** Быстрые темы: позже подставят тему в письмо. */
-const TOPICS = [
-  "Не пришли токены",
-  "Ошибка генерации",
-  "Вопрос по оплате",
-  "Удалить аккаунт",
-  "Другое",
-];
+
+
 
 function CardShell({ children }: { children: React.ReactNode }) {
   return <>{children}</>;

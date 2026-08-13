@@ -2,13 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import { Icon } from "@iconify/react";
 import { useCreate } from "@/components/create/CreateContext";
 import { SettingsPanel } from "@/components/create/SettingsPanel";
+import { AudioPanel } from "@/components/create/AudioPanel";
+import { capabilitiesFor } from "@/components/create/modelCapabilities";
 import {
   MOTION_PRESETS,
   MOTION_PRESET_IDS,
   applyPresetText,
   type MotionPresetId,
 } from "@/components/create/motionPresets";
-
 
 const DRAW_SCENARIOS = new Set(["detskiy-risunok", "illyustratsiya", "kartina"]);
 const TEXT_ONLY = "video-iz-teksta";
@@ -228,7 +229,6 @@ function PromptPanel() {
           );
         })}
 
-
         <button
           type="button"
           disabled={disabled}
@@ -249,7 +249,8 @@ function PromptPanel() {
 }
 
 export function Workspace() {
-  const { scenarioSlug } = useCreate();
+  const { scenarioSlug, modelSlug } = useCreate();
+  const caps = capabilitiesFor(modelSlug);
   return (
     <div className="mx-auto w-full max-w-[860px] px-4 pb-8 pt-5 sm:px-5">
       <div
@@ -263,7 +264,7 @@ export function Workspace() {
       </div>
 
       {scenarioSlug !== TEXT_ONLY && <UploadZone />}
-      <PromptPanel />
+      {caps.needsAudio ? <AudioPanel maxSeconds={caps.maxAudioSeconds ?? 15} /> : <PromptPanel />}
       <SettingsPanel />
     </div>
   );

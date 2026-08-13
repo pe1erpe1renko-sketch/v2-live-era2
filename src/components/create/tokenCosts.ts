@@ -1,60 +1,60 @@
 /**
  * Стоимость генерации в токенах.
  *
- * ВНИМАНИЕ: цифры предварительные и подлежат уточнению после подключения
- * реальных моделей. Меняйте стоимость только здесь.
+ * Утверждено 13.08.2026.
+ * Меняйте стоимость только здесь — интерфейс читает этот конфиг.
  */
 
 export const TOKEN_COSTS = {
-  // базовая стоимость ролика 5 секунд, 720p, без звука
+  // стоимость ролика 5 секунд, базовое качество, без звука
   base: {
-    "kling-3": 15,
-    "minimax-h3": 6,
-    hedra: 8,
-    "seedance-2": 4,
-    "veo-3-1": 14,
-    grok: 5,
-    "hailuo-2": 4,
+    "hailuo-2": 12,
+    "veo-3-1": 20,
+    grok: 27,
+    hedra: 27,
+    "kling-3": 31,
+    "minimax-h3": 36,
+    "seedance-2": 83,
   } as Record<string, number>,
-  // множители настроек
+
   multipliers: {
-    duration: {
-      // за каждую секунду сверх пяти
-      perSecondOver5: 0.2,
-    },
     quality: {
       "480p": 0.8,
+      "540p": 0.8,
       "720p": 1,
+      "768p": 1,
       "1080p": 1.5,
+      "2K": 1.5,
       "4K": 2.5,
     } as Record<string, number>,
-    sound: {
-      on: 1.3,
-      off: 1,
-    },
-    format: {
-      "16:9": 1,
-      "9:16": 1,
-      "1:1": 1,
-    } as Record<string, number>,
+    sound: { on: 1.4, off: 1 },
+    format: { "16:9": 1, "9:16": 1, "1:1": 1 } as Record<string, number>,
+    duration: { perSecondOver5: 0.2 },
   },
-  // фиксированные доплаты
+
   extras: {
     improvePrompt: 1,
     lastFrame: 2,
   },
-  // реставрация снимка (страница /restore)
+
   restore: {
-    base: 6,
+    base: 4,
     resolution: { "1x": 1, "2x": 1.4, "4x": 2.2 } as Record<string, number>,
   },
+};
+
+/**
+ * Исключения в формуле расчёта. Утверждено 13.08.2026.
+ */
+export const PRICING_RULES = {
+  perClip: ["veo-3-1", "hailuo-2"], // длительность не влияет на цену
+  soundIncluded: ["hedra"], // звук всегда включён, доплаты нет
 };
 
 export function computeRestoreCost(resolution: string) {
   const r = TOKEN_COSTS.restore;
   return Math.ceil(r.base * (r.resolution[resolution] ?? 1));
 }
-
 
 export function computeCost(input: {
   model: string;
@@ -66,12 +66,17 @@ export function computeCost(input: {
 }) {
   const m = TOKEN_COSTS.multipliers;
   const base = TOKEN_COSTS.base[input.model] ?? 0;
+
+  const perClip = PRICING_RULES.perClip.includes(input.model);
+  const soundIncluded = PRICING_RULES.soundIncluded.includes(input.model);
+
+  const durationMul = perClip
+    ? 1
+    : 1 + (Math.max(input.duration, 5) - 5) * m.duration.perSecondOver5;
+  const soundMul = soundIncluded ? 1 : input.sound ? m.sound.on : m.sound.off;
+
   let total =
-    base *
-    (1 + (input.duration - 5) * m.duration.perSecondOver5) *
-    (m.quality[input.quality] ?? 1) *
-    (input.sound ? m.sound.on : m.sound.off) *
-    (m.format[input.format] ?? 1);
+    base * durationMul * (m.quality[input.quality] ?? 1) * soundMul * (m.format[input.format] ?? 1);
   if (input.lastFrame) total += TOKEN_COSTS.extras.lastFrame;
   return Math.ceil(total);
 }

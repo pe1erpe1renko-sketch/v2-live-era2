@@ -57,20 +57,20 @@ export function ComparisonTable() {
 
         <div
           tabIndex={0}
-          className="mt-8 overflow-x-auto rounded-[16px] border border-rule bg-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2"
+          className="mt-8 overflow-x-auto rounded-[16px] border border-rule bg-surface focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 md:rounded-[16px]"
         >
-          <table className="w-full min-w-[640px] border-collapse text-left">
+          <table className="w-full border-collapse text-left md:min-w-[640px]">
             <thead>
               <tr>
-                <th className="sticky left-0 z-10 w-[40%] bg-surface px-5 py-[14px]" />
-                <th className="px-5 py-[14px] text-center text-[15px] font-normal text-ink">
+                <th className="sticky left-0 z-10 w-[130px] bg-surface px-5 py-[14px] shadow-[4px_0_8px_rgba(0,0,0,0.06)] md:w-[40%] md:shadow-none md:py-[14px]" />
+                <th className="min-w-[90px] px-5 py-[14px] text-center text-[15px] font-normal text-ink md:py-[14px]">
                   Старт
                 </th>
-                <th className="bg-gold3 px-5 py-[14px] text-center text-[15px] font-normal text-ink">
+                <th className="min-w-[90px] bg-gold3 px-5 py-[14px] text-center text-[15px] font-normal text-ink md:py-[14px]">
                   Про
                   <span className="type-label mt-0.5 block text-[10px] text-gold">Популярный</span>
                 </th>
-                <th className="px-5 py-[14px] text-center text-[15px] font-normal text-ink">
+                <th className="min-w-[90px] px-5 py-[14px] text-center text-[15px] font-normal text-ink md:py-[14px]">
                   Ультра
                 </th>
               </tr>
@@ -80,17 +80,17 @@ export function ComparisonTable() {
                 <tr key={r.label} className="border-t border-rule">
                   <th
                     scope="row"
-                    className="sticky left-0 z-10 bg-surface px-5 py-[14px] text-left text-[13px] font-normal text-ink2"
+                    className="sticky left-0 z-10 w-[130px] border-r border-rule bg-surface px-[10px] py-[10px] text-left text-[12px] font-normal leading-[1.3] text-ink2 shadow-[4px_0_8px_rgba(0,0,0,0.06)] md:w-[40%] md:border-r-0 md:px-5 md:py-[14px] md:text-[13px] md:shadow-none"
                   >
                     {r.label}
                   </th>
-                  <td className="px-5 py-[14px] text-center">
+                  <td className="min-w-[90px] px-[8px] py-[10px] text-center text-[12px] md:px-5 md:py-[14px] md:text-[13px]">
                     <Value v={r.v[0]} />
                   </td>
-                  <td className="bg-gold3 px-5 py-[14px] text-center">
+                  <td className="min-w-[90px] bg-gold3 px-[8px] py-[10px] text-center text-[12px] md:px-5 md:py-[14px] md:text-[13px]">
                     <Value v={r.v[1]} />
                   </td>
-                  <td className="px-5 py-[14px] text-center">
+                  <td className="min-w-[90px] px-[8px] py-[10px] text-center text-[12px] md:px-5 md:py-[14px] md:text-[13px]">
                     <Value v={r.v[2]} />
                   </td>
                 </tr>

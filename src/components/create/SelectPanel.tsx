@@ -14,8 +14,12 @@ const clamp2 = {
 export function SelectPanel() {
   const [mode, setMode] = useState<"scenario" | "model">("scenario");
   const [query, setQuery] = useState("");
-  const [scenario, setScenario] = useState<string | null>(null);
-  const [model, setModel] = useState<string>("kling-3");
+  const {
+    scenarioSlug: scenario,
+    setScenarioSlug: setScenario,
+    modelSlug: model,
+    setModelSlug: setModel,
+  } = useCreate();
   const listRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {

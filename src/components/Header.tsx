@@ -405,14 +405,26 @@ export function Header() {
               <AccountMenu />
             </div>
           ) : null}
-          <button
-            type="button"
-            aria-label="Меню"
-            onClick={() => setMenu((v) => !v)}
-            className="-mr-2 flex h-11 w-11 items-center justify-center rounded-[6px] text-ink2 lg:hidden"
-          >
-            <Icon icon="solar:hamburger-menu-linear" className="h-6 w-6" />
-          </button>
+          <div className="flex items-center lg:hidden">
+            {isLoggedIn ? (
+              <AppLink
+                href="/account?tab=balance"
+                className="mr-3 inline-flex items-center rounded-full border border-rule px-3 py-[6px]"
+              >
+                <span className="h-[6px] w-[6px] rounded-full bg-gold2" aria-hidden="true" />
+                <span className="ml-2 text-[13px] text-ink">0 ток.</span>
+              </AppLink>
+            ) : null}
+            <button
+              type="button"
+              aria-label="Меню"
+              onClick={() => setMenu((v) => !v)}
+              className="-mr-2 flex h-11 w-11 items-center justify-center rounded-[6px] text-ink2"
+            >
+              <Icon icon="solar:hamburger-menu-linear" className="h-6 w-6" />
+            </button>
+          </div>
+
         </div>
       </div>
 

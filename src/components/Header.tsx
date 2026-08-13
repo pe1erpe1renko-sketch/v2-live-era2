@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Icon } from "@iconify/react";
 import { SectionLabel } from "@/components/SectionLabel";
 import { useAuth } from "@/context/AuthContext";
+import { useAuthModal } from "@/context/AuthModalContext";
 import { AccountMenu, TokenPill, ACCOUNT_LINKS } from "@/components/AccountMenu";
 import { AppLink } from "@/components/AppLink";
 import { scenarioHref, modelHref } from "@/lib/links";
@@ -296,6 +297,7 @@ function ModelsMenu() {
 
 export function Header() {
   const { isLoggedIn, setLoggedIn } = useAuth();
+  const { openAuth } = useAuthModal();
   const SIMPLE_LINKS = isLoggedIn ? SIMPLE_LINKS_IN : SIMPLE_LINKS_OUT;
   const [open, setOpen] = useState<"scenarios" | "models" | null>(null);
   const [menu, setMenu] = useState(false);
@@ -383,12 +385,13 @@ export function Header() {
           {isLoggedIn ? (
             <TokenPill />
           ) : (
-            <AppLink
-              href="/account"
+            <button
+              type="button"
+              onClick={() => openAuth("login")}
               className="hidden rounded-[6px] text-[14px] text-ink2 hover:text-ink lg:block"
             >
               Войти
-            </AppLink>
+            </button>
           )}
           <AppLink
             href="/create"
@@ -528,9 +531,16 @@ export function Header() {
               </button>
             </div>
           ) : (
-            <AppLink href="/account" className="block rounded-[6px] py-3 text-[14px] text-ink2">
+            <button
+              type="button"
+              onClick={() => {
+                setMenu(false);
+                openAuth("login");
+              }}
+              className="block w-full rounded-[6px] py-3 text-left text-[14px] text-ink2"
+            >
               Войти
-            </AppLink>
+            </button>
           )}
           <span className="type-label mt-4 block">RU · Без VPN</span>
         </div>

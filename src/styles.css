@@ -316,3 +316,28 @@
     background-color: #3f3f46;
   }
 }
+
+/* ── Печать юридических страниц ──────────────────────────────────── */
+@media print {
+  .legal-page header,
+  header,
+  footer,
+  .legal-toc {
+    display: none !important;
+  }
+
+  .legal-page {
+    padding: 0 !important;
+  }
+
+  .legal-page * {
+    color: #000 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .legal-page .grid {
+    display: block !important;
+    max-width: none !important;
+  }
+}

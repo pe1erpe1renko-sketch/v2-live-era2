@@ -140,7 +140,7 @@ function UploadZone({ file, setFile }: { file: File | null; setFile: (f: File | 
 function HistoryPanel() {
   const { isLoggedIn } = useAuth();
   return (
-    <div className="flex min-h-full flex-col px-5 pb-5 pt-5">
+    <div className="flex min-h-full flex-col px-4 pb-5 pt-5 sm:px-5">
       <div className="flex items-center justify-between gap-4">
         <h2 className="text-[15px] font-normal text-ink">История</h2>
         <AppLink
@@ -190,7 +190,7 @@ function RestoreWorkspace() {
   const strengthPct = strength * 100;
 
   return (
-    <div className="mx-auto w-full max-w-[760px] p-5">
+    <div className="cta-offset mx-auto w-full max-w-[760px] p-4 sm:p-5">
       {/* режим */}
       <div className="flex items-center gap-3 rounded-[16px] border border-rule bg-surface px-4 py-3">
         <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[6px] bg-gold3">
@@ -207,7 +207,7 @@ function RestoreWorkspace() {
       <UploadZone file={file} setFile={setFile} />
 
       {/* промпт */}
-      <div className="mt-4 rounded-[16px] border border-rule bg-surface p-5">
+      <div className="mt-4 rounded-[16px] border border-rule bg-surface p-4 md:p-5">
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div
             style={darkInput}
@@ -229,7 +229,7 @@ function RestoreWorkspace() {
                   role="tab"
                   aria-selected={on}
                   onClick={() => setTab(id)}
-                  className={`rounded-[4px] px-4 py-2 text-[13px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
+                  className={`min-h-[40px] rounded-[4px] px-4 py-2 text-[13px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
                     on ? "bg-gold text-white" : "text-ink2 hover:text-ink"
                   }`}
                 >
@@ -274,11 +274,11 @@ function RestoreWorkspace() {
       </div>
 
       {/* настройки */}
-      <div className="mt-4 rounded-[16px] border border-rule bg-surface p-5">
-        <div className="flex flex-col gap-8 sm:flex-row">
+      <div className="mt-4 rounded-[16px] border border-rule bg-surface p-4 md:p-5">
+        <div className="flex flex-col gap-6 md:flex-row md:gap-8">
           <div>
             <p className="text-[13px] text-ink3">Сила обработки</p>
-            <div className="mt-2 flex items-center gap-3">
+            <div className="mt-2 flex items-center gap-3 md:w-auto">
               <input
                 type="range"
                 aria-label="Сила обработки"
@@ -287,12 +287,12 @@ function RestoreWorkspace() {
                 step={0.05}
                 value={strength}
                 onChange={(e) => setStrength(Number(e.target.value))}
-                className="gold-range w-[180px] max-w-full"
+                className="gold-range w-full max-w-full md:w-[180px]"
                 style={{ ["--fill" as string]: `${strengthPct}%` }}
               />
               <span className="text-[14px] text-ink">{strength.toFixed(2)}</span>
             </div>
-            <p className="mt-2 max-w-[280px] text-[11px] leading-[1.5] text-ink3">
+            <p className="mt-2 text-[11px] md:max-w-[280px] leading-[1.5] text-ink3">
               Ниже — бережнее к оригиналу. Выше — чище результат, но может уйти детализация.
             </p>
           </div>
@@ -312,7 +312,7 @@ function RestoreWorkspace() {
       </div>
 
       {/* кнопка */}
-      <div className="mt-4">
+      <div className="sticky-cta mt-4">
         <button
           type="button"
           disabled={isLoggedIn && !file}
@@ -320,7 +320,7 @@ function RestoreWorkspace() {
           onClick={() => {
             if (!isLoggedIn) openAuth("login");
           }}
-          className={`h-[56px] w-full rounded-[6px] text-[16px] transition-opacity duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
+          className={`h-[52px] w-full rounded-[6px] text-[15px] transition-opacity md:h-[56px] md:text-[16px] duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
             isLoggedIn && !file
               ? "cursor-not-allowed border border-rule text-ink3"
               : "cursor-pointer bg-gold text-white hover:opacity-90"
@@ -367,7 +367,7 @@ export function RestoreShell() {
       <section className="min-w-0 flex-1 overflow-y-auto thin-scroll">
         <RestoreWorkspace />
       </section>
-      <aside className="w-full shrink-0 border-t border-rule lg:w-[320px] lg:overflow-y-auto lg:border-l lg:border-t-0 thin-scroll">
+      <aside className="cta-offset w-full shrink-0 border-t border-rule lg:pb-0 lg:w-[320px] lg:overflow-y-auto lg:border-l lg:border-t-0 thin-scroll">
         <HistoryPanel />
       </aside>
     </div>

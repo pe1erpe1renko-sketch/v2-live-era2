@@ -236,16 +236,24 @@ export function SettingsPanel() {
 
   return (
     <>
-      <div className="mt-4 rounded-[16px] border border-rule bg-surface p-5">
+      <div className="mt-4 rounded-[16px] border border-rule bg-surface p-4 md:p-5">
         {/* Ряд 1 */}
-        <div className="flex flex-col gap-5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-8">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-3">
+        <div className="flex flex-col gap-5 md:flex-row md:flex-wrap md:items-center md:gap-8">
+          <div className="flex flex-col gap-2 md:flex-row md:items-center md:gap-3">
             <span className="text-[13px] text-ink3">Формат</span>
             <Segmented value={format} options={caps.formats} onChange={setFormat} label="Формат" />
           </div>
 
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-3">
-            <span className="text-[13px] text-ink3">Длительность</span>
+          <div className="flex flex-col gap-2 md:flex-row md:items-center md:gap-3">
+            <div className="flex items-center justify-between gap-3">
+              <span className="text-[13px] text-ink3">Длительность</span>
+              <span className="shrink-0 whitespace-nowrap md:hidden">
+                <span className="text-[14px] font-normal text-ink">{duration}</span>{" "}
+                <span className="text-[12px] text-ink3">
+                  / {caps.durationMin}–{caps.durationMax} сек
+                </span>
+              </span>
+            </div>
             <div className="flex items-center gap-3">
               <Slider
                 label="Длительность"
@@ -254,9 +262,9 @@ export function SettingsPanel() {
                 max={caps.durationMax}
                 step={caps.durationStep}
                 onChange={setDuration}
-                className="w-full sm:w-[160px]"
+                className="w-full md:w-[160px]"
               />
-              <span className="shrink-0 whitespace-nowrap">
+              <span className="hidden shrink-0 whitespace-nowrap md:inline">
                 <span className="text-[14px] font-normal text-ink">{duration}</span>{" "}
                 <span className="text-[12px] text-ink3">
                   / {caps.durationMin}–{caps.durationMax} сек
@@ -269,8 +277,8 @@ export function SettingsPanel() {
         <div className="my-4 h-px w-full bg-rule" />
 
         {/* Ряд 2 */}
-        <div className="flex flex-col gap-5 sm:flex-row sm:flex-wrap sm:items-center sm:gap-8">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-3">
+        <div className="flex flex-col gap-5 md:flex-row md:flex-wrap md:items-center md:gap-8">
+          <div className="flex flex-col gap-2 md:flex-row md:items-center md:gap-3">
             <span className="text-[13px] text-ink3">Качество</span>
             <Segmented
               value={quality}
@@ -291,7 +299,7 @@ export function SettingsPanel() {
           )}
 
           {caps.expert && (
-            <div className="flex items-center gap-3 sm:ml-auto">
+            <div className="flex items-center gap-3 md:ml-auto">
               <Toggle checked={expert} onChange={setExpert} label="Эксперт" />
               <span className="text-[13px] text-ink">Эксперт</span>
             </div>

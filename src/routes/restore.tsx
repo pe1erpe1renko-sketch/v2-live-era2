@@ -1,14 +1,21 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { DarkLayout } from "@/components/layouts/DarkLayout";
-import { Placeholder } from "@/components/Placeholder";
+import { RestoreShell } from "@/components/restore/RestoreShell";
 
 export const Route = createFileRoute("/restore")({
   head: () => ({
     meta: [
-      { title: "Реставрация снимков — Live Era2" },
-      { name: "description", content: "Восстановление старых фотографий в Live Era2." },
-      { property: "og:title", content: "Реставрация снимков — Live Era2" },
-      { property: "og:description", content: "Восстановление старых фотографий в Live Era2." },
+      { title: "Реставрация фото — Live Era2" },
+      {
+        name: "description",
+        content:
+          "Восстановление старых фотографий Live Era2: убираем царапины, заломы и выцветание, сохраняя черты лица.",
+      },
+      { property: "og:title", content: "Реставрация фото — Live Era2" },
+      {
+        property: "og:description",
+        content: "Убираем царапины, заломы и выцветание со старых снимков онлайн.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -19,7 +26,7 @@ export const Route = createFileRoute("/restore")({
 function Page() {
   return (
     <DarkLayout>
-      <Placeholder title="Реставрация снимков" tone="dark" />
+      <RestoreShell />
     </DarkLayout>
   );
 }

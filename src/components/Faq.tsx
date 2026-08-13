@@ -63,6 +63,37 @@ const LD_JSON = JSON.stringify({
   })),
 });
 
+type FaqEntry = { q: string; a: string };
+
+export function FaqAccordion({ items }: { items: FaqEntry[] }) {
+  const [open, setOpen] = useState<number[]>([]);
+  const uid = useId();
+  const toggle = (i: number) => setOpen((prev) => (prev.includes(i) ? [] : [i]));
+  const half = Math.ceil(items.length / 2);
+
+  return (
+    <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+      {[items.slice(0, half), items.slice(half)].map((col, ci) => (
+        <div key={ci}>
+          {col.map((item, i) => {
+            const index = ci === 0 ? i : i + half;
+            return (
+              <FaqItem
+                key={item.q}
+                item={item}
+                index={index}
+                isOpen={open.includes(index)}
+                onToggle={() => toggle(index)}
+                uid={uid}
+              />
+            );
+          })}
+        </div>
+      ))}
+    </div>
+  );
+}
+
 function FaqItem({
   item,
   index,
@@ -70,13 +101,14 @@ function FaqItem({
   onToggle,
   uid,
 }: {
-  item: (typeof FAQ)[number];
+  item: FaqEntry;
   index: number;
   isOpen: boolean;
   onToggle: () => void;
   uid: string;
 }) {
   const number = String(index + 1).padStart(2, "0");
+
 
   return (
     <div className="border-t border-rule">

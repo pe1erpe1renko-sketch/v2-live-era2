@@ -2,19 +2,12 @@ import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import { useAuth } from "@/context/AuthContext";
 import { AppLink } from "@/components/AppLink";
-
-function SelectPanel() {
-  return (
-    <div className="p-5">
-      <p className="type-label">ВЫБОР</p>
-    </div>
-  );
-}
+import { SelectPanel } from "@/components/create/SelectPanel";
 
 function HistoryPanel() {
   const { isLoggedIn } = useAuth();
   return (
-    <div className="flex min-h-full flex-col p-5">
+    <div className="flex min-h-full flex-col px-5 pb-5 pt-5">
       <div className="flex items-center justify-between gap-4">
         <h2 className="text-[15px] font-normal text-ink">История</h2>
         <AppLink href="/account" className="text-[12px] text-ink3 transition-colors hover:text-ink">
@@ -50,7 +43,7 @@ export function CreateShell() {
   return (
     <div className="flex w-full flex-col lg:h-[calc(100svh-72px)] lg:flex-row lg:overflow-hidden">
       {/* left */}
-      <aside className="hidden w-[300px] shrink-0 overflow-y-auto border-r border-rule thin-scroll lg:block">
+      <aside className="hidden w-[300px] shrink-0 flex-col overflow-hidden border-r border-rule lg:flex">
         <SelectPanel />
       </aside>
 
@@ -65,7 +58,7 @@ export function CreateShell() {
             Сценарии и модели
           </button>
         </div>
-        <div className="mx-auto w-full max-w-[860px] p-8">
+        <div className="mx-auto w-full max-w-[860px] px-8 pb-8 pt-5">
           <p className="type-label">РАБОЧАЯ ОБЛАСТЬ</p>
         </div>
       </section>
@@ -84,7 +77,7 @@ export function CreateShell() {
             onClick={() => setDrawer(false)}
             className="absolute inset-0 bg-black/50"
           />
-          <div className="absolute inset-y-0 left-0 w-[300px] max-w-[85vw] overflow-y-auto border-r border-rule bg-bg thin-scroll">
+          <div className="absolute inset-y-0 left-0 flex w-[300px] max-w-[85vw] flex-col overflow-hidden border-r border-rule bg-bg">
             <SelectPanel />
           </div>
         </div>

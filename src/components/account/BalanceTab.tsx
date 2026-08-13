@@ -63,7 +63,7 @@ export function BalanceTab() {
     <div>
       <h1 className="text-[24px] font-normal text-ink">Баланс и платежи</h1>
 
-      <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-2">
+      <div className="mt-6 grid grid-cols-1 items-stretch gap-4 md:grid-cols-2">
         <div className={panel}>
           <p className="type-label text-ink3">Баланс</p>
           <div className="mt-3 flex items-baseline">
@@ -71,12 +71,9 @@ export function BalanceTab() {
             <span className="ml-[10px] text-[20px] font-light text-ink2">токенов</span>
           </div>
           <p className="mt-1.5 text-[12px] text-ink3">хватит примерно на 0 роликов</p>
-          <div className="mt-5 flex flex-wrap gap-[10px]">
+          <div className="mt-auto flex flex-wrap gap-[10px] pt-5">
             <AppLink href="/pricing" className={`${solidBtn} ${focusRing}`}>
               Пополнить
-            </AppLink>
-            <AppLink href="/pricing" className={`${ghostBtn} ${focusRing}`}>
-              Все тарифы
             </AppLink>
           </div>
         </div>
@@ -88,12 +85,13 @@ export function BalanceTab() {
             Вы платите разово за пакеты токенов. Токены не сгорают, автоматических списаний нет.
             Подписка выгоднее при регулярном использовании.
           </p>
-          <div className="mt-5">
+          <div className="mt-auto pt-5">
             <AppLink href="/pricing" className={`${ghostBtn} ${focusRing}`}>
               Посмотреть подписки
             </AppLink>
           </div>
         </div>
+
       </div>
 
       <div className={`mt-6 ${panel}`}>

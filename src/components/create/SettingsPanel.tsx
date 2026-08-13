@@ -376,12 +376,12 @@ export function SettingsPanel() {
       </div>
 
       {/* Кнопка генерации */}
-      <div className="mt-4">
+      <div className="sticky-cta mt-4">
         <button
           type="button"
           disabled={disabled}
           onClick={() => (isLoggedIn ? handleGenerate() : openAuth("login"))}
-          className={`h-[56px] w-full rounded-[6px] text-[16px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
+          className={`h-[52px] w-full rounded-[6px] text-[15px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 md:h-[56px] md:text-[16px] ${
             disabled
               ? "cursor-not-allowed bg-rule text-ink3"
               : "cursor-pointer bg-gold text-white hover:bg-gold-dark"
@@ -390,7 +390,7 @@ export function SettingsPanel() {
           {isLoggedIn ? `Сгенерировать · ${cost} токенов` : "Войти и создать видео"}
         </button>
 
-        <p className="mt-2.5 text-center text-[12px] text-ink3">
+        <p className="mt-2 text-center text-[12px] text-ink3 md:mt-2.5">
           {disabled ? (
             "Загрузите снимок, чтобы продолжить"
           ) : isLoggedIn ? (

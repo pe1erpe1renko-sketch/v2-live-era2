@@ -5,6 +5,9 @@ import { LightLayout } from "@/components/layouts/LightLayout";
 import { SectionLabel } from "@/components/SectionLabel";
 import { SubscriptionPlans } from "@/components/pricing/SubscriptionPlans";
 import { TokenPacks } from "@/components/pricing/TokenPacks";
+import { ComparisonTable } from "@/components/pricing/ComparisonTable";
+import { TokenUsage } from "@/components/pricing/TokenUsage";
+import { PaymentFaq } from "@/components/pricing/PaymentFaq";
 
 export const Route = createFileRoute("/pricing")({
   head: () => ({
@@ -81,6 +84,10 @@ function Page() {
           {tab === "sub" ? <SubscriptionPlans /> : <TokenPacks />}
         </div>
       </section>
+
+      <ComparisonTable />
+      <TokenUsage />
+      <PaymentFaq />
     </LightLayout>
   );
 }

@@ -50,7 +50,7 @@ export function PaymentFaq() {
   return (
     <section className="border-t border-rule">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: LD_JSON }} />
-      <div className="mx-auto max-w-[1440px] px-8 pt-16 lg:px-16">
+      <div className="mx-auto max-w-[1440px] px-8 pb-16 pt-16 lg:px-16">
         <SectionLabel>Оплата</SectionLabel>
 
         <h2 className="mt-4 text-[clamp(26px,3vw,38px)] font-light leading-[1.1] tracking-[-0.04em] text-ink">

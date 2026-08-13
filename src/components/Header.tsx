@@ -421,6 +421,31 @@ export function Header() {
 
       {menu ? (
         <div className="border-t border-rule bg-surface px-6 py-6 lg:hidden">
+          {isLoggedIn ? (
+            <div className="mb-2 border-b border-rule pb-2">
+              <div className="flex items-center py-3">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-gold3 text-[15px] text-gold">
+                  П
+                </span>
+                <span className="ml-3 min-w-0">
+                  <span className="block truncate text-[14px] text-ink">Пользователь</span>
+                  <span className="block truncate text-[12px] text-ink3">user@example.com</span>
+                </span>
+              </div>
+              <div className="flex items-center justify-between border-t border-rule py-3">
+                <span className="flex items-center">
+                  <span className="h-[6px] w-[6px] rounded-full bg-gold2" aria-hidden="true" />
+                  <span className="ml-2 text-[14px] text-ink">0 токенов</span>
+                </span>
+                <button
+                  type="button"
+                  className="rounded-[6px] bg-gold px-[14px] py-[6px] text-[12px] text-white"
+                >
+                  Пополнить
+                </button>
+              </div>
+            </div>
+          ) : null}
           {[
             { label: "Сценарии", items: SCENARIO_COLS.flatMap((c) => c.items.map((i) => i.title)) },
             { label: "Нейросети", items: MODELS.map((m) => m.name) },

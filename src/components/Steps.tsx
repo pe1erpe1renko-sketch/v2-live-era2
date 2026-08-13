@@ -1,6 +1,7 @@
 import { Icon } from "@iconify/react";
 import { SectionLabel } from "@/components/SectionLabel";
 import portraitRestored from "@/assets/portrait-restored.jpg";
+import { AppLink } from "@/components/AppLink";
 
 const PILLS = ["улыбка", "взгляд в камеру", "поворот головы", "объятие"];
 
@@ -143,12 +144,12 @@ export function Steps() {
               ))}
             </div>
 
-            <button
-              type="button"
+            <AppLink
+              href="/create"
               className="mt-8 self-start rounded-[6px] bg-gold px-8 py-4 text-[15px] text-surface transition-colors hover:bg-gold-dark"
             >
               Оживить снимок бесплатно
-            </button>
+            </AppLink>
           </div>
         </div>
       </div>

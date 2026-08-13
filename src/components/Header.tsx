@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Icon } from "@iconify/react";
 import { SectionLabel } from "@/components/SectionLabel";
+import { useAuth } from "@/context/AuthContext";
+import { AccountMenu, TokenPill, ACCOUNT_LINKS } from "@/components/AccountMenu";
 import archive1 from "@/assets/sc-archive-1.jpg";
 import archive2 from "@/assets/sc-archive-2.jpg";
 import archive3 from "@/assets/sc-archive-3.jpg";

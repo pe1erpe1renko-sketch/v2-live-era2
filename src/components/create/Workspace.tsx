@@ -137,15 +137,17 @@ function UploadZone() {
         if (f) setFile(f);
       }}
       style={drag ? { backgroundColor: "rgba(176,141,87,0.06)" } : undefined}
-      className={`mt-4 flex min-h-[160px] cursor-pointer flex-col items-center justify-center rounded-[16px] border border-dashed px-5 text-center transition-colors duration-200 hover:border-gold2 hover:bg-[rgba(176,141,87,0.06)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 sm:min-h-[220px] ${
+      className={`mt-4 flex min-h-[160px] cursor-pointer flex-col items-center justify-center rounded-[16px] border border-dashed px-4 text-center transition-colors duration-200 hover:border-gold2 hover:bg-[rgba(176,141,87,0.06)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 md:min-h-[220px] md:px-5 ${
         drag ? "border-gold2" : "border-rule"
       }`}
     >
-      <Icon icon="solar:camera-linear" width={28} height={28} className="text-gold2" />
-      <p className="mt-3 text-[15px] text-ink">
+      <Icon icon="solar:camera-linear" className="h-6 w-6 text-gold2 md:h-7 md:w-7" />
+      <p className="mt-3 text-[14px] text-ink md:text-[15px]">
         {isDraw ? "Загрузите рисунок" : "Загрузите фотографию"}
       </p>
-      <p className="mt-1.5 text-[13px] text-ink3">снимок с телефона или скан · JPG, PNG до 20 МБ</p>
+      <p className="mt-1.5 text-[12px] text-ink3 md:text-[13px]">
+        снимок с телефона или скан · JPG, PNG до 20 МБ
+      </p>
       <input
         ref={inputRef}
         type="file"

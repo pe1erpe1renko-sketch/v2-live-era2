@@ -202,8 +202,8 @@ export function AuthModal() {
       );
       const list = Array.from(items).filter((el) => el.offsetParent !== null || el.tagName === "A");
       if (!list.length) return;
-      const first = list[0];
-      const last = list[list.length - 1];
+      const first = list[0]!;
+      const last = list[list.length - 1]!;
       const active = document.activeElement as HTMLElement | null;
       if (e.shiftKey && active === first) {
         e.preventDefault();

@@ -429,7 +429,7 @@ export function Header() {
       ) : null}
 
       {menu ? (
-        <div className="border-t border-rule bg-surface px-6 py-6 lg:hidden">
+        <div className="max-h-[calc(100svh-72px)] overflow-y-auto border-t border-rule bg-surface px-4 py-6 lg:hidden">
           {isLoggedIn ? (
             <div className="mb-2 border-b border-rule pb-2">
               <div className="flex items-center py-3">

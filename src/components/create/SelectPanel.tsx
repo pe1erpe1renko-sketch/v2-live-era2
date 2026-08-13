@@ -4,49 +4,6 @@ import { AppLink } from "@/components/AppLink";
 import { MODELS, SCENARIOS } from "@/components/create/data";
 import { useCreate } from "@/components/create/CreateContext";
 
-const SCENARIOS: Scenario[] = [
-  { slug: "staroe-foto", title: "Старое фото", img: archive1 },
-  { slug: "portret", title: "Портрет", img: family1 },
-  { slug: "foto-9-maya", title: "Фото к 9 Мая", img: archive2 },
-  { slug: "foto-pitomtsa", title: "Фото питомца", img: family2 },
-  { slug: "ya-v-detstve", title: "Встреча с собой в детстве", img: archive3 },
-  { slug: "podarok-k-yubileyu", title: "Подарок к юбилею", img: family3 },
-  { slug: "detskiy-risunok", title: "Детский рисунок", img: draw1 },
-  { slug: "video-iz-foto", title: "Видео из фото", img: feed1 },
-  { slug: "illyustratsiya", title: "Иллюстрация", img: draw2 },
-  { slug: "tanets-iz-kadra", title: "Танец из кадра", img: feed2 },
-  { slug: "kartina", title: "Картина", img: draw3 },
-  { slug: "video-iz-teksta", title: "Видео из текста", img: feed3 },
-];
-
-const MODELS: Model[] = [
-  { slug: "kling-3", name: "Kling 3.0", letter: "K", note: "универсальная, держит мимику и детали" },
-  {
-    slug: "seedance-2",
-    name: "Seedance 2.0",
-    letter: "S",
-    note: "ByteDance, считает быстрее и дешевле",
-  },
-  { slug: "veo-3-1", name: "Veo 3.1", letter: "V", note: "Google, звук в комплекте, есть 4K" },
-  { slug: "sora-2", name: "Sora 2", letter: "S", note: "OpenAI, звук и синхронные губы" },
-  { slug: "wan-2-7", name: "Wan 2.7", letter: "W", note: "Alibaba, плавные переходы между сценами" },
-  {
-    slug: "kling-motion",
-    name: "Kling Motion Control",
-    letter: "K",
-    note: "движение с вашего видео-образца",
-  },
-  { slug: "hailuo-02", name: "Hailuo 02", letter: "H", note: "MiniMax, бережный расход токенов" },
-  { slug: "grok-imagine", name: "Grok Imagine", letter: "G", note: "xAI, свободные соотношения сторон" },
-  { slug: "happy-horse", name: "Happy Horse", letter: "H", note: "Alibaba, 1080p со звуком" },
-  {
-    slug: "nano-banana-2",
-    name: "Nano Banana 2",
-    letter: "N",
-    note: "до 14 референсов в одной сцене",
-  },
-];
-
 const clamp2 = {
   display: "-webkit-box",
   WebkitLineClamp: 2,

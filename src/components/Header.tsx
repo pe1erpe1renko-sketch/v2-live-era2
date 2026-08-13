@@ -388,20 +388,20 @@ export function Header() {
             <button
               type="button"
               onClick={() => openAuth("login")}
-              className="hidden rounded-[6px] text-[14px] text-ink2 hover:text-ink lg:block"
+              className="hdr-login hidden rounded-[6px] text-[14px] text-ink2 hover:text-ink lg:block"
             >
               Войти
             </button>
           )}
           <AppLink
             href="/create"
-            className="rounded-[6px] bg-gold px-6 py-3 text-[14px] text-surface transition-colors duration-200 ease-slow hover:bg-gold-dark"
+            className="hdr-cta rounded-[6px] bg-gold px-6 py-3 text-[14px] text-surface transition-colors duration-200 ease-slow hover:bg-gold-dark"
           >
             <span className="hidden lg:inline">Создать видео</span>
             <span className="lg:hidden">Создать</span>
           </AppLink>
           {isLoggedIn ? (
-            <div className="hidden lg:block">
+            <div className="hdr-account hidden lg:block">
               <AccountMenu />
             </div>
           ) : null}
@@ -409,7 +409,7 @@ export function Header() {
             type="button"
             aria-label="Меню"
             onClick={() => setMenu((v) => !v)}
-            className="rounded-[6px] p-1 text-ink2 lg:hidden"
+            className="-mr-2 flex h-11 w-11 items-center justify-center rounded-[6px] text-ink2 lg:hidden"
           >
             <Icon icon="solar:hamburger-menu-linear" className="h-6 w-6" />
           </button>

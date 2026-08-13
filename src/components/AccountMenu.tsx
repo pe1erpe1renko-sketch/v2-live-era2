@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { Icon } from "@iconify/react";
 import { useAuth } from "@/context/AuthContext";
+import { AppLink } from "@/components/AppLink";
 
 export const ACCOUNT_LINKS = [
-  { icon: "solar:gallery-linear", label: "Мои генерации" },
-  { icon: "solar:settings-linear", label: "Настройки профиля" },
-  { icon: "solar:chat-round-line-linear", label: "Поддержка" },
+  { icon: "solar:gallery-linear", label: "Мои генерации", href: "/account?tab=generations" },
+  { icon: "solar:settings-linear", label: "Настройки профиля", href: "/account?tab=profile" },
+  { icon: "solar:chat-round-line-linear", label: "Поддержка", href: "/account?tab=support" },
 ];
 
 const focusRing =

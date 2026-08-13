@@ -8,6 +8,8 @@ type Ctx = {
   setModelSlug: (v: string) => void;
   scenario: Scenario | null;
   model: Model | null;
+  file: File | null;
+  setFile: (f: File | null) => void;
 };
 
 const CreateCtx = createContext<Ctx | null>(null);
@@ -15,6 +17,7 @@ const CreateCtx = createContext<Ctx | null>(null);
 export function CreateProvider({ children }: { children: ReactNode }) {
   const [scenarioSlug, setScenarioSlug] = useState<string | null>(null);
   const [modelSlug, setModelSlug] = useState<string>("kling-3");
+  const [file, setFile] = useState<File | null>(null);
 
   const value = useMemo<Ctx>(
     () => ({
@@ -24,8 +27,10 @@ export function CreateProvider({ children }: { children: ReactNode }) {
       setModelSlug,
       scenario: SCENARIOS.find((s) => s.slug === scenarioSlug) ?? null,
       model: MODELS.find((m) => m.slug === modelSlug) ?? null,
+      file,
+      setFile,
     }),
-    [scenarioSlug, modelSlug],
+    [scenarioSlug, modelSlug, file],
   );
 
   return <CreateCtx.Provider value={value}>{children}</CreateCtx.Provider>;

@@ -141,18 +141,7 @@ export function SupportTab() {
           </a>
         </div>
 
-        <div className="mt-5 flex flex-wrap gap-2">
-          {TOPICS.map((t) => (
-            <button
-              key={t}
-              type="button"
-              // TODO: подставит тему в письмо после подключения бэкенда
-              className={`cursor-pointer rounded-[6px] border border-rule px-4 py-2 text-[13px] text-ink2 transition-colors duration-200 hover:border-gold2 hover:text-ink ${focusRing}`}
-            >
-              {t}
-            </button>
-          ))}
-        </div>
+
       </div>
     </CardShell>
   );

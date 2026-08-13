@@ -381,8 +381,9 @@
   }
 
   .zone-dark .hdr-account {
-    display: block;
+    display: none;
   }
+
 
   .zone-dark .hdr-login {
     display: block;

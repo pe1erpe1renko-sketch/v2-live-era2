@@ -43,6 +43,7 @@ export function CreateShell() {
   }, [drawer]);
 
   return (
+    <CreateProvider>
     <div className="flex w-full flex-col lg:h-[calc(100svh-72px)] lg:flex-row lg:overflow-hidden">
       {/* left */}
       <aside className="hidden w-[340px] shrink-0 flex-col overflow-hidden border-r border-rule lg:flex">

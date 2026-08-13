@@ -1,8 +1,11 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { DarkLayout } from "@/components/layouts/DarkLayout";
-import { Placeholder } from "@/components/Placeholder";
+import { AccountShell } from "@/components/account/AccountShell";
 
 export const Route = createFileRoute("/account")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    tab: typeof search.tab === "string" ? search.tab : undefined,
+  }),
   head: () => ({
     meta: [
       { title: "Личный кабинет — Live Era2" },
@@ -19,7 +22,8 @@ export const Route = createFileRoute("/account")({
 function Page() {
   return (
     <DarkLayout>
-      <Placeholder title="Личный кабинет" tone="dark" />
+      <AccountShell />
     </DarkLayout>
   );
 }
+

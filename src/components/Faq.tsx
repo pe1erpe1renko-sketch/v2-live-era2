@@ -151,15 +151,6 @@ function FaqItem({
 }
 
 export function Faq() {
-  const [open, setOpen] = useState<number[]>([]);
-  const uid = useId();
-
-  const toggle = (i: number) =>
-    setOpen((prev) => (prev.includes(i) ? [] : [i]));
-
-  const left = FAQ.slice(0, 6);
-  const right = FAQ.slice(6, 12);
-
   return (
     <section className="border-b border-rule">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: LD_JSON }} />
@@ -170,33 +161,11 @@ export function Faq() {
           Частые вопросы
         </h2>
 
-        <div className="mt-6 grid grid-cols-1 gap-8 md:grid-cols-2">
-          <div>
-            {left.map((item, i) => (
-              <FaqItem
-                key={item.q}
-                item={item}
-                index={i}
-                isOpen={open.includes(i)}
-                onToggle={() => toggle(i)}
-                uid={uid}
-              />
-            ))}
-          </div>
-          <div>
-            {right.map((item, i) => (
-              <FaqItem
-                key={item.q}
-                item={item}
-                index={i + 6}
-                isOpen={open.includes(i + 6)}
-                onToggle={() => toggle(i + 6)}
-                uid={uid}
-              />
-            ))}
-          </div>
+        <div className="mt-6">
+          <FaqAccordion items={FAQ} />
         </div>
       </div>
+
     </section>
   );
 }

@@ -150,7 +150,7 @@ function UploadZone() {
 function PromptPanel() {
   const { scenarioSlug } = useCreate();
   const [value, setValue] = useState("");
-  const [preset, setPreset] = useState("live");
+  const [preset, setPreset] = useState<MotionPresetId | null>(null);
   const taRef = useRef<HTMLTextAreaElement | null>(null);
 
   useEffect(() => {
@@ -163,6 +163,19 @@ function PromptPanel() {
   const near = value.length >= 450;
   const disabled = value.trim().length === 0;
 
+  const onPreset = (id: MotionPresetId) => {
+    const oldText = preset ? MOTION_PRESETS[preset].text : "";
+    const next = preset === id ? "" : MOTION_PRESETS[id].text;
+    setValue(applyPresetText(value, oldText, next).slice(0, MAX));
+    setPreset(next ? id : null);
+  };
+
+  const onManualChange = (next: string) => {
+    setValue(next);
+    // пресет снимается, если его текст стёрли вручную
+    if (preset && !next.includes(MOTION_PRESETS[preset].text)) setPreset(null);
+  };
+
   return (
     <div className="mt-4 rounded-[16px] border border-rule bg-surface p-5">
       <div className="flex items-start gap-4">
@@ -170,7 +183,7 @@ function PromptPanel() {
           ref={taRef}
           value={value}
           maxLength={MAX}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(e) => onManualChange(e.target.value)}
           placeholder={placeholderFor(scenarioSlug)}
           className="min-h-[72px] max-h-[200px] w-full flex-1 resize-none border-0 bg-transparent text-[14px] leading-[1.6] text-ink outline-none placeholder:text-ink3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2"
         />
@@ -180,23 +193,25 @@ function PromptPanel() {
       </div>
 
       <div className="mt-4 flex flex-wrap items-center gap-2">
-        {PRESETS.map((p) => {
-          const on = preset === p.id;
+        {MOTION_PRESET_IDS.map((id) => {
+          const on = preset === id;
           return (
             <button
-              key={p.id}
+              key={id}
               type="button"
-              onClick={() => setPreset(p.id)}
+              aria-pressed={on}
+              onClick={() => onPreset(id)}
               className={`cursor-pointer rounded-full px-4 py-2 text-[13px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
                 on
                   ? "border-0 bg-gold3 text-gold"
                   : "border border-rule text-ink2 hover:border-[#3F3F46] hover:text-ink"
               }`}
             >
-              {p.label}
+              {MOTION_PRESETS[id].label}
             </button>
           );
         })}
+
 
         <button
           type="button"

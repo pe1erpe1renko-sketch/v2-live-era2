@@ -12,6 +12,8 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { LightLayout } from "@/components/layouts/LightLayout";
+import { AuthProvider } from "@/context/AuthContext";
+import { AuthDevToggle } from "@/components/AuthDevToggle";
 
 function NotFoundComponent() {
   return (

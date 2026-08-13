@@ -5,11 +5,12 @@ import { AppLink } from "@/components/AppLink";
 const focusRing =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 focus-visible:outline-offset-2";
 
-const panel = "rounded-[16px] border border-rule bg-surface p-6";
-const solidBtn =
-  "rounded-[6px] bg-gold px-6 py-3 text-[14px] text-white transition-colors duration-200 hover:bg-gold-dark";
-const ghostBtn =
-  "rounded-[6px] border border-rule px-6 py-3 text-[14px] text-ink transition-colors duration-200 hover:bg-gold3";
+const panel = "flex h-full flex-col rounded-[16px] border border-rule bg-surface p-6";
+const btnBase =
+  "inline-flex h-[44px] items-center justify-center rounded-[6px] px-6 text-[14px] transition-colors duration-200";
+const solidBtn = `${btnBase} bg-gold text-white hover:bg-gold-dark`;
+const ghostBtn = `${btnBase} border border-rule text-ink hover:bg-gold3`;
+
 
 export type Operation = {
   id: string;

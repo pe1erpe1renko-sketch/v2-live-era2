@@ -1,21 +1,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Icon } from "@iconify/react";
 import { AppLink } from "@/components/AppLink";
-import archive1 from "@/assets/sc-archive-1.jpg";
-import archive2 from "@/assets/sc-archive-2.jpg";
-import archive3 from "@/assets/sc-archive-3.jpg";
-import family1 from "@/assets/sc-family-1.jpg";
-import family2 from "@/assets/sc-family-2.jpg";
-import family3 from "@/assets/sc-family-3.jpg";
-import draw1 from "@/assets/sc-draw-1.jpg";
-import draw2 from "@/assets/sc-draw-2.jpg";
-import draw3 from "@/assets/sc-draw-3.jpg";
-import feed1 from "@/assets/sc-feed-1.jpg";
-import feed2 from "@/assets/sc-feed-2.jpg";
-import feed3 from "@/assets/sc-feed-3.jpg";
-
-type Scenario = { slug: string; title: string; img: string };
-type Model = { slug: string; name: string; letter: string; note: string };
+import { MODELS, SCENARIOS } from "@/components/create/data";
+import { useCreate } from "@/components/create/CreateContext";
 
 const SCENARIOS: Scenario[] = [
   { slug: "staroe-foto", title: "Старое фото", img: archive1 },

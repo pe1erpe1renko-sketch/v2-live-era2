@@ -196,8 +196,20 @@ export function SettingsPanel() {
 
   // при смене модели набор настроек перестраивается под её возможности
   useEffect(() => {
-    setFormat((f) => (caps.formats.includes(f) ? f : (caps.formats.includes("9:16") ? "9:16" : caps.formats[0])));
-    setQuality((q) => (caps.qualities.includes(q) ? q : (caps.qualities.includes("720p") ? "720p" : caps.qualities[0])));
+    setFormat((f) =>
+      caps.formats.includes(f)
+        ? f
+        : caps.formats.includes("9:16")
+          ? "9:16"
+          : (caps.formats[0] ?? "16:9"),
+    );
+    setQuality((q) =>
+      caps.qualities.includes(q)
+        ? q
+        : caps.qualities.includes("720p")
+          ? "720p"
+          : (caps.qualities[0] ?? "720p"),
+    );
     setDuration((d) => Math.min(caps.durationMax, Math.max(caps.durationMin, d)));
     if (!caps.sound) setSound(false);
     if (!caps.expert) setExpert(false);

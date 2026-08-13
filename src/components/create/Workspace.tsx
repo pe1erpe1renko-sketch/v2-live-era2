@@ -31,19 +31,26 @@ function ScenarioBar() {
   const { scenario, model, setScenarioSlug } = useCreate();
   if (!scenario) return null;
   return (
-    <div className="flex flex-col gap-3 rounded-[16px] border border-rule bg-surface px-4 py-3 sm:flex-row sm:items-center">
-      <div className="flex min-w-0 flex-1 items-center gap-3">
+    <div className="flex flex-col gap-2 rounded-[16px] border border-rule bg-surface px-4 py-3 md:flex-row md:items-center md:gap-3">
+      <div className="flex min-w-0 flex-1 items-start gap-3 md:items-center">
         <img
           src={scenario.img}
           alt={scenario.title}
           className="h-9 w-12 shrink-0 rounded-[6px] object-cover"
         />
         <div className="min-w-0">
-          <div className="flex items-center gap-2">
-            <Icon icon={scenario.icon} width={16} height={16} className="shrink-0 text-gold2" />
-            <span className="truncate text-[15px] font-normal text-ink">{scenario.title}</span>
+          <div className="flex items-start gap-2">
+            <Icon
+              icon={scenario.icon}
+              width={16}
+              height={16}
+              className="mt-1 shrink-0 text-gold2"
+            />
+            <span className="text-[15px] font-normal leading-[1.3] text-ink md:truncate">
+              {scenario.title}
+            </span>
           </div>
-          <p className="mt-1 truncate text-[12px] text-ink3">
+          <p className="mt-1 text-[12px] leading-[1.4] text-ink3 md:truncate">
             {scenario.note}
             {model && (
               <>
@@ -57,7 +64,7 @@ function ScenarioBar() {
       <button
         type="button"
         onClick={() => setScenarioSlug(null)}
-        className="flex shrink-0 items-center gap-1 self-start text-[12px] text-ink3 transition-colors hover:text-ink sm:self-center"
+        className="flex shrink-0 items-center gap-1 self-end text-[12px] text-ink3 transition-colors hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 md:self-center"
       >
         сбросить
         <Icon icon="solar:close-circle-linear" width={14} height={14} />

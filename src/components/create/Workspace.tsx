@@ -251,7 +251,7 @@ function PromptPanel() {
 export function Workspace() {
   const { scenarioSlug } = useCreate();
   return (
-    <div className="cta-offset mx-auto w-full max-w-[860px] px-4 pb-8 pt-5 sm:px-5">
+    <div className="mx-auto w-full max-w-[860px] px-4 pb-8 pt-5 sm:px-5">
       <div
         className={`grid transition-[grid-template-rows,opacity] duration-200 ease-slow ${
           scenarioSlug ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"

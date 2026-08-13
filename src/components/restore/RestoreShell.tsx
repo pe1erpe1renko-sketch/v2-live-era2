@@ -190,7 +190,7 @@ function RestoreWorkspace() {
   const strengthPct = strength * 100;
 
   return (
-    <div className="cta-offset mx-auto w-full max-w-[760px] p-4 sm:p-5">
+    <div className="mx-auto w-full max-w-[760px] p-4 sm:p-5">
       {/* режим */}
       <div className="flex items-center gap-3 rounded-[16px] border border-rule bg-surface px-4 py-3">
         <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-[6px] bg-gold3">

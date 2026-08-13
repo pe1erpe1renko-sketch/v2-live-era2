@@ -160,3 +160,53 @@
     mask-image: none;
   }
 }
+
+/* ── Dark zone: header/footer chrome on dark pages ───────────────── */
+.zone-dark {
+  --dark-bg: #1a1a1c;
+  --dark-panel: #232326;
+  --dark-rule: #2e2e31;
+  --dark-ink: #fafafa;
+  --dark-ink2: #a1a1aa;
+  --dark-ink3: #71717a;
+  color: var(--dark-ink);
+}
+
+.zone-dark .bg-bg,
+.zone-dark .bg-\[\#1A1A1C\] {
+  background-color: var(--dark-bg);
+}
+
+.zone-dark .bg-surface {
+  background-color: var(--dark-panel);
+}
+
+.zone-dark .border-rule,
+.zone-dark .border-rule2 {
+  border-color: var(--dark-rule);
+}
+
+.zone-dark .text-ink {
+  color: var(--dark-ink);
+}
+
+.zone-dark .text-ink2 {
+  color: var(--dark-ink2);
+}
+
+.zone-dark .text-ink3,
+.zone-dark .type-label {
+  color: var(--dark-ink3);
+}
+
+.zone-dark .hover\:text-ink:hover {
+  color: var(--dark-ink);
+}
+
+.zone-dark .hover\:text-ink2:hover {
+  color: var(--dark-ink2);
+}
+
+.zone-dark .hover\:bg-gold3:hover {
+  background-color: var(--dark-rule);
+}

@@ -369,9 +369,16 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-4 lg:gap-6">
-          <a href="#" className="hidden rounded-[6px] text-[14px] text-ink2 hover:text-ink lg:block">
-            Войти
-          </a>
+          {isLoggedIn ? (
+            <TokenPill />
+          ) : (
+            <a
+              href="#"
+              className="hidden rounded-[6px] text-[14px] text-ink2 hover:text-ink lg:block"
+            >
+              Войти
+            </a>
+          )}
           <button
             type="button"
             onClick={() => {

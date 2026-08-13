@@ -111,6 +111,7 @@ export function AudioPanel({ maxSeconds = 15 }: { maxSeconds?: number }) {
   const inputRef = useRef<HTMLInputElement | null>(null);
   const recorderRef = useRef<MediaRecorder | null>(null);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
+  const elapsedRef = useRef(0);
 
   useEffect(() => {
     setAudioDuration(url ? duration : null);
@@ -176,8 +177,6 @@ export function AudioPanel({ maxSeconds = 15 }: { maxSeconds?: number }) {
       setMicError(true);
     }
   };
-
-  const elapsedRef = useRef(0);
 
   const stopRecording = () => {
     if (timerRef.current) clearInterval(timerRef.current);

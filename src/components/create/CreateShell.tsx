@@ -61,9 +61,7 @@ export function CreateShell() {
             Сценарии и модели
           </button>
         </div>
-        <div className="mx-auto w-full max-w-[860px] px-8 pb-8 pt-5">
-          <p className="type-label">РАБОЧАЯ ОБЛАСТЬ</p>
-        </div>
+        <Workspace />
       </section>
 
       {/* right */}

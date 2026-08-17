@@ -231,6 +231,19 @@ export function SettingsPanel() {
   const needsVideo = !!caps.requiresReferenceVideo;
   const videoSeconds = videoDuration ? Math.ceil(videoDuration) : null;
 
+  // звук входит в базовую цену — тумблер показываем включённым и заблокированным
+  const soundLocked = PRICING_RULES.soundIncluded.includes(modelSlug);
+  const soundHint = "Эта модель всегда выдаёт видео со звуком. Доплаты за него нет";
+  // цена не зависит от длительности
+  const perClip = PRICING_RULES.perClip.includes(modelSlug);
+  // фиксированные длительности вместо ползунка
+  const durationOptions = caps.durationMultipliers
+    ? Object.keys(caps.durationMultipliers)
+        .map(Number)
+        .sort((a, b) => a - b)
+    : null;
+
+
 
   const [format, setFormat] = useState("9:16");
   const [duration, setDuration] = useState(dMin);

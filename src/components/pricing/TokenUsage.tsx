@@ -1,18 +1,24 @@
 import { SectionLabel } from "@/components/SectionLabel";
 
-const MODELS: { name: string; cost: number; note: string }[] = [
-  { name: "Hailuo 2", cost: 12, note: "самая экономная, хороша для проб" },
-  { name: "Veo 3.1", cost: 20, note: "Google, звук в комплекте" },
-  { name: "Grok", cost: 27, note: "быстрый, для простых движений" },
-  { name: "Hedra", cost: 27, note: "говорящий портрет под вашу аудиозапись" },
-  { name: "KLING 3.0", cost: 31, note: "держит мимику и мелкие детали" },
-  { name: "MiniMax H3", cost: 36, note: "оживление фото и работа с референсами" },
+const MODELS: { name: string; cost: number; unit: string; note: string }[] = [
+  { name: "Grok", cost: 9, unit: "/ 5 сек", note: "самый дешёвый, для простых движений" },
+  { name: "Hailuo 2", cost: 12, unit: "/ 6 сек", note: "экономный, ролики на 6 и 10 секунд" },
+  { name: "Veo 3.1", cost: 20, unit: "/ 5 сек", note: "Google, звук в комплекте" },
+  { name: "Hedra", cost: 27, unit: "/ 5 сек", note: "говорящий портрет под вашу аудиозапись" },
+  { name: "KLING 3.0", cost: 31, unit: "/ 5 сек", note: "держит мимику и мелкие детали" },
+  {
+    name: "MiniMax H3",
+    cost: 36,
+    unit: "/ 5 сек",
+    note: "оживление фото и работа с референсами",
+  },
   {
     name: "Kling 3.0 Motion Control",
     cost: 44,
+    unit: "/ 5 сек",
     note: "переносит движение с вашего видео-эталона",
   },
-  { name: "Seedance 2.0", cost: 83, note: "максимальное качество движения" },
+  { name: "Seedance 2.0", cost: 62, unit: "/ 5 сек", note: "плавное движение в кадре" },
 ];
 
 export function TokenUsage() {
@@ -39,7 +45,7 @@ export function TokenUsage() {
               <h3 className="mt-3 text-[15px] font-normal text-ink">{m.name}</h3>
               <p className="mt-2 flex items-baseline gap-1.5">
                 <span className="text-[28px] font-light leading-none text-ink">{m.cost}</span>
-                <span className="text-[12px] text-ink3">ток. / 5 сек</span>
+                <span className="text-[12px] text-ink3">ток. {m.unit}</span>
               </p>
               <p className="mt-1.5 text-[12px] leading-[1.5] text-ink2">{m.note}</p>
             </article>

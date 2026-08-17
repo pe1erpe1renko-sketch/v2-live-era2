@@ -1,5 +1,6 @@
 import { useRef, useState } from "react";
 import { Icon } from "@iconify/react";
+import { tokensLabel } from "@/lib/plural";
 
 type Pack = {
   name: string;
@@ -11,7 +12,7 @@ type Pack = {
 };
 
 const BASE = (tokens: string, clips: string) => [
-  { text: `${tokens} токенов` },
+  { text: tokensLabel(tokens) },
   { text: clips },
   { text: "Токены не сгорают" },
   { text: "Все сценарии и нейросети" },

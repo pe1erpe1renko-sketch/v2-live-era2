@@ -6,6 +6,7 @@ import { computeCost } from "@/components/create/tokenCosts";
 import { useAuth } from "@/context/AuthContext";
 import { useAuthModal } from "@/context/AuthModalContext";
 import { AppLink } from "@/components/AppLink";
+import { tokensLabel } from "@/lib/plural";
 
 const TEXT_ONLY = "video-iz-teksta";
 const darkInput = { backgroundColor: "var(--dark-input, #1a1a1c)" };
@@ -495,7 +496,7 @@ export function SettingsPanel() {
             ? "Войти и создать видео"
             : missingLabel
               ? missingLabel
-              : `Сгенерировать · ${cost} токенов`}
+              : `Сгенерировать · ${tokensLabel(cost)}`}
         </button>
 
         <p className="mt-2 text-center text-[12px] text-ink3 md:mt-2.5">
@@ -509,7 +510,7 @@ export function SettingsPanel() {
             )
           ) : isLoggedIn ? (
             <>
-              Баланс: 0 токенов ·{" "}
+              Баланс: {tokensLabel(0)} ·{" "}
               <AppLink href="/account?tab=balance" className="text-gold2">
                 пополнить
               </AppLink>

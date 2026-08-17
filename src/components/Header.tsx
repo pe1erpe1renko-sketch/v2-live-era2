@@ -5,6 +5,7 @@ import { useAuth } from "@/context/AuthContext";
 import { useAuthModal } from "@/context/AuthModalContext";
 import { AccountMenu, TokenPill, ACCOUNT_LINKS } from "@/components/AccountMenu";
 import { AppLink } from "@/components/AppLink";
+import { tokensLabel } from "@/lib/plural";
 import { scenarioHref, modelHref } from "@/lib/links";
 import archive1 from "@/assets/sc-archive-1.jpg";
 import archive2 from "@/assets/sc-archive-2.jpg";

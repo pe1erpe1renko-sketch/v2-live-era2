@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Icon } from "@iconify/react";
 import { AppLink } from "@/components/AppLink";
+import { tokensLabel } from "@/lib/plural";
 import { useAuth } from "@/context/AuthContext";
 import { useAuthModal } from "@/context/AuthModalContext";
 import { computeRestoreCost } from "@/components/create/tokenCosts";

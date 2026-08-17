@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Icon } from "@iconify/react";
 import { AppLink } from "@/components/AppLink";
+import { tokenWord } from "@/lib/plural";
 
 const focusRing =
   "focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 focus-visible:outline-offset-2";

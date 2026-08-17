@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Icon } from "@iconify/react";
 import { useAuth } from "@/context/AuthContext";
 import { AppLink } from "@/components/AppLink";
+import { tokensLabel } from "@/lib/plural";
 
 export const ACCOUNT_LINKS = [
   { icon: "solar:gallery-linear", label: "Мои генерации", href: "/account?tab=generations" },

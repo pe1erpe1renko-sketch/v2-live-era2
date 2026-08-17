@@ -54,15 +54,11 @@ export const PRICING_RULES = {
   // звук входит в базовую цену и отдельно не тарифицируется:
   // hedra — всегда включён, kling-motion — берётся из видео-эталона
   soundIncluded: ["hedra", "kling-motion"],
-  // 1080p у kling-motion идёт с множителем 1.35 (см. MODEL_CAPABILITIES).
-  // При ceil() получаются 60/84/167, а целевые значения 59/83/166 —
-  // это округление до ближайшего, поэтому для модели используется round().
-  round: ["kling-motion"],
 };
 
 export function computeRestoreCost(resolution: string) {
   const r = TOKEN_COSTS.restore;
-  return Math.ceil(r.base * (r.resolution[resolution] ?? 1));
+  return Math.round(r.base * (r.resolution[resolution] ?? 1));
 }
 
 export function computeCost(input: {
@@ -89,15 +85,10 @@ export function computeCost(input: {
   const caps = capabilitiesFor(input.model);
   const qMul = caps.qualityMultipliers?.[input.quality] ?? (m.quality[input.quality] ?? 1);
 
-  const round = (PRICING_RULES.round ?? []).includes(input.model);
-
-  // у kling-motion округление до целого происходит в два шага:
-  // сперва цена за длительность, затем множитель качества
-  const afterDuration = round
-    ? Math.round(base * durationMul)
-    : base * durationMul;
-
-  let total = afterDuration * qMul * soundMul * (m.format[input.format] ?? 1);
+  // округление одно и единственное: итог округляется до ближайшего целого
+  let total = Math.round(
+    base * durationMul * qMul * soundMul * (m.format[input.format] ?? 1),
+  );
   if (input.lastFrame) total += TOKEN_COSTS.extras.lastFrame;
-  return round ? Math.round(total) : Math.ceil(total);
+  return total;
 }

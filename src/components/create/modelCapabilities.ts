@@ -42,12 +42,14 @@ export const MODEL_CAPABILITIES: Record<string, ModelCapability> = {
   "kling-motion": {
     // образец — kling-3; отличия: только 720p/1080p, эксперт и промпт выключены,
     // движение берётся из видео-эталона (режим video-to-video).
+    // звук берётся из видео-эталона, поэтому тумблер не показывается и
+    // не тарифицируется отдельно (см. PRICING_RULES.soundIncluded).
     formats: ["16:9", "9:16", "1:1"],
     durationMin: 5,
     durationMax: 10,
     durationStep: 1,
     qualities: ["720p", "1080p"],
-    sound: true,
+    sound: false,
     expert: false,
     promptStrength: false,
     lastFrame: true,

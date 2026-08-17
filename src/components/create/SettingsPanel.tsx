@@ -334,7 +334,7 @@ export function SettingsPanel() {
         {/* Строка-подсказка */}
         <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-[12px] text-ink3">
           <span>
-            {!expert &&
+            {caps.expert && !expert &&
               "Тумблер «Эксперт» открывает точность промпта, последний кадр и негативный промпт"}
           </span>
           <span className="ml-auto">

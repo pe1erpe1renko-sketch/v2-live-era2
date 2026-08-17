@@ -71,6 +71,11 @@ const MODELS: {
     text: "универсальная модель, держит мимику и мелкие детали",
   },
   {
+    letter: "K",
+    name: "Kling 3.0 Motion Control",
+    text: "перенос движения с видео-эталона",
+  },
+  {
     letter: "M",
     name: "MiniMax H3",
     text: "Hailuo: оживление фото и работа с референсами",

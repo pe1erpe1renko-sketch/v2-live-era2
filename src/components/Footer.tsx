@@ -12,7 +12,7 @@ const COLUMNS: { title: string; links: { label: string; href: string }[] }[] = [
   },
   {
     title: "Нейросети",
-    links: ["KLING 3.0", "MiniMax H3", "Hedra", "Seedance 2.0"].map((label) => ({
+    links: ["KLING 3.0", "Kling 3.0 Motion Control", "MiniMax H3", "Hedra", "Seedance 2.0"].map((label) => ({
       label,
       href: modelHref(label),
     })),

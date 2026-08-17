@@ -43,8 +43,12 @@ export function CreateProvider({ children }: { children: ReactNode }) {
       setFile,
       audioDuration,
       setAudioDuration,
+      videoFile,
+      setVideoFile,
+      videoDuration,
+      setVideoDuration,
     }),
-    [scenarioSlug, modelSlug, file, audioDuration],
+    [scenarioSlug, modelSlug, file, audioDuration, videoFile, videoDuration],
   );
 
   return <CreateCtx.Provider value={value}>{children}</CreateCtx.Provider>;

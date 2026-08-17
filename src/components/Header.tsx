@@ -58,57 +58,21 @@ const SCENARIO_COLS: { label: string; items: Item[] }[] = [
   },
 ];
 
-const MODELS: {
-  letter: string;
-  name: string;
-  badge?: string;
-  text: string;
-}[] = [
-  {
-    letter: "K",
-    name: "KLING 3.0",
-    badge: "Чаще всего",
-    text: "универсальная модель, держит мимику и мелкие детали",
-  },
-  {
-    letter: "K",
-    name: "Kling 3.0 Motion Control",
-    text: "перенос движения с видео-эталона",
-  },
-  {
-    letter: "M",
-    name: "MiniMax H3",
-    text: "Hailuo: оживление фото и работа с референсами",
-  },
-  {
-    letter: "H",
-    name: "Hedra",
-    badge: "Речь",
-    text: "говорящий портрет: лицо произносит вашу реплику",
-  },
-  {
-    letter: "S",
-    name: "Seedance 2.0",
-    badge: "Качество",
-    text: "ByteDance: максимальное качество движения",
-  },
-  {
-    letter: "V",
-    name: "Veo 3.1",
-    text: "Google: звук в комплекте",
-  },
-  {
-    letter: "G",
-    name: "Grok",
-    text: "xAI: быстрый и недорогой",
-  },
-  {
-    letter: "H",
-    name: "Hailuo 2",
-    badge: "Эконом",
-    text: "MiniMax: самый бережный расход токенов",
-  },
-];
+import { MODELS as DATA_MODELS } from "@/components/create/data";
+
+const MODEL_BADGES: Record<string, string> = {
+  "KLING 3.0": "Чаще всего",
+  Hedra: "Речь",
+  "Seedance 2.0": "Качество",
+  "Hailuo 2": "Эконом",
+};
+
+const MODELS = DATA_MODELS.map((m) => ({
+  letter: m.letter,
+  name: m.name,
+  badge: MODEL_BADGES[m.name],
+  text: m.note,
+}));
 
 const SIMPLE_LINKS_OUT = [
   { label: "Примеры", href: "/examples" },

@@ -116,6 +116,12 @@ export const MODELS: Model[] = [
     note: "универсальная, держит мимику и мелкие детали",
   },
   {
+    slug: "kling-motion",
+    name: "Kling 3.0 Motion Control",
+    letter: "K",
+    note: "перенос движения с видео-эталона",
+  },
+  {
     slug: "minimax-h3",
     name: "MiniMax H3",
     letter: "M",

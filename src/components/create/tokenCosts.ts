@@ -5,6 +5,8 @@
  * Меняйте стоимость только здесь — интерфейс читает этот конфиг.
  */
 
+import { capabilitiesFor } from "@/components/create/modelCapabilities";
+
 export const TOKEN_COSTS = {
   // стоимость ролика 5 секунд, базовое качество, без звука
   base: {
@@ -13,6 +15,7 @@ export const TOKEN_COSTS = {
     grok: 27,
     hedra: 27,
     "kling-3": 31,
+    "kling-motion": 44,
     "minimax-h3": 36,
     "seedance-2": 83,
   } as Record<string, number>,
@@ -49,6 +52,10 @@ export const TOKEN_COSTS = {
 export const PRICING_RULES = {
   perClip: ["veo-3-1", "hailuo-2"], // длительность не влияет на цену
   soundIncluded: ["hedra"], // звук всегда включён, доплаты нет
+  // 1080p у kling-motion идёт с множителем 1.35 (см. MODEL_CAPABILITIES).
+  // При ceil() получаются 60/84/167, а целевые значения 59/83/166 —
+  // это округление до ближайшего, поэтому для модели используется round().
+  round: ["kling-motion"],
 };
 
 export function computeRestoreCost(resolution: string) {
@@ -75,8 +82,13 @@ export function computeCost(input: {
     : 1 + (Math.max(input.duration, 5) - 5) * m.duration.perSecondOver5;
   const soundMul = soundIncluded ? 1 : input.sound ? m.sound.on : m.sound.off;
 
-  let total =
-    base * durationMul * (m.quality[input.quality] ?? 1) * soundMul * (m.format[input.format] ?? 1);
+  // У модели может быть собственный множитель качества (qualityMultipliers
+  // в MODEL_CAPABILITIES), перекрывающий общий из TOKEN_COSTS.multipliers.
+  const caps = capabilitiesFor(input.model);
+  const qMul = caps.qualityMultipliers?.[input.quality] ?? (m.quality[input.quality] ?? 1);
+
+  let total = base * durationMul * qMul * soundMul * (m.format[input.format] ?? 1);
   if (input.lastFrame) total += TOKEN_COSTS.extras.lastFrame;
-  return Math.ceil(total);
+  const round = (PRICING_RULES.round ?? []).includes(input.model);
+  return round ? Math.round(total) : Math.ceil(total);
 }

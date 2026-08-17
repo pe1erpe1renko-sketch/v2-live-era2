@@ -17,6 +17,7 @@ export const SCENARIO_SLUGS: Record<string, string> = {
 export const MODEL_SLUGS: Record<string, string> = {
   "KLING 3.0": "kling-3",
   "Kling 3.0": "kling-3",
+  "Kling 3.0 Motion Control": "kling-motion",
   "MiniMax H3": "minimax-h3",
   Hedra: "hedra",
   "Seedance 2.0": "seedance-2",

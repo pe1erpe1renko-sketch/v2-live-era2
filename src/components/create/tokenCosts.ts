@@ -89,8 +89,15 @@ export function computeCost(input: {
   const caps = capabilitiesFor(input.model);
   const qMul = caps.qualityMultipliers?.[input.quality] ?? (m.quality[input.quality] ?? 1);
 
-  let total = base * durationMul * qMul * soundMul * (m.format[input.format] ?? 1);
-  if (input.lastFrame) total += TOKEN_COSTS.extras.lastFrame;
   const round = (PRICING_RULES.round ?? []).includes(input.model);
+
+  // у kling-motion округление до целого происходит в два шага:
+  // сперва цена за длительность, затем множитель качества
+  const afterDuration = round
+    ? Math.round(base * durationMul)
+    : base * durationMul;
+
+  let total = afterDuration * qMul * soundMul * (m.format[input.format] ?? 1);
+  if (input.lastFrame) total += TOKEN_COSTS.extras.lastFrame;
   return round ? Math.round(total) : Math.ceil(total);
 }

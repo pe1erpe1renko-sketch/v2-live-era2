@@ -13,6 +13,12 @@ type Ctx = {
   /** длительность загруженной звуковой дорожки, сек (Hedra) */
   audioDuration: number | null;
   setAudioDuration: (v: number | null) => void;
+  /** видео-эталон (kling-motion, режим video-to-video) */
+  videoFile: File | null;
+  setVideoFile: (f: File | null) => void;
+  /** длительность видео-эталона, сек */
+  videoDuration: number | null;
+  setVideoDuration: (v: number | null) => void;
 };
 
 const CreateCtx = createContext<Ctx | null>(null);
@@ -22,6 +28,8 @@ export function CreateProvider({ children }: { children: ReactNode }) {
   const [modelSlug, setModelSlug] = useState<string>("kling-3");
   const [file, setFile] = useState<File | null>(null);
   const [audioDuration, setAudioDuration] = useState<number | null>(null);
+  const [videoFile, setVideoFile] = useState<File | null>(null);
+  const [videoDuration, setVideoDuration] = useState<number | null>(null);
 
   const value = useMemo<Ctx>(
     () => ({
@@ -35,8 +43,12 @@ export function CreateProvider({ children }: { children: ReactNode }) {
       setFile,
       audioDuration,
       setAudioDuration,
+      videoFile,
+      setVideoFile,
+      videoDuration,
+      setVideoDuration,
     }),
-    [scenarioSlug, modelSlug, file, audioDuration],
+    [scenarioSlug, modelSlug, file, audioDuration, videoFile, videoDuration],
   );
 
   return <CreateCtx.Provider value={value}>{children}</CreateCtx.Provider>;

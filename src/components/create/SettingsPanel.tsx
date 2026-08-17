@@ -188,7 +188,8 @@ function LastFrameZone({ onChange }: { onChange: (has: boolean) => void }) {
 }
 
 export function SettingsPanel() {
-  const { modelSlug, model, scenarioSlug, file, audioDuration } = useCreate();
+  const { modelSlug, model, scenarioSlug, file, audioDuration, videoFile, videoDuration } =
+    useCreate();
   const { isLoggedIn } = useAuth();
   const { openAuth } = useAuthModal();
   const caps = capabilitiesFor(modelSlug);
@@ -198,6 +199,8 @@ export function SettingsPanel() {
   const needsAudio = !!caps.needsAudio;
   const noDuration = !!caps.durationLocked;
   const compact = noDuration && !needsAudio && !caps.sound && !caps.expert;
+  const needsVideo = !!caps.requiresReferenceVideo;
+  const videoSeconds = videoDuration ? Math.ceil(videoDuration) : null;
 
 
   const [format, setFormat] = useState("9:16");
@@ -234,7 +237,11 @@ export function SettingsPanel() {
     () =>
       computeCost({
         model: modelSlug,
-        duration: needsAudio ? Math.max(5, Math.ceil(audioDuration ?? 5)) : duration,
+        duration: needsAudio
+          ? Math.max(5, Math.ceil(audioDuration ?? 5))
+          : needsVideo
+            ? Math.max(5, videoSeconds ?? 5)
+            : duration,
         quality,
         sound,
         format,
@@ -245,6 +252,8 @@ export function SettingsPanel() {
       duration,
       needsAudio,
       audioDuration,
+      needsVideo,
+      videoSeconds,
       quality,
       sound,
       format,
@@ -255,7 +264,18 @@ export function SettingsPanel() {
   );
 
   const needsPhoto = scenarioSlug !== TEXT_ONLY;
-  const disabled = (needsPhoto && !file) || (needsAudio && !audioDuration);
+  const disabled =
+    (needsPhoto && !file) || (needsAudio && !audioDuration) || (needsVideo && !videoFile);
+
+  // подпись кнопки, когда не хватает файлов для video-to-video
+  const missingLabel =
+    needsVideo && !file && !videoFile
+      ? "Загрузите снимок и видео-эталон"
+      : needsVideo && !videoFile
+        ? "Загрузите видео-эталон"
+        : needsVideo && !file
+          ? "Загрузите снимок"
+          : null;
 
   // TODO: заглушка — генерация появится вместе с бэкендом
   const handleGenerate = () => {};
@@ -300,6 +320,15 @@ export function SettingsPanel() {
               </div>
             </div>
             </div>
+
+            {noDuration && (
+              <div className="mt-3 flex items-center gap-2 text-[13px]">
+                <span className="text-ink3">Длительность</span>
+                <span className="text-ink">
+                  {videoSeconds ? `${videoSeconds} сек` : "по видео-эталону"}
+                </span>
+              </div>
+            )}
           </>
         ) : (
           <>
@@ -462,12 +491,18 @@ export function SettingsPanel() {
               : "cursor-pointer bg-gold text-white hover:bg-gold-dark"
           }`}
         >
-          {isLoggedIn ? `Сгенерировать · ${cost} токенов` : "Войти и создать видео"}
+          {!isLoggedIn
+            ? "Войти и создать видео"
+            : missingLabel
+              ? missingLabel
+              : `Сгенерировать · ${cost} токенов`}
         </button>
 
         <p className="mt-2 text-center text-[12px] text-ink3 md:mt-2.5">
           {disabled ? (
-            needsAudio && !audioDuration ? (
+            needsVideo ? (
+              "Нужны два файла: снимок и видео-эталон"
+            ) : needsAudio && !audioDuration ? (
               "Загрузите звук, чтобы продолжить"
             ) : (
               "Загрузите снимок, чтобы продолжить"

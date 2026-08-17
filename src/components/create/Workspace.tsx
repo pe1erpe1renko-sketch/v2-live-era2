@@ -3,6 +3,7 @@ import { Icon } from "@iconify/react";
 import { useCreate } from "@/components/create/CreateContext";
 import { SettingsPanel } from "@/components/create/SettingsPanel";
 import { AudioPanel } from "@/components/create/AudioPanel";
+import { VideoRefPanel } from "@/components/create/VideoRefPanel";
 import { capabilitiesFor } from "@/components/create/modelCapabilities";
 import {
   MOTION_PRESETS,
@@ -263,8 +264,21 @@ export function Workspace() {
         </div>
       </div>
 
-      {scenarioSlug !== TEXT_ONLY && <UploadZone />}
-      {caps.needsAudio ? <AudioPanel maxSeconds={caps.maxAudioSeconds ?? 15} /> : <PromptPanel />}
+      {scenarioSlug !== TEXT_ONLY && (
+        <>
+          {caps.requiresReferenceVideo && (
+            <div className="type-label mt-4 text-ink3">Шаг 1 · Исходное фото</div>
+          )}
+          <UploadZone />
+        </>
+      )}
+      {caps.requiresReferenceVideo ? (
+        <VideoRefPanel />
+      ) : caps.needsAudio ? (
+        <AudioPanel maxSeconds={caps.maxAudioSeconds ?? 15} />
+      ) : (
+        <PromptPanel />
+      )}
       <SettingsPanel />
     </div>
   );

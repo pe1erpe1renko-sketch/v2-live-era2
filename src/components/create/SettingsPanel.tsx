@@ -79,21 +79,27 @@ function Toggle({
   checked,
   onChange,
   label,
+  locked,
+  lockedHint,
 }: {
   checked: boolean;
   onChange: (v: boolean) => void;
   label: string;
+  locked?: boolean;
+  lockedHint?: string;
 }) {
   return (
     <button
       type="button"
       role="switch"
       aria-checked={checked}
+      aria-disabled={locked || undefined}
       aria-label={label}
-      onClick={() => onChange(!checked)}
+      title={locked ? lockedHint : undefined}
+      onClick={() => !locked && onChange(!checked)}
       className={`relative h-[24px] w-[44px] shrink-0 rounded-full transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
         checked ? "bg-gold" : "bg-rule"
-      }`}
+      } ${locked ? "cursor-default opacity-50" : ""}`}
     >
       <span
         className="absolute top-[3px] h-[18px] w-[18px] rounded-full transition-all duration-200"
@@ -104,6 +110,7 @@ function Toggle({
       />
     </button>
   );
+
 }
 
 function Slider({

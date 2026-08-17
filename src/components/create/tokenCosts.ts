@@ -51,7 +51,9 @@ export const TOKEN_COSTS = {
  */
 export const PRICING_RULES = {
   perClip: ["veo-3-1", "hailuo-2"], // длительность не влияет на цену
-  soundIncluded: ["hedra"], // звук всегда включён, доплаты нет
+  // звук входит в базовую цену и отдельно не тарифицируется:
+  // hedra — всегда включён, kling-motion — берётся из видео-эталона
+  soundIncluded: ["hedra", "kling-motion"],
   // 1080p у kling-motion идёт с множителем 1.35 (см. MODEL_CAPABILITIES).
   // При ceil() получаются 60/84/167, а целевые значения 59/83/166 —
   // это округление до ближайшего, поэтому для модели используется round().

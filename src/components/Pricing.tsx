@@ -47,7 +47,7 @@ const PLANS: Plan[] = [
     featured: true,
     items: [
       { text: "Всё из «Старта», плюс:", note: true },
-      { text: "Премиум-модели: Veo 3.1, Kling O3 Pro" },
+      { text: "Премиум-модели: Veo 3.1, Seedance 2.0, Kling 3.0" },
       { text: "Ролики до 15 секунд" },
       { text: "Несколько снимков в одной сцене" },
       { text: "Приватные генерации" },
@@ -66,7 +66,7 @@ const PLANS: Plan[] = [
     clips: "≈ 84 ролика",
     items: [
       { text: "Всё из «Про», плюс:", note: true },
-      { text: "Качество 4K" },
+      { text: "Качество 4K на Veo 3.1 и KLING 3.0" },
       { text: "Две генерации одновременно" },
     ],
   },

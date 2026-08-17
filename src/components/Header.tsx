@@ -63,7 +63,7 @@ import { MODELS as DATA_MODELS } from "@/components/create/data";
 const MODEL_BADGES: Record<string, string> = {
   "KLING 3.0": "Чаще всего",
   Hedra: "Речь",
-  "Seedance 2.0": "Качество",
+  "Seedance 2.0": "Плавность",
   "Hailuo 2": "Эконом",
 };
 

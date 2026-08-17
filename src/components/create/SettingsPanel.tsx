@@ -435,7 +435,7 @@ export function SettingsPanel() {
                 <div className="flex flex-col gap-2 md:flex-row md:items-center md:gap-3">
                   <span className="text-[13px] text-ink3">Длительность</span>
                   <Segmented
-                    value={String(duration)}
+                    value={`${duration} сек`}
                     options={durationOptions.map((d) => `${d} сек`)}
                     onChange={(v) => setDuration(parseInt(v, 10))}
                     label="Длительность"

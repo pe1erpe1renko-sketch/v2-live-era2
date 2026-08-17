@@ -6,7 +6,7 @@ export function StatsBar() {
         <div className="py-8 lg:pr-8">
           <p className="type-label text-ink3">В доступе</p>
           <p className="mt-2 flex items-baseline text-[28px] font-light leading-none text-ink">
-            7 моделей
+            8 моделей
           </p>
         </div>
 

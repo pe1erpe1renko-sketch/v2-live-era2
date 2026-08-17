@@ -1,6 +1,6 @@
 import { SectionLabel } from "@/components/SectionLabel";
 
-const ROW_TOP = ["KLING 3.0", "MiniMax H3", "Hedra", "Seedance 2.0"];
+const ROW_TOP = ["KLING 3.0", "Kling 3.0 Motion Control", "MiniMax H3", "Hedra", "Seedance 2.0"];
 const ROW_BOTTOM = ["Veo 3.1", "Grok", "Hailuo 2"];
 
 function Item({ label }: { label: string }) {
@@ -41,7 +41,7 @@ export function Models() {
   return (
     <section className="border-b border-rule">
       <div className="mx-auto max-w-[1440px] px-8 py-12 lg:px-16">
-        <SectionLabel>Семь моделей</SectionLabel>
+        <SectionLabel>Восемь моделей</SectionLabel>
 
         <h2 className="mt-4 text-[clamp(28px,3vw,44px)] font-light leading-[1.1] tracking-[-0.04em] text-ink">
           Не одна нейросеть, а весь набор сразу

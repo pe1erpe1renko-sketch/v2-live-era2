@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Icon } from "@iconify/react";
 import { useCreate } from "@/components/create/CreateContext";
 import { capabilitiesFor, qualitiesFor } from "@/components/create/modelCapabilities";
-import { computeCost } from "@/components/create/tokenCosts";
+import { computeCost, PRICING_RULES } from "@/components/create/tokenCosts";
 import { useAuth } from "@/context/AuthContext";
 import { useAuthModal } from "@/context/AuthModalContext";
 import { AppLink } from "@/components/AppLink";
@@ -17,12 +17,18 @@ function Segmented({
   onChange,
   label,
   inline,
+  disabledOptions,
+  titles,
+  subLabels,
 }: {
   value: string;
   options: string[];
   onChange: (v: string) => void;
   label: string;
   inline?: boolean;
+  disabledOptions?: string[];
+  titles?: Record<string, string>;
+  subLabels?: Record<string, string>;
 }) {
   return (
     <div
@@ -35,18 +41,32 @@ function Segmented({
     >
       {options.map((o) => {
         const on = o === value;
+        const off = disabledOptions?.includes(o);
         return (
           <button
             key={o}
             type="button"
             role="radio"
             aria-checked={on}
-            onClick={() => onChange(o)}
+            aria-disabled={off || undefined}
+            title={titles?.[o]}
+            onClick={() => !off && onChange(o)}
             className={`rounded-[4px] px-[14px] text-[13px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
               inline ? "py-[6px]" : "flex-1 py-[10px] md:flex-none md:py-[6px]"
-            } ${on ? "bg-gold text-white" : "text-ink2 hover:text-ink"}`}
+            } ${
+              off
+                ? "cursor-default text-ink3 opacity-50"
+                : on
+                  ? "bg-gold text-white"
+                  : "text-ink2 hover:text-ink"
+            }`}
           >
             {o}
+            {subLabels?.[o] && (
+              <span className="ml-1 text-[10px] uppercase tracking-[0.1em] opacity-70">
+                {subLabels[o]}
+              </span>
+            )}
           </button>
         );
       })}
@@ -54,25 +74,32 @@ function Segmented({
   );
 }
 
+
 function Toggle({
   checked,
   onChange,
   label,
+  locked,
+  lockedHint,
 }: {
   checked: boolean;
   onChange: (v: boolean) => void;
   label: string;
+  locked?: boolean;
+  lockedHint?: string;
 }) {
   return (
     <button
       type="button"
       role="switch"
       aria-checked={checked}
+      aria-disabled={locked || undefined}
       aria-label={label}
-      onClick={() => onChange(!checked)}
+      title={locked ? lockedHint : undefined}
+      onClick={() => !locked && onChange(!checked)}
       className={`relative h-[24px] w-[44px] shrink-0 rounded-full transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
         checked ? "bg-gold" : "bg-rule"
-      }`}
+      } ${locked ? "cursor-default opacity-50" : ""}`}
     >
       <span
         className="absolute top-[3px] h-[18px] w-[18px] rounded-full transition-all duration-200"
@@ -83,6 +110,7 @@ function Toggle({
       />
     </button>
   );
+
 }
 
 function Slider({
@@ -203,6 +231,19 @@ export function SettingsPanel() {
   const needsVideo = !!caps.requiresReferenceVideo;
   const videoSeconds = videoDuration ? Math.ceil(videoDuration) : null;
 
+  // звук входит в базовую цену — тумблер показываем включённым и заблокированным
+  const soundLocked = PRICING_RULES.soundIncluded.includes(modelSlug);
+  const soundHint = "Эта модель всегда выдаёт видео со звуком. Доплаты за него нет";
+  // цена не зависит от длительности
+  const perClip = PRICING_RULES.perClip.includes(modelSlug);
+  // фиксированные длительности вместо ползунка
+  const durationOptions = caps.durationMultipliers
+    ? Object.keys(caps.durationMultipliers)
+        .map(Number)
+        .sort((a, b) => a - b)
+    : null;
+
+
 
   const [format, setFormat] = useState("9:16");
   const [duration, setDuration] = useState(dMin);
@@ -229,15 +270,21 @@ export function SettingsPanel() {
           ? "720p"
           : (caps.qualities[0] ?? "720p"),
     );
-    setDuration((d) => Math.min(dMax, Math.max(dMin, d)));
+    setDuration((d) => {
+      const clamped = Math.min(dMax, Math.max(dMin, d));
+      if (!durationOptions) return clamped;
+      return durationOptions.includes(clamped) ? clamped : durationOptions[0]!;
+    });
     if (!caps.sound) setSound(false);
     if (!caps.expert) setExpert(false);
-  }, [caps, dMin, dMax]);
+  }, [caps, dMin, dMax]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const availableQualities = qualitiesFor(caps, duration);
+  const disabledQualities = caps.qualities.filter((q) => !availableQualities.includes(q));
   useEffect(() => {
     setQuality((q) => (availableQualities.includes(q) ? q : (availableQualities[0] ?? "720p")));
   }, [availableQualities.join(",")]); // eslint-disable-line react-hooks/exhaustive-deps
+
 
   const cost = useMemo(
     () =>
@@ -286,7 +333,39 @@ export function SettingsPanel() {
   // TODO: заглушка — генерация появится вместе с бэкендом
   const handleGenerate = () => {};
 
+  // общие пропсы кнопок качества: недоступные варианты видно, но выбрать нельзя
+  const qualityProps = {
+    options: caps.qualities,
+    disabledOptions: disabledQualities,
+    titles: Object.fromEntries(
+      disabledQualities.map((q) => [q, "1080p доступно только для ролика на 6 секунд"]),
+    ),
+    subLabels: (caps.qualities.includes("480p")
+      ? { "480p": "экономно" }
+      : {}) as Record<string, string>,
+  };
+
+  const soundBlock =
+    caps.sound || soundLocked ? (
+      <div className="flex items-center gap-3" title={soundLocked ? soundHint : undefined}>
+        <Toggle
+          checked={soundLocked ? true : sound}
+          onChange={setSound}
+          label="Звук"
+          locked={soundLocked}
+          lockedHint={soundHint}
+        />
+        <div>
+          <div className="text-[13px] text-ink">Звук</div>
+          <div className="text-[11px] text-ink3">
+            {soundLocked ? "звук включён, доплаты нет" : "дороже — считается по другой ставке"}
+          </div>
+        </div>
+      </div>
+    ) : null;
+
   return (
+
     <>
       <div
         className={`mt-4 rounded-[16px] border border-rule bg-surface ${
@@ -319,7 +398,7 @@ export function SettingsPanel() {
                 <Segmented
                   inline
                   value={quality}
-                  options={availableQualities}
+                  {...qualityProps}
                   onChange={setQuality}
                   label="Качество"
                 />
@@ -335,6 +414,9 @@ export function SettingsPanel() {
                 </span>
               </div>
             )}
+
+            {soundBlock && <div className="mt-3">{soundBlock}</div>}
+
           </>
         ) : (
           <>
@@ -349,6 +431,16 @@ export function SettingsPanel() {
                 <p className="text-[13px] text-ink2">
                   Длительность ролика равна длине звуковой дорожки
                 </p>
+              ) : durationOptions ? (
+                <div className="flex flex-col gap-2 md:flex-row md:items-center md:gap-3">
+                  <span className="text-[13px] text-ink3">Длительность</span>
+                  <Segmented
+                    value={`${duration} сек`}
+                    options={durationOptions.map((d) => `${d} сек`)}
+                    onChange={(v) => setDuration(parseInt(v, 10))}
+                    label="Длительность"
+                  />
+                </div>
               ) : (
                 <div className="flex flex-col gap-2 md:flex-row md:items-center md:gap-3">
                   <div className="flex items-center justify-between gap-3">
@@ -360,22 +452,29 @@ export function SettingsPanel() {
                       </span>
                     </span>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <Slider
-                      label="Длительность"
-                      value={duration}
-                      min={dMin}
-                      max={dMax}
-                      step={dStep}
-                      onChange={setDuration}
-                      className="w-full md:w-[160px]"
-                    />
-                    <span className="hidden shrink-0 whitespace-nowrap md:inline">
-                      <span className="text-[14px] font-normal text-ink">{duration}</span>{" "}
-                      <span className="text-[12px] text-ink3">
-                        / {dMin}–{dMax} сек
+                  <div className="flex flex-col gap-1">
+                    <div className="flex items-center gap-3">
+                      <Slider
+                        label="Длительность"
+                        value={duration}
+                        min={dMin}
+                        max={dMax}
+                        step={dStep}
+                        onChange={setDuration}
+                        className="w-full md:w-[160px]"
+                      />
+                      <span className="hidden shrink-0 whitespace-nowrap md:inline">
+                        <span className="text-[14px] font-normal text-ink">{duration}</span>{" "}
+                        <span className="text-[12px] text-ink3">
+                          / {dMin}–{dMax} сек
+                        </span>
                       </span>
-                    </span>
+                    </div>
+                    {perClip && (
+                      <span className="text-[11px] text-ink3">
+                        цена не зависит от длины ролика
+                      </span>
+                    )}
                   </div>
                 </div>
               )}
@@ -389,21 +488,14 @@ export function SettingsPanel() {
                 <span className="text-[13px] text-ink3">Качество</span>
                 <Segmented
                   value={quality}
-                  options={availableQualities}
+                  {...qualityProps}
                   onChange={setQuality}
                   label="Качество"
                 />
               </div>
 
-              {caps.sound && (
-                <div className="flex items-center gap-3">
-                  <Toggle checked={sound} onChange={setSound} label="Звук" />
-                  <div>
-                    <div className="text-[13px] text-ink">Звук</div>
-                    <div className="text-[11px] text-ink3">дороже — считается по другой ставке</div>
-                  </div>
-                </div>
-              )}
+              {soundBlock}
+
 
               {caps.expert && (
                 <div className="flex items-center gap-3 md:ml-auto">

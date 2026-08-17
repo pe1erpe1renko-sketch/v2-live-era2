@@ -3,6 +3,7 @@ import { Icon } from "@iconify/react";
 import { useCreate } from "@/components/create/CreateContext";
 import { SettingsPanel } from "@/components/create/SettingsPanel";
 import { AudioPanel } from "@/components/create/AudioPanel";
+import { VideoRefPanel } from "@/components/create/VideoRefPanel";
 import { capabilitiesFor } from "@/components/create/modelCapabilities";
 import {
   MOTION_PRESETS,

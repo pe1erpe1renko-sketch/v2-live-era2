@@ -396,7 +396,7 @@ export function SettingsPanel() {
                 <Segmented
                   inline
                   value={quality}
-                  options={availableQualities}
+                  {...qualityProps}
                   onChange={setQuality}
                   label="Качество"
                 />
@@ -412,6 +412,9 @@ export function SettingsPanel() {
                 </span>
               </div>
             )}
+
+            {soundBlock && <div className="mt-3">{soundBlock}</div>}
+
           </>
         ) : (
           <>

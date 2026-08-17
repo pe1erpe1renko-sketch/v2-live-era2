@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Icon } from "@iconify/react";
 import { useCreate } from "@/components/create/CreateContext";
-import { capabilitiesFor } from "@/components/create/modelCapabilities";
+import { capabilitiesFor, qualitiesFor } from "@/components/create/modelCapabilities";
 import { computeCost } from "@/components/create/tokenCosts";
 import { useAuth } from "@/context/AuthContext";
 import { useAuthModal } from "@/context/AuthModalContext";
@@ -234,6 +234,11 @@ export function SettingsPanel() {
     if (!caps.expert) setExpert(false);
   }, [caps, dMin, dMax]);
 
+  const availableQualities = qualitiesFor(caps, duration);
+  useEffect(() => {
+    setQuality((q) => (availableQualities.includes(q) ? q : (availableQualities[0] ?? "720p")));
+  }, [availableQualities.join(",")]); // eslint-disable-line react-hooks/exhaustive-deps
+
   const cost = useMemo(
     () =>
       computeCost({
@@ -314,7 +319,7 @@ export function SettingsPanel() {
                 <Segmented
                   inline
                   value={quality}
-                  options={caps.qualities}
+                  options={availableQualities}
                   onChange={setQuality}
                   label="Качество"
                 />
@@ -384,7 +389,7 @@ export function SettingsPanel() {
                 <span className="text-[13px] text-ink3">Качество</span>
                 <Segmented
                   value={quality}
-                  options={caps.qualities}
+                  options={availableQualities}
                   onChange={setQuality}
                   label="Качество"
                 />

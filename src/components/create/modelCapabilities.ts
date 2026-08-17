@@ -22,8 +22,8 @@ export type ModelCapability = {
   maxAudioSeconds?: number;
   /** длительность задаётся видео-эталоном, ручной выбор скрыт */
   durationLocked?: boolean;
-  /** собственные множители качества, перекрывают общие из TOKEN_COSTS */
-  qualityMultipliers?: Record<string, number>;
+  /** множители качества — единственный источник правды по цене за качество */
+  qualityMultipliers: Record<string, number>;
   /** модель работает в режиме video-to-video и требует видео-эталон */
   requiresReferenceVideo?: boolean;
 };
@@ -35,6 +35,7 @@ export const MODEL_CAPABILITIES: Record<string, ModelCapability> = {
     durationMax: 10,
     durationStep: 1,
     qualities: ["720p", "1080p", "4K"],
+    qualityMultipliers: { "720p": 1, "1080p": 1.5, "4K": 2.5 },
     sound: true,
     expert: true,
     promptStrength: true,
@@ -66,6 +67,7 @@ export const MODEL_CAPABILITIES: Record<string, ModelCapability> = {
     durationMax: 10,
     durationStep: 1,
     qualities: ["768p", "2K"],
+    qualityMultipliers: { "768p": 1, "2K": 1.625 },
     sound: true,
     expert: true,
     promptStrength: true,
@@ -74,7 +76,8 @@ export const MODEL_CAPABILITIES: Record<string, ModelCapability> = {
   },
   hedra: {
     formats: ["16:9", "9:16", "1:1"],
-    qualities: ["540p", "720p"],
+    qualities: ["720p"],
+    qualityMultipliers: { "720p": 1 },
     sound: false, // звук всегда включён, тумблер не показывается
     expert: false,
     promptStrength: false,
@@ -88,7 +91,8 @@ export const MODEL_CAPABILITIES: Record<string, ModelCapability> = {
     durationMin: 5,
     durationMax: 10,
     durationStep: 1,
-    qualities: ["480p", "720p", "1080p", "4K"],
+    qualities: ["720p", "1080p", "4K"],
+    qualityMultipliers: { "720p": 1, "1080p": 1.5, "4K": 2.5 },
     sound: true,
     expert: true,
     promptStrength: true,
@@ -101,6 +105,7 @@ export const MODEL_CAPABILITIES: Record<string, ModelCapability> = {
     durationMax: 8,
     durationStep: 1,
     qualities: ["720p", "1080p", "4K"],
+    qualityMultipliers: { "720p": 1, "1080p": 1.5, "4K": 2.5 },
     sound: true,
     expert: true,
     promptStrength: true,
@@ -112,7 +117,8 @@ export const MODEL_CAPABILITIES: Record<string, ModelCapability> = {
     durationMin: 5,
     durationMax: 10,
     durationStep: 1,
-    qualities: ["480p", "720p"],
+    qualities: ["720p"],
+    qualityMultipliers: { "720p": 1 },
     sound: false,
     expert: false,
     promptStrength: false,
@@ -125,6 +131,7 @@ export const MODEL_CAPABILITIES: Record<string, ModelCapability> = {
     durationMax: 10,
     durationStep: 4,
     qualities: ["768p", "1080p"],
+    qualityMultipliers: { "768p": 1, "1080p": 1.5 },
     sound: false,
     expert: true,
     promptStrength: true,

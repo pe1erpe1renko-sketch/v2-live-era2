@@ -5,7 +5,7 @@
  * Меняйте стоимость только здесь — интерфейс читает этот конфиг.
  */
 
-import { capabilitiesFor } from "@/components/create/modelCapabilities";
+import { capabilitiesFor } from "./modelCapabilities";
 
 export const TOKEN_COSTS = {
   // стоимость ролика 5 секунд, базовое качество, без звука
@@ -21,15 +21,6 @@ export const TOKEN_COSTS = {
   } as Record<string, number>,
 
   multipliers: {
-    quality: {
-      "480p": 0.8,
-      "540p": 0.8,
-      "720p": 1,
-      "768p": 1,
-      "1080p": 1.5,
-      "2K": 1.5,
-      "4K": 2.5,
-    } as Record<string, number>,
     sound: { on: 1.4, off: 1 },
     format: { "16:9": 1, "9:16": 1, "1:1": 1 } as Record<string, number>,
     duration: { perSecondOver5: 0.2 },
@@ -80,10 +71,9 @@ export function computeCost(input: {
     : 1 + (Math.max(input.duration, 5) - 5) * m.duration.perSecondOver5;
   const soundMul = soundIncluded ? 1 : input.sound ? m.sound.on : m.sound.off;
 
-  // У модели может быть собственный множитель качества (qualityMultipliers
-  // в MODEL_CAPABILITIES), перекрывающий общий из TOKEN_COSTS.multipliers.
+  // множители качества живут только в MODEL_CAPABILITIES
   const caps = capabilitiesFor(input.model);
-  const qMul = caps.qualityMultipliers?.[input.quality] ?? (m.quality[input.quality] ?? 1);
+  const qMul = caps.qualityMultipliers[input.quality] ?? 1;
 
   // округление одно и единственное: итог округляется до ближайшего целого
   let total = Math.round(

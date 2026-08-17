@@ -263,8 +263,21 @@ export function Workspace() {
         </div>
       </div>
 
-      {scenarioSlug !== TEXT_ONLY && <UploadZone />}
-      {caps.needsAudio ? <AudioPanel maxSeconds={caps.maxAudioSeconds ?? 15} /> : <PromptPanel />}
+      {scenarioSlug !== TEXT_ONLY && (
+        <>
+          {caps.requiresReferenceVideo && (
+            <div className="type-label mt-4 text-ink3">Шаг 1 · Исходное фото</div>
+          )}
+          <UploadZone />
+        </>
+      )}
+      {caps.requiresReferenceVideo ? (
+        <VideoRefPanel />
+      ) : caps.needsAudio ? (
+        <AudioPanel maxSeconds={caps.maxAudioSeconds ?? 15} />
+      ) : (
+        <PromptPanel />
+      )}
       <SettingsPanel />
     </div>
   );

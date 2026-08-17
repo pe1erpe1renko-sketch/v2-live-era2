@@ -125,7 +125,7 @@ export const MODELS: Model[] = [
     slug: "minimax-h3",
     name: "MiniMax H3",
     letter: "M",
-    note: "Hailuo, оживление фото и работа с референсами",
+    note: "MiniMax, оживление фото и работа с референсами",
   },
   {
     slug: "hedra",
@@ -137,14 +137,14 @@ export const MODELS: Model[] = [
     slug: "seedance-2",
     name: "Seedance 2.0",
     letter: "S",
-    note: "ByteDance, максимальное качество движения",
+    note: "ByteDance, плавное движение в кадре",
   },
-  { slug: "veo-3-1", name: "Veo 3.1", letter: "V", note: "Google, звук в комплекте" },
-  { slug: "grok", name: "Grok", letter: "G", note: "xAI, быстрый и недорогой" },
+  { slug: "veo-3-1", name: "Veo 3.1", letter: "V", note: "Google, звук в комплекте, до 4K" },
+  { slug: "grok", name: "Grok", letter: "G", note: "самый дешёвый: 9 токенов за ролик" },
   {
     slug: "hailuo-2",
     name: "Hailuo 2",
     letter: "H",
-    note: "MiniMax, самый бережный расход токенов",
+    note: "быстрый и недорогой, ролики на 6 и 10 секунд",
   },
 ];

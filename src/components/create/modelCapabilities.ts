@@ -20,6 +20,10 @@ export type ModelCapability = {
   /** вместо промпта — загрузка звуковой дорожки */
   needsAudio?: boolean;
   maxAudioSeconds?: number;
+  /** собственные множители качества, перекрывают общие из TOKEN_COSTS */
+  qualityMultipliers?: Record<string, number>;
+  /** модель работает в режиме video-to-video и требует видео-эталон */
+  requiresReferenceVideo?: boolean;
 };
 
 export const MODEL_CAPABILITIES: Record<string, ModelCapability> = {
@@ -34,6 +38,22 @@ export const MODEL_CAPABILITIES: Record<string, ModelCapability> = {
     promptStrength: true,
     lastFrame: true,
     negativePrompt: true,
+  },
+  "kling-motion": {
+    // образец — kling-3; отличия: только 720p/1080p, эксперт и промпт выключены,
+    // движение берётся из видео-эталона (режим video-to-video).
+    formats: ["16:9", "9:16", "1:1"],
+    durationMin: 5,
+    durationMax: 10,
+    durationStep: 1,
+    qualities: ["720p", "1080p"],
+    sound: true,
+    expert: false,
+    promptStrength: false,
+    lastFrame: true,
+    negativePrompt: true,
+    requiresReferenceVideo: true,
+    qualityMultipliers: { "720p": 1, "1080p": 1.35 },
   },
   "minimax-h3": {
     formats: ["16:9", "9:16", "1:1"],

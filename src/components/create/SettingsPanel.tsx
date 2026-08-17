@@ -333,7 +333,37 @@ export function SettingsPanel() {
   // TODO: заглушка — генерация появится вместе с бэкендом
   const handleGenerate = () => {};
 
+  // общие пропсы кнопок качества: недоступные варианты видно, но выбрать нельзя
+  const qualityProps = {
+    options: caps.qualities,
+    disabledOptions: disabledQualities,
+    titles: Object.fromEntries(
+      disabledQualities.map((q) => [q, "1080p доступно только для ролика на 6 секунд"]),
+    ),
+    subLabels: caps.qualities.includes("480p") ? { "480p": "экономно" } : undefined,
+  };
+
+  const soundBlock =
+    caps.sound || soundLocked ? (
+      <div className="flex items-center gap-3" title={soundLocked ? soundHint : undefined}>
+        <Toggle
+          checked={soundLocked ? true : sound}
+          onChange={setSound}
+          label="Звук"
+          locked={soundLocked}
+          lockedHint={soundHint}
+        />
+        <div>
+          <div className="text-[13px] text-ink">Звук</div>
+          <div className="text-[11px] text-ink3">
+            {soundLocked ? "звук включён, доплаты нет" : "дороже — считается по другой ставке"}
+          </div>
+        </div>
+      </div>
+    ) : null;
+
   return (
+
     <>
       <div
         className={`mt-4 rounded-[16px] border border-rule bg-surface ${

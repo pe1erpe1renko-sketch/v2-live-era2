@@ -15,18 +15,22 @@ function Segmented({
   options,
   onChange,
   label,
+  inline,
 }: {
   value: string;
   options: string[];
   onChange: (v: string) => void;
   label: string;
+  inline?: boolean;
 }) {
   return (
     <div
       role="radiogroup"
       aria-label={label}
       style={darkInput}
-      className="flex w-full gap-0 rounded-[6px] border border-rule p-[3px] md:inline-flex md:w-auto"
+      className={`gap-0 rounded-[6px] border border-rule p-[3px] ${
+        inline ? "inline-flex w-auto" : "flex w-full md:inline-flex md:w-auto"
+      }`}
     >
       {options.map((o) => {
         const on = o === value;
@@ -37,9 +41,9 @@ function Segmented({
             role="radio"
             aria-checked={on}
             onClick={() => onChange(o)}
-            className={`flex-1 rounded-[4px] px-[14px] py-[10px] text-[13px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 md:flex-none md:py-[6px] ${
-              on ? "bg-gold text-white" : "text-ink2 hover:text-ink"
-            }`}
+            className={`rounded-[4px] px-[14px] text-[13px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
+              inline ? "py-[6px]" : "flex-1 py-[10px] md:flex-none md:py-[6px]"
+            } ${on ? "bg-gold text-white" : "text-ink2 hover:text-ink"}`}
           >
             {o}
           </button>
@@ -192,6 +196,9 @@ export function SettingsPanel() {
   const dMax = caps.durationMax ?? 10;
   const dStep = caps.durationStep ?? 1;
   const needsAudio = !!caps.needsAudio;
+  const noDuration = !!caps.durationLocked;
+  const compact = noDuration && !needsAudio && !caps.sound && !caps.expert;
+
 
   const [format, setFormat] = useState("9:16");
   const [duration, setDuration] = useState(dMin);
@@ -255,81 +262,124 @@ export function SettingsPanel() {
 
   return (
     <>
-      <div className="mt-4 rounded-[16px] border border-rule bg-surface p-4 md:p-5">
-        {/* Ряд 1 */}
-        <div className="flex flex-col gap-5 md:flex-row md:flex-wrap md:items-center md:gap-8">
-          <div className="flex flex-col gap-2 md:flex-row md:items-center md:gap-3">
-            <span className="text-[13px] text-ink3">Формат</span>
-            <Segmented value={format} options={caps.formats} onChange={setFormat} label="Формат" />
-          </div>
-
-          {needsAudio ? (
-            <p className="text-[13px] text-ink2">
-              Длительность ролика равна длине звуковой дорожки
-            </p>
-          ) : (
-            <div className="flex flex-col gap-2 md:flex-row md:items-center md:gap-3">
-              <div className="flex items-center justify-between gap-3">
-                <span className="text-[13px] text-ink3">Длительность</span>
-                <span className="shrink-0 whitespace-nowrap md:hidden">
-                  <span className="text-[14px] font-normal text-ink">{duration}</span>{" "}
-                  <span className="text-[12px] text-ink3">
-                    / {dMin}–{dMax} сек
-                  </span>
-                </span>
-              </div>
-              <div className="flex items-center gap-3">
-                <Slider
-                  label="Длительность"
-                  value={duration}
-                  min={dMin}
-                  max={dMax}
-                  step={dStep}
-                  onChange={setDuration}
-                  className="w-full md:w-[160px]"
+      <div
+        className={`mt-4 rounded-[16px] border border-rule bg-surface ${
+          compact ? "p-4" : "p-4 md:p-5"
+        }`}
+      >
+        {compact ? (
+          <>
+            {/* Компактная строка: Формат | Качество */}
+            <div className="@container">
+            <div className="flex flex-col gap-3 @lg:flex-row @lg:items-center @lg:justify-between @lg:gap-6">
+              <div className="flex flex-col gap-2 @lg:flex-row @lg:items-center @lg:gap-3">
+                <span className="text-[13px] text-ink3">Формат</span>
+                <Segmented
+                  inline
+                  value={format}
+                  options={caps.formats}
+                  onChange={setFormat}
+                  label="Формат"
                 />
-                <span className="hidden shrink-0 whitespace-nowrap md:inline">
-                  <span className="text-[14px] font-normal text-ink">{duration}</span>{" "}
-                  <span className="text-[12px] text-ink3">
-                    / {dMin}–{dMax} сек
-                  </span>
-                </span>
+              </div>
+
+              <div
+                className="hidden w-px self-stretch @lg:block"
+                style={{ backgroundColor: "var(--dark-rule)" }}
+              />
+
+              <div className="flex flex-col gap-2 @lg:flex-row @lg:items-center @lg:gap-3">
+                <span className="text-[13px] text-ink3">Качество</span>
+                <Segmented
+                  inline
+                  value={quality}
+                  options={caps.qualities}
+                  onChange={setQuality}
+                  label="Качество"
+                />
               </div>
             </div>
-          )}
-        </div>
-
-        <div className="my-4 h-px w-full bg-rule" />
-
-        {/* Ряд 2 */}
-        <div className="flex flex-col gap-5 md:flex-row md:flex-wrap md:items-center md:gap-8">
-          <div className="flex flex-col gap-2 md:flex-row md:items-center md:gap-3">
-            <span className="text-[13px] text-ink3">Качество</span>
-            <Segmented
-              value={quality}
-              options={caps.qualities}
-              onChange={setQuality}
-              label="Качество"
-            />
-          </div>
-
-          {caps.sound && (
-            <div className="flex items-center gap-3">
-              <Toggle checked={sound} onChange={setSound} label="Звук" />
-              <div>
-                <div className="text-[13px] text-ink">Звук</div>
-                <div className="text-[11px] text-ink3">дороже — считается по другой ставке</div>
+            </div>
+          </>
+        ) : (
+          <>
+            {/* Ряд 1 */}
+            <div className="flex flex-col gap-5 md:flex-row md:flex-wrap md:items-center md:gap-8">
+              <div className="flex flex-col gap-2 md:flex-row md:items-center md:gap-3">
+                <span className="text-[13px] text-ink3">Формат</span>
+                <Segmented value={format} options={caps.formats} onChange={setFormat} label="Формат" />
               </div>
-            </div>
-          )}
 
-          {caps.expert && (
-            <div className="flex items-center gap-3 md:ml-auto">
-              <Toggle checked={expert} onChange={setExpert} label="Эксперт" />
-              <span className="text-[13px] text-ink">Эксперт</span>
+              {needsAudio ? (
+                <p className="text-[13px] text-ink2">
+                  Длительность ролика равна длине звуковой дорожки
+                </p>
+              ) : (
+                <div className="flex flex-col gap-2 md:flex-row md:items-center md:gap-3">
+                  <div className="flex items-center justify-between gap-3">
+                    <span className="text-[13px] text-ink3">Длительность</span>
+                    <span className="shrink-0 whitespace-nowrap md:hidden">
+                      <span className="text-[14px] font-normal text-ink">{duration}</span>{" "}
+                      <span className="text-[12px] text-ink3">
+                        / {dMin}–{dMax} сек
+                      </span>
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <Slider
+                      label="Длительность"
+                      value={duration}
+                      min={dMin}
+                      max={dMax}
+                      step={dStep}
+                      onChange={setDuration}
+                      className="w-full md:w-[160px]"
+                    />
+                    <span className="hidden shrink-0 whitespace-nowrap md:inline">
+                      <span className="text-[14px] font-normal text-ink">{duration}</span>{" "}
+                      <span className="text-[12px] text-ink3">
+                        / {dMin}–{dMax} сек
+                      </span>
+                    </span>
+                  </div>
+                </div>
+              )}
             </div>
-          )}
-        </div>
+
+            <div className="my-4 h-px w-full bg-rule" />
+
+            {/* Ряд 2 */}
+            <div className="flex flex-col gap-5 md:flex-row md:flex-wrap md:items-center md:gap-8">
+              <div className="flex flex-col gap-2 md:flex-row md:items-center md:gap-3">
+                <span className="text-[13px] text-ink3">Качество</span>
+                <Segmented
+                  value={quality}
+                  options={caps.qualities}
+                  onChange={setQuality}
+                  label="Качество"
+                />
+              </div>
+
+              {caps.sound && (
+                <div className="flex items-center gap-3">
+                  <Toggle checked={sound} onChange={setSound} label="Звук" />
+                  <div>
+                    <div className="text-[13px] text-ink">Звук</div>
+                    <div className="text-[11px] text-ink3">дороже — считается по другой ставке</div>
+                  </div>
+                </div>
+              )}
+
+              {caps.expert && (
+                <div className="flex items-center gap-3 md:ml-auto">
+                  <Toggle checked={expert} onChange={setExpert} label="Эксперт" />
+                  <span className="text-[13px] text-ink">Эксперт</span>
+                </div>
+              )}
+            </div>
+          </>
+        )}
+
 
         {/* Строка-подсказка */}
         <div className="mt-3 flex flex-wrap items-center justify-between gap-2 text-[12px] text-ink3">

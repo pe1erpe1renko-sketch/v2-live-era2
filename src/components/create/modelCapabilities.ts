@@ -20,6 +20,8 @@ export type ModelCapability = {
   /** вместо промпта — загрузка звуковой дорожки */
   needsAudio?: boolean;
   maxAudioSeconds?: number;
+  /** длительность задаётся видео-эталоном, ручной выбор скрыт */
+  durationLocked?: boolean;
   /** собственные множители качества, перекрывают общие из TOKEN_COSTS */
   qualityMultipliers?: Record<string, number>;
   /** модель работает в режиме video-to-video и требует видео-эталон */
@@ -55,6 +57,7 @@ export const MODEL_CAPABILITIES: Record<string, ModelCapability> = {
     lastFrame: true,
     negativePrompt: true,
     requiresReferenceVideo: true,
+    durationLocked: true,
     qualityMultipliers: { "720p": 1, "1080p": 1.35 },
   },
   "minimax-h3": {

@@ -17,12 +17,18 @@ function Segmented({
   onChange,
   label,
   inline,
+  disabledOptions,
+  titles,
+  subLabels,
 }: {
   value: string;
   options: string[];
   onChange: (v: string) => void;
   label: string;
   inline?: boolean;
+  disabledOptions?: string[];
+  titles?: Record<string, string>;
+  subLabels?: Record<string, string>;
 }) {
   return (
     <div
@@ -35,24 +41,39 @@ function Segmented({
     >
       {options.map((o) => {
         const on = o === value;
+        const off = disabledOptions?.includes(o);
         return (
           <button
             key={o}
             type="button"
             role="radio"
             aria-checked={on}
-            onClick={() => onChange(o)}
+            aria-disabled={off || undefined}
+            title={titles?.[o]}
+            onClick={() => !off && onChange(o)}
             className={`rounded-[4px] px-[14px] text-[13px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
               inline ? "py-[6px]" : "flex-1 py-[10px] md:flex-none md:py-[6px]"
-            } ${on ? "bg-gold text-white" : "text-ink2 hover:text-ink"}`}
+            } ${
+              off
+                ? "cursor-default text-ink3 opacity-50"
+                : on
+                  ? "bg-gold text-white"
+                  : "text-ink2 hover:text-ink"
+            }`}
           >
             {o}
+            {subLabels?.[o] && (
+              <span className="ml-1 text-[10px] uppercase tracking-[0.1em] opacity-70">
+                {subLabels[o]}
+              </span>
+            )}
           </button>
         );
       })}
     </div>
   );
 }
+
 
 function Toggle({
   checked,

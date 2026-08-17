@@ -1,29 +1,30 @@
 /**
  * Стоимость генерации в токенах.
  *
- * Утверждено 13.08.2026.
+ * Утверждено 18.08.2026 (сверено с прайсом поставщика).
  * Меняйте стоимость только здесь — интерфейс читает этот конфиг.
  */
 
 import { capabilitiesFor } from "./modelCapabilities";
 
 export const TOKEN_COSTS = {
-  // стоимость ролика 5 секунд, базовое качество, без звука
+  // стоимость ролика базовой длительности, базовое качество, без звука
   base: {
+    grok: 9,
     "hailuo-2": 12,
     "veo-3-1": 20,
-    grok: 27,
     hedra: 27,
     "kling-3": 31,
-    "kling-motion": 44,
     "minimax-h3": 36,
-    "seedance-2": 83,
+    "kling-motion": 44,
+    "seedance-2": 62,
   } as Record<string, number>,
 
   multipliers: {
-    sound: { on: 1.4, off: 1 },
+    // общего множителя звука нет: звук платный только у kling-3
+    soundByModel: { "kling-3": 1.5 } as Record<string, number>,
     format: { "16:9": 1, "9:16": 1, "1:1": 1 } as Record<string, number>,
-    duration: { perSecondOver5: 0.2 },
+    duration: { perSecondOverBase: 0.2 },
   },
 
   extras: {
@@ -33,18 +34,17 @@ export const TOKEN_COSTS = {
 
   restore: {
     base: 4,
-    resolution: { "1x": 1, "2x": 1.4, "4x": 2.2 } as Record<string, number>,
+    resolution: { "1x": 1, "2x": 1.5, "4x": 2.25 } as Record<string, number>,
   },
 };
 
 /**
- * Исключения в формуле расчёта. Утверждено 13.08.2026.
+ * Исключения в формуле расчёта. Утверждено 18.08.2026.
  */
 export const PRICING_RULES = {
-  perClip: ["veo-3-1", "hailuo-2"], // длительность не влияет на цену
-  // звук входит в базовую цену и отдельно не тарифицируется:
-  // hedra — всегда включён, kling-motion — берётся из видео-эталона
-  soundIncluded: ["hedra", "kling-motion"],
+  perClip: ["veo-3-1"], // длительность не влияет на цену
+  // звук входит в базовую цену и отдельно не тарифицируется
+  soundIncluded: ["hedra", "kling-motion", "veo-3-1"],
 };
 
 export function computeRestoreCost(resolution: string) {
@@ -62,17 +62,24 @@ export function computeCost(input: {
 }) {
   const m = TOKEN_COSTS.multipliers;
   const base = TOKEN_COSTS.base[input.model] ?? 0;
+  const caps = capabilitiesFor(input.model);
 
   const perClip = PRICING_RULES.perClip.includes(input.model);
   const soundIncluded = PRICING_RULES.soundIncluded.includes(input.model);
+  const baseDuration = caps.durationMin ?? 5;
 
   const durationMul = perClip
     ? 1
-    : 1 + (Math.max(input.duration, 5) - 5) * m.duration.perSecondOver5;
-  const soundMul = soundIncluded ? 1 : input.sound ? m.sound.on : m.sound.off;
+    : caps.durationMultipliers
+      ? (caps.durationMultipliers[input.duration] ?? 1)
+      : 1 +
+        (Math.max(input.duration, baseDuration) - baseDuration) *
+          m.duration.perSecondOverBase;
+
+  const soundMul =
+    soundIncluded || !input.sound ? 1 : (m.soundByModel[input.model] ?? 1);
 
   // множители качества живут только в MODEL_CAPABILITIES
-  const caps = capabilitiesFor(input.model);
   const qMul = caps.qualityMultipliers[input.quality] ?? 1;
 
   // округление одно и единственное: итог округляется до ближайшего целого

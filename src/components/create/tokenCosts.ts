@@ -5,7 +5,7 @@
  * Меняйте стоимость только здесь — интерфейс читает этот конфиг.
  */
 
-import { capabilitiesFor } from "@/components/create/modelCapabilities";
+import { capabilitiesFor } from "./modelCapabilities";
 
 export const TOKEN_COSTS = {
   // стоимость ролика 5 секунд, базовое качество, без звука

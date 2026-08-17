@@ -431,6 +431,16 @@ export function SettingsPanel() {
                 <p className="text-[13px] text-ink2">
                   Длительность ролика равна длине звуковой дорожки
                 </p>
+              ) : durationOptions ? (
+                <div className="flex flex-col gap-2 md:flex-row md:items-center md:gap-3">
+                  <span className="text-[13px] text-ink3">Длительность</span>
+                  <Segmented
+                    value={String(duration)}
+                    options={durationOptions.map((d) => `${d} сек`)}
+                    onChange={(v) => setDuration(parseInt(v, 10))}
+                    label="Длительность"
+                  />
+                </div>
               ) : (
                 <div className="flex flex-col gap-2 md:flex-row md:items-center md:gap-3">
                   <div className="flex items-center justify-between gap-3">
@@ -442,22 +452,29 @@ export function SettingsPanel() {
                       </span>
                     </span>
                   </div>
-                  <div className="flex items-center gap-3">
-                    <Slider
-                      label="Длительность"
-                      value={duration}
-                      min={dMin}
-                      max={dMax}
-                      step={dStep}
-                      onChange={setDuration}
-                      className="w-full md:w-[160px]"
-                    />
-                    <span className="hidden shrink-0 whitespace-nowrap md:inline">
-                      <span className="text-[14px] font-normal text-ink">{duration}</span>{" "}
-                      <span className="text-[12px] text-ink3">
-                        / {dMin}–{dMax} сек
+                  <div className="flex flex-col gap-1">
+                    <div className="flex items-center gap-3">
+                      <Slider
+                        label="Длительность"
+                        value={duration}
+                        min={dMin}
+                        max={dMax}
+                        step={dStep}
+                        onChange={setDuration}
+                        className="w-full md:w-[160px]"
+                      />
+                      <span className="hidden shrink-0 whitespace-nowrap md:inline">
+                        <span className="text-[14px] font-normal text-ink">{duration}</span>{" "}
+                        <span className="text-[12px] text-ink3">
+                          / {dMin}–{dMax} сек
+                        </span>
                       </span>
-                    </span>
+                    </div>
+                    {perClip && (
+                      <span className="text-[11px] text-ink3">
+                        цена не зависит от длины ролика
+                      </span>
+                    )}
                   </div>
                 </div>
               )}
@@ -471,21 +488,14 @@ export function SettingsPanel() {
                 <span className="text-[13px] text-ink3">Качество</span>
                 <Segmented
                   value={quality}
-                  options={availableQualities}
+                  {...qualityProps}
                   onChange={setQuality}
                   label="Качество"
                 />
               </div>
 
-              {caps.sound && (
-                <div className="flex items-center gap-3">
-                  <Toggle checked={sound} onChange={setSound} label="Звук" />
-                  <div>
-                    <div className="text-[13px] text-ink">Звук</div>
-                    <div className="text-[11px] text-ink3">дороже — считается по другой ставке</div>
-                  </div>
-                </div>
-              )}
+              {soundBlock}
+
 
               {caps.expert && (
                 <div className="flex items-center gap-3 md:ml-auto">

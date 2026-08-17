@@ -13,6 +13,12 @@ type Ctx = {
   /** длительность загруженной звуковой дорожки, сек (Hedra) */
   audioDuration: number | null;
   setAudioDuration: (v: number | null) => void;
+  /** видео-эталон (kling-motion, режим video-to-video) */
+  videoFile: File | null;
+  setVideoFile: (f: File | null) => void;
+  /** длительность видео-эталона, сек */
+  videoDuration: number | null;
+  setVideoDuration: (v: number | null) => void;
 };
 
 const CreateCtx = createContext<Ctx | null>(null);

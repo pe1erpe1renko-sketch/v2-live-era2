@@ -126,9 +126,7 @@ function Logo() {
       className="group relative inline-flex rounded-[6px] text-[18px] font-light text-ink"
     >
       <span>Live Era</span>
-      <span
-        className="inline-block transform transition-[transform,color] duration-200 ease-slow group-hover:-translate-y-1 group-hover:text-gold motion-reduce:transition-none motion-reduce:group-hover:translate-y-0"
-      >
+      <span className="inline-block transform transition-[transform,color] duration-200 ease-slow group-hover:-translate-y-1 group-hover:text-gold motion-reduce:transition-none motion-reduce:group-hover:translate-y-0">
         2
       </span>
       <span
@@ -171,9 +169,7 @@ function ScenarioCard({ it }: { it: Item }) {
           </span>
         ) : null}
       </div>
-      <p className="mt-2 text-[13px] font-normal leading-[1.3] text-ink line-clamp-2">
-        {it.title}
-      </p>
+      <p className="mt-2 text-[13px] font-normal leading-[1.3] text-ink line-clamp-2">{it.title}</p>
     </AppLink>
   );
 }
@@ -419,7 +415,6 @@ export function Header() {
               <Icon icon="solar:hamburger-menu-linear" className="h-6 w-6" />
             </button>
           </div>
-
         </div>
       </div>
 

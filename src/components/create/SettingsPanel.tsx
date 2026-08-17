@@ -340,7 +340,9 @@ export function SettingsPanel() {
     titles: Object.fromEntries(
       disabledQualities.map((q) => [q, "1080p доступно только для ролика на 6 секунд"]),
     ),
-    subLabels: caps.qualities.includes("480p") ? { "480p": "экономно" } : undefined,
+    subLabels: (caps.qualities.includes("480p")
+      ? { "480p": "экономно" }
+      : {}) as Record<string, string>,
   };
 
   const soundBlock =

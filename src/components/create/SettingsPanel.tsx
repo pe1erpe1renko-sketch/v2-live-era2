@@ -270,15 +270,21 @@ export function SettingsPanel() {
           ? "720p"
           : (caps.qualities[0] ?? "720p"),
     );
-    setDuration((d) => Math.min(dMax, Math.max(dMin, d)));
+    setDuration((d) => {
+      const clamped = Math.min(dMax, Math.max(dMin, d));
+      if (!durationOptions) return clamped;
+      return durationOptions.includes(clamped) ? clamped : durationOptions[0]!;
+    });
     if (!caps.sound) setSound(false);
     if (!caps.expert) setExpert(false);
-  }, [caps, dMin, dMax]);
+  }, [caps, dMin, dMax]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const availableQualities = qualitiesFor(caps, duration);
+  const disabledQualities = caps.qualities.filter((q) => !availableQualities.includes(q));
   useEffect(() => {
     setQuality((q) => (availableQualities.includes(q) ? q : (availableQualities[0] ?? "720p")));
   }, [availableQualities.join(",")]); // eslint-disable-line react-hooks/exhaustive-deps
+
 
   const cost = useMemo(
     () =>

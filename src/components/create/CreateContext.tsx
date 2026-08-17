@@ -28,6 +28,8 @@ export function CreateProvider({ children }: { children: ReactNode }) {
   const [modelSlug, setModelSlug] = useState<string>("kling-3");
   const [file, setFile] = useState<File | null>(null);
   const [audioDuration, setAudioDuration] = useState<number | null>(null);
+  const [videoFile, setVideoFile] = useState<File | null>(null);
+  const [videoDuration, setVideoDuration] = useState<number | null>(null);
 
   const value = useMemo<Ctx>(
     () => ({

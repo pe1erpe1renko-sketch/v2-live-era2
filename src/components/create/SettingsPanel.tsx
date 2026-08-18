@@ -490,13 +490,21 @@ export function SettingsPanel() {
               ) : durationOptions ? (
                 <div className="flex flex-col gap-2 md:flex-row md:items-center md:gap-3">
                   <span className="text-[13px] text-ink3">Длительность</span>
-                  <Segmented
-                    value={`${duration} сек`}
-                    options={durationOptions.map((d) => `${d} сек`)}
-                    onChange={(v) => setDuration(parseInt(v, 10))}
-                    label="Длительность"
-                  />
+                  <div className="flex flex-col gap-1">
+                    <Segmented
+                      value={`${duration} сек`}
+                      options={durationOptions.map((d) => `${d} сек`)}
+                      onChange={(v) => setDuration(parseInt(v, 10))}
+                      label="Длительность"
+                    />
+                    {perClip && (
+                      <span className="text-[11px] text-ink3">
+                        цена не зависит от длины ролика
+                      </span>
+                    )}
+                  </div>
                 </div>
+
               ) : (
                 <div className="flex flex-col gap-2 md:flex-row md:items-center md:gap-3">
                   <div className="flex items-center justify-between gap-3">

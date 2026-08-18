@@ -5,7 +5,7 @@
  * Меняйте стоимость только здесь — интерфейс читает этот конфиг.
  */
 
-import { capabilitiesFor } from "./modelCapabilities";
+import { baseDurationFor, capabilitiesFor } from "./modelCapabilities";
 
 export const TOKEN_COSTS = {
   // стоимость ролика базовой длительности, базовое качество, без звука
@@ -66,7 +66,7 @@ export function computeCost(input: {
 
   const perClip = PRICING_RULES.perClip.includes(input.model);
   const soundIncluded = PRICING_RULES.soundIncluded.includes(input.model);
-  const baseDuration = caps.durationMin ?? 5;
+  const baseDuration = baseDurationFor(caps);
 
   const durationMul = perClip
     ? 1

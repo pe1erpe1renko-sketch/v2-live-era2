@@ -258,16 +258,13 @@ export function SettingsPanel() {
   // цена не зависит от длительности
   const perClip = PRICING_RULES.perClip.includes(modelSlug);
   // фиксированные длительности вместо ползунка
-  const durationOptions = caps.durationMultipliers
-    ? Object.keys(caps.durationMultipliers)
-        .map(Number)
-        .sort((a, b) => a - b)
-    : null;
+  const durationOptions = caps.durations ?? null;
+  const dBase = baseDurationFor(caps);
 
 
 
   const [format, setFormat] = useState("9:16");
-  const [duration, setDuration] = useState(dMin);
+  const [duration, setDuration] = useState(dBase);
   const [quality, setQuality] = useState("720p");
   const [sound, setSound] = useState(false);
   const [expert, setExpert] = useState(false);
@@ -291,14 +288,11 @@ export function SettingsPanel() {
           ? "720p"
           : (caps.qualities[0] ?? "720p"),
     );
-    setDuration((d) => {
-      const clamped = Math.min(dMax, Math.max(dMin, d));
-      if (!durationOptions) return clamped;
-      return durationOptions.includes(clamped) ? clamped : durationOptions[0]!;
-    });
+    // наборы секунд у моделей разные и стоят по-разному — переносить выбор нельзя
+    setDuration(dBase);
     if (!caps.sound) setSound(false);
     if (!caps.expert) setExpert(false);
-  }, [caps, dMin, dMax]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [caps, dBase]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const availableQualities = qualitiesFor(caps, duration);
   const disabledQualities = caps.qualities.filter((q) => !availableQualities.includes(q));

@@ -151,8 +151,8 @@ function Page() {
         </div>
 
         <div className="mt-6 flex flex-col gap-4 lg:flex-row lg:items-stretch">
-          {/* Правая колонка (на мобильных — первая) */}
-          <div className="order-1 flex w-full flex-col lg:order-2 lg:w-[55%]">
+          {/* Правая колонка (на мобильных — вторая) */}
+          <div className="order-2 flex w-full flex-col lg:order-2 lg:w-[55%]">
             <div className={PANEL}>
               {/* Период оплаты */}
               <span className="type-label">Период оплаты</span>
@@ -297,8 +297,8 @@ function Page() {
             </div>
           </div>
 
-          {/* Левая колонка — сводка */}
-          <div className="order-2 flex w-full flex-col lg:order-1 lg:w-[45%]">
+          {/* Левая колонка — сводка (на мобильных — первая) */}
+          <div className="order-1 flex w-full flex-col lg:order-1 lg:w-[45%]">
             <div className={PANEL}>
               <span className="type-label">Ваш план</span>
               <p className="mt-1.5 text-[clamp(24px,2.4vw,32px)] font-light leading-none tracking-[-0.03em] text-ink">

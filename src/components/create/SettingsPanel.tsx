@@ -7,6 +7,13 @@ import { useAuth } from "@/context/AuthContext";
 import { useAuthModal } from "@/context/AuthModalContext";
 import { AppLink } from "@/components/AppLink";
 import { tokensLabel } from "@/lib/plural";
+import {
+  baseParamsFor,
+  isFreeEligible,
+  isFreeModel,
+  FREE_MODEL_NAMES,
+} from "@/components/create/freeGeneration";
+
 
 const TEXT_ONLY = "video-iz-teksta";
 const darkInput = { backgroundColor: "var(--dark-input, #1a1a1c)" };

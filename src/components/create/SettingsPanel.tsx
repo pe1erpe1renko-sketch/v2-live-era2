@@ -306,6 +306,18 @@ export function SettingsPanel() {
     setQuality((q) => (availableQualities.includes(q) ? q : (availableQualities[0] ?? "720p")));
   }, [availableQualities.join(",")]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // пока первая бесплатная генерация не использована, переключение на бесплатную
+  // модель возвращает минимальные параметры — чтобы ролик сразу был бесплатным
+  useEffect(() => {
+    if (freeGenerationUsed || !isFreeModel(modelSlug)) return;
+    const base = baseParamsFor(modelSlug);
+    setQuality(base.quality);
+    setDuration(base.duration);
+    setSound(false);
+    setExpert(false);
+    setHasLastFrame(false);
+  }, [modelSlug, freeGenerationUsed]);
+
 
   const cost = useMemo(
     () =>

@@ -198,9 +198,14 @@ export function SelectPanel({ onSelect }: { onSelect?: () => void } = {}) {
                   >
                     {m.letter}
                   </span>
+                  {showFree && isFreeModel(m.slug) && (
+                    <span className="absolute right-2 top-2 rounded-[6px] bg-gold px-1.5 py-[1px] text-[9px] uppercase tracking-[0.08em] text-white">
+                      Бесплатно
+                    </span>
+                  )}
                   <span className="min-w-0 flex-1">
                     <span
-                      className={`block text-[13px] ${on ? "font-medium text-ink" : "text-ink"}`}
+                      className={`block text-[13px] ${showFree && isFreeModel(m.slug) ? "pr-[74px]" : ""} ${on ? "font-medium text-ink" : "text-ink"}`}
                     >
                       {m.name}
                     </span>
@@ -212,6 +217,7 @@ export function SelectPanel({ onSelect }: { onSelect?: () => void } = {}) {
                     </span>
                   </span>
                   {on && <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-gold2" />}
+
                 </button>
               );
             })}

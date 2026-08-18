@@ -319,11 +319,12 @@ export function Pricing() {
                 <AppLink
                   href="/pricing"
                   onClick={() => selectPlan(idx)}
-                  className={`mt-6 block w-full rounded-[6px] p-3 text-center text-[15px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
+                  className={`mt-auto block w-full rounded-[6px] p-3 text-center text-[15px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
                     dark
                       ? "bg-gold text-white hover:bg-gold-dark"
-                      : "border border-rule text-ink hover:border-gold2 hover:text-gold"
+                      : "border border-gold bg-surface text-gold hover:bg-gold hover:text-white"
                   }`}
+                  style={{ marginTop: 24 }}
                 >
                   {p.cta}
                 </AppLink>
@@ -334,21 +335,46 @@ export function Pricing() {
         </div>
 
 
-        <div className="mt-5 flex justify-center gap-2 md:hidden">
-          {PLANS.map((p, i) => (
-            <button
-              key={p.name}
-              type="button"
-              onClick={() => scrollToCard(i, true)}
-              className={`min-h-[44px] rounded-full px-5 py-2.5 text-[13px] transition-colors duration-200 ${
-                activeIdx === i
-                  ? "bg-gold text-white"
-                  : "border border-rule text-ink2"
-              }`}
+        <div className="mt-5 flex justify-center md:hidden">
+          <div className="inline-flex flex-col items-stretch gap-3">
+            <div className="flex justify-center gap-2">
+              {PLANS.map((p, i) => (
+                <button
+                  key={p.name}
+                  type="button"
+                  onClick={() => scrollToCard(i, true)}
+                  className={`min-h-[44px] rounded-full px-5 py-2.5 text-[13px] transition-colors duration-200 ${
+                    activeIdx === i
+                      ? "bg-gold text-white"
+                      : "border border-rule text-ink2"
+                  }`}
+                >
+                  {p.name}
+                </button>
+              ))}
+            </div>
+            <AppLink
+              href="/pricing"
+              className="block w-full rounded-[6px] border border-gold bg-surface p-3 text-center text-[15px] text-gold transition-colors duration-200 hover:bg-gold hover:text-white"
             >
-              {p.name}
-            </button>
-          ))}
+              Смотреть все тарифы
+            </AppLink>
+            <p className="text-center text-[12px] leading-[1.4] text-ink3">
+              Подписки, пакеты токенов и оплата на 3, 6 и 12 месяцев
+            </p>
+          </div>
+        </div>
+
+        <div className="mt-8 hidden text-center md:block">
+          <AppLink
+            href="/pricing"
+            className="inline-block rounded-[6px] border border-gold bg-surface px-8 py-3 text-[15px] text-gold transition-colors duration-200 hover:bg-gold hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2"
+          >
+            Смотреть все тарифы
+          </AppLink>
+          <p className="mt-3 text-[12px] leading-[1.4] text-ink3">
+            Подписки, пакеты токенов и оплата на 3, 6 и 12 месяцев
+          </p>
         </div>
 
         <div className="mt-6 rounded-[16px] border border-rule bg-surface p-5">

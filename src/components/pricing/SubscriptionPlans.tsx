@@ -150,7 +150,7 @@ export function SubscriptionPlans() {
             <article
               key={p.name}
               tabIndex={0}
-              className={`relative flex h-full w-[76vw] shrink-0 snap-center flex-col rounded-[16px] p-7 shadow-card transition-[opacity,transform] duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 md:w-auto md:shrink md:opacity-100 md:scale-100 ${
+              className={`relative flex h-full w-[76vw] shrink-0 snap-center flex-col rounded-[16px] p-7 shadow-card transition-[opacity,transform,box-shadow] duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 md:w-auto md:shrink md:opacity-100 md:scale-100 md:hover:-translate-y-0.5 md:hover:shadow-[0_12px_30px_-12px_rgba(0,0,0,0.16)] ${
                 dark ? "bg-ink" : "border border-rule bg-surface"
               } ${activeIdx === idx ? "scale-100 opacity-100" : "scale-[0.94] opacity-50"}`}
             >

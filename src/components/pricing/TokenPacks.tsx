@@ -14,7 +14,7 @@ const PACKS: Pack[] = [
   { name: "Пробный", tokens: "115", price: "590", perClip: "от 49 ₽ за ролик" },
   { name: "Средний", tokens: "260", price: "1 290", perClip: "от 46 ₽ за ролик", featured: true },
   { name: "Большой", tokens: "760", price: "3 490", perClip: "от 42 ₽ за ролик" },
-  { name: "Максимум", tokens: "1\u2009700", price: "6 990", perClip: "от 37 ₽ за ролик" },
+  { name: "Максимум", tokens: "1 700", price: "6 990", perClip: "от 37 ₽ за ролик" },
 ];
 
 const COMMON = [
@@ -72,7 +72,7 @@ export function TokenPacks() {
               {/* Левая часть: объём + название */}
               <div className="flex flex-1 flex-col justify-between sm:pr-6">
                 <div className="flex items-baseline gap-2">
-                  <span className="font-serif text-[40px] font-light leading-none text-ink">
+                  <span className="text-[40px] font-light leading-none text-ink">
                     {p.tokens}
                   </span>
                   <span className="text-[15px] text-ink">{word}</span>

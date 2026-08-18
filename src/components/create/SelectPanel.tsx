@@ -92,7 +92,13 @@ export function SelectPanel({ onSelect }: { onSelect?: () => void } = {}) {
             className="h-10 w-full rounded-[6px] border border-rule bg-[var(--dark-input,#1a1a1c)] pl-9 pr-3 text-[13px] text-ink placeholder:text-ink3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2"
           />
         </div>
+        {mode === "model" && showFree && (
+          <p className="mt-2 text-[11px] leading-[1.4] text-ink3">
+            Первый ролик бесплатно на моделях с плашкой
+          </p>
+        )}
       </div>
+
 
       <div ref={listRef} className="mt-4 min-h-0 flex-1 overflow-y-auto px-4 pb-4 thin-scroll">
         {empty && <p className="text-center text-[13px] text-ink3">Ничего не нашлось</p>}

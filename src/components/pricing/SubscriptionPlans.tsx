@@ -212,22 +212,17 @@ export function SubscriptionPlans() {
                 )}
               </div>
 
-              <button
-                type="button"
-                disabled={!agreed}
-                className={`mt-auto w-full rounded-[6px] p-3 pt-3 text-center text-[15px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
-                  !agreed
-                    ? dark
-                      ? "cursor-not-allowed bg-[#3F3F46] text-[#71717A]"
-                      : "cursor-not-allowed bg-rule text-ink3"
-                    : dark
-                      ? "bg-gold text-white hover:bg-gold-dark"
-                      : "border border-rule text-ink hover:border-gold2 hover:text-gold"
+              <a
+                href={`/checkout?plan=${PLAN_SLUGS[p.name]}&period=1month`}
+                className={`mt-auto block w-full rounded-[6px] p-3 text-center text-[15px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
+                  dark
+                    ? "bg-gold text-white hover:bg-gold-dark"
+                    : "border border-gold bg-surface text-gold hover:bg-gold hover:text-white"
                 }`}
                 style={{ marginTop: 24 }}
               >
-                {agreed ? "Оплатить" : `Выбрать «${p.name}»`}
-              </button>
+                {`Выбрать «${p.name}»`}
+              </a>
             </article>
           );
         })}

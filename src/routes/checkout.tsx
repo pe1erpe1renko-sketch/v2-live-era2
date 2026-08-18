@@ -72,7 +72,7 @@ function nextChargeDate(months: number) {
   return d.toLocaleDateString("ru-RU", { day: "numeric", month: "long", year: "numeric" });
 }
 
-const PANEL = "rounded-[16px] border border-rule bg-surface p-5 md:p-6";
+const PANEL = "rounded-[16px] border border-rule bg-surface p-4 md:p-5";
 const DIVIDER = "border-0 border-t border-rule";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 

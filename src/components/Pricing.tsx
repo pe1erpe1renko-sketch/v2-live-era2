@@ -217,19 +217,38 @@ export function Pricing() {
         <div
           ref={carouselRef}
           onScroll={onScroll}
+          role="radiogroup"
+          aria-label="Выбор тарифа"
           className="mt-12 -mx-8 flex items-stretch gap-3 overflow-x-auto px-4 pb-2 pt-4 [-webkit-overflow-scrolling:touch] [scroll-snap-type:x_mandatory] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:grid md:grid-cols-3 md:items-start md:gap-6 md:overflow-visible md:px-0 md:pb-0 md:pt-0"
         >
           {PLANS.map((p, idx) => {
-            const dark = !!p.featured;
+            const selected = selectedIdx === idx;
+            const dark = selected;
             return (
-              <article
+              <div
                 key={p.name}
-                tabIndex={0}
-                className={`relative flex h-full w-[76vw] shrink-0 snap-center flex-col rounded-[16px] p-7 shadow-card transition-[opacity,transform] duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 md:w-auto md:shrink md:opacity-100 md:scale-100 ${
-                  dark ? "bg-ink md:-my-6" : "border border-rule bg-surface"
-                } ${activeIdx === idx ? "scale-100 opacity-100" : "scale-[0.94] opacity-50"}`}
+                className="flex w-[76vw] shrink-0 snap-center md:w-auto md:shrink md:py-6"
               >
-                {dark && (
+                <article
+                  tabIndex={0}
+                  role="radio"
+                  aria-checked={selected}
+                  onClick={() => selectPlan(idx)}
+                  onKeyDown={(e) => {
+                    if (e.key === " " || e.key === "Enter") {
+                      e.preventDefault();
+                      selectPlan(idx);
+                    }
+                  }}
+                  className={`relative flex h-full w-full cursor-pointer flex-col rounded-[16px] p-7 shadow-card transition-[opacity,transform,background-color,border-color,box-shadow] duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 md:opacity-100 md:scale-100 md:duration-300 md:hover:shadow-panel ${
+                    dark ? "bg-ink" : "border border-rule bg-surface"
+                  } ${
+                    selected
+                      ? "md:-translate-y-6 md:hover:-translate-y-[32px]"
+                      : "md:translate-y-0 md:hover:-translate-y-1"
+                  } ${activeIdx === idx ? "scale-100 opacity-100" : "scale-[0.94] opacity-50 md:scale-100"}`}
+                >
+                {p.featured && (
                   <span className="type-label absolute -top-3 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-full bg-gold px-3 py-1 text-[10px] text-white">
                     Выбирают чаще
                   </span>
@@ -292,6 +311,7 @@ export function Pricing() {
 
                 <AppLink
                   href="/pricing"
+                  onClick={() => selectPlan(idx)}
                   className={`mt-6 block w-full rounded-[6px] p-3 text-center text-[15px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
                     dark
                       ? "bg-gold text-white hover:bg-gold-dark"
@@ -300,10 +320,12 @@ export function Pricing() {
                 >
                   {p.cta}
                 </AppLink>
-              </article>
+                </article>
+              </div>
             );
           })}
         </div>
+
 
         <div className="mt-5 flex justify-center gap-2 md:hidden">
           {PLANS.map((p, i) => (

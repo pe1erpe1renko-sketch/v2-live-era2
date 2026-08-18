@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import { Icon } from "@iconify/react";
 import { useCreate } from "@/components/create/CreateContext";
+import { useAuth } from "@/context/AuthContext";
+
 import { SettingsPanel } from "@/components/create/SettingsPanel";
 import { AudioPanel } from "@/components/create/AudioPanel";
 import { VideoRefPanel } from "@/components/create/VideoRefPanel";

@@ -218,13 +218,13 @@ function Page() {
                 onChange={(e) => setEmail(e.target.value)}
                 onBlur={validateEmail}
                 placeholder="you@example.com"
-                className={`mt-3 h-11 w-full rounded-[6px] border bg-surface px-3.5 text-[14px] text-ink placeholder:text-ink3 outline-none transition-colors focus:border-gold2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
+                className={`mt-2 h-11 w-full rounded-[6px] border bg-surface px-3.5 text-[14px] text-ink placeholder:text-ink3 outline-none transition-colors focus:border-gold2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
                   emailError ? "border-red-500" : "border-rule"
                 }`}
               />
               {emailError && <p className="mt-1.5 text-[12px] text-red-600">{emailError}</p>}
 
-              <hr className={`${DIVIDER} my-4`} />
+              <hr className={`${DIVIDER} my-3`} />
 
               {/* Согласие */}
               <label className="flex cursor-pointer items-start gap-3">

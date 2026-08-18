@@ -33,8 +33,8 @@ const isPeriod = (v: unknown): v is PeriodId =>
 
 export const Route = createFileRoute("/checkout")({
   validateSearch: (search: Record<string, unknown>) => ({
-    plan: isPlan(search.plan) ? search.plan : ("pro" as PlanId),
-    period: isPeriod(search.period) ? search.period : ("1month" as PeriodId),
+    plan: isPlan(search['plan']) ? search['plan'] : ("pro" as PlanId),
+    period: isPeriod(search['period']) ? search['period'] : ("1month" as PeriodId),
   }),
   head: () => ({
     meta: [
@@ -105,7 +105,7 @@ function Page() {
             </h1>
           </div>
           <AppLink
-            to="/pricing"
+            href="/pricing"
             className="inline-flex items-center gap-2 text-[14px] text-ink2 transition-colors hover:text-gold focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2"
           >
             <Icon icon="lucide:arrow-left" className="h-4 w-4" />
@@ -210,7 +210,7 @@ function Page() {
 
         <div className="mt-10 text-center">
           <AppLink
-            to="/pricing"
+            href="/pricing"
             className="text-[14px] text-ink2 transition-colors hover:text-gold focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2"
           >
             ← Вернуться к тарифам

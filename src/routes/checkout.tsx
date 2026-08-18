@@ -234,7 +234,7 @@ function Page() {
                   onChange={(e) => setAgreed(e.target.checked)}
                   className="mt-0.5 h-[16px] w-[16px] shrink-0 accent-[#8A6A2F]"
                 />
-                <span className="text-[13px] leading-[1.55] text-ink2">
+                <span className="text-[13px] leading-[1.45] text-ink2">
                   Я принимаю{" "}
                   <AppLink href="/offer" className={LEGAL_LINK}>
                     Публичную оферту
@@ -264,7 +264,7 @@ function Page() {
               </label>
 
               {/* Оплата */}
-              <div className="mt-4">
+              <div className="mt-3">
                 {/* TODO backend: сюда подставить платёжную ссылку магазина с суммой, тарифом и периодом */}
                 <a
                   href="https://yookassa.ru"
@@ -279,7 +279,7 @@ function Page() {
                   {gift ? "Подарить за" : "Оплатить"} {fmt(total)} ₽
                 </a>
 
-                <div className="mt-3 flex flex-wrap items-center gap-1.5">
+                <div className="mt-2 flex flex-wrap items-center gap-1.5">
                   {["Visa", "Mastercard", "МИР", "СБП"].map((m) => (
                     <span
                       key={m}
@@ -290,7 +290,7 @@ function Page() {
                   ))}
                 </div>
 
-                <p className="mt-2 text-[12px] leading-[1.5] text-ink3">
+                <p className="mt-1.5 text-[12px] leading-[1.5] text-ink3">
                   Способ оплаты выберете на защищённой странице ЮKassa · Возврат в течение 3 дней
                 </p>
               </div>

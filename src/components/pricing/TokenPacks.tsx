@@ -1,215 +1,144 @@
-import { useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
 import { tokensLabel } from "@/lib/plural";
 
 type Pack = {
   name: string;
-  desc: string;
+  tokens: string;
   price: string;
-  label: string;
+  perClip: string;
   featured?: boolean;
-  items: { text: string; off?: boolean }[];
 };
 
-const BASE = (tokens: string, clips: string) => [
-  { text: tokensLabel(tokens) },
-  { text: clips },
-  { text: "Токены не сгорают" },
-  { text: "Все сценарии и нейросети" },
-];
-
 const PACKS: Pack[] = [
-  {
-    name: "Старт",
-    desc: "Попробовать без подписки",
-    price: "590",
-    label: "От 66 ₽ за ролик",
-    items: [
-      ...BASE("115", "≈ 12 роликов, или 3 на KLING 3.0"),
-      { text: "Без автоматических списаний" },
-      { text: "Без водяных знаков" },
-      { text: "Возврат токенов при сбое" },
-      { text: "Приоритетная очередь", off: true },
-    ],
-  },
-  {
-    name: "Оптимальный",
-    desc: "Лучшая цена за ролик",
-    price: "1 290",
-    label: "От 61 ₽ за ролик",
-    featured: true,
-    items: [
-      ...BASE("260", "≈ 28 роликов, или 8 на KLING 3.0"),
-      { text: "Несколько снимков в одной сцене" },
-      { text: "Без автоматических списаний" },
-      { text: "Без водяных знаков" },
-      { text: "Возврат токенов при сбое" },
-      { text: "Приоритетная очередь", off: true },
-    ],
-  },
-  {
-    name: "Бизнес",
-    desc: "Для регулярной работы",
-    price: "3 490",
-    label: "От 55 ₽ за ролик",
-    items: [
-      ...BASE("760", "≈ 84 ролика, или 24 на KLING 3.0"),
-      { text: "Несколько снимков в одной сцене" },
-      { text: "Качество 4K" },
-      { text: "Без автоматических списаний" },
-      { text: "Без водяных знаков" },
-      { text: "Приватные генерации" },
-      { text: "Приоритетная очередь" },
-    ],
-  },
-  {
-    name: "Макс",
-    desc: "Максимальный объём",
-    price: "6 990",
-    label: "От 50 ₽ за ролик",
-    items: [
-      ...BASE("1 700", "≈ 188 роликов, или 54 на KLING 3.0"),
-      { text: "Несколько снимков в одной сцене" },
-      { text: "Качество 4K" },
-      { text: "Без автоматических списаний" },
-      { text: "Без водяных знаков" },
-      { text: "Приватные генерации" },
-      { text: "Приоритетная очередь" },
-    ],
-  },
+  { name: "Старт", tokens: "115", price: "590", perClip: "от 49 ₽ за ролик" },
+  { name: "Оптимальный", tokens: "260", price: "1 290", perClip: "от 46 ₽ за ролик", featured: true },
+  { name: "Бизнес", tokens: "760", price: "3 490", perClip: "от 42 ₽ за ролик" },
+  { name: "Макс", tokens: "1 700", price: "6 990", perClip: "от 37 ₽ за ролик" },
 ];
 
-const PAY = ["МИР", "VISA", "MASTERCARD"];
+const COMMON = [
+  "Токены не сгорают",
+  "Все сценарии и нейросети",
+  "Без автоматических списаний",
+  "Без водяных знаков",
+  "Возврат токенов при сбое",
+  "Оплата российской картой, чек на почту",
+];
+
+// TODO backend: проверка email в профиле
+const PROFILE_EMAIL: string | null = "user@example.com";
+
+// TODO backend: сюда подставить платёжную ссылку магазина
+const PAYMENT_URL = "https://yookassa.ru";
 
 export function TokenPacks() {
-  const carouselRef = useRef<HTMLDivElement>(null);
-  const [activeIdx, setActiveIdx] = useState(1);
+  const [notice, setNotice] = useState(false);
 
-  const scrollToCard = (i: number) => {
-    const el = carouselRef.current;
-    if (!el) return;
-    const card = el.children[i] as HTMLElement | undefined;
-    if (!card) return;
-    el.scrollTo({
-      left: card.offsetLeft - (el.clientWidth - card.offsetWidth) / 2,
-      behavior: "smooth",
-    });
-    setActiveIdx(i);
-  };
+  useEffect(() => {
+    if (!notice) return;
+    const t = setTimeout(() => setNotice(false), 8000);
+    return () => clearTimeout(t);
+  }, [notice]);
 
-  const onScroll = () => {
-    const el = carouselRef.current;
-    if (!el) return;
-    const center = el.scrollLeft + el.clientWidth / 2;
-    let nearest = 0;
-    let dist = Infinity;
-    Array.from(el.children).forEach((c, i) => {
-      const child = c as HTMLElement;
-      const d = Math.abs(child.offsetLeft + child.offsetWidth / 2 - center);
-      if (d < dist) {
-        dist = d;
-        nearest = i;
-      }
-    });
-    setActiveIdx(nearest);
+  const pay = () => {
+    // TODO backend: проверка email в профиле
+    if (!PROFILE_EMAIL) {
+      setNotice(true);
+      return;
+    }
+    window.location.href = PAYMENT_URL;
   };
 
   return (
     <div>
-      <div
-        ref={carouselRef}
-        onScroll={onScroll}
-        className="mt-12 -mx-8 flex items-stretch gap-3 overflow-x-auto px-4 pb-2 pt-4 [-webkit-overflow-scrolling:touch] [scroll-snap-type:x_mandatory] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:grid md:grid-cols-2 md:gap-4 md:overflow-visible md:px-0 md:pb-0 md:pt-4 lg:grid-cols-4"
-      >
-        {PACKS.map((p, idx) => (
+      <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
+        {PACKS.map((p) => (
           <article
             key={p.name}
-            tabIndex={0}
-            className={`relative flex h-full w-[80vw] shrink-0 snap-center flex-col rounded-[16px] bg-surface p-6 shadow-card transition-[opacity,transform] duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 md:w-auto md:shrink md:scale-100 md:opacity-100 ${
+            className={`relative grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 rounded-[16px] bg-surface p-6 shadow-card sm:grid-cols-[minmax(0,1fr)_auto_auto] ${
               p.featured ? "border border-gold2" : "border border-rule"
-            } ${activeIdx === idx ? "scale-100 opacity-100" : "scale-[0.94] opacity-50"}`}
+            }`}
           >
             {p.featured && (
-              <span className="type-label absolute -top-3 left-1/2 z-10 -translate-x-1/2 whitespace-nowrap rounded-full bg-gold px-3 py-1 text-[10px] text-white">
+              <span className="type-label absolute -top-3 left-6 z-10 whitespace-nowrap rounded-full bg-gold px-3 py-1 text-[10px] text-white">
                 Выгоднее всего
               </span>
             )}
 
-            <h3 className="text-[17px] font-normal text-ink">{p.name}</h3>
-            <p className="mt-1 text-[13px] text-ink2">{p.desc}</p>
-
-            <div className="mt-5 flex items-baseline gap-1.5">
-              <span className="text-[34px] font-light leading-none tracking-[-0.04em] text-ink">
-                {p.price}
-              </span>
-              <span className="text-[14px] text-ink3">₽</span>
+            <div className="min-w-0">
+              <div className="text-[30px] font-light leading-none tracking-[-0.04em] text-ink">
+                {p.tokens}
+              </div>
+              <div className="type-label mt-1.5 text-ink3">{tokensLabel(p.tokens)}</div>
+              <div className="mt-1 truncate text-[13px] text-ink2">{p.name}</div>
             </div>
-            <div className="type-label mt-1 text-gold">{p.label}</div>
 
-            <div className="mt-5 flex flex-col gap-2.5 border-t border-rule pt-5">
-              {p.items.map((it) => (
-                <div key={it.text} className="flex items-start">
-                  <Icon
-                    icon={it.off ? "solar:close-circle-linear" : "solar:check-circle-linear"}
-                    width={16}
-                    height={16}
-                    className="mt-[2px] shrink-0 text-ink3"
-                  />
-                  <span
-                    className={`ml-[10px] block text-[13px] leading-[1.4] ${
-                      it.off ? "text-ink3 line-through" : "text-ink2"
-                    }`}
-                  >
-                    {it.text}
-                  </span>
-                </div>
-              ))}
+            <div className="text-right">
+              <div className="text-[26px] font-light leading-none tracking-[-0.04em] text-ink">
+                {p.price} <span className="text-[14px] text-ink3">₽</span>
+              </div>
+              <div className="mt-1.5 text-[12px] text-gold">{p.perClip}</div>
             </div>
 
             <button
               type="button"
-              className={`mt-auto w-full rounded-[6px] p-[14px] text-center text-[15px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
+              onClick={pay}
+              className={`col-span-2 self-center rounded-[6px] px-6 py-3 text-[15px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 sm:col-span-1 ${
                 p.featured
                   ? "bg-gold text-white hover:bg-gold-dark"
-                  : "border border-rule text-ink hover:border-gold2 hover:text-gold"
+                  : "border border-gold text-gold hover:bg-gold hover:text-white"
               }`}
-              style={{ marginTop: 20 }}
             >
               Оплатить
             </button>
-
-            <div className="mt-3 flex justify-center gap-1.5">
-              {PAY.map((t) => (
-                <span
-                  key={t}
-                  className="rounded-[4px] border border-rule px-2 py-[3px] text-[10px] text-ink3"
-                >
-                  {t}
-                </span>
-              ))}
-            </div>
           </article>
         ))}
       </div>
 
-      <div className="mt-5 flex flex-wrap justify-center gap-2 md:hidden">
-        {PACKS.map((p, i) => (
-          <button
-            key={p.name}
-            type="button"
-            onClick={() => scrollToCard(i)}
-            className={`min-h-[44px] rounded-full px-4 py-2.5 text-[13px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
-              activeIdx === i ? "bg-gold text-white" : "border border-rule text-ink2"
-            }`}
-          >
-            {p.name}
-          </button>
-        ))}
+      <div className="mt-6 rounded-[16px] border border-rule bg-surface p-6">
+        <h3 className="text-[16px] font-normal text-ink">В любом пакете</h3>
+        <div className="mt-4 grid grid-cols-1 gap-x-6 gap-y-2.5 sm:grid-cols-2 lg:grid-cols-3">
+          {COMMON.map((t) => (
+            <div key={t} className="flex items-start">
+              <Icon
+                icon="solar:check-circle-linear"
+                width={16}
+                height={16}
+                className="mt-[2px] shrink-0 text-ink3"
+              />
+              <span className="ml-[10px] block text-[13px] leading-[1.4] text-ink2">{t}</span>
+            </div>
+          ))}
+        </div>
       </div>
 
       <p className="mt-4 text-center text-[13px] text-ink3">
         Купили — потратили — докупили, когда нужно. Автоматических списаний нет.
       </p>
+
+      {notice && (
+        <div className="fixed bottom-5 right-5 z-50 w-[320px] rounded-[12px] border border-rule bg-surface p-4 shadow-card">
+          <button
+            type="button"
+            onClick={() => setNotice(false)}
+            aria-label="Закрыть"
+            className="absolute right-3 top-3 text-ink3 transition-colors hover:text-ink"
+          >
+            <Icon icon="solar:close-circle-linear" width={16} height={16} />
+          </button>
+          <p className="pr-6 text-[14px] text-ink">Нужен email для чека</p>
+          <p className="mt-1 pr-6 text-[13px] leading-[1.4] text-ink2">
+            Добавьте адрес в профиль — на него придёт чек об оплате
+          </p>
+          <a
+            href="/account"
+            className="mt-3 inline-block rounded-[6px] border border-gold px-4 py-2 text-[13px] text-gold transition-colors hover:bg-gold hover:text-white"
+          >
+            В профиль
+          </a>
+        </div>
+      )}
     </div>
   );
 }

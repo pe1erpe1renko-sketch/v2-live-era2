@@ -322,7 +322,7 @@ function Page() {
                 </div>
               </dl>
 
-              <hr className={`${DIVIDER} my-4`} />
+              <hr className={`${DIVIDER} my-3`} />
 
               <span className="type-label">К оплате</span>
               <p className="mt-1.5 text-[clamp(22px,2.8vw,32px)] font-light leading-none tracking-[-0.03em] text-ink">
@@ -334,7 +334,7 @@ function Page() {
                   : `Следующее списание: ${nextChargeDate(periodData.months)} · ${fmt(total)} ₽`}
               </p>
 
-              <hr className={`${DIVIDER} my-4`} />
+              <hr className={`${DIVIDER} my-3`} />
 
               {/* Промокод */}
               <span className="type-label">Промокод</span>
@@ -380,7 +380,7 @@ function Page() {
                 </>
               )}
 
-              <hr className={`${DIVIDER} my-4`} />
+              <hr className={`${DIVIDER} my-3`} />
 
               {/* Подарок другу */}
               {/* TODO backend: генерация подарочной ссылки после оплаты */}

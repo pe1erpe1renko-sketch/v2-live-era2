@@ -34,7 +34,7 @@ function Page() {
   return (
     <LightLayout>
       <section>
-        <div className="mx-auto max-w-[1440px] px-8 pb-16 pt-8 lg:px-16 lg:pt-8">
+        <div className="mx-auto max-w-[1440px] px-8 pb-10 pt-4 lg:px-16 lg:pt-4">
           <h1 className="text-left text-[clamp(22px,2.7vw,35px)] font-light leading-[1.1] tracking-[-0.04em] text-ink">
             Цены
           </h1>

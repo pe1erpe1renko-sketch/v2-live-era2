@@ -306,6 +306,18 @@ export function SettingsPanel() {
     setQuality((q) => (availableQualities.includes(q) ? q : (availableQualities[0] ?? "720p")));
   }, [availableQualities.join(",")]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // пока первая бесплатная генерация не использована, переключение на бесплатную
+  // модель возвращает минимальные параметры — чтобы ролик сразу был бесплатным
+  useEffect(() => {
+    if (freeGenerationUsed || !isFreeModel(modelSlug)) return;
+    const base = baseParamsFor(modelSlug);
+    setQuality(base.quality);
+    setDuration(base.duration);
+    setSound(false);
+    setExpert(false);
+    setHasLastFrame(false);
+  }, [modelSlug, freeGenerationUsed]);
+
 
   const cost = useMemo(
     () =>
@@ -645,9 +657,7 @@ export function SettingsPanel() {
               ? missingLabel
               : freeAvailable
                 ? "Попробовать бесплатно"
-                : notEnoughTokens
-                  ? "Не хватает токенов"
-                  : `Сгенерировать · ${tokensLabel(cost)}`}
+                : `Сгенерировать · ${tokensLabel(cost)}`}
         </button>
 
         <p className="mt-2 text-center text-[12px] text-ink3 md:mt-2.5">
@@ -664,9 +674,16 @@ export function SettingsPanel() {
           ) : freeAvailable ? (
             "Первая генерация бесплатно, карта не нужна"
           ) : notEnoughTokens ? (
-            <AppLink href="/pricing" className="text-gold2">
-              Пополнить
-            </AppLink>
+            <>
+              <span style={{ color: "#E06A5A" }}>
+                Не хватает {tokensLabel(cost)} — на балансе {tokenBalance}
+              </span>{" "}
+              ·{" "}
+              <AppLink href="/pricing" className="text-gold2">
+                Пополнить
+              </AppLink>
+            </>
+
           ) : freeOffered ? (
             <>
               На {FREE_MODEL_NAMES} первый ролик бесплатно ·{" "}

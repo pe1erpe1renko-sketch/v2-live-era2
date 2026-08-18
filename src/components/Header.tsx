@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Icon } from "@iconify/react";
 import { SectionLabel } from "@/components/SectionLabel";
 import { useAuth } from "@/context/AuthContext";
+import { isFreeModel } from "@/components/create/freeGeneration";
 import { useAuthModal } from "@/context/AuthModalContext";
 import { AccountMenu, TokenPill, ACCOUNT_LINKS } from "@/components/AccountMenu";
 import { AppLink } from "@/components/AppLink";
@@ -69,6 +70,7 @@ const MODEL_BADGES: Record<string, string> = {
 
 const MODELS = DATA_MODELS.map((m) => ({
   letter: m.letter,
+  slug: m.slug,
   name: m.name,
   badge: MODEL_BADGES[m.name],
   text: m.note,
@@ -202,6 +204,8 @@ function ScenariosMenu() {
 }
 
 function ModelsMenu() {
+  const { freeGenerationUsed } = useAuth();
+  const showFree = !freeGenerationUsed;
   return (
     <Panel>
       <div className="flex flex-wrap items-baseline justify-between gap-3">
@@ -221,8 +225,13 @@ function ModelsMenu() {
           <AppLink
             key={m.name}
             href={modelHref(m.name)}
-            className="rounded-[6px] border border-rule bg-surface p-4 transition-colors hover:border-gold2"
+            className="relative rounded-[6px] border border-rule bg-surface p-4 transition-colors hover:border-gold2"
           >
+            {showFree && isFreeModel(m.slug) && (
+              <span className="absolute right-2 top-2 rounded-[6px] bg-gold px-1.5 py-[1px] text-[9px] uppercase tracking-[0.08em] text-white">
+                Бесплатно
+              </span>
+            )}
             <span className="flex h-9 w-9 items-center justify-center rounded-[6px] bg-gold3 font-normal text-[16px] text-gold">
               {m.letter}
             </span>

@@ -3,6 +3,9 @@ import { Icon } from "@iconify/react";
 import { AppLink } from "@/components/AppLink";
 import { MODELS, SCENARIOS } from "@/components/create/data";
 import { useCreate } from "@/components/create/CreateContext";
+import { isFreeModel } from "@/components/create/freeGeneration";
+import { useAuth } from "@/context/AuthContext";
+
 
 const clamp2 = {
   display: "-webkit-box",
@@ -20,7 +23,10 @@ export function SelectPanel({ onSelect }: { onSelect?: () => void } = {}) {
     modelSlug: model,
     setModelSlug: setModel,
   } = useCreate();
+  const { freeGenerationUsed } = useAuth();
+  const showFree = !freeGenerationUsed;
   const listRef = useRef<HTMLDivElement | null>(null);
+
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -86,7 +92,13 @@ export function SelectPanel({ onSelect }: { onSelect?: () => void } = {}) {
             className="h-10 w-full rounded-[6px] border border-rule bg-[var(--dark-input,#1a1a1c)] pl-9 pr-3 text-[13px] text-ink placeholder:text-ink3 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2"
           />
         </div>
+        {mode === "model" && showFree && (
+          <p className="mt-2 text-[11px] leading-[1.4] text-ink3">
+            Первый ролик бесплатно на моделях с плашкой
+          </p>
+        )}
       </div>
+
 
       <div ref={listRef} className="mt-4 min-h-0 flex-1 overflow-y-auto px-4 pb-4 thin-scroll">
         {empty && <p className="text-center text-[13px] text-ink3">Ничего не нашлось</p>}
@@ -186,9 +198,14 @@ export function SelectPanel({ onSelect }: { onSelect?: () => void } = {}) {
                   >
                     {m.letter}
                   </span>
+                  {showFree && isFreeModel(m.slug) && (
+                    <span className="absolute right-2 top-2 rounded-[6px] bg-gold px-1.5 py-[1px] text-[9px] uppercase tracking-[0.08em] text-white">
+                      Бесплатно
+                    </span>
+                  )}
                   <span className="min-w-0 flex-1">
                     <span
-                      className={`block text-[13px] ${on ? "font-medium text-ink" : "text-ink"}`}
+                      className={`block text-[13px] ${showFree && isFreeModel(m.slug) ? "pr-[74px]" : ""} ${on ? "font-medium text-ink" : "text-ink"}`}
                     >
                       {m.name}
                     </span>
@@ -200,6 +217,7 @@ export function SelectPanel({ onSelect }: { onSelect?: () => void } = {}) {
                     </span>
                   </span>
                   {on && <span className="mt-1 h-1.5 w-1.5 shrink-0 rounded-full bg-gold2" />}
+
                 </button>
               );
             })}

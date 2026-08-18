@@ -3,6 +3,9 @@ import { Icon } from "@iconify/react";
 import { AppLink } from "@/components/AppLink";
 import { MODELS, SCENARIOS } from "@/components/create/data";
 import { useCreate } from "@/components/create/CreateContext";
+import { isFreeModel } from "@/components/create/freeGeneration";
+import { useAuth } from "@/context/AuthContext";
+
 
 const clamp2 = {
   display: "-webkit-box",

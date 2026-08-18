@@ -321,7 +321,7 @@ export function Pricing() {
                 </div>
 
                 <AppLink
-                  href="/pricing"
+                  href={`/checkout?plan=${p.slug}&period=1month`}
                   onClick={() => selectPlan(idx)}
                   className={`mt-auto block w-full rounded-[6px] p-3 text-center text-[15px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
                     dark

@@ -117,6 +117,13 @@ export function Pricing() {
   const carouselRef = useRef<HTMLDivElement>(null);
   const sectionRef = useRef<HTMLElement>(null);
   const [activeIdx, setActiveIdx] = useState(1);
+  const [selectedIdx, setSelectedIdx] = useState(1);
+
+  const selectPlan = (i: number) => {
+    if (typeof window !== "undefined" && !window.matchMedia("(min-width: 768px)").matches) return;
+    setSelectedIdx(i);
+  };
+
 
   const scrollToCard = (i: number, smooth: boolean) => {
     const el = carouselRef.current;

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Icon } from "@iconify/react";
 import { SectionLabel } from "@/components/SectionLabel";
 import { useAuth } from "@/context/AuthContext";
+import { isFreeModel } from "@/components/create/freeGeneration";
 import { useAuthModal } from "@/context/AuthModalContext";
 import { AccountMenu, TokenPill, ACCOUNT_LINKS } from "@/components/AccountMenu";
 import { AppLink } from "@/components/AppLink";
@@ -203,6 +204,8 @@ function ScenariosMenu() {
 }
 
 function ModelsMenu() {
+  const { freeGenerationUsed } = useAuth();
+  const showFree = !freeGenerationUsed;
   return (
     <Panel>
       <div className="flex flex-wrap items-baseline justify-between gap-3">

@@ -23,7 +23,10 @@ export function SelectPanel({ onSelect }: { onSelect?: () => void } = {}) {
     modelSlug: model,
     setModelSlug: setModel,
   } = useCreate();
+  const { freeGenerationUsed } = useAuth();
+  const showFree = !freeGenerationUsed;
   const listRef = useRef<HTMLDivElement | null>(null);
+
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);

@@ -320,6 +320,29 @@ export function SettingsPanel() {
   const disabled =
     (needsPhoto && !file) || (needsAudio && !audioDuration) || (needsVideo && !videoFile);
 
+  // бесплатная генерация: только базовые параметры трёх моделей
+  const freeEligible = isFreeEligible({
+    model: modelSlug,
+    quality,
+    duration,
+    sound: soundLocked ? true : sound,
+    expert,
+    lastFrame: caps.lastFrame && expert && hasLastFrame,
+  });
+  const freeAvailable = isLoggedIn && !freeGenerationUsed && freeEligible;
+  // право есть, но параметры или модель уводят в платный режим
+  const freeOffered = isLoggedIn && !freeGenerationUsed && !freeEligible;
+  const notEnoughTokens = isLoggedIn && !freeAvailable && cost > tokenBalance;
+
+  const resetToBase = () => {
+    const base = baseParamsFor(isFreeModel(modelSlug) ? modelSlug : "kling-3");
+    if (!isFreeModel(modelSlug)) setModelSlug("kling-3");
+    setQuality(base.quality);
+    setDuration(base.duration);
+    setSound(false);
+    setExpert(false);
+  };
+
   // подпись кнопки, когда не хватает файлов для video-to-video
   const missingLabel =
     needsVideo && !file && !videoFile
@@ -331,7 +354,13 @@ export function SettingsPanel() {
           : null;
 
   // TODO: заглушка — генерация появится вместе с бэкендом
-  const handleGenerate = () => {};
+  // TODO backend: признак freeGenerationUsed хранится на сервере, проверка права
+  // выполняется на сервере при каждом запросе генерации. Фронт только отображает состояние.
+  const handleGenerate = () => {
+    // при бесплатной генерации токены не списываются, меняется только признак
+    if (freeAvailable) markFreeGenerationUsed();
+  };
+
 
   // общие пропсы кнопок качества: недоступные варианты видно, но выбрать нельзя
   const qualityProps = {

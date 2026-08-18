@@ -243,48 +243,35 @@ export function SubscriptionPlans() {
         ))}
       </div>
 
-      <label className="mx-auto mt-8 flex max-w-[720px] cursor-pointer items-start rounded-[16px] border border-rule p-5">
-        <input
-          type="checkbox"
-          checked={agreed}
-          onChange={(e) => setAgreed(e.target.checked)}
-          className="mt-[2px] h-[18px] w-[18px] shrink-0 appearance-none rounded-[4px] border border-rule bg-surface checked:border-gold checked:bg-gold focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2"
-        />
-        <span className="ml-3 text-[13px] leading-[1.5] text-ink2">
-          Нажимая «Оплатить», я даю согласие на регулярные списания, на{" "}
-          <a
-            href="/consent"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gold underline-offset-2 hover:underline"
-          >
-            обработку персональных данных
-          </a>{" "}
-          и принимаю условия{" "}
-          <a
-            href="/privacy"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gold underline-offset-2 hover:underline"
-          >
-            Политики конфиденциальности
-          </a>{" "}
-          и{" "}
-          <a
-            href="/terms"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gold underline-offset-2 hover:underline"
-          >
-            Пользовательского соглашения
-          </a>
-          .
-        </span>
-      </label>
+      <div className="mt-6 text-center">
+        <button
+          type="button"
+          onClick={() => {
+            // TODO backend: отключение автопродления на сервере
+            setNotice(true);
+          }}
+          className="text-[13px] text-ink2 underline underline-offset-2 transition-colors hover:text-ink"
+        >
+          Отключить автопродление подписки
+        </button>
+      </div>
 
-      <p className="mt-3 text-center text-[13px] text-ink3">
-        Списание раз в месяц. Напомним на почту за три дня до продления.
-      </p>
+      {notice && (
+        <div className="fixed bottom-5 right-5 z-50 w-[320px] rounded-[12px] border border-rule bg-surface p-4 shadow-card">
+          <button
+            type="button"
+            onClick={() => setNotice(false)}
+            aria-label="Закрыть"
+            className="absolute right-3 top-3 text-ink3 transition-colors hover:text-ink"
+          >
+            <Icon icon="solar:close-circle-linear" width={16} height={16} />
+          </button>
+          <p className="pr-6 text-[14px] text-ink">Автопродление отключено</p>
+          <p className="mt-1 pr-6 text-[13px] leading-[1.4] text-ink2">
+            Подписка доработает до конца оплаченного периода и не продлится
+          </p>
+        </div>
+      )}
     </div>
   );
 }

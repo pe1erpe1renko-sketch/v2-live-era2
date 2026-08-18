@@ -5,6 +5,7 @@ import { AppLink } from "@/components/AppLink";
 
 type Plan = {
   name: string;
+  slug: "start" | "pro" | "ultra";
   desc: string;
   price: string;
   label: string;
@@ -20,6 +21,7 @@ type Plan = {
 const PLANS: Plan[] = [
   {
     name: "Старт",
+    slug: "start",
     desc: "Попробовать и оживить пару снимков",
     price: "490",
     label: "От 41 ₽ за ролик",
@@ -36,6 +38,7 @@ const PLANS: Plan[] = [
   },
   {
     name: "Про",
+    slug: "pro",
     desc: "Регулярно разбирать семейный архив",
     price: "990",
     label: "От 35 ₽ за ролик",
@@ -56,6 +59,7 @@ const PLANS: Plan[] = [
   },
   {
     name: "Ультра",
+    slug: "ultra",
     desc: "Для работы и потокового производства",
     price: "2 450",
     label: "От 29 ₽ за ролик",

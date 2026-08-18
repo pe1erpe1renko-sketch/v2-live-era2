@@ -7,6 +7,13 @@ import { useAuth } from "@/context/AuthContext";
 import { useAuthModal } from "@/context/AuthModalContext";
 import { AppLink } from "@/components/AppLink";
 import { tokensLabel } from "@/lib/plural";
+import {
+  baseParamsFor,
+  isFreeEligible,
+  isFreeModel,
+  FREE_MODEL_NAMES,
+} from "@/components/create/freeGeneration";
+
 
 const TEXT_ONLY = "video-iz-teksta";
 const darkInput = { backgroundColor: "var(--dark-input, #1a1a1c)" };
@@ -147,7 +154,9 @@ function Slider({
 }
 
 function LastFrameZone({ onChange }: { onChange: (has: boolean) => void }) {
+  const { isLoggedIn } = useAuth();
   const inputRef = useRef<HTMLInputElement | null>(null);
+
   const [file, setFile] = useState<File | null>(null);
   const [url, setUrl] = useState<string | null>(null);
 
@@ -200,7 +209,10 @@ function LastFrameZone({ onChange }: { onChange: (has: boolean) => void }) {
     >
       <Icon icon="solar:gallery-add-linear" width={22} height={22} className="text-gold2" />
       <p className="mt-2 text-[13px] text-ink">Кадр, которым закончится ролик</p>
-      <p className="mt-1 text-[11px] text-ink3">необязательно · JPG или PNG до 20 МБ · +2 токена</p>
+      <p className="mt-1 text-[11px] text-ink3">
+        необязательно · JPG или PNG до 20 МБ{isLoggedIn ? " · +2 токена" : ""}
+      </p>
+
       <input
         ref={inputRef}
         type="file"
@@ -217,9 +229,18 @@ function LastFrameZone({ onChange }: { onChange: (has: boolean) => void }) {
 }
 
 export function SettingsPanel() {
-  const { modelSlug, model, scenarioSlug, file, audioDuration, videoFile, videoDuration } =
-    useCreate();
-  const { isLoggedIn } = useAuth();
+  const {
+    modelSlug,
+    setModelSlug,
+    model,
+    scenarioSlug,
+    file,
+    audioDuration,
+    videoFile,
+    videoDuration,
+  } = useCreate();
+  const { isLoggedIn, tokenBalance, freeGenerationUsed, markFreeGenerationUsed } = useAuth();
+
   const { openAuth } = useAuthModal();
   const caps = capabilitiesFor(modelSlug);
   const dMin = caps.durationMin ?? 5;
@@ -320,6 +341,29 @@ export function SettingsPanel() {
   const disabled =
     (needsPhoto && !file) || (needsAudio && !audioDuration) || (needsVideo && !videoFile);
 
+  // бесплатная генерация: только базовые параметры трёх моделей
+  const freeEligible = isFreeEligible({
+    model: modelSlug,
+    quality,
+    duration,
+    sound: soundLocked ? true : sound,
+    expert,
+    lastFrame: caps.lastFrame && expert && hasLastFrame,
+  });
+  const freeAvailable = isLoggedIn && !freeGenerationUsed && freeEligible;
+  // право есть, но параметры или модель уводят в платный режим
+  const freeOffered = isLoggedIn && !freeGenerationUsed && !freeEligible;
+  const notEnoughTokens = isLoggedIn && !freeAvailable && cost > tokenBalance;
+
+  const resetToBase = () => {
+    const base = baseParamsFor(isFreeModel(modelSlug) ? modelSlug : "kling-3");
+    if (!isFreeModel(modelSlug)) setModelSlug("kling-3");
+    setQuality(base.quality);
+    setDuration(base.duration);
+    setSound(false);
+    setExpert(false);
+  };
+
   // подпись кнопки, когда не хватает файлов для video-to-video
   const missingLabel =
     needsVideo && !file && !videoFile
@@ -331,7 +375,13 @@ export function SettingsPanel() {
           : null;
 
   // TODO: заглушка — генерация появится вместе с бэкендом
-  const handleGenerate = () => {};
+  // TODO backend: признак freeGenerationUsed хранится на сервере, проверка права
+  // выполняется на сервере при каждом запросе генерации. Фронт только отображает состояние.
+  const handleGenerate = () => {
+    // при бесплатной генерации токены не списываются, меняется только признак
+    if (freeAvailable) markFreeGenerationUsed();
+  };
+
 
   // общие пропсы кнопок качества: недоступные варианты видно, но выбрать нельзя
   const qualityProps = {
@@ -581,19 +631,23 @@ export function SettingsPanel() {
       <div className="sticky-cta mt-4">
         <button
           type="button"
-          disabled={disabled}
+          disabled={disabled || notEnoughTokens}
           onClick={() => (isLoggedIn ? handleGenerate() : openAuth("login"))}
           className={`h-[52px] w-full rounded-[6px] text-[15px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 md:h-[56px] md:text-[16px] ${
-            disabled
+            disabled || notEnoughTokens
               ? "cursor-not-allowed bg-rule text-ink3"
               : "cursor-pointer bg-gold text-white hover:bg-gold-dark"
           }`}
         >
           {!isLoggedIn
-            ? "Войти и создать видео"
+            ? "Войдите, чтобы создать видео"
             : missingLabel
               ? missingLabel
-              : `Сгенерировать · ${tokensLabel(cost)}`}
+              : freeAvailable
+                ? "Попробовать бесплатно"
+                : notEnoughTokens
+                  ? "Не хватает токенов"
+                  : `Сгенерировать · ${tokensLabel(cost)}`}
         </button>
 
         <p className="mt-2 text-center text-[12px] text-ink3 md:mt-2.5">
@@ -605,18 +659,32 @@ export function SettingsPanel() {
             ) : (
               "Загрузите снимок, чтобы продолжить"
             )
-          ) : isLoggedIn ? (
+          ) : !isLoggedIn ? (
+            "Первая генерация бесплатно — после входа"
+          ) : freeAvailable ? (
+            "Первая генерация бесплатно, карта не нужна"
+          ) : notEnoughTokens ? (
+            <AppLink href="/pricing" className="text-gold2">
+              Пополнить
+            </AppLink>
+          ) : freeOffered ? (
             <>
-              Баланс: {tokensLabel(0)} ·{" "}
+              На {FREE_MODEL_NAMES} первый ролик бесплатно ·{" "}
+              <button type="button" onClick={resetToBase} className="text-gold2 underline">
+                вернуть базовые параметры
+              </button>
+            </>
+          ) : (
+            <>
+              Баланс: {tokensLabel(tokenBalance)} ·{" "}
               <AppLink href="/account?tab=balance" className="text-gold2">
                 пополнить
               </AppLink>
             </>
-          ) : (
-            "Первая генерация бесплатно — после входа"
           )}
         </p>
       </div>
     </>
   );
 }
+

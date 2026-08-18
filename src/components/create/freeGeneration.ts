@@ -5,7 +5,7 @@
  * выполняется на сервере при каждом запросе генерации. Фронт только отображает состояние.
  */
 
-import { capabilitiesFor } from "./modelCapabilities";
+import { baseDurationFor, capabilitiesFor } from "./modelCapabilities";
 
 /** модели, на которых действует бесплатная генерация */
 export const FREE_MODELS = ["grok", "hailuo-2", "kling-3"] as const;
@@ -21,7 +21,7 @@ export function baseParamsFor(slug: string) {
   const caps = capabilitiesFor(slug);
   return {
     quality: caps.qualities[0] ?? "720p",
-    duration: caps.durationMin ?? 5,
+    duration: baseDurationFor(caps),
   };
 }
 

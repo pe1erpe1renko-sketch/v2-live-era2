@@ -3,6 +3,7 @@
 
 @theme inline {
   --font-sans: "Inter", system-ui, sans-serif;
+  --font-serif: "Cormorant Garamond", Georgia, serif;
 
   --color-bg: #fafafa;
   --color-surface: #ffffff;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Icon } from "@iconify/react";
-import { tokensLabel } from "@/lib/plural";
+import { tokenWord } from "@/lib/plural";
 
 type Pack = {
   name: string;
@@ -11,10 +11,10 @@ type Pack = {
 };
 
 const PACKS: Pack[] = [
-  { name: "Старт", tokens: "115", price: "590", perClip: "от 49 ₽ за ролик" },
-  { name: "Оптимальный", tokens: "260", price: "1 290", perClip: "от 46 ₽ за ролик", featured: true },
-  { name: "Бизнес", tokens: "760", price: "3 490", perClip: "от 42 ₽ за ролик" },
-  { name: "Макс", tokens: "1 700", price: "6 990", perClip: "от 37 ₽ за ролик" },
+  { name: "Пробный", tokens: "115", price: "590", perClip: "от 49 ₽ за ролик" },
+  { name: "Средний", tokens: "260", price: "1 290", perClip: "от 46 ₽ за ролик", featured: true },
+  { name: "Большой", tokens: "760", price: "3 490", perClip: "от 42 ₽ за ролик" },
+  { name: "Максимум", tokens: "1\u2009700", price: "6 990", perClip: "от 37 ₽ за ролик" },
 ];
 
 const COMMON = [
@@ -53,47 +53,62 @@ export function TokenPacks() {
   return (
     <div>
       <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-2">
-        {PACKS.map((p) => (
-          <article
-            key={p.name}
-            className={`relative grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 rounded-[16px] bg-surface p-6 shadow-card sm:grid-cols-[minmax(0,1fr)_auto_auto] ${
-              p.featured ? "border border-gold2" : "border border-rule"
-            }`}
-          >
-            {p.featured && (
-              <span className="type-label absolute -top-3 left-6 z-10 whitespace-nowrap rounded-full bg-gold px-3 py-1 text-[10px] text-white">
-                Выгоднее всего
-              </span>
-            )}
-
-            <div className="min-w-0">
-              <div className="text-[30px] font-light leading-none tracking-[-0.04em] text-ink">
-                {p.tokens}
-              </div>
-              <div className="type-label mt-1.5 text-ink3">{tokensLabel(p.tokens)}</div>
-              <div className="mt-1 truncate text-[13px] text-ink2">{p.name}</div>
-            </div>
-
-            <div className="text-right">
-              <div className="text-[26px] font-light leading-none tracking-[-0.04em] text-ink">
-                {p.price} <span className="text-[14px] text-ink3">₽</span>
-              </div>
-              <div className="mt-1.5 text-[12px] text-gold">{p.perClip}</div>
-            </div>
-
-            <button
-              type="button"
-              onClick={pay}
-              className={`col-span-2 self-center rounded-[6px] px-6 py-3 text-[15px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 sm:col-span-1 ${
-                p.featured
-                  ? "bg-gold text-white hover:bg-gold-dark"
-                  : "border border-gold text-gold hover:bg-gold hover:text-white"
+        {PACKS.map((p) => {
+          const num = Number(String(p.tokens).replace(/\s/g, ""));
+          const word = tokenWord(Number.isFinite(num) ? num : 0);
+          return (
+            <article
+              key={p.name}
+              className={`group relative flex flex-col gap-4 rounded-[16px] bg-surface p-6 shadow-card transition-[transform,box-shadow] duration-200 hover:-translate-y-0.5 hover:shadow-[0_12px_30px_-12px_rgba(0,0,0,0.16)] sm:flex-row sm:items-stretch sm:gap-0 ${
+                p.featured ? "border border-gold2" : "border border-rule"
               }`}
             >
-              Оплатить
-            </button>
-          </article>
-        ))}
+              {p.featured && (
+                <span className="type-label absolute -top-3 left-6 z-10 whitespace-nowrap rounded-full bg-gold px-3 py-1 text-[10px] text-white">
+                  Покупают чаще
+                </span>
+              )}
+
+              {/* Левая часть: объём + название */}
+              <div className="flex flex-1 flex-col justify-between sm:pr-6">
+                <div className="flex items-baseline gap-2">
+                  <span className="font-serif text-[40px] font-light leading-none text-ink">
+                    {p.tokens}
+                  </span>
+                  <span className="text-[15px] text-ink">{word}</span>
+                </div>
+                <div className="text-[13px] text-ink3">{p.name}</div>
+              </div>
+
+              {/* Вертикальный разделитель */}
+              <div className="hidden w-px self-stretch bg-rule sm:block" />
+
+              {/* Правая часть: цена + цена за ролик */}
+              <div className="flex flex-col justify-between sm:px-6">
+                <div className="flex items-baseline gap-1.5">
+                  <span className="text-[40px] font-light leading-none text-gold">
+                    {p.price}
+                  </span>
+                  <span className="text-[15px] text-gold">₽</span>
+                </div>
+                <div className="text-[13px] text-ink3">{p.perClip}</div>
+              </div>
+
+              {/* Кнопка */}
+              <button
+                type="button"
+                onClick={pay}
+                className={`mt-2 w-full rounded-[6px] px-6 py-3 text-[15px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 sm:mt-0 sm:w-auto sm:self-center sm:pl-6 ${
+                  p.featured
+                    ? "bg-gold text-white hover:bg-gold-dark"
+                    : "border border-gold text-gold hover:bg-gold hover:text-white"
+                }`}
+              >
+                Оплатить
+              </button>
+            </article>
+          );
+        })}
       </div>
 
       <div className="mt-6 rounded-[16px] border border-rule bg-surface p-6">

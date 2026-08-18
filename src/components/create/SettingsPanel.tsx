@@ -645,9 +645,7 @@ export function SettingsPanel() {
               ? missingLabel
               : freeAvailable
                 ? "Попробовать бесплатно"
-                : notEnoughTokens
-                  ? "Не хватает токенов"
-                  : `Сгенерировать · ${tokensLabel(cost)}`}
+                : `Сгенерировать · ${tokensLabel(cost)}`}
         </button>
 
         <p className="mt-2 text-center text-[12px] text-ink3 md:mt-2.5">
@@ -664,9 +662,16 @@ export function SettingsPanel() {
           ) : freeAvailable ? (
             "Первая генерация бесплатно, карта не нужна"
           ) : notEnoughTokens ? (
-            <AppLink href="/pricing" className="text-gold2">
-              Пополнить
-            </AppLink>
+            <>
+              <span style={{ color: "#E06A5A" }}>
+                Не хватает {tokensLabel(cost)} — на балансе {tokenBalance}
+              </span>{" "}
+              ·{" "}
+              <AppLink href="/pricing" className="text-gold2">
+                Пополнить
+              </AppLink>
+            </>
+
           ) : freeOffered ? (
             <>
               На {FREE_MODEL_NAMES} первый ролик бесплатно ·{" "}

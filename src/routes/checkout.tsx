@@ -72,7 +72,8 @@ function nextChargeDate(months: number) {
   return d.toLocaleDateString("ru-RU", { day: "numeric", month: "long", year: "numeric" });
 }
 
-const PANEL = "rounded-[16px] border border-rule bg-surface p-7 md:p-8";
+const PANEL = "rounded-[16px] border border-rule bg-surface p-5 md:p-6";
+const DIVIDER = "border-0 border-t border-rule";
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
 const LEGAL_LINK =
@@ -132,11 +133,11 @@ function Page() {
 
   return (
     <LightLayout>
-      <section className="mx-auto max-w-[1440px] px-8 pb-16 pt-6 lg:px-16">
+      <section className="mx-auto max-w-[1440px] px-6 pb-10 pt-5 lg:px-16">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <span className="type-label">Чекаут</span>
-            <h1 className="mt-2 text-[clamp(24px,3vw,38px)] font-light leading-[1.1] tracking-[-0.04em] text-ink">
+            <h1 className="mt-1.5 text-[clamp(24px,3vw,38px)] font-light leading-[1.1] tracking-[-0.04em] text-ink">
               Оформление подписки
             </h1>
           </div>
@@ -149,12 +150,13 @@ function Page() {
           </AppLink>
         </div>
 
-        <div className="mt-8 flex flex-col gap-6 lg:flex-row lg:items-start">
+        <div className="mt-6 flex flex-col gap-4 lg:flex-row lg:items-stretch">
           {/* Правая колонка (на мобильных — первая) */}
-          <div className="order-1 flex w-full flex-col gap-6 lg:order-2 lg:w-[55%]">
+          <div className="order-1 flex w-full flex-col lg:order-2 lg:w-[55%]">
             <div className={PANEL}>
-              <h2 className="text-[20px] font-light tracking-[-0.02em] text-ink">Период оплаты</h2>
-              <div className="mt-5 flex flex-col gap-2.5">
+              {/* Период оплаты */}
+              <span className="type-label">Период оплаты</span>
+              <div className="mt-3 flex flex-col gap-1.5">
                 {PERIODS.map((p) => {
                   const active = p.id === period;
                   const discount = Math.round((1 - p.k) * 100);
@@ -166,18 +168,18 @@ function Page() {
                       key={p.id}
                       type="button"
                       onClick={() => setPeriod(p.id)}
-                      className={`flex w-full items-center gap-3 rounded-[12px] border px-4 py-4 text-left transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
+                      className={`flex w-full items-center gap-3 rounded-[10px] border px-3.5 py-3 text-left transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
                         active ? "border-gold2 bg-gold/[0.06]" : "border-rule bg-transparent hover:border-ink3"
                       }`}
                     >
                       <span
-                        className={`flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full border ${
+                        className={`flex h-[16px] w-[16px] shrink-0 items-center justify-center rounded-full border ${
                           active ? "border-gold2" : "border-rule"
                         }`}
                       >
-                        {active && <span className="h-[8px] w-[8px] rounded-full bg-gold2" />}
+                        {active && <span className="h-[7px] w-[7px] rounded-full bg-gold2" />}
                       </span>
-                      <span className="flex-1 text-[15px] text-ink">{p.label}</span>
+                      <span className="flex-1 text-[14px] text-ink">{p.label}</span>
                       {discount > 0 && (
                         <span
                           className={`rounded-full px-2 py-0.5 text-[11px] transition-opacity ${
@@ -187,25 +189,26 @@ function Page() {
                           −{discount}%
                         </span>
                       )}
-                      <span className="text-[15px] text-ink">{fmt(rowPrice)} ₽</span>
+                      <span className="text-[14px] text-ink">{fmt(rowPrice)} ₽</span>
                     </button>
                   );
                 })}
               </div>
               {promo ? (
-                <p className="mt-4 text-[12px] leading-[1.5] text-ink3">
+                <p className="mt-3 text-[12px] leading-[1.5] text-ink3">
                   Действует промокод — скидка за период не применяется
                 </p>
               ) : (
-                <p className="mt-4 text-[12px] leading-[1.5] text-ink3">
+                <p className="mt-3 text-[12px] leading-[1.5] text-ink3">
                   Чем длиннее период — тем ниже цена месяца. Списание раз в выбранный период
                 </p>
               )}
-            </div>
 
-            <div className={PANEL}>
-              <h2 className="text-[20px] font-light tracking-[-0.02em] text-ink">Email для чека</h2>
-              <p className="mt-2 text-[12px] leading-[1.5] text-ink3">
+              <hr className={`${DIVIDER} my-4`} />
+
+              {/* Email для чека */}
+              <span className="type-label">Email для чека</span>
+              <p className="mt-1.5 text-[12px] leading-[1.5] text-ink3">
                 Отправим на него электронный чек об оплате. Адрес сохранится в профиле — войти по
                 нему нельзя
               </p>
@@ -215,23 +218,23 @@ function Page() {
                 onChange={(e) => setEmail(e.target.value)}
                 onBlur={validateEmail}
                 placeholder="you@example.com"
-                className={`mt-4 h-12 w-full rounded-[6px] border bg-surface px-4 text-[14px] text-ink placeholder:text-ink3 outline-none transition-colors focus:border-gold2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
+                className={`mt-3 h-11 w-full rounded-[6px] border bg-surface px-3.5 text-[14px] text-ink placeholder:text-ink3 outline-none transition-colors focus:border-gold2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
                   emailError ? "border-red-500" : "border-rule"
                 }`}
               />
-              {emailError && <p className="mt-2 text-[12px] text-red-600">{emailError}</p>}
-            </div>
+              {emailError && <p className="mt-1.5 text-[12px] text-red-600">{emailError}</p>}
 
-            {/* Согласие */}
-            <div className={PANEL}>
+              <hr className={`${DIVIDER} my-4`} />
+
+              {/* Согласие */}
               <label className="flex cursor-pointer items-start gap-3">
                 <input
                   type="checkbox"
                   checked={agreed}
                   onChange={(e) => setAgreed(e.target.checked)}
-                  className="mt-0.5 h-[18px] w-[18px] shrink-0 accent-[#8A6A2F]"
+                  className="mt-0.5 h-[16px] w-[16px] shrink-0 accent-[#8A6A2F]"
                 />
-                <span className="text-[13px] leading-[1.6] text-ink2">
+                <span className="text-[13px] leading-[1.55] text-ink2">
                   Я принимаю{" "}
                   <AppLink href="/offer" className={LEGAL_LINK}>
                     Публичную оферту
@@ -259,50 +262,50 @@ function Page() {
                   )}
                 </span>
               </label>
-            </div>
 
-            {/* Оплата */}
-            <div>
-              {/* TODO backend: сюда подставить платёжную ссылку магазина с суммой, тарифом и периодом */}
-              <a
-                href="https://yookassa.ru"
-                aria-disabled={!canPay}
-                onClick={(e) => {
-                  if (!canPay) e.preventDefault();
-                }}
-                className={`flex h-14 w-full items-center justify-center rounded-[8px] bg-gold text-[16px] text-white transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
-                  canPay ? "hover:opacity-90" : "pointer-events-none opacity-40"
-                }`}
-              >
-                {gift ? "Подарить за" : "Оплатить"} {fmt(total)} ₽
-              </a>
+              {/* Оплата */}
+              <div className="mt-4">
+                {/* TODO backend: сюда подставить платёжную ссылку магазина с суммой, тарифом и периодом */}
+                <a
+                  href="https://yookassa.ru"
+                  aria-disabled={!canPay}
+                  onClick={(e) => {
+                    if (!canPay) e.preventDefault();
+                  }}
+                  className={`flex h-11 w-full items-center justify-center rounded-[8px] bg-gold text-[15px] text-white transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
+                    canPay ? "hover:opacity-90" : "pointer-events-none opacity-40"
+                  }`}
+                >
+                  {gift ? "Подарить за" : "Оплатить"} {fmt(total)} ₽
+                </a>
 
-              <div className="mt-4 flex flex-wrap items-center gap-2">
-                {["Visa", "Mastercard", "МИР", "СБП"].map((m) => (
-                  <span
-                    key={m}
-                    className="rounded-[6px] border border-rule px-3 py-1.5 text-[11px] uppercase tracking-[0.08em] text-ink3"
-                  >
-                    {m}
-                  </span>
-                ))}
+                <div className="mt-3 flex flex-wrap items-center gap-1.5">
+                  {["Visa", "Mastercard", "МИР", "СБП"].map((m) => (
+                    <span
+                      key={m}
+                      className="rounded-[5px] border border-rule px-2 py-0.5 text-[10px] uppercase tracking-[0.08em] text-ink3"
+                    >
+                      {m}
+                    </span>
+                  ))}
+                </div>
+
+                <p className="mt-2 text-[12px] leading-[1.5] text-ink3">
+                  Способ оплаты выберете на защищённой странице ЮKassa · Возврат в течение 3 дней
+                </p>
               </div>
-
-              <p className="mt-3 text-[12px] leading-[1.5] text-ink3">
-                Способ оплаты выберете на защищённой странице ЮKassa · Возврат в течение 3 дней
-              </p>
             </div>
           </div>
 
           {/* Левая колонка — сводка */}
-          <div className="order-2 flex w-full flex-col gap-6 lg:order-1 lg:w-[45%]">
+          <div className="order-2 flex w-full flex-col lg:order-1 lg:w-[45%]">
             <div className={PANEL}>
               <span className="type-label">Ваш план</span>
-              <p className="mt-2 text-[clamp(26px,2.6vw,34px)] font-light leading-none tracking-[-0.03em] text-ink">
+              <p className="mt-1.5 text-[clamp(24px,2.4vw,32px)] font-light leading-none tracking-[-0.03em] text-ink">
                 {planData.name}
               </p>
 
-              <dl className="mt-6 flex flex-col gap-3 text-[14px]">
+              <dl className="mt-4 flex flex-col gap-2 text-[14px]">
                 <div className="flex items-baseline justify-between gap-4">
                   <dt className="text-ink3">Аккаунт</dt>
                   <dd className="text-right text-ink">
@@ -319,102 +322,95 @@ function Page() {
                 </div>
               </dl>
 
-              <hr className="my-6 border-0 border-t border-rule" />
+              <hr className={`${DIVIDER} my-4`} />
 
               <span className="type-label">К оплате</span>
-              <p className="mt-2 text-[clamp(34px,4vw,48px)] font-light leading-none tracking-[-0.03em] text-ink">
+              <p className="mt-1.5 text-[clamp(22px,2.8vw,32px)] font-light leading-none tracking-[-0.03em] text-ink">
                 {fmt(total)} ₽
               </p>
-              <p className="mt-3 text-[12px] leading-[1.5] text-ink3">
+              <p className="mt-2 text-[12px] leading-[1.5] text-ink3">
                 {gift
                   ? "Подписка на выбранный период · активируется по ссылке · без автопродления"
                   : `Следующее списание: ${nextChargeDate(periodData.months)} · ${fmt(total)} ₽`}
               </p>
 
+              <hr className={`${DIVIDER} my-4`} />
+
               {/* Промокод */}
-              <div className="mt-6">
-                <span className="type-label">Промокод</span>
-                {promo ? (
-                  <div className="mt-3 inline-flex items-center gap-2 rounded-[8px] border border-gold2 bg-gold/[0.06] px-3 py-2 text-[13px] text-ink">
-                    {promo.code} · −{Math.round(promo.discount * 100)}%
-                    <button
-                      type="button"
-                      aria-label="Отменить промокод"
-                      onClick={() => {
-                        setPromo(null);
-                        setPromoInput("");
+              <span className="type-label">Промокод</span>
+              {promo ? (
+                <div className="mt-2 inline-flex items-center gap-2 rounded-[8px] border border-gold2 bg-gold/[0.06] px-3 py-1.5 text-[13px] text-ink">
+                  {promo.code} · −{Math.round(promo.discount * 100)}%
+                  <button
+                    type="button"
+                    aria-label="Отменить промокод"
+                    onClick={() => {
+                      setPromo(null);
+                      setPromoInput("");
+                      setPromoError("");
+                    }}
+                    className="text-ink3 transition-colors hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2"
+                  >
+                    <Icon icon="lucide:x" className="h-4 w-4" />
+                  </button>
+                </div>
+              ) : (
+                <>
+                  <div className="mt-2 flex gap-2">
+                    <input
+                      value={promoInput}
+                      onChange={(e) => {
+                        setPromoInput(e.target.value);
                         setPromoError("");
                       }}
-                      className="text-ink3 transition-colors hover:text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2"
+                      placeholder="Введите промокод"
+                      className={`h-11 min-w-0 flex-1 rounded-[6px] border bg-surface px-3.5 text-[14px] text-ink placeholder:text-ink3 outline-none transition-colors focus:border-gold2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
+                        promoError ? "border-red-500" : "border-rule"
+                      }`}
+                    />
+                    <button
+                      type="button"
+                      onClick={applyPromo}
+                      className="h-11 shrink-0 rounded-[6px] border border-ink px-4 text-[14px] text-ink transition-colors hover:border-gold2 hover:text-gold focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2"
                     >
-                      <Icon icon="lucide:x" className="h-4 w-4" />
+                      Применить
                     </button>
                   </div>
-                ) : (
-                  <>
-                    <div className="mt-3 flex gap-2">
-                      <input
-                        value={promoInput}
-                        onChange={(e) => {
-                          setPromoInput(e.target.value);
-                          setPromoError("");
-                        }}
-                        placeholder="Введите промокод"
-                        className={`h-11 min-w-0 flex-1 rounded-[6px] border bg-surface px-4 text-[14px] text-ink placeholder:text-ink3 outline-none transition-colors focus:border-gold2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
-                          promoError ? "border-red-500" : "border-rule"
-                        }`}
-                      />
-                      <button
-                        type="button"
-                        onClick={applyPromo}
-                        className="h-11 shrink-0 rounded-[6px] border border-ink px-4 text-[14px] text-ink transition-colors hover:border-gold2 hover:text-gold focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2"
-                      >
-                        Применить
-                      </button>
-                    </div>
-                    {promoError && <p className="mt-2 text-[12px] text-red-600">{promoError}</p>}
-                  </>
-                )}
-              </div>
-            </div>
+                  {promoError && <p className="mt-1.5 text-[12px] text-red-600">{promoError}</p>}
+                </>
+              )}
 
-            {/* Подарок другу */}
-            {/* TODO backend: генерация подарочной ссылки после оплаты */}
-            <div className={`${PANEL} flex items-start gap-4`}>
-              <Icon icon="lucide:gift" className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
-              <div className="flex-1">
-                <p className="text-[15px] text-ink">Подарить подписку другу</p>
-                <p className="mt-1 text-[12px] leading-[1.5] text-ink3">
-                  После оплаты вы получите ссылку — отправьте её другу в любой мессенджер
-                </p>
-              </div>
-              <button
-                type="button"
-                role="switch"
-                aria-checked={gift}
-                aria-label="Подарить подписку другу"
-                onClick={() => setGift((v) => !v)}
-                className={`relative mt-0.5 h-[24px] w-[44px] shrink-0 rounded-full transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
-                  gift ? "bg-gold" : "bg-rule"
-                }`}
-              >
-                <span
-                  className={`absolute top-[3px] h-[18px] w-[18px] rounded-full bg-surface shadow-sm transition-all ${
-                    gift ? "left-[23px]" : "left-[3px]"
+              <hr className={`${DIVIDER} my-4`} />
+
+              {/* Подарок другу */}
+              {/* TODO backend: генерация подарочной ссылки после оплаты */}
+              <div className="flex items-start gap-3">
+                <Icon icon="lucide:gift" className="mt-0.5 h-5 w-5 shrink-0 text-gold" />
+                <div className="flex-1">
+                  <p className="text-[14px] text-ink">Подарить подписку другу</p>
+                  <p className="mt-1 text-[12px] leading-[1.5] text-ink3">
+                    После оплаты вы получите ссылку — отправьте её другу в любой мессенджер
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  role="switch"
+                  aria-checked={gift}
+                  aria-label="Подарить подписку другу"
+                  onClick={() => setGift((v) => !v)}
+                  className={`relative mt-0.5 h-[22px] w-[40px] shrink-0 rounded-full transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
+                    gift ? "bg-gold" : "bg-rule"
                   }`}
-                />
-              </button>
+                >
+                  <span
+                    className={`absolute top-[2px] h-[18px] w-[18px] rounded-full bg-surface shadow-sm transition-all ${
+                      gift ? "left-[20px]" : "left-[2px]"
+                    }`}
+                  />
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-
-        <div className="mt-10 text-center">
-          <AppLink
-            href="/pricing"
-            className="text-[14px] text-ink2 transition-colors hover:text-gold focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2"
-          >
-            ← Вернуться к тарифам
-          </AppLink>
         </div>
       </section>
     </LightLayout>

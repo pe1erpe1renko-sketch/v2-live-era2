@@ -88,10 +88,22 @@ function Feature({ text, dark }: { text: string; dark?: boolean }) {
   );
 }
 
+const PLAN_SLUGS: Record<string, string> = {
+  "Старт": "start",
+  "Про": "pro",
+  "Ультра": "ultra",
+};
+
 export function SubscriptionPlans() {
   const carouselRef = useRef<HTMLDivElement>(null);
   const [activeIdx, setActiveIdx] = useState(1);
-  const [agreed, setAgreed] = useState(false);
+  const [notice, setNotice] = useState(false);
+
+  useEffect(() => {
+    if (!notice) return;
+    const t = setTimeout(() => setNotice(false), 5000);
+    return () => clearTimeout(t);
+  }, [notice]);
 
   const scrollToCard = (i: number, smooth: boolean) => {
     const el = carouselRef.current;

@@ -133,7 +133,7 @@ function Page() {
 
   return (
     <LightLayout>
-      <section className="mx-auto max-w-[1440px] px-6 pb-10 pt-5 lg:px-16">
+      <section className="mx-auto max-w-[1440px] px-6 pb-8 pt-4 lg:px-16">
         <div className="flex flex-wrap items-end justify-between gap-4">
           <div>
             <span className="type-label">Чекаут</span>

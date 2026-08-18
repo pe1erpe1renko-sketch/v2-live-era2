@@ -151,8 +151,8 @@ function Page() {
         </div>
 
         <div className="mt-6 flex flex-col gap-4 lg:flex-row lg:items-stretch">
-          {/* Правая колонка (на мобильных — первая) */}
-          <div className="order-1 flex w-full flex-col lg:order-2 lg:w-[55%]">
+          {/* Правая колонка (на мобильных — вторая) */}
+          <div className="order-2 flex w-full flex-col lg:order-2 lg:w-[55%]">
             <div className={PANEL}>
               {/* Период оплаты */}
               <span className="type-label">Период оплаты</span>

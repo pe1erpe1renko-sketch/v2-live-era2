@@ -581,19 +581,23 @@ export function SettingsPanel() {
       <div className="sticky-cta mt-4">
         <button
           type="button"
-          disabled={disabled}
+          disabled={disabled || notEnoughTokens}
           onClick={() => (isLoggedIn ? handleGenerate() : openAuth("login"))}
           className={`h-[52px] w-full rounded-[6px] text-[15px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 md:h-[56px] md:text-[16px] ${
-            disabled
+            disabled || notEnoughTokens
               ? "cursor-not-allowed bg-rule text-ink3"
               : "cursor-pointer bg-gold text-white hover:bg-gold-dark"
           }`}
         >
           {!isLoggedIn
-            ? "Войти и создать видео"
+            ? "Войдите, чтобы создать видео"
             : missingLabel
               ? missingLabel
-              : `Сгенерировать · ${tokensLabel(cost)}`}
+              : freeAvailable
+                ? "Попробовать бесплатно"
+                : notEnoughTokens
+                  ? "Не хватает токенов"
+                  : `Сгенерировать · ${tokensLabel(cost)}`}
         </button>
 
         <p className="mt-2 text-center text-[12px] text-ink3 md:mt-2.5">
@@ -605,18 +609,32 @@ export function SettingsPanel() {
             ) : (
               "Загрузите снимок, чтобы продолжить"
             )
-          ) : isLoggedIn ? (
+          ) : !isLoggedIn ? (
+            "Первая генерация бесплатно — после входа"
+          ) : freeAvailable ? (
+            "Первая генерация бесплатно, карта не нужна"
+          ) : notEnoughTokens ? (
+            <AppLink href="/pricing" className="text-gold2">
+              Пополнить
+            </AppLink>
+          ) : freeOffered ? (
             <>
-              Баланс: {tokensLabel(0)} ·{" "}
+              На {FREE_MODEL_NAMES} первый ролик бесплатно ·{" "}
+              <button type="button" onClick={resetToBase} className="text-gold2 underline">
+                вернуть базовые параметры
+              </button>
+            </>
+          ) : (
+            <>
+              Баланс: {tokensLabel(tokenBalance)} ·{" "}
               <AppLink href="/account?tab=balance" className="text-gold2">
                 пополнить
               </AppLink>
             </>
-          ) : (
-            "Первая генерация бесплатно — после входа"
           )}
         </p>
       </div>
     </>
   );
 }
+

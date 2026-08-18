@@ -11,6 +11,10 @@ export type ModelCapability = {
   durationMin?: number;
   durationMax?: number;
   durationStep?: number;
+  /** фиксированный набор длительностей — панель рисует кнопки вместо ползунка */
+  durations?: number[];
+  /** длительность по умолчанию (и база для расчёта цены) */
+  durationBase?: number;
   qualities: string[];
   sound: boolean;
   expert: boolean;
@@ -38,6 +42,8 @@ export const MODEL_CAPABILITIES: Record<string, ModelCapability> = {
     durationMin: 5,
     durationMax: 10,
     durationStep: 1,
+    durations: [5, 10],
+    durationBase: 5,
     qualities: ["720p", "1080p", "4K"],
     qualityMultipliers: { "720p": 1, "1080p": 1.286, "4K": 4.786 },
     sound: true, // единственная модель с платным звуком (×1.5)
@@ -64,10 +70,12 @@ export const MODEL_CAPABILITIES: Record<string, ModelCapability> = {
     qualityMultipliers: { "720p": 1, "1080p": 1.35 },
   },
   "minimax-h3": {
+    // единственная модель, принимающая любое целое число секунд
     formats: ["16:9", "9:16", "1:1"],
-    durationMin: 5,
-    durationMax: 10,
+    durationMin: 4,
+    durationMax: 15,
     durationStep: 1,
+    durationBase: 5,
     qualities: ["768p", "2K"],
     qualityMultipliers: { "768p": 1, "2K": 1.625 },
     sound: false,
@@ -93,6 +101,8 @@ export const MODEL_CAPABILITIES: Record<string, ModelCapability> = {
     durationMin: 5,
     durationMax: 10,
     durationStep: 1,
+    durations: [5, 10],
+    durationBase: 5,
     qualities: ["480p", "720p"],
     qualityMultipliers: { "480p": 0.476, "720p": 1 },
     sound: false,
@@ -103,9 +113,11 @@ export const MODEL_CAPABILITIES: Record<string, ModelCapability> = {
   },
   "veo-3-1": {
     formats: ["16:9", "9:16", "1:1"],
-    durationMin: 5,
+    durationMin: 4,
     durationMax: 8,
     durationStep: 1,
+    durations: [4, 6, 8],
+    durationBase: 8,
     qualities: ["720p", "1080p", "4K"],
     qualityMultipliers: { "720p": 1, "1080p": 1.083, "4K": 3.0 },
     sound: false, // звук входит в базовую цену
@@ -116,11 +128,14 @@ export const MODEL_CAPABILITIES: Record<string, ModelCapability> = {
   },
   grok: {
     formats: ["16:9", "9:16", "1:1"],
-    durationMin: 5,
+    durationMin: 6,
     durationMax: 10,
     durationStep: 1,
+    durations: [6, 10],
+    durationBase: 6,
     qualities: ["720p", "1080p"],
     qualityMultipliers: { "720p": 1, "1080p": 1.778 },
+    durationMultipliers: { 6: 1, 10: 1.667 },
     sound: false,
     expert: false,
     promptStrength: false,
@@ -132,6 +147,8 @@ export const MODEL_CAPABILITIES: Record<string, ModelCapability> = {
     durationMin: 6,
     durationMax: 10,
     durationStep: 4,
+    durations: [6, 10],
+    durationBase: 6,
     qualities: ["768p", "1080p"],
     qualityMultipliers: { "768p": 1, "1080p": 1.667 },
     durationMultipliers: { 6: 1, 10: 1.667 },
@@ -151,4 +168,9 @@ export function capabilitiesFor(slug: string | null | undefined): ModelCapabilit
 /** доступные разрешения с учётом выбранной длительности */
 export function qualitiesFor(caps: ModelCapability, duration: number): string[] {
   return caps.qualitiesByDuration?.[duration] ?? caps.qualities;
+}
+
+/** базовая длительность модели: и значение по умолчанию, и база расчёта цены */
+export function baseDurationFor(caps: ModelCapability): number {
+  return caps.durationBase ?? caps.durationMin ?? 5;
 }

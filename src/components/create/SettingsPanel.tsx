@@ -224,9 +224,18 @@ function LastFrameZone({ onChange }: { onChange: (has: boolean) => void }) {
 }
 
 export function SettingsPanel() {
-  const { modelSlug, model, scenarioSlug, file, audioDuration, videoFile, videoDuration } =
-    useCreate();
-  const { isLoggedIn } = useAuth();
+  const {
+    modelSlug,
+    setModelSlug,
+    model,
+    scenarioSlug,
+    file,
+    audioDuration,
+    videoFile,
+    videoDuration,
+  } = useCreate();
+  const { isLoggedIn, tokenBalance, freeGenerationUsed, markFreeGenerationUsed } = useAuth();
+
   const { openAuth } = useAuthModal();
   const caps = capabilitiesFor(modelSlug);
   const dMin = caps.durationMin ?? 5;

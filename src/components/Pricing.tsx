@@ -319,11 +319,12 @@ export function Pricing() {
                 <AppLink
                   href="/pricing"
                   onClick={() => selectPlan(idx)}
-                  className={`mt-6 block w-full rounded-[6px] p-3 text-center text-[15px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
+                  className={`mt-auto block w-full rounded-[6px] p-3 text-center text-[15px] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
                     dark
                       ? "bg-gold text-white hover:bg-gold-dark"
-                      : "border border-rule text-ink hover:border-gold2 hover:text-gold"
+                      : "border border-gold bg-surface text-gold hover:bg-gold hover:text-white"
                   }`}
+                  style={{ marginTop: 24 }}
                 >
                   {p.cta}
                 </AppLink>

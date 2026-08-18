@@ -154,7 +154,9 @@ function Slider({
 }
 
 function LastFrameZone({ onChange }: { onChange: (has: boolean) => void }) {
+  const { isLoggedIn } = useAuth();
   const inputRef = useRef<HTMLInputElement | null>(null);
+
   const [file, setFile] = useState<File | null>(null);
   const [url, setUrl] = useState<string | null>(null);
 

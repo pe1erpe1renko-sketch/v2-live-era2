@@ -167,6 +167,8 @@ function UploadZone() {
 
 function PromptPanel() {
   const { scenarioSlug } = useCreate();
+  const { isLoggedIn } = useAuth();
+
   const [value, setValue] = useState("");
   const [preset, setPreset] = useState<MotionPresetId | null>(null);
   const taRef = useRef<HTMLTextAreaElement | null>(null);

@@ -242,7 +242,7 @@ function PromptPanel() {
           }`}
         >
           <Icon icon="solar:magic-stick-3-linear" width={14} height={14} />
-          Улучшить промпт · 1 токен
+          Улучшить промпт{isLoggedIn ? " · 1 токен" : ""}
         </button>
       </div>
     </div>

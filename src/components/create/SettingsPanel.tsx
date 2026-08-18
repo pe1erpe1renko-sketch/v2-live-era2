@@ -207,7 +207,10 @@ function LastFrameZone({ onChange }: { onChange: (has: boolean) => void }) {
     >
       <Icon icon="solar:gallery-add-linear" width={22} height={22} className="text-gold2" />
       <p className="mt-2 text-[13px] text-ink">Кадр, которым закончится ролик</p>
-      <p className="mt-1 text-[11px] text-ink3">необязательно · JPG или PNG до 20 МБ · +2 токена</p>
+      <p className="mt-1 text-[11px] text-ink3">
+        необязательно · JPG или PNG до 20 МБ{isLoggedIn ? " · +2 токена" : ""}
+      </p>
+
       <input
         ref={inputRef}
         type="file"

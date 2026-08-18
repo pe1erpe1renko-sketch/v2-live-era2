@@ -305,7 +305,7 @@ function Page() {
                 {planData.name}
               </p>
 
-              <dl className="mt-4 flex flex-col gap-2 text-[14px]">
+              <dl className="mt-3 flex flex-col gap-2 text-[14px]">
                 <div className="flex items-baseline justify-between gap-4">
                   <dt className="text-ink3">Аккаунт</dt>
                   <dd className="text-right text-ink">

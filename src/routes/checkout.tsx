@@ -156,7 +156,7 @@ function Page() {
             <div className={PANEL}>
               {/* Период оплаты */}
               <span className="type-label">Период оплаты</span>
-              <div className="mt-3 flex flex-col gap-1.5">
+              <div className="mt-2 flex flex-col gap-1">
                 {PERIODS.map((p) => {
                   const active = p.id === period;
                   const discount = Math.round((1 - p.k) * 100);
@@ -168,7 +168,7 @@ function Page() {
                       key={p.id}
                       type="button"
                       onClick={() => setPeriod(p.id)}
-                      className={`flex w-full items-center gap-3 rounded-[10px] border px-3.5 py-3 text-left transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
+                      className={`flex w-full items-center gap-3 rounded-[10px] border px-3.5 py-3 text-left leading-[1.25] transition-colors duration-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-gold2 ${
                         active ? "border-gold2 bg-gold/[0.06]" : "border-rule bg-transparent hover:border-ink3"
                       }`}
                     >
@@ -182,7 +182,7 @@ function Page() {
                       <span className="flex-1 text-[14px] text-ink">{p.label}</span>
                       {discount > 0 && (
                         <span
-                          className={`rounded-full px-2 py-0.5 text-[11px] transition-opacity ${
+                          className={`rounded-full px-2 py-0.5 text-[11px] leading-none transition-opacity ${
                             promo ? "bg-ink3/10 text-ink3 opacity-40" : "bg-gold/10 text-gold"
                           }`}
                         >
@@ -195,16 +195,16 @@ function Page() {
                 })}
               </div>
               {promo ? (
-                <p className="mt-3 text-[12px] leading-[1.5] text-ink3">
+                <p className="mt-2 text-[12px] leading-[1.5] text-ink3">
                   Действует промокод — скидка за период не применяется
                 </p>
               ) : (
-                <p className="mt-3 text-[12px] leading-[1.5] text-ink3">
+                <p className="mt-2 text-[12px] leading-[1.5] text-ink3">
                   Чем длиннее период — тем ниже цена месяца. Списание раз в выбранный период
                 </p>
               )}
 
-              <hr className={`${DIVIDER} my-4`} />
+              <hr className={`${DIVIDER} my-3`} />
 
               {/* Email для чека */}
               <span className="type-label">Email для чека</span>

@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Icon } from "@iconify/react";
 import { useCreate } from "@/components/create/CreateContext";
-import { capabilitiesFor, qualitiesFor } from "@/components/create/modelCapabilities";
+import { baseDurationFor, capabilitiesFor, qualitiesFor } from "@/components/create/modelCapabilities";
 import { computeCost, PRICING_RULES } from "@/components/create/tokenCosts";
 import { useAuth } from "@/context/AuthContext";
 import { useAuthModal } from "@/context/AuthModalContext";
